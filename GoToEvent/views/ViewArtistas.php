@@ -8,12 +8,14 @@
 		<tr>
 			<th>Nombre</th>
 			<th>Apellido</th>
+			<th>D.N.I</th>
 		</tr>
 	<?php while(!empty($lista)){ ?>
 		<?php $artista = array_pop($lista) ?>
 		<tr>
-			<td><?php echo $artista->getNombre(); ?></td>
-			<td><?php echo $artista->getApellido(); ?></td>
+			<td><?php echo $artista->getName(); ?></td>
+			<td><?php echo $artista->getLastName(); ?></td>
+			<td><?php echo $artista->getDni(); ?></td>
 		</tr>
 	<?php } ?>
 	</table>

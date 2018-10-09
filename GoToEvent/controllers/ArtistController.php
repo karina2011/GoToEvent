@@ -17,9 +17,9 @@ class ArtistController
         include("../views/Home.php");
     }
 
-    public function store($nombre, $apellido)
+    public function store($nombre,$apellido,$dni)
     {
-        $artist = new Artist($nombre,$apellido);
+        $artist = new Artist($dni,$nombre,$apellido);
 
         $this->dao->create($artist);
 
