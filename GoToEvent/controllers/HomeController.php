@@ -12,5 +12,10 @@ class HomeController
         require(ROOT.'views/Home.php');
     }
 
+    public function creatEvent()
+    {
+       	require(ROOT.'views/CreatEvent.php');
+    }
+
 }
 ?>
