@@ -1,5 +1,5 @@
 <?php
-namespace Package1;
+namespace models;
 
 
 require_once ('Calendar.php');

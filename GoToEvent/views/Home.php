@@ -49,9 +49,27 @@
 <br>
 <br>
 
-<a href="Artist/getStore" >Ver Artista</a>
+<div>
+  <a href="Artist/getStore" >Ver Artista</a>
+</div>
+<br>
+<div>
+  <h3>Crear Evento</h3>
+</div>
+<br>
+<form action="Event/creat" method="post">
+  <div>
+    <label>Titulo</label>
+    <input type="text" name="title">
+  </div>
+  <br>
+  <div>
+    <input type="submit" name="" value="enviar">
+  </div>
 
+</form>
+<br>
 
-
+<a href="Event/readAll">Ver eventos</a>
 </body>
 </html>

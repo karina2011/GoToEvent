@@ -9,25 +9,18 @@ require_once ('purchase.php');
  * @version 1.0
  * @created 06-oct.-2018 19:11:41
  */
-class Customer
+class Customer extends User 
 {
 
-	private $dni;
-	private $email;
-	private $last_name;
-	private $name;
 	public $m_Purchase;
 
 	function __construct($dni='',$email='',$last_name='',$name='',$m_Purchase='')
 	{
-		$this->dni = $dni;
-		$this->email = $email;
-		$this->last_name = $last_name;
-		$this->name = $name;
+		parent::__construct($name,$last_name,$email,$dni);
 		$this->m_Purchase = $m_Purchase;
 	}
 
-	public function getDni()
+	/*public function getDni()
 	{
 		return $this->dni;
 	}
@@ -65,7 +58,7 @@ class Customer
 	public function setName($name)
 	{
 		$this->name = $name;
-	}
+	}*/
 
 }
 ?>
