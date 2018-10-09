@@ -1,31 +1,56 @@
-<?php
+<?php 
+
+/**
+ * @author Federico
+ * @version 1.0
+ * @created 06-oct.-2018 19:11:14
+ */
+
 namespace models;
+
 class Artist
 {
-    private $nombre;
-    private $apellido;
 
-    public function __construct($nombre='',$apellido='')
-    {
-        $this->nombre=$nombre;
-        $this->apellido=$apellido;
-    }
+	private $dni;
+	private $last_name;
+	private $name;
 
-    public function getNombre(){
-        return $this->nombre;
-    }
+	function __construct($dni='',$name='',$last_name='')
+	{
+		$this->dni = $dni;
+		$this->name = $name;
+		$this->last_name = $last_name;
+	}
 
-    public function setNombre($nombre){
-        $this->nombre=$nombre;
-    }
+	public function getDni()
+	{
+		return $this->dni;
+	}
 
-    public function getApellido(){
-        return $this->apellido;
-    }
+	public function getLastName()
+	{
+		return $this->last_name;
+	}
 
-    public function setApellido($apellido){
-        $this->apellido=$apellido;
-    }
+	public function getName()
+	{
+		return $this->name;
+	}
+
+	public function setDni($dni)
+	{
+		$this->dni = $dnidni;
+	}
+
+	public function setLastName($last_name)
+	{
+		$this->last_name = $last_name;
+	}
+
+	public function setName()
+	{
+		$this->name = $name;
+	}
 
 }
 ?>

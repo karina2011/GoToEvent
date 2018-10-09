@@ -36,6 +36,11 @@
   </div>
 
   <div>
+    <label for="dni">D.N.I: </label>
+    <input type="text" name="dni" value="" placeholder="D.N.I">
+  </div>
+
+  <div>
     <input type="submit" name="boton" value="Enviar">
   </div>
 </form>
