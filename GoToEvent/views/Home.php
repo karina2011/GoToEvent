@@ -53,8 +53,9 @@
   <a href="Artist/getStore" >Ver Artista</a>
 </div>
 <br>
-<div>
-  <h3>Crear Evento</h3>
+
+<!--<div>
+<h3>Crear Evento</h3>
 </div>
 <br>
 <form action="Event/creat" method="post">
@@ -67,16 +68,21 @@
     <input type="submit" name="" value="enviar">
   </div>
 
-</form>
+</form> -->
+
+<br>
+
+<button><a href="Home/creatEvent">Crear Evento</a></button>
+
 <br>
 
 <a href="Event/readAll">Ver eventos</a>
 
 <?php
 
-echo "<pre>";
+/*echo "<pre>";
 var_dump($_SESSION);
-echo "</pre>";
+echo "</pre>"; */
 
 ?>
 
