@@ -71,5 +71,15 @@
 <br>
 
 <a href="Event/readAll">Ver eventos</a>
+
+<?php
+
+echo "<pre>";
+var_dump($_SESSION);
+echo "</pre>";
+
+?>
+
+
 </body>
 </html>

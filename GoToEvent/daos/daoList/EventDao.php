@@ -1,9 +1,10 @@
 <?php 
 namespace daos\daoList;
 
-class ArtistDao  extends Singleton implements \interfaces\Crud
+class EventDao  extends Singleton implements \interfaces\Crud
 {
     private $list;
+
     public function __construct()
     {
         $this->list = array();

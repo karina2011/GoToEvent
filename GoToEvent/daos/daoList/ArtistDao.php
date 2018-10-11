@@ -25,7 +25,9 @@ class ArtistDao  extends Singleton implements \interfaces\Crud
         $this->list=$this->getSessionArtist();
         array_push($this->list, $artist);
         $this->setSessionArtist($this->list);
-        print_r($this->list);
+        echo "<pre>";
+        var_dump($this->list);
+        echo "</pre>";
     }
 
 

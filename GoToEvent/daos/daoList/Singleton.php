@@ -2,7 +2,8 @@
  
 class Singleton
 {
-    private static $instance=array();
+	private static $instance=array();
+	
 	public static function getInstance()
 	{
 		
