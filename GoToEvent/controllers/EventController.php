@@ -1,6 +1,6 @@
 <?php 
 namespace controllers;
-use daos\daoList\ArtistDao as Dao;
+use daos\daoList\EventDao as Dao;
 use models\Event;
 /**
  * 
@@ -9,10 +9,10 @@ class EventController
 {
 	protected $dao;
 	
-	function __construct()
-	{
-		$this->dao=Dao::getInstance();
-	}
+	public function __construct()
+    {
+        $this->dao = Dao::getInstance(); // esto se instancia en el router
+    }
 
 	public function creat($title)
 	{
