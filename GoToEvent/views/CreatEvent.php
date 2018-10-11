@@ -8,9 +8,9 @@
 	<h3>Crear Evento</h3>
 	</div>
 		<br>
-		<form action="../Event/creat" method="post">
+		<form action="<?php echo BASE; ?>Event/creat" method="post">
 			<div>
-				<label>Titulo</label>
+				<label>Titulo: </label>
 				<input type="text" name="title">
 			</div>
 		<br>
@@ -18,7 +18,10 @@
 				<input type="submit" name="" value="enviar">
 			</form>
 	</div>
-
+	<br><br>
+	<div>
+		<a href="<?php echo BASE; ?>Home/index">Volver al incio</a>
+	</div>
 	
 
 </body>

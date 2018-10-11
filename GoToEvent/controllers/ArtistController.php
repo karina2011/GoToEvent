@@ -14,14 +14,22 @@ class ArtistController
 
     public function index() // funcion por defecto de cada controladora
     {
-        include("../views/Home.php");
+        include(BASE . VIEWS . "Home.php");
     }
 
     public function store($nombre,$apellido,$dni)
     {
         $artist = new Artist($dni,$nombre,$apellido);
 
-        $this->dao->create($artist);
+        $flag = $this->dao->create($artist);
+
+        if($flag){
+            echo "Artista creado" . "<br><br>";
+        } else {
+            echo "No se pudo crear el artista" . "<br><br>";
+        }
+
+        require(ROOT . VIEWS . 'Home.php');
 
     }
 
@@ -29,7 +37,15 @@ class ArtistController
     {
         $lista = $this->dao->readAll();
         //var_dump($lista);
-        include("views/ViewArtistas.php");
+        include(VIEWS . "ViewArtistas.php");
+    }
+
+    public function delete($dni)
+    {
+        
+        $this->dao->delete($dni);
+
+        require(ROOT . VIEWS . 'Home.php');
     }
 
 

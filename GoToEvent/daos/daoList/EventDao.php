@@ -26,25 +26,42 @@ class EventDao  extends Singleton implements \interfaces\Crud
         $this->list=$this->getSessionEvent();
         array_push($this->list, $event);
         $this->setSessionEvent($this->list);
-        print_r($this->list);
+       // print_r($this->list);
     }
 
 
-    public function readAll(){
+    public function readAll()
+    {
         $this->list = $this->getSessionEvent();
         return $this->list;
     }
 
-    public function read ($id){
+    public function read ($id)
+    {
 
     }
 
-    public function update ($id){
+    public function update ($id)
+    {
 
     }
 
-    public function delete ($id){
-
+    public function delete ($id)
+    {
+        $this->list = $this->getSessionEvent();
+        $flag = false;
+        foreach ($this->list as $key => $value) {
+            if($value->getTitle() == $id){
+                unset($this->list[$key]);
+                $flag = true;
+            }
+        }
+        if($flag){
+            $this->setSessionEvent($this->list);
+            echo "Evento eliminado" . '<br><br>';
+        } else {
+            echo "El evento que deseas eliminar no exsiste" . '<br><br>';
+        }
     }
 }
 

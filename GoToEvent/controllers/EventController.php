@@ -21,15 +21,23 @@ class EventController
 
 		$this->dao->create($event);
 
-		//require(ROOT . 'views/Home');
+		require(ROOT . VIEWS . 'Home.php');
 	}
 
 	public function readAll()
 	{
 		$lista = $this->dao->readAll();
 
-		include('views/ViewEvents.php');
+		include(VIEWS . 'ViewEvents.php');
 	}
+
+	public function delete($title)
+	{
+		$this->dao->delete($title);
+
+		require(ROOT . VIEWS . 'Home.php');
+	}
+	
 }
 
 ?>

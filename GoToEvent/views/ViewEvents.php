@@ -15,5 +15,9 @@
 		</tr>
 	<?php } ?>
 	</table>
+	<br><br>
+	<div>
+		<a href="<?php echo BASE; ?>Home/index">Volver al inicio</a>
+	</div>
 </body>
 </html>
