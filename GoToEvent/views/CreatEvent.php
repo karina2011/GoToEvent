@@ -4,16 +4,22 @@
 	<title></title>
 </head>
 <body>
-	<form action="Event/creat" method="post">
-		<div>
-			<label>Titulo</label>
-			<input type="text" name="title">
-		</div>
 
-		<div>
-			<input type="submit" name="" value="enviar">
-		</div>
+	<h3>Crear Evento</h3>
+	</div>
+		<br>
+		<form action="../Event/creat" method="post">
+			<div>
+				<label>Titulo</label>
+				<input type="text" name="title">
+			</div>
+		<br>
+			<div>
+				<input type="submit" name="" value="enviar">
+			</form>
+	</div>
 
-	</form>
+	
+
 </body>
 </html>

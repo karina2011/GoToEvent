@@ -14,11 +14,14 @@ class EventController
         $this->dao = Dao::getInstance(); // esto se instancia en el router
     }
 
-	public function creat($title)
+	public function creat($title='')
 	{
+
 		$event = new Event($title);
 
 		$this->dao->create($event);
+
+		//require(ROOT . 'views/Home');
 	}
 
 	public function readAll()
