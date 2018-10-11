@@ -78,7 +78,7 @@
 
 <a href="Event/readAll">Ver eventos</a>
 
-<h1>maldito git</h1>
+<h1>maldito gittttttt</h1>
 <?php
 
 /*echo "<pre>";
