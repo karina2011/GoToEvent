@@ -11,45 +11,45 @@
 </head>
 <body>
 
-  <h3>Opciones artista:</h3>
+  <p class="h3"><h3>Opciones artista:</h3></p>
   <br>
   <div>
-    <a href="<?php echo BASE; ?>Home/createArtist" >Crear Artista</a>
+    <a class="btn btn-primary" href="<?php echo BASE; ?>Home/createArtist" >Crear Artista</a>
   </div>
 
   <br>
 
   <div>
-    <a href="<?php echo BASE; ?>Artist/getStore" >Ver Artista</a>
+    <a class="btn btn-primary" href="<?php echo BASE; ?>Artist/getStore" >Ver Artista</a>
   </div>
 
   <br>
 
   <div>
-    <a href="<?php echo BASE; ?>Home/deleteArtist">Borrar Artista</a>
+    <a class="btn btn-primary" href="<?php echo BASE; ?>Home/deleteArtist">Borrar Artista</a>
   </div>
 
   <br>
   <br>
 
-  <h3>Opciones evento: </h3>
+  <p><h3>Opciones evento: </h3></p>
 
   <br>
 
   <div>
-    <a href="<?php echo BASE; ?>Home/creatEvent">Crear Evento</a>
+    <a class="btn btn-primary" href="<?php echo BASE; ?>Home/creatEvent">Crear Evento</a>
   </div>
 
   <br>
 
   <div>
-    <a href="<?php echo BASE; ?>Event/readAll">Ver eventos</a>
+    <a class="btn btn-primary" href="<?php echo BASE; ?>Event/readAll">Ver eventos</a>
   </div>
 
   <br>
 
   <div>
-    <a href="<?php echo BASE; ?>Home/deleteEvent">Borrar evento</a>
+    <a class="btn btn-primary" href="<?php echo BASE; ?>Home/deleteEvent">Borrar evento</a>
   </div>
 
 </body>
