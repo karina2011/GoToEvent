@@ -1,23 +1,27 @@
 <?php
-namespace models;
+namespace Package1;
 
 
 require_once ('Line_purchase.php');
 
 
 
+use Package1;
+/**
+ * @author Federico
+ * @version 1.0
+ * @created 06-oct.-2018 19:12:28
+ */
 class Purchase
 {
 
 	private $date;
-	private $id_line_purchase;
-	private $id_purchase;
+	public $m_Line_purchase;
 
-	function __construct($date='',$id_line_purchase='',$id_purchase='')
+	function __construct($date='',$m_Line_purchase='')
 	{
 		$this->date = $date;
-		$this->id_line_purchase = $id_line_purchase;
-		$this->id_purchase = $id_purchase;
+		$this->m_Line_purchase = $m_Line_purchase;
 	}
 	
 	public function getDate()

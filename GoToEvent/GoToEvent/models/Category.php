@@ -4,19 +4,21 @@ namespace models;
 
 require_once ('event.php');
 
-
+/**
+ * @author Federico
+ * @version 1.0
+ * @created 06-oct.-2018 19:11:32
+ */
 class Category
 {
 
 	private $description;
-	private $id_event;
-	private $id_category;
+	public $m_Event;
 
-	function __construct($description='',$id_event='',$id_category='')
+	function __construct($description='',$m_Event='')
 	{
 		$this->description = $description;
-		$this->id_event = $id_event;
-		$this->id_category = $id_category
+		$this->m_Event = $m_Event;
 	}
 
 	public function getDescription()

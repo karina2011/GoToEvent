@@ -1,25 +1,23 @@
 <?php 
 
-/**
- * @author Federico
- * @version 1.0
- * @created 06-oct.-2018 19:11:14
- */
+
 
 namespace models;
 
 class Artist
 {
-
+	
 	private $dni;
 	private $last_name;
 	private $name;
+	private $id_artist;
 
-	function __construct($dni='',$name='',$last_name='')
+	function __construct($dni='',$name='',$last_name='',$id_artist='')
 	{
 		$this->dni = $dni;
 		$this->name = $name;
 		$this->last_name = $last_name;
+		$this->id_artist = $id_artist;
 	}
 
 	public function getDni()
@@ -37,6 +35,11 @@ class Artist
 		return $this->name;
 	}
 
+	public function getIdArtisit()
+	{
+		return $this->id_artist;
+	}
+
 	public function setDni($dni)
 	{
 		$this->dni = $dnidni;
@@ -50,6 +53,11 @@ class Artist
 	public function setName()
 	{
 		$this->name = $name;
+	}
+
+	public function setIdArtist($id_artist)
+	{
+		$this->id_artist = $id_artist;
 	}
 
 }

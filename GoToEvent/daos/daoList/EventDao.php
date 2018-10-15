@@ -23,10 +23,20 @@ class EventDao  extends Singleton implements \interfaces\Crud
     }
     public function create($event)
     {
+        $flag = 1;
         $this->list=$this->getSessionEvent();
-        array_push($this->list, $event);
-        $this->setSessionEvent($this->list);
-       // print_r($this->list);
+        foreach ($this->list as $key => $value) {  //solo agrega un nuevo evento si este no existe
+            if($value->getTitle()==$event->getTitle())
+            {
+                $flag=0;
+            }
+        }
+        if ($flag)
+        {
+            array_push($this->list, $event);
+            $this->setSessionEvent($this->list);
+            // print_r($this->list);
+        }
     }
 
 
