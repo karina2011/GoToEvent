@@ -103,10 +103,6 @@
     </div>
     <!-- /.container -->
 
-    <div>
-		<a href="<?php echo BASE; ?>Home/index">Volver al inicio</a>
-	</div>
-
     <!-- Footer -->
     <footer class="py-5 bg-dark">
       <div class="container">

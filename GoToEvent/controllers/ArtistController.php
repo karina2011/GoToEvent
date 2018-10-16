@@ -1,7 +1,8 @@
 <?php
 namespace controllers;
-use daos\daoList\ArtistDao as Dao;
+//use daos\daoList\ArtistDao as Dao;
 use models\Artist;
+use daos\daobd\ArtistDao as Dao;
 
 class ArtistController
 {
@@ -21,13 +22,14 @@ class ArtistController
     {
         $artist = new Artist($dni,$nombre,$apellido);
 
-        $flag = $this->dao->create($artist);
+        //$flag = $this->dao->create($artist);
+        $this->dao->create($artist);
 
-        if($flag){
+        /*if($flag){
             echo "Artista creado" . "<br><br>";
         } else {
             echo "No se pudo crear el artista" . "<br><br>";
-        }
+        }*/
 
         require(ROOT . VIEWS . 'Home.php');
 

@@ -8,10 +8,10 @@ define('VIEWS', 'views/');
 $base=explode($_SERVER['DOCUMENT_ROOT'],ROOT);
 define("BASE",$base[1]);
 
-define('HOST',"localhost");
-define('USER',"root");
-define('PASS',"");
-define('DB',"beerghost");
+define('DB_HOST',"localhost");
+define('DB_USER',"root");
+define('DB_PASS',"");
+define('DB_NAME',"GoToEvent");
 
 
 

@@ -2,6 +2,7 @@
 namespace daos\daobd;
 
 use model\Artist as M_Artist;
+use daos\daobd\Connection as Connection;
 
 class ArtistDao  extends Singleton implements \interfaces\Crud
 {
@@ -26,12 +27,14 @@ class ArtistDao  extends Singleton implements \interfaces\Crud
 
 
 		// creo el objeto conexion
-		$obj_pdo = new Conexion();
+		//$obj_pdo = new Connection();
 
 
 		// Conecto a la base de datos.
 		try {
-			$conexion = $obj_pdo->conectar();
+			//$conexion = $obj_pdo->conectar();
+
+            $conexion = new Connection();
 
 			// Creo una sentencia llamando a prepare. Esto devuelve un objeto statement
 			$sentencia = $conexion->prepare($sql);
@@ -60,10 +63,11 @@ class ArtistDao  extends Singleton implements \interfaces\Crud
     {
         $sql = "SELECT * FROM artist";
 
-        $obj_pdo = new Conexion();
+       // $obj_pdo = new Connection();
 
         try {
-            $conexion = $obj_pdo->conectar();
+           // $conexion = $obj_pdo->conectar();
+            $conexion = new Connection();
 
 			// Creo una sentencia llamando a prepare. Esto devuelve un objeto statement
 			$sentencia = $conexion->prepare($sql);
@@ -90,11 +94,11 @@ class ArtistDao  extends Singleton implements \interfaces\Crud
     {
         $sql = "SELECT * FROM artist where idArtist = :idArtist";
 
-        $obj_pdo = new Conexion();
+        //$obj_pdo = new Conexion();
 
         try {
-            $conexion = $obj_pdo->conectar();
-
+            //$conexion = $obj_pdo->conectar();
+            $conexion = new Connection();
              // Creo una sentencia llamando a prepare. Esto devuelve un objeto statement
             $sentencia = $conexion->prepare($sql);
 
@@ -127,11 +131,11 @@ class ArtistDao  extends Singleton implements \interfaces\Crud
     {
         $sql = "DELETE FROM usuarios WHERE idArtist = :idArtist";
 
-        $obj_pdo = new Conexion();
+        //$obj_pdo = new Conexion();
 
         try {
-            $conexion = $obj_pdo->conectar();
-
+            //$conexion = $obj_pdo->conectar();
+            $conexion = new Connection();
             // Creo una sentencia llamando a prepare. Esto devuelve un objeto statement
             $sentencia = $conexion->prepare($sql);
 
