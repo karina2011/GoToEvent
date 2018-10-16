@@ -5,23 +5,25 @@ namespace models;
 require_once ('event.php');
 require_once ('type_square.php');
 
-
+/**
+ * @author Federico
+ * @version 1.0
+ * @created 06-oct.-2018 19:11:58
+ */
 class Event_place
 {
 
 	private $capacity;
 	private $description;
-	private $id_event;
-	private $id_type_square;
-	private $id_event_place;
+	public $m_Event;
+	public $m_Type_square;
 
-	function __construct($capacity='',$description='',$id_event='',$id_type_square='',$id_event_place)
+	function __construct($capacity='',$description='',$m_Event='',$m_Type_square='')
 	{
 		$this->capacity = $capacity;
 		$this->description = $description;
-		$this->id_event = $id_event;
-		$this->id_type_square = $id_type_square;
-		$this->id_event_place = $id_event_place;
+		$this->m_Event = $m_Event;
+		$this->m_Type_square = $m_Type_square;
 	}
 
 	public function getCapacity()

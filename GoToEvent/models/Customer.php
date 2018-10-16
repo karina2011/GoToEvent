@@ -4,18 +4,20 @@ namespace models;
 
 require_once ('purchase.php');
 
-
+/**
+ * @author Federico
+ * @version 1.0
+ * @created 06-oct.-2018 19:11:41
+ */
 class Customer extends User 
 {
 
-	private $id_purchase;
-	private $id_customer;
+	public $m_Purchase;
 
-	function __construct($dni='',$email='',$last_name='',$name='',$id_curchase='',$id_customer='')
+	function __construct($dni='',$email='',$last_name='',$name='',$m_Purchase='')
 	{
 		parent::__construct($name,$last_name,$email,$dni);
-		$this->id_purchase = $id_purchase;
-		$this->id_customer = $id_customer;
+		$this->m_Purchase = $m_Purchase;
 	}
 
 	/*public function getDni()
