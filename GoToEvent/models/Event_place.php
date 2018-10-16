@@ -11,14 +11,16 @@ class Event_place
 
 	private $capacity;
 	private $description;
-	private $id_calendar;
+	private $id_event;
+	private $id_type_square;
 	private $id_event_place;
 
-	function __construct($capacity='',$description='',$id_calendar='',$id_event_place)
+	function __construct($capacity='',$description='',$id_event='',$id_type_square='',$id_event_place)
 	{
 		$this->capacity = $capacity;
 		$this->description = $description;
-		$this->id_calendar = $id_calendar;
+		$this->id_event = $id_event;
+		$this->id_type_square = $id_type_square;
 		$this->id_event_place = $id_event_place;
 	}
 
