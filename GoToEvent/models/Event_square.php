@@ -1,5 +1,5 @@
 <?php
-namespace Package1;
+namespace models;
 
 
 require_once ('Calendar.php');
@@ -7,28 +7,23 @@ require_once ('..\models1\Line_purchase.java');
 
 
 
-use Package1;
-/**
- * @author Federico
- * @version 1.0
- * @created 06-oct.-2018 19:12:07
- */
 class Event_square
 {
 
 	private $price;
 	private $quantity_available;
 	private $remanente;
-	public $m_Calendar;
-	public $m_Line_purchase;
+	private $id_calendar;
+	private $id_line_purchase;
+	private $id_event_square;
 
-	function __construct($price='',$quantity_available='',$remanente='',$m_Calendar='',$m_Line_purchase='')
+	function __construct($price='',$quantity_available='',$remanente='',$id_calendar='',$id_line_purchase='',$id_event_square='')
 	{
 		$this->price = $price;
 		$this->quantity_available = $quantity_available;
 		$this->remanente = $remanente;
-		$this->m_Calendar = $m_Calendar;
-		$this->m_Line_purchase = $m_Line_purchase;
+		$this->id_calendar = $id_calendar;
+		$this->id_line_purchase = $id_line_purchase;
 	}
 
 	public function getPrice()

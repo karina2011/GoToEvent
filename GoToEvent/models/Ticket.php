@@ -1,24 +1,18 @@
 <?php
-namespace Package1;
+namespace models;
 
 
-
-
-/**
- * @author Federico
- * @version 1.0
- * @created 06-oct.-2018 19:12:44
- */
 class Ticket
 {
-
+	private $id_ticket;
 	private $number;
 	private $qr;
 
-	function __construct($number='',$qr='')
+	function __construct($number='',$qr='',$id_ticket)
 	{
 		$this->number = $number;
 		$this->qr = $qr;
+		$this->$id_ticket = $id_ticket;
 	}
 
 	public function getNumber()

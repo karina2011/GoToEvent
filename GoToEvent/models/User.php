@@ -1,22 +1,22 @@
 <?php
 namespace models;
 
-/**
- * 
- */
+
 class User
 {
 	private $dni;
 	private $email;
 	private $last_name;
 	private $name;
+	private $id_user;
 	
-	function __construct($name='',$last_name='',$email='',$dni='')
+	function __construct($name='',$last_name='',$email='',$dni='',$id_user='')
 	{
 		$this->name = $name;
 		$this->last_name = $last_name;
 		$this->email = $email;
 		$this->dni = $dni;
+		$this->id_user = $id_user;
 	}
 
 	public function getName()

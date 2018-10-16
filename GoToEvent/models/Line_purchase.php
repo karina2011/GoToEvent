@@ -1,29 +1,25 @@
 <?php
-namespace Package1;
+namespace models;
 
 
 require_once ('..\models1\Ticket.php');
 
 
 
-use Package1;
-/**
- * @author Federico
- * @version 1.0
- * @created 06-oct.-2018 19:12:19
- */
 class Line_purchase
 {
 
 	private $price;
 	private $quantity;
-	public $m_Ticket;
+	private $id_ticket;
+	private $id_line_purchase;
 
-	function __construct($price='',$quantity='',$m_Ticket='')
+	function __construct($price='',$quantity='',$id_ticket='')
 	{
 		$this->price = $price;
 		$this->quantity = $quantity;
-		$this->m_Ticket = $m_Ticket;
+		$this->id_ticket = $id_ticket;
+		$this->id_line_purchase = $id_line_purchase;
 	}
 
 	public function getPrice()

@@ -5,23 +5,18 @@ namespace models;
 require_once ('Calendar.php');
 
 
-
-use Package1;
-/**
- * @author Federico
- * @version 1.0
- * @created 06-oct.-2018 19:11:50
- */
 class Event
 {
 
 	private $title;
-	public $m_Calendar;
+	private $id_calendar;
+	private $id_event;
 
-	function __construct($title='',$m_Calendar='')
+	function __construct($title='',$id_calendar='',$id_event='')
 	{
 		$this->title = $title;
-		$this->m_Calendar = $m_Calendar;
+		$this->id_calendar = $id_calendar;
+		$this->id_event=$id_event;
 	}
 
 	public function getTitle()

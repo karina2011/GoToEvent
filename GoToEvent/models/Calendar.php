@@ -5,21 +5,17 @@ namespace models;
 require_once ('Artist.php');
 
 
-/**
- * @author Federico
- * @version 1.0
- * @created 06-oct.-2018 19:11:23
- */
 class Calendar
 {
-
+	private $id_calendar;
 	private $date;
-	public $m_Artist;
+	private $id_artist;
 
-	function __construct($date='',$m_Artist='')
+	function __construct($date='',$id_artist='',$id_calendar)
 	{
 		$this->date = $date;
-		$this->m_Artist = $m_Artist;
+		$this->id_artist = $id_artist;
+		$this->id_calendar = $id_calendar;
 	}
 
 	public function getDate()
