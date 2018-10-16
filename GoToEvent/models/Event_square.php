@@ -3,7 +3,6 @@ namespace models;
 
 
 require_once ('Calendar.php');
-require_once ('..\models1\Line_purchase.java');
 
 
 

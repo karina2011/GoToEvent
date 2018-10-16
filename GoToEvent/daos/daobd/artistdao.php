@@ -1,10 +1,11 @@
 <?php
 namespace daos\daobd;
 
-use model\Artist as M_Artist;
-use daos\daobd\Connection as Connection;
+use models\Artist as M_Artist;
+use daos\daobd\connection as Connection;
+use PDOException;
 
-class ArtistDao  extends Singleton implements \interfaces\Crud
+class ArtistDao extends Singleton implements \interfaces\Crud
 {
     private $object;
     public function __construct()
@@ -23,7 +24,7 @@ class ArtistDao  extends Singleton implements \interfaces\Crud
     {
         // Guardo como string la consulta sql utilizando como values, marcadores de parámetros con nombre (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada
 
-		$sql = "INSERT INTO artist (names, lastName, dni) VALUES (:names, :lastName, :dni)";
+		$sql = "INSERT INTO artistas (name, last_name, dni) VALUES (:name, :last_name, :dni)";
 
 
 		// creo el objeto conexion
@@ -34,7 +35,8 @@ class ArtistDao  extends Singleton implements \interfaces\Crud
 		try {
 			//$conexion = $obj_pdo->conectar();
 
-            $conexion = new Connection();
+            $modelo = new Connection();
+            $conexion = $modelo->getConnection();
 
 			// Creo una sentencia llamando a prepare. Esto devuelve un objeto statement
 			$sentencia = $conexion->prepare($sql);
@@ -44,8 +46,8 @@ class ArtistDao  extends Singleton implements \interfaces\Crud
             $oneLastName = $artist->getLastName();
 			$oneDni = $artist->getDni();
 				
-            $sentencia->bindParam(":names", $oneName);
-            $sentencia->bindParam(":lastName", $oneLastName);
+            $sentencia->bindParam(":name", $oneName);
+            $sentencia->bindParam(":last_name", $oneLastName);
 			$sentencia->bindParam(":dni", $oneDni);
 
 			// Ejecuto la sentencia.
@@ -61,18 +63,17 @@ class ArtistDao  extends Singleton implements \interfaces\Crud
 
     public function readAll()
     {
-        $sql = "SELECT * FROM artist";
+        $sql = "SELECT * FROM artistas";
 
        // $obj_pdo = new Connection();
 
         try {
            // $conexion = $obj_pdo->conectar();
-            $conexion = new Connection();
+            $modelo = new Connection();
+            $conexion = $modelo->getConnection();
 
 			// Creo una sentencia llamando a prepare. Esto devuelve un objeto statement
 			$sentencia = $conexion->prepare($sql);
-
-            $sentencia->bindParam(":email", $email);
 
             $sentencia->execute();
 
@@ -80,7 +81,7 @@ class ArtistDao  extends Singleton implements \interfaces\Crud
             while($row = $sentencia->fetch()) {
                 $array[] = $row;
             }
-
+            
             return $this->mapear($array);
 
         } catch(PDOException $Exception) {
@@ -92,13 +93,11 @@ class ArtistDao  extends Singleton implements \interfaces\Crud
 
     public function read ($idArtist)
     {
-        $sql = "SELECT * FROM artist where idArtist = :idArtist";
-
-        //$obj_pdo = new Conexion();
+        $sql = "SELECT * FROM artistas where id_artist = :idArtist";
 
         try {
-            //$conexion = $obj_pdo->conectar();
-            $conexion = new Connection();
+            $modelo = new Connection();
+            $conexion = $modelo->getConnection();
              // Creo una sentencia llamando a prepare. Esto devuelve un objeto statement
             $sentencia = $conexion->prepare($sql);
 
@@ -129,13 +128,14 @@ class ArtistDao  extends Singleton implements \interfaces\Crud
 
     public function delete ($idArtist)
     {
-        $sql = "DELETE FROM usuarios WHERE idArtist = :idArtist";
+        $sql = "DELETE FROM artistas WHERE dni = :idArtist";
 
         //$obj_pdo = new Conexion();
 
         try {
-            //$conexion = $obj_pdo->conectar();
-            $conexion = new Connection();
+            $modelo = new Connection();
+            $conexion = $modelo->getConnection();
+            
             // Creo una sentencia llamando a prepare. Esto devuelve un objeto statement
             $sentencia = $conexion->prepare($sql);
 
@@ -163,11 +163,13 @@ class ArtistDao  extends Singleton implements \interfaces\Crud
 	protected function mapear($value) {
 
 		$value = is_array($value) ? $value : [];
-
-		$resp = array_map(function($p){
-		    return new M_Artist($p['idArtist'], $p['names'], $p['lastName'], $p['dni']);
-        }, $value);
         
-            return count($resp) > 1 ? $resp : $resp['0'];
+		$resp = array_map(function($p){
+		    return new M_Artist( $p['dni'], $p['name'], $p['last_name'], $p['id_artist']);
+        }, $value);
+            
+            /* devuelve un arreglo si tiene datos y sino devuelve nulo*/
+
+            return count($resp) > 0 ? $resp : null;
      }
 }

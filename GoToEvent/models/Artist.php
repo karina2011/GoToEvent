@@ -35,7 +35,7 @@ class Artist
 		return $this->name;
 	}
 
-	public function getIdArtisit()
+	public function getIdArtist()
 	{
 		return $this->id_artist;
 	}
