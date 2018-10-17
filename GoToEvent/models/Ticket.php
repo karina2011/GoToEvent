@@ -25,6 +25,11 @@ class Ticket
 		return $this->qr;
 	}
 
+	public function getId()
+	{
+		return $this->id_ticket;
+	}
+
 	public function setNumber($number)
 	{
 		$this->number = $number;
@@ -33,6 +38,11 @@ class Ticket
 	public function setQr($qr)
 	{
 		$this->qr = $qr;
+	}
+
+	public function getId($id)
+	{
+		$this->id_ticket = $id;
 	}
 
 }

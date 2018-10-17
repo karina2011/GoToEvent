@@ -11,14 +11,12 @@ class Event_place
 
 	private $capacity;
 	private $description;
-	private $id_calendar;
 	private $id_event_place;
 
-	function __construct($capacity='',$description='',$id_calendar='',$id_event_place)
+	function __construct($capacity='',$description='',$id_event_place)
 	{
 		$this->capacity = $capacity;
 		$this->description = $description;
-		$this->id_calendar = $id_calendar;
 		$this->id_event_place = $id_event_place;
 	}
 
@@ -32,6 +30,11 @@ class Event_place
 		return $this->description;
 	}
 
+	public function getId()
+	{
+		return $this->id_event_place;
+	}
+
 	public function setCapacity($capacity)
 	{
 		$this->capacity = $capacity;
@@ -40,6 +43,11 @@ class Event_place
 	public function setDescription($description)
 	{
 		$this->description = $description;
+	}
+
+	public function setId($id)
+	{
+		$this->id_event_place = $id;
 	}
 
 }

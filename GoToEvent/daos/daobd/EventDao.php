@@ -5,7 +5,7 @@ use models\Event as M_Event;
 use daos\daobd\connection as Connection;
 use PDOException;
 
-class ArtistDao extends Singleton implements \interfaces\Crud
+class EventDao extends Singleton implements \interfaces\Crud
 {
     private $object;
     public function __construct()
@@ -14,7 +14,7 @@ class ArtistDao extends Singleton implements \interfaces\Crud
     }
     public function getEvent()
     {
-        return object;
+        return $this->object;
     }
     public function setEvent($object)
     {
@@ -24,7 +24,7 @@ class ArtistDao extends Singleton implements \interfaces\Crud
     {
         // Guardo como string la consulta sql utilizando como values, marcadores de parámetros con nombre (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada
 
-		$sql = "INSERT INTO events (title,id_event,id_calendar) VALUES (:title, :id_event, :id_calendar)";
+		$sql = "INSERT INTO events (title,id_category) VALUES (:title, :category)";
 
 
 		// creo el objeto conexion
@@ -43,12 +43,10 @@ class ArtistDao extends Singleton implements \interfaces\Crud
 
 			// Reemplazo los marcadores de parametro por los valores reales utilizando el método bindParam().
 			$oneTitle = $envet->getTitle();
-            $oneIdCalendar = $event->getIdCalendar();
-			$oneIdEvent = $event->getIdEvent();
+            $oneCategory = $event->getCategory();
 				
             $sentencia->bindParam(":title", $oneTitle);
-            $sentencia->bindParam(":id_calendar", $oneIdCalendar);
-			$sentencia->bindParam(":id_event", $oneIdEvent);
+            $sentencia->bindParam(":category", $oneCategory);
 
 			// Ejecuto la sentencia.
 			return $sentencia->execute();
@@ -56,7 +54,8 @@ class ArtistDao extends Singleton implements \interfaces\Crud
         } 
         catch(PDOException $Exception) {
 
-			throw new MyDatabaseException( $Exception->getMessage( ) , $Exception->getCode( ) );
+			//throw new MyDatabaseException( $Exception->getMessage( ) , $Exception->getCode( ) );
+            throw new Exception('Error: ' . $e->getMessage());
 
 		}
     }
@@ -163,7 +162,7 @@ class ArtistDao extends Singleton implements \interfaces\Crud
 		$value = is_array($value) ? $value : [];
         
 		$resp = array_map(function($p){
-		    return new M_Event( $p['title'], $p['id_calendar'], $p['id_event']);
+		    return new M_Event( $p['title'], $p['category'], $p['id_event']);
         }, $value);
             
             /* devuelve un arreglo si tiene datos y sino devuelve nulo*/

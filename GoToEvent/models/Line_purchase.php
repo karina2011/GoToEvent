@@ -11,14 +11,14 @@ class Line_purchase
 
 	private $price;
 	private $quantity;
-	private $id_ticket;
+	private $ticket;
 	private $id_line_purchase;
 
-	function __construct($price='',$quantity='',$id_ticket='')
+	function __construct($price='',$quantity='',$ticket='')
 	{
 		$this->price = $price;
 		$this->quantity = $quantity;
-		$this->id_ticket = $id_ticket;
+		$this->ticket = $ticket;
 		$this->id_line_purchase = $id_line_purchase;
 	}
 
@@ -32,6 +32,16 @@ class Line_purchase
 		return $this->quantity;
 	}
 
+	public function getId()
+	{
+		return $this->id_line_purchase;
+	}
+
+	public function getTicket()
+	{
+		return $this->ticket;
+	}
+
 	public function setPrice($price)
 	{
 		$this->price = $price;
@@ -40,6 +50,16 @@ class Line_purchase
 	public function setQuantity($quantity)
 	{
 		$this->quantity = $quantity;
+	}
+
+	public function setTicket($ticket)
+	{
+		$this->ticket = $ticket;
+	}
+
+	public function setId($id)
+	{
+		$this->id_line_purchase = $id;
 	}
 
 }

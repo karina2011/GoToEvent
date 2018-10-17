@@ -9,13 +9,11 @@ class Category
 {
 
 	private $description;
-	private $id_event;
 	private $id_category;
 
-	function __construct($description='',$id_event='',$id_category='')
+	function __construct($description='',$id_category='')
 	{
 		$this->description = $description;
-		$this->id_event = $id_event;
 		$this->id_category = $id_category
 	}
 
@@ -24,9 +22,19 @@ class Category
 		return $this->description;
 	}
 
+	public function getId()
+	{
+		return $this->id_category;
+	}
+
 	public function setDescription($description)
 	{
 		$this->description = $description;
+	}
+
+	public function setId($id)
+	{
+		$this->id_category = $id;
 	}
 
 }

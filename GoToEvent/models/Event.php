@@ -9,13 +9,13 @@ class Event
 {
 
 	private $title;
-	private $id_calendar;
 	private $id_event;
+	private $category;
 
-	function __construct($title='',$id_calendar='',$id_event='')
+	function __construct($title='',$category='',$id_event='')
 	{
 		$this->title = $title;
-		$this->id_calendar = $id_calendar;
+		$this->category = $category;
 		$this->id_event=$id_event;
 	}
 
@@ -29,6 +29,11 @@ class Event
 		return $this->id_calendar;
 	}
 
+	public function getCategory()
+	{
+		return $this->category;
+	}
+
 	public function getIdEvent()
 	{
 		return $this->id_event;
@@ -37,6 +42,11 @@ class Event
 	public function setTitle($title)
 	{
 		$this->title = $title;
+	}
+
+	public function setCategory($category)
+	{
+		$this->category = $category;
 	}
 
 }

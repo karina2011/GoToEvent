@@ -1,7 +1,8 @@
 <?php 
 namespace controllers;
-use daos\daoList\EventDao as Dao;
+//use daos\daoList\EventDao as Dao;
 use models\Event;
+use daos\daobd\EventDao as Dao;
 /**
  * 
  */
@@ -17,7 +18,7 @@ class EventController
 	public function creat($title='')
 	{
 
-		$event = new Event($title);
+		$event = new Event($title,1);
 
 		$this->dao->create($event);
 

@@ -8,9 +8,11 @@ use PDOException;
 class ArtistDao extends Singleton implements \interfaces\Crud
 {
     private $object;
+    protected $mensaje;
     public function __construct()
     {
         $this->object = null;
+        $this->mensaje = '';
     }
     public function getArtist()
     {
@@ -54,9 +56,9 @@ class ArtistDao extends Singleton implements \interfaces\Crud
 			return $sentencia->execute();
 
         } 
-        catch(PDOException $Exception) {
+        catch(PDOException $e) {
 
-			throw new MyDatabaseException( $Exception->getMessage( ) , $Exception->getCode( ) );
+			throw new \MyDatabaseException( $e->getMessage( ) , $e->getCode( ) );
 
 		}
     }
@@ -117,7 +119,7 @@ class ArtistDao extends Singleton implements \interfaces\Crud
 
         } catch(PDOException $Exception) {
 
-         throw new \MyDatabaseException( $Exception->getMessage( ) , $Exception->getCode( ) );
+         throw new MyDatabaseException( $Exception->getMessage( ) , $Exception->getCode( ) );
         }
     }
 
