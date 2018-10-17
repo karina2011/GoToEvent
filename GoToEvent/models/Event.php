@@ -24,6 +24,16 @@ class Event
 		return $this->title;
 	}
 
+	public function getIdCalendar()
+	{
+		return $this->id_calendar;
+	}
+
+	public function getIdEvent()
+	{
+		return $this->id_event;
+	}
+
 	public function setTitle($title)
 	{
 		$this->title = $title;
