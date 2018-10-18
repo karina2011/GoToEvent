@@ -1,5 +1,5 @@
 <?php
-namespace daos\daobd;
+namespace daos\daodb;
 
 use models\Event as M_Event;
 use daos\daobd\connection as Connection;

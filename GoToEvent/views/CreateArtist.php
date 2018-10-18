@@ -6,7 +6,7 @@
 <body>
 	<h1>Crear artista</h1>
 	<br><br>
-	<form action="<?php echo BASE; ?>Artist/Store" method="post" accept-charset="utf-8">
+	<form action="<?php echo BASE; ?>Artist/create" method="post" accept-charset="utf-8">
 	  <div>
 	    <label for="name">Nombre: </label>
 	    <input type="text" name="name" value="" placeholder="Nombre">

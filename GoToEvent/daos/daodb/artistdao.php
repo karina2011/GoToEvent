@@ -1,5 +1,5 @@
 <?php
-namespace daos\daobd;
+namespace daos\daodb;
 
 use models\Artist as M_Artist;
 use daos\daobd\connection as Connection;
@@ -8,6 +8,7 @@ use PDOException;
 class ArtistDao extends Singleton implements \interfaces\Crud
 {
     private $connection;
+    
     public function __construct()
     {
         $this->connection = null;

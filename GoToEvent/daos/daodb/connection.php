@@ -1,5 +1,5 @@
 <?php 
-namespace daos\daobd;
+namespace daos\daodb;
 
 /**
 *

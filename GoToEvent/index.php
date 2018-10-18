@@ -9,7 +9,7 @@
 	
 	require_once "config/Request.php";
 	require_once "config/Router.php";
-    require_once "daos/daobd/Singleton.php";
+    require_once "daos/daodb/Singleton.php";
     require_once "daos/daoList/Singleton.php";
     
     use config\Autoload as Autoload;

@@ -2,7 +2,7 @@
 namespace controllers;
 //use daos\daoList\EventDao as Dao;
 use models\Event;
-use daos\daobd\EventDao as Dao;
+use daos\daodb\EventDao as Dao;
 /**
  * 
  */
@@ -40,7 +40,7 @@ class EventController
 		require(ROOT . VIEWS . 'ViewEvents.php');
 	}
 
-	public function viewCreatEvent()
+	public function viewCreateEvent()
 	{
 		require(ROOT . VIEWS . 'CreatEvent.php');
 	}

@@ -2,7 +2,7 @@
 namespace controllers;
 //use daos\daoList\ArtistDao as Dao;
 use models\Artist;
-use daos\daobd\ArtistDao as Dao;
+use daos\daodb\ArtistDao as Dao;
 
 class ArtistController
 {
@@ -18,7 +18,7 @@ class ArtistController
         include(BASE . VIEWS . "Home.php");
     }
 
-    public function store($nombre,$apellido,$dni)
+    public function create($nombre,$apellido,$dni)
     {
         $artist = new Artist($dni,$nombre,$apellido);
 
@@ -35,7 +35,7 @@ class ArtistController
 
     }
 
-    public function getStore()
+    public function readAll()
     {
         $lista = $this->dao->readAll();
         //var_dump($lista);
@@ -50,7 +50,7 @@ class ArtistController
         require(ROOT . VIEWS . 'Home.php');
     }
 
-    public function viewCreatArtist()
+    public function viewCreateArtist()
     {
         require(ROOT . VIEWS . 'CreateArtist.php');
     }
