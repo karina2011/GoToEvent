@@ -64,16 +64,16 @@
           <!-- Opciones artistas y eventos están aca de prueba, despues se debe pasar a su respectiva vista-->
           <h2 class="my-4">Opciones Artistas</h2><!--Solo puede haber un "h1"-->
           <div class="list-group">
-            <a href="<?php echo BASE; ?>Home/createArtist" class="list-group-item">Crear Artista</a>
+            <a href="<?php echo BASE; ?>Artist/viewCreatArtist" class="list-group-item">Crear Artista</a>
             <a href="<?php echo BASE; ?>Artist/getStore" class="list-group-item">Ver Artista</a>
-            <a href="<?php echo BASE; ?>Home/deleteArtist" class="list-group-item">Borrar Artista</a>
+            <a href="<?php echo BASE; ?>Artist/viewDeleteArtist" class="list-group-item">Borrar Artista</a>
           </div>
 
           <h2 class="my-4">Opciones Eventos</h2><!--Solo puede haber un "h1"-->
           <div class="list-group">
-            <a href="<?php echo BASE; ?>Home/creatEvent" class="list-group-item">Crear Evento</a>
+            <a href="<?php echo BASE; ?>Event/viewCreatEvent" class="list-group-item">Crear Evento</a>
             <a href="<?php echo BASE; ?>Event/readAll" class="list-group-item">Ver Evento</a>
-            <a href="<?php echo BASE; ?>Home/deleteEvent" class="list-group-item">Borrar Evento</a>
+            <a href="<?php echo BASE; ?>Event/viewDeleteEvent" class="list-group-item">Borrar Evento</a>
           </div>
 
         </div>

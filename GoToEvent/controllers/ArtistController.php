@@ -50,5 +50,15 @@ class ArtistController
         require(ROOT . VIEWS . 'Home.php');
     }
 
+    public function viewCreatArtist()
+    {
+        require(ROOT . VIEWS . 'CreateArtist.php');
+    }
+
+    public function viewDeleteArtist()
+    {
+        require(ROOT . VIEWS . 'DeleteArtist.php');
+    }
+
 
 }
