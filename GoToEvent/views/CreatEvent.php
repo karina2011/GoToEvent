@@ -8,12 +8,12 @@
 	<h3>Crear Evento</h3>
 	</div>
 		<br>
-		<form action="<?php echo BASE; ?>Event/creat" method="post">
+		<form action="<?php echo BASE; ?>Event/create" method="post">
 			<div>
 				<label>Titulo: </label>
 				<input type="text" name="title">
-				<label>ID Evento: </label>
-				<input type="number" name="id_event" required>
+				<label>Categoria: </label>
+				<input type="text" name="category">
 			</div>
 		<br>
 			<div>

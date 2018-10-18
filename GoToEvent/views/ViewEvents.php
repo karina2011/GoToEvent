@@ -15,6 +15,7 @@
 
     <!-- Custom styles for this template -->
     <link href="../assets/css/1-col-portfolio.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
 
   </head>
 
@@ -71,13 +72,16 @@
 
           <form action="<?php echo BASE; ?>Event/delete" method="post">
           <a class="btn btn-primary" href="#">Ver evento</a><!--cambiar esto a boton tambien-->
-          <button name="idEvent" type="submit" class="btn btn-danger" value="<?php echo $event->getIdEvent();?>">Borrar Evento </button>
+          <button name="title" type="submit" class="btn btn-danger" value="<?php echo $event->getTitle();?>"><i class="fas fa-trash"></i> </button>
           </form>
 
         </div>
       </div>
       <hr>
       <?php } } else { echo '<p>' ."NO HAY EVENTOS CARGADOS" .'</p>'; } ?>
+      <div class="pagination justify-content-end">
+      <button name="idEvent" type="submit" class="btn btn-success" title="agregar evento"><i class="fas fa-plus"></i></button>
+      </div>
       <!-- /.row -->
 
       <!-- Pagination -->

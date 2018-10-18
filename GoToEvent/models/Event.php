@@ -12,7 +12,7 @@ class Event
 	private $id_event;
 	private $category;
 
-	function __construct($title='',$id_event='',$category='')
+	function __construct($title='',$category='',$id_event='')
 	{
 		$this->title = $title;
 		$this->id_event=$id_event;

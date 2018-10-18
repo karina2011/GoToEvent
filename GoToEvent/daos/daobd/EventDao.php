@@ -7,119 +7,80 @@ use PDOException;
 
 class EventDao extends Singleton implements \interfaces\Crud
 {
-    private $object;
+    private $connection;
     public function __construct()
     {
-        $this->object = null;
+        $this->connection = null;
     }
-    public function getEvent()
-    {
-        return $this->object;
-    }
-    public function setEvent($object)
-    {
-        $this->object = $object;
-    }
+
     public function create($event)
     {
         // Guardo como string la consulta sql utilizando como values, marcadores de parámetros con nombre (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada
 
-		$sql = "INSERT INTO events (title,id_event,category) VALUES (:title,:id_event, :category)";
+		$sql = "INSERT INTO events (title,category) VALUES (:title, :category)";
 
+        $parameters['title'] = $event->getTitle();
+        $parameters['category'] = $event->getCategory();
 
-		// creo el objeto conexion
-		//$obj_pdo = new Connection();
+        try 
+        {
+            
+            $this->connection = Connection::getInstance();
 
-
-		// Conecto a la base de datos.
-		try {
-			//$conexion = $obj_pdo->conectar();
-
-            $modelo = new Connection();
-            $conexion = $modelo->getConnection();
-
-			// Creo una sentencia llamando a prepare. Esto devuelve un objeto statement
-			$sentencia = $conexion->prepare($sql);
-
-			// Reemplazo los marcadores de parametro por los valores reales utilizando el método bindParam().
-            $oneTitle = $event->getTitle();
-            $oneId_Event = $event->getIdEvent();
-            $oneCategory = $event->getCategory();
-				
-            $sentencia->bindParam(":title", $oneTitle);
-            $sentencia->bindParam(":id_event", $oneId_Event);
-            $sentencia->bindParam(":category", $oneCategory);
-
-			// Ejecuto la sentencia.
-			return $sentencia->execute();
+            return $this->connection->ExecuteNonQuery($sql, $parameters);
 
         } 
-        catch(PDOException $Exception) {
+        catch(PDOException $e)
+        {
+            echo $e;
+        }
 
-			//throw new MyDatabaseException( $Exception->getMessage( ) , $Exception->getCode( ) );
-            throw new Exception('Error: ' . $e->getMessage());
-
-		}
     }
 
     public function readAll()
     {
         $sql = "SELECT * FROM events";
 
-       // $obj_pdo = new Connection();
+        try
+        {
 
-        try {
-           // $conexion = $obj_pdo->conectar();
-            $modelo = new Connection();
-            $conexion = $modelo->getConnection();
+            $this->connection = Connection::getInstance();
+            $resultSet = $this->connection->execute($sql);
 
-			// Creo una sentencia llamando a prepare. Esto devuelve un objeto statement
-			$sentencia = $conexion->prepare($sql);
+        } 
+        catch(PDOException $e) 
+        {
 
-            $sentencia->execute();
+            echo $e;
+        }
 
-            $array = [];
-            while($row = $sentencia->fetch()) {
-                $array[] = $row;
-            }
-            
-            return $this->mapear($array);
+        if(!empty($resultSet))
+            return $this->mapear($resultSet);
+        else
+            return false;       
 
-        } catch(PDOException $Exception) {
-
-			throw new MyDatabaseException( $Exception->getMessage( ) , $Exception->getCode( ) );
-
-		}
     }
 
-    public function read ($idEvent)
+    public function read ($title)
     {
-        $sql = "SELECT * FROM artistas where id_event = :idEvent";
+        $sql = "SELECT * FROM events where title = :title";
 
-        try {
-            $modelo = new Connection();
-            $conexion = $modelo->getConnection();
-             // Creo una sentencia llamando a prepare. Esto devuelve un objeto statement
-            $sentencia = $conexion->prepare($sql);
+        $parameters['title'] = $title;
 
-            $sentencia->bindParam(":idEvent", $idEvent);
-
-             $sentencia->execute();
-
-             $array = [];
-             while($row = $sentencia->fetch()) {
-                  $array[] = $row;
-             }
-
-             if($sentencia->rowCount() > 0)
-                  return $this->mapear($array);
-             else
-                  return false;
-
-        } catch(PDOException $Exception) {
-
-         throw new \MyDatabaseException( $Exception->getMessage( ) , $Exception->getCode( ) );
+        try 
+        {
+            $this->connection = Connection::getInstance();
+            $resultSet = $this->connection->execute($sql, $parameters);
+        } 
+        catch(PDOException $e) 
+        {
+            echo $e;
         }
+
+        if(!empty($resultSet))
+            return $this->mapear($resultSet);
+        else
+            return false;
     }
 
     public function update ($id)
@@ -127,27 +88,20 @@ class EventDao extends Singleton implements \interfaces\Crud
 
     }
 
-    public function delete ($idEvent)
+    public function delete ($title)
     {
-        $sql = "DELETE FROM events WHERE id_event = :idEvent";
+        $sql = "DELETE FROM events WHERE title = :title";
 
-        //$obj_pdo = new Conexion();
+        $parameters['title'] = $title;
 
-        try {
-            $modelo = new Connection();
-            $conexion = $modelo->getConnection();
-            
-            // Creo una sentencia llamando a prepare. Esto devuelve un objeto statement
-            $sentencia = $conexion->prepare($sql);
-
-            $sentencia->bindParam(":idEvent", $idEvent);
-
-            $sentencia->execute();
-
-
-        } catch(PDOException $Exception) {
-
-            throw new MyDatabaseException( $Exception->getMessage( ) , $Exception->getCode( ) );
+        try 
+        {
+            $this->connection = Connection::getInstance();
+            return $this->connection->ExecuteNonQuery($sql, $parameters);
+        } 
+        catch(PDOException $e) 
+        {
+            echo $e;
         }
    }
 
@@ -164,7 +118,7 @@ class EventDao extends Singleton implements \interfaces\Crud
 		$value = is_array($value) ? $value : [];
         
 		$resp = array_map(function($p){
-		    return new M_Event( $p['title'], $p['id_event'], $p['category']);
+		    return new M_Event( $p['title'], $p['category'], $p['id_event']);
         }, $value);
             
             /* devuelve un arreglo si tiene datos y sino devuelve nulo*/
