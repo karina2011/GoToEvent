@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Ver Eventos</title>
+    <title>Ver Categoria</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -53,12 +53,12 @@
     <div class="container">
 
       <!-- Page Heading -->
-      <h1 class="my-4">Eventos:
+      <h1 class="my-4">Categorias:
         <small></small>
       </h1>
 
       <!-- Project One -->
-      <?php if (!empty($lista)){ foreach ($lista as $key => $event){ ?>
+      <?php if (!empty($lista)){ foreach ($lista as $key => $category){ ?>
       
       <div class="row">
         <div class="col-md-7">
@@ -67,12 +67,11 @@
           </a>
         </div>
         <div class="col-md-5">
-          <h3><?php echo $event->getTitle(); ?></h3><!--Titulo del evento-->
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium veniam exercitationem expedita laborum at voluptate. Labore, voluptates totam at aut nemo deserunt rem magni pariatur quos perspiciatis atque eveniet unde.</p>
+          <h3><?php echo $category->getDescription(); ?></h3><!--Descripcion de la categoria-->
 
-          <form action="<?php echo BASE; ?>Event/delete" method="post">
-          <a class="btn btn-primary" href="#">Ver evento</a><!--cambiar esto a boton tambien-->
-          <button name="title" type="submit" class="btn btn-danger" value="<?php echo $event->getTitle();?>"><i class="fas fa-trash"></i> </button>
+          <form action="<?php echo BASE; ?>Category/delete" method="post">
+          <a class="btn btn-primary" href="#">Ver categoria</a><!--cambiar esto a boton tambien-->
+          <button name="description" type="submit" class="btn btn-danger" value="<?php echo $category->getDescription();?>"><i class="fas fa-trash"></i> </button>
           </form>
 
         </div>
@@ -128,30 +127,4 @@
 
 </html>
 
-
-
-<!-- // borrar esto
-<!DOCTYPE html>
-<html>
-<head>
-	<title></title>
-</head>
-<body>
-	<table border="1">
-		<tr>
-			<th>Title</th>
-		</tr>
-	<?php while(!empty($lista)){ ?>
-		<?php $event = array_pop($lista) ?>
-		<tr>
-			<td><?php echo $event->getTitle(); ?></td>
-		</tr>
-	<?php } ?>
-	</table>
-	<br><br>
-	<div>
-		<a href="<?php echo BASE; ?>Home/index">Volver al inicio</a>
-	</div>
-</body>
 </html>
--->

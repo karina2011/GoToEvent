@@ -18,7 +18,7 @@
 	</form>
 	<br><br>
 	<div>
-		<a href="<?php echo BASE; ?>Home/index">Volver al inicio</a>
+		<a href="<?php echo BASE; ?>views/index">Volver al inicio</a>
 	</div>
 </body>
 </html>

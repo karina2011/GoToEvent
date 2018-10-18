@@ -8,15 +8,16 @@ class User
 	private $email;
 	private $last_name;
 	private $name;
-	private $id_user;
+	private $rol;
 	
-	function __construct($name='',$last_name='',$email='',$dni='',$id_user='')
+	function __construct($name='',$last_name='',$email='',$dni='',$rol='')
 	{
 		$this->name = $name;
 		$this->last_name = $last_name;
 		$this->email = $email;
 		$this->dni = $dni;
-		$this->id_user = $id_user;
+		$this->rol = $rol;
+
 	}
 
 	public function getName()

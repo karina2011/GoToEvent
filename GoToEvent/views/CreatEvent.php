@@ -22,7 +22,7 @@
 	</div>
 	<br><br>
 	<div>
-		<a href="<?php echo BASE; ?>Home/index">Volver al incio</a>
+		<a href="<?php echo BASE; ?>views/index">Volver al incio</a>
 	</div>
 	
 

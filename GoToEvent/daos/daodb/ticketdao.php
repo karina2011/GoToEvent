@@ -1,28 +1,32 @@
-<?php
+<?php 
 namespace daos\daodb;
 
-use models\Artist as M_Artist;
-use daos\daodb\connection as Connection;
-use PDOException;
+use models\Ticket as M_Ticket;
+use daos\daobd\connection as Connection;
+use PDOException
 
-class ArtistDao extends Singleton implements \interfaces\Crud
+/**
+ * 
+ */
+class TicketDao extends Singleton implements \interfaces\Crud
 {
     private $connection;
     
     public function __construct()
     {
         $this->connection = null;
-    }
-    
-    public function create($artist)
-    {
-        // Guardo como string la consulta sql utilizando como values, marcadores de parámetros con nombre (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada
+	}
 
-		$sql = "INSERT INTO artists (name, last_name, dni) VALUES (:name, :last_name, :dni)";
+	public function create($ticket)
+	{
+	    // Guardo como string la consulta sql utilizando como values, marcadores de parámetros con nombre (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada
 
-        $parameters['name'] = $artist->getName();
-        $parameters['last_name'] = $artist->getLastName();
-        $parameters['dni'] = $artist->getDni();
+		//TIENE DOBLE RR EL NUMBERR PORQUE CON UNA SOLA R ES UNA PALABRA RESERVADA DE PHP
+
+		$sql = "INSERT INTO tickets (numberr, qr) VALUES (:numberr, :qr)";
+
+        $parameters['numberr'] = $ticket->getNumber();
+        $parameters['qr'] = $ticket->getQr();
 
 		try {
 			
@@ -36,11 +40,11 @@ class ArtistDao extends Singleton implements \interfaces\Crud
 
 			echo $e;
 		}
-    }
+	}    
 
-    public function readAll()
+	public function readAll()
     {
-        $sql = "SELECT * FROM artists";
+        $sql = "SELECT * FROM tickets";
 
         try
         {
@@ -61,11 +65,11 @@ class ArtistDao extends Singleton implements \interfaces\Crud
             return false;
     }
 
-    public function read ($dni)
+    public function read ($number)
     {
-        $sql = "SELECT * FROM artists where dni = :dni";
+        $sql = "SELECT * FROM artists where numberr = :numberr";
 
-        $parameters['dni'] = $dni;
+        $parameters['numberr'] = $number;
 
         try 
         {
@@ -83,7 +87,7 @@ class ArtistDao extends Singleton implements \interfaces\Crud
             return false;
     }
 
-    public function update ($id)
+    public function update()
     {
 
     }
@@ -104,26 +108,17 @@ class ArtistDao extends Singleton implements \interfaces\Crud
         }
    }
 
-    public function checkDni($dni){
-       
-    }
-
-    /**
-    * Transforma el listado de usuario en
-    * objetos de la clase Usuario
-	*
-	* @param  Array $gente Listado de personas a transformar
-	*/
-	protected function mapear($value) {
+   protected function mapear($value) {
 
 		$value = is_array($value) ? $value : [];
         
 		$resp = array_map(function($p){
-		    return new M_Artist( $p['dni'], $p['name'], $p['last_name'], $p['id_artist']);
+		    return new M_Artist( $p['numberr'], $p['qr'], $p['id_ticket']);
         }, $value);
             
             /* devuelve un arreglo si tiene datos y sino devuelve nulo*/
 
             return count($resp) > 0 ? $resp : null;
-     }
+    }
+
 }

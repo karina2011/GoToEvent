@@ -1,11 +1,12 @@
 <?php
+
 namespace daos\daodb;
 
-use models\Artist as M_Artist;
-use daos\daodb\connection as Connection;
+use models\Type_square as M_Type_square;
+use daos\daobd\connection as Connection;
 use PDOException;
 
-class ArtistDao extends Singleton implements \interfaces\Crud
+class TypeSquareDao extends Singleton implements \interfaces\Crud
 {
     private $connection;
     
@@ -14,15 +15,14 @@ class ArtistDao extends Singleton implements \interfaces\Crud
         $this->connection = null;
     }
     
-    public function create($artist)
+    public function create($type_square)
     {
         // Guardo como string la consulta sql utilizando como values, marcadores de parámetros con nombre (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada
 
-		$sql = "INSERT INTO artists (name, last_name, dni) VALUES (:name, :last_name, :dni)";
+		$sql = "INSERT INTO types_squares (description, id_event_square) VALUES (:description, :id_event_square)";
 
-        $parameters['name'] = $artist->getName();
-        $parameters['last_name'] = $artist->getLastName();
-        $parameters['dni'] = $artist->getDni();
+        $parameters['description'] = $type_square->getDescription();
+        $parameters['id_event_square'] = $artist->getIdEventSquare();
 
 		try {
 			
@@ -40,7 +40,7 @@ class ArtistDao extends Singleton implements \interfaces\Crud
 
     public function readAll()
     {
-        $sql = "SELECT * FROM artists";
+        $sql = "SELECT * FROM types_squares";
 
         try
         {
@@ -61,11 +61,11 @@ class ArtistDao extends Singleton implements \interfaces\Crud
             return false;
     }
 
-    public function read ($dni)
+    public function read ($description)
     {
-        $sql = "SELECT * FROM artists where dni = :dni";
+        $sql = "SELECT * FROM types_squares where description = :description";
 
-        $parameters['dni'] = $dni;
+        $parameters['description'] = $description;
 
         try 
         {
@@ -88,10 +88,10 @@ class ArtistDao extends Singleton implements \interfaces\Crud
 
     }
 
-    public function delete ($dni)
+    public function delete ($description)
     {
-        $sql = "DELETE FROM artists WHERE dni = :dni";
-        $parameters['dni'] = $dni;
+        $sql = "DELETE FROM artists WHERE description = :description";
+        $parameters['description'] = $description;
 
         try 
         {
@@ -119,7 +119,7 @@ class ArtistDao extends Singleton implements \interfaces\Crud
 		$value = is_array($value) ? $value : [];
         
 		$resp = array_map(function($p){
-		    return new M_Artist( $p['dni'], $p['name'], $p['last_name'], $p['id_artist']);
+		    return new M_Artist( $p['description'], $p['id_event_square'], $p['id_type_square']);
         }, $value);
             
             /* devuelve un arreglo si tiene datos y sino devuelve nulo*/

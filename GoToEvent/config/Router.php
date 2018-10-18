@@ -15,7 +15,7 @@ class Router
     public static function direccionar(Request $request)
     {
 
-        $controlador = $request->getControladora()."Controller";
+        $controlador = $request->getControladora()."controller";
         $metodo = $request->getMetodo(); 
         $parametros = $request->getParametros();
         $objeto = "controllers\\" . $controlador;

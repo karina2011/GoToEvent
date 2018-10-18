@@ -11,10 +11,9 @@ class Customer extends User
 	private $id_purchase;
 	private $id_customer;
 
-	function __construct($dni='',$email='',$last_name='',$name='',$id_curchase='',$id_customer='')
+	function __construct($name='',$last_name='',$email='',$dni='',$rol='',$id_customer='')
 	{
-		parent::__construct($name,$last_name,$email,$dni);
-		$this->id_purchase = $id_purchase;
+		parent::__construct($name,$last_name,$email,$dni,$rol);
 		$this->id_customer = $id_customer;
 	}
 

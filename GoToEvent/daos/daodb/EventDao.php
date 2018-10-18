@@ -2,7 +2,7 @@
 namespace daos\daodb;
 
 use models\Event as M_Event;
-use daos\daobd\connection as Connection;
+use daos\daodb\connection as Connection;
 use PDOException;
 
 class EventDao extends Singleton implements \interfaces\Crud

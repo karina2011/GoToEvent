@@ -1,11 +1,14 @@
 <?php
+
 namespace daos\daodb;
 
-use models\Artist as M_Artist;
-use daos\daodb\connection as Connection;
+use models\Customer as M_Customer;
+use daos\daobd\connection as Connection;
 use PDOException;
-
-class ArtistDao extends Singleton implements \interfaces\Crud
+/**
+ * 
+ */
+class CustomerDao extends Singleton implements \interfaces\Crud
 {
     private $connection;
     
@@ -13,16 +16,18 @@ class ArtistDao extends Singleton implements \interfaces\Crud
     {
         $this->connection = null;
     }
-    
-    public function create($artist)
+
+    public function create($customer)
     {
-        // Guardo como string la consulta sql utilizando como values, marcadores de parámetros con nombre (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada
+    	// Guardo como string la consulta sql utilizando como values, marcadores de parámetros con nombre (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada
 
-		$sql = "INSERT INTO artists (name, last_name, dni) VALUES (:name, :last_name, :dni)";
+		$sql = "INSERT INTO customers (name, last_name, dni, email, rol) VALUES (:name, :last_name, :dni, :email, :rol)";
 
-        $parameters['name'] = $artist->getName();
-        $parameters['last_name'] = $artist->getLastName();
-        $parameters['dni'] = $artist->getDni();
+        $parameters['name'] = $customer->getName();
+        $parameters['last_name'] = $customer->getLastName();
+        $parameters['dni'] = $customer->getDni();
+        $parameters['email'] = $customer->getEmail();
+        $parameters['rol'] = $customer->getRol();
 
 		try {
 			
@@ -38,9 +43,10 @@ class ArtistDao extends Singleton implements \interfaces\Crud
 		}
     }
 
+
     public function readAll()
     {
-        $sql = "SELECT * FROM artists";
+        $sql = "SELECT * FROM customers";
 
         try
         {
@@ -61,11 +67,11 @@ class ArtistDao extends Singleton implements \interfaces\Crud
             return false;
     }
 
-    public function read ($dni)
+    public function read ($email)
     {
-        $sql = "SELECT * FROM artists where dni = :dni";
+        $sql = "SELECT * FROM customer where email = :email";
 
-        $parameters['dni'] = $dni;
+        $parameters['email'] = $email;
 
         try 
         {
@@ -83,15 +89,16 @@ class ArtistDao extends Singleton implements \interfaces\Crud
             return false;
     }
 
+
     public function update ($id)
     {
 
     }
 
-    public function delete ($dni)
+    public function delete ($email)
     {
-        $sql = "DELETE FROM artists WHERE dni = :dni";
-        $parameters['dni'] = $dni;
+        $sql = "DELETE FROM customers WHERE email = :email";
+        $parameters['email'] = $email;
 
         try 
         {
@@ -104,26 +111,17 @@ class ArtistDao extends Singleton implements \interfaces\Crud
         }
    }
 
-    public function checkDni($dni){
-       
-    }
-
-    /**
-    * Transforma el listado de usuario en
-    * objetos de la clase Usuario
-	*
-	* @param  Array $gente Listado de personas a transformar
-	*/
-	protected function mapear($value) {
+   	protected function mapear($value) {
 
 		$value = is_array($value) ? $value : [];
         
 		$resp = array_map(function($p){
-		    return new M_Artist( $p['dni'], $p['name'], $p['last_name'], $p['id_artist']);
+		    return new M_Artist( $p['name'], $p['last_name'], $p['email'], $p['dni'], $p['rol'], $p['id_customer']);
         }, $value);
             
             /* devuelve un arreglo si tiene datos y sino devuelve nulo*/
 
             return count($resp) > 0 ? $resp : null;
      }
+
 }

@@ -6,6 +6,8 @@ class Autoload
     {
         spl_autoload_register(function ($instancia) {
 
+        	$instancia = strtolower($instancia);
+
             $ruta = ROOT . str_replace("\\", "/", $instancia) . ".php";
             include_once ($ruta);
 
