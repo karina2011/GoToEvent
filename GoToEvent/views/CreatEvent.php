@@ -12,6 +12,8 @@
 			<div>
 				<label>Titulo: </label>
 				<input type="text" name="title">
+				<label>ID Evento: </label>
+				<input type="number" name="id_event" required>
 			</div>
 		<br>
 			<div>

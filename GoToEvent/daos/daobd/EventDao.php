@@ -24,7 +24,7 @@ class EventDao extends Singleton implements \interfaces\Crud
     {
         // Guardo como string la consulta sql utilizando como values, marcadores de parámetros con nombre (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada
 
-		$sql = "INSERT INTO events (title,id_category) VALUES (:title, :category)";
+		$sql = "INSERT INTO events (title,id_event,category) VALUES (:title,:id_event, :category)";
 
 
 		// creo el objeto conexion
@@ -42,10 +42,12 @@ class EventDao extends Singleton implements \interfaces\Crud
 			$sentencia = $conexion->prepare($sql);
 
 			// Reemplazo los marcadores de parametro por los valores reales utilizando el método bindParam().
-			$oneTitle = $envet->getTitle();
+            $oneTitle = $event->getTitle();
+            $oneId_Event = $event->getIdEvent();
             $oneCategory = $event->getCategory();
 				
             $sentencia->bindParam(":title", $oneTitle);
+            $sentencia->bindParam(":id_event", $oneId_Event);
             $sentencia->bindParam(":category", $oneCategory);
 
 			// Ejecuto la sentencia.
@@ -162,7 +164,7 @@ class EventDao extends Singleton implements \interfaces\Crud
 		$value = is_array($value) ? $value : [];
         
 		$resp = array_map(function($p){
-		    return new M_Event( $p['title'], $p['category'], $p['id_event']);
+		    return new M_Event( $p['title'], $p['id_event'], $p['category']);
         }, $value);
             
             /* devuelve un arreglo si tiene datos y sino devuelve nulo*/

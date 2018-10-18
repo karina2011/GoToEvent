@@ -4,7 +4,7 @@
 	<title></title>
 </head>
 <body>
-	<h3>Borrar un evento</h3>
+	<h3>Borrar un evento (YA NO SIRVE PORQ SE MODIFICO TODO Y SE AGREGO LA OPCION EN "VER EVENTOS")</h3>
 	<br><br>
 	<form action="<?php echo BASE; ?>Event/delete" method='post'>
 		<div>

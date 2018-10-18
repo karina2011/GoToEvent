@@ -57,8 +57,8 @@
       </h1>
 
       <!-- Project One -->
-      <?php if (!empty($lista)){ while(!empty($lista)){ ?>
-      	<?php $event = array_pop($lista) ?>
+      <?php if (!empty($lista)){ foreach ($lista as $key => $event){ ?>
+      
       <div class="row">
         <div class="col-md-7">
           <a href="#">
@@ -68,7 +68,12 @@
         <div class="col-md-5">
           <h3><?php echo $event->getTitle(); ?></h3><!--Titulo del evento-->
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium veniam exercitationem expedita laborum at voluptate. Labore, voluptates totam at aut nemo deserunt rem magni pariatur quos perspiciatis atque eveniet unde.</p>
-          <a class="btn btn-primary" href="#">Ver evento</a>
+
+          <form action="<?php echo BASE; ?>Event/delete" method="post">
+          <a class="btn btn-primary" href="#">Ver evento</a><!--cambiar esto a boton tambien-->
+          <button name="idEvent" type="submit" class="btn btn-danger" value="<?php echo $event->getIdEvent();?>">Borrar Evento </button>
+          </form>
+
         </div>
       </div>
       <hr>
