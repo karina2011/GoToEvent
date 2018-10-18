@@ -44,15 +44,7 @@ class CategoryController
 		require(ROOT . VIEWS . 'Home.php');
 	}
 
-	public function viewCreateCategory()
-	{
-		require(ROOT . VIEWS . 'createcategory.php');
-	}
 
-	public function viewDeleteCategory()
-	{
-
-	}
 }
 
  ?>

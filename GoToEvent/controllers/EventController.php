@@ -40,15 +40,7 @@ class EventController
 		require(ROOT . VIEWS . 'ViewEvents.php');
 	}
 
-	public function viewCreateEvent()
-	{
-		require(ROOT . VIEWS . 'CreatEvent.php');
-	}
 
-	public function viewDeleteEvent()
-	{
-		require(ROOT . VIEWS . 'DeleteEvent.php');
-	}
 	
 }
 
