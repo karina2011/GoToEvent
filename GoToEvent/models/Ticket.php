@@ -8,7 +8,7 @@ class Ticket
 	private $number;
 	private $qr;
 
-	function __construct($number='',$qr='',$id_ticket)
+	function __construct($number='',$qr='',$id_ticket='')
 	{
 		$this->number = $number;
 		$this->qr = $qr;
@@ -38,11 +38,6 @@ class Ticket
 	public function setQr($qr)
 	{
 		$this->qr = $qr;
-	}
-
-	public function getId($id)
-	{
-		$this->id_ticket = $id;
 	}
 
 }

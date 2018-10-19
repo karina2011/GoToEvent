@@ -46,5 +46,21 @@ class ViewsController
 	{
 		require(ROOT . VIEWS . 'createuser.php');
 	}
+
+    public function viewCreateTicket()
+    {
+        require(ROOT . VIEWS . 'createticket.php');
+    }
+
+    public function viewCreateSquareType()
+    {
+        require(ROOT . VIEWS . 'createsquaretype.php');
+    }
+
+    public function viewCreateEventPlace()
+    {
+        require(ROOT . VIEWS . 'createeventplace.php');
+    }
+
 }
 ?>

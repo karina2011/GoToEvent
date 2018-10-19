@@ -58,8 +58,8 @@ class UserController
 	public function delete($email)
 	{
 		//BORRA EL user QUE COINCIDE CON EL EMAIL RECIBIDO POR PARAMETROS DE LA BASE DE DATOS
-
-		$this->dao->delete();
+		
+		$this->dao->delete($email);
 
 		//INCLUYE LA VISTA PRINCIPAL
 		

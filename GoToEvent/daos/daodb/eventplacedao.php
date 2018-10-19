@@ -1,7 +1,7 @@
 <?php
 namespace daos\daodb;
 
-use models\Event_place as M_Event_place;
+use models\EventPlace as M_Event_place;
 use daos\daodb\connection as Connection;
 use PDOException;
 
@@ -17,11 +17,10 @@ class EventPlaceDao extends Singleton implements \interfaces\Crud
     {
         // Guardo como string la consulta sql utilizando como values, marcadores de parámetros con nombre (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada
 
-        $sql = "INSERT INTO event_places (capacity,description,id_event_place) VALUES (:capacity, :description,:id_event_place)";
+        $sql = "INSERT INTO event_places (capacity,description) VALUES (:capacity, :description)";
 
         $parameters['capacity'] = $event_place->getCapacity();
-        $parameters['description'] = $event_plcae->getDescription();
-        $parameters['id_event_place'] = $event_place->getId();
+        $parameters['description'] = $event_place->getDescription();
 
         try 
         {
@@ -62,11 +61,11 @@ class EventPlaceDao extends Singleton implements \interfaces\Crud
 
     }
 
-    public function read ($id_event_place)
+    public function read ($description)
     {
-        $sql = "SELECT * FROM event_places where id_event_place = :id_event_place";
+        $sql = "SELECT * FROM event_places where description = :description";
 
-        $parameters['id_event_place'] = $id_event_place;
+        $parameters['description'] = $description;
 
         try 
         {
@@ -89,11 +88,11 @@ class EventPlaceDao extends Singleton implements \interfaces\Crud
 
     }
 
-    public function delete ($id_event_place)
+    public function delete ($description)
     {
-        $sql = "DELETE FROM event_places WHERE id_event_place = :id_event_place";
+        $sql = "DELETE FROM event_places WHERE description = :description";
 
-        $parameters['id_event_place'] = $id_event_place;
+        $parameters['description'] = $description;
 
         try 
         {

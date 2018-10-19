@@ -2,24 +2,24 @@
 namespace models;
 
 
-require_once ('..\models1\Ticket.php');
 
-
-
-class Line_purchase
+class Purchase_line
 {
 
 	private $price;
 	private $quantity;
+	private $event_square;
 	private $ticket;
-	private $id_line_purchase;
+	private $id_purchase;
+	private $id_purchase_line;
 
-	function __construct($price='',$quantity='',$ticket='')
+	function __construct($price='', $quantity='', $event_square='', $ticket='')
 	{
 		$this->price = $price;
 		$this->quantity = $quantity;
 		$this->ticket = $ticket;
-		$this->id_line_purchase = $id_line_purchase;
+		$this->id_purchase = '';
+		$this->id_purchase_line = $id_purchase_line;
 	}
 
 	public function getPrice()
@@ -40,6 +40,11 @@ class Line_purchase
 	public function getTicket()
 	{
 		return $this->ticket;
+	}
+
+	public function getEventSquareId()
+	{
+		return $this->event_square->getId();
 	}
 
 	public function setPrice($price)

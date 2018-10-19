@@ -92,16 +92,28 @@
 
           <h2 class="my-4"> Tickets</h2><!--Solo puede haber un "h1"-->
           <div class="list-group">
-            <a href="<?php echo BASE; ?>Views/viewCreateCategory" class="list-group-item">Crear Categoria</a>
-            <a href="<?php echo BASE; ?>Category/readAll" class="list-group-item">Ver Categoria</a>
-            <a href="<?php echo BASE; ?>Views/viewDeleteCategory" class="list-group-item">Borrar Categoria</a>
+            <a href="<?php echo BASE; ?>Views/viewCreateTicket" class="list-group-item">Crear Ticket</a>
+            <a href="<?php echo BASE; ?>Ticket/readAll" class="list-group-item">Ver Ticket</a>
+            <a href="<?php echo BASE; ?>Views/viewDeleteCategory" class="list-group-item">Borrar Ticket</a>
           </div>
 
           <h2 class="my-4"> Tipos de Plaza</h2><!--Solo puede haber un "h1"-->
           <div class="list-group">
-            <a href="<?php echo BASE; ?>Views/viewCreateCategory" class="list-group-item">Crear Categoria</a>
-            <a href="<?php echo BASE; ?>Category/readAll" class="list-group-item">Ver Categoria</a>
-            <a href="<?php echo BASE; ?>Views/viewDeleteCategory" class="list-group-item">Borrar Categoria</a>
+            <a href="<?php echo BASE; ?>Views/viewCreateSquareType" class="list-group-item">Crear Tipo de Plaza</a>
+            <a href="<?php echo BASE; ?>SquareType/readAll" class="list-group-item">Ver Tipo de Plaza</a>
+            <a href="<?php echo BASE; ?>Views/viewDeleteSquareType" class="list-group-item">Borrar Tipo de Plaza</a>
+          </div>
+
+          <h2 class="my-4"> Lugar de evento</h2><!--Solo puede haber un "h1"-->
+          <div class="list-group">
+            <a href="<?php echo BASE; ?>Views/viewCreateEventPlace" class="list-group-item">Crear lugar de evento</a>
+            <a href="<?php echo BASE; ?>EventPlace/readAll" class="list-group-item">Ver lugares de evento</a>
+          </div>
+
+          <h2 class="my-4"> Compras</h2><!--Solo puede haber un "h1"-->
+          <div class="list-group">
+            <a href="<?php echo BASE; ?>Views/viewCreatePurchase" class="list-group-item">Crear Compra</a>
+            <a href="<?php echo BASE; ?>Purchase/readAll" class="list-group-item">Ver Compras</a>
           </div>
 
           

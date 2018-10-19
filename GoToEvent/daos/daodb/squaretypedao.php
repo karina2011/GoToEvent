@@ -3,7 +3,7 @@
 namespace daos\daodb;
 
 use models\Square_type as M_Square_type;
-use daos\daobd\connection as Connection;
+use daos\daodb\connection as Connection;
 use PDOException;
 
 class SquareTypeDao extends Singleton implements \interfaces\Crud
@@ -19,10 +19,9 @@ class SquareTypeDao extends Singleton implements \interfaces\Crud
     {
         // Guardo como string la consulta sql utilizando como values, marcadores de parámetros con nombre (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada
 
-		$sql = "INSERT INTO square_types (description, id_event_square) VALUES (:description, :id_event_square)";
+		$sql = "INSERT INTO square_types (description) VALUES (:description)";
 
         $parameters['description'] = $square_type->getDescription();
-        $parameters['id_event_square'] = $artist->getIdEventSquare();
 
 		try {
 			
@@ -119,7 +118,7 @@ class SquareTypeDao extends Singleton implements \interfaces\Crud
 		$value = is_array($value) ? $value : [];
         
 		$resp = array_map(function($p){
-		    return new M_Square_type( $p['description'], $p['id_event_square'], $p['id_type_square']);
+		    return new M_Square_type( $p['description'], $p['id_square_type']);
         }, $value);
             
             /* devuelve un arreglo si tiene datos y sino devuelve nulo*/

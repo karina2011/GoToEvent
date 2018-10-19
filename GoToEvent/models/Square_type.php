@@ -9,13 +9,11 @@ class Square_type
 {
 
 	private $description;
-	private $event_square;
 	private $id_square_type;
 
-	function __construct($description='',$event_square='',$id_square_type='')
+	function __construct($description='',$id_square_type='')
 	{
 		$this->description = $description;
-		$this->event_square = $event_square;
 		$this->id_square_type = $id_square_type;
 	}
 
@@ -24,14 +22,19 @@ class Square_type
 		return $this->description;
 	}
 
-	public function getIdEventSquare()
+	public function getId()
 	{
-		return $this->event_square->getId();
+		return $this->id_square_type();
 	}
 
 	public function setDescription()
 	{
 		$this->description = $description;
+	}
+
+	public function setId($id)
+	{
+		$this->id_square_type = $id;
 	}
 
 }
