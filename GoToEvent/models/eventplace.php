@@ -2,18 +2,14 @@
 namespace models;
 
 
-require_once ('event.php');
-require_once ('type_square.php');
-
-
-class Event_place
+class EventPlace
 {
 
 	private $capacity;
 	private $description;
 	private $id_event_place;
 
-	function __construct($capacity='',$description='',$id_event_place)
+	function __construct($capacity='',$description='',$id_event_place='')
 	{
 		$this->capacity = $capacity;
 		$this->description = $description;

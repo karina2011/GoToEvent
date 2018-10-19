@@ -39,6 +39,8 @@ class TicketController
 
 		//INCLUYE LA VISTA DONDE SE MUESTRA LO LEIDO
 
+		require(ROOT . VIEWS . 'viewtickets.php');
+
 		//FALTA REALIZAR LA VISTA DONDE SE MUESTRAN LOS TICKETS
 	}
 

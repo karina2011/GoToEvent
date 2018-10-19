@@ -2,7 +2,7 @@
 namespace models;
 
 
-require_once ('Line_purchase.php');
+require_once ('Purchase_line.php');
 
 
 
@@ -10,14 +10,14 @@ class Purchase
 {
 
 	private $date;
-	private $line_purchase;
+	private $purchase_line = array();
 	private $id_purchase;
 	private $customer;
 
-	function __construct($date='',$line_purchase='',$id_purchase='',$customer='')
+	function __construct($date='',$purchase_line='',$id_purchase='',$customer='')
 	{
 		$this->date = $date;
-		$this->line_purchase = array();
+		$this->purchase_line = $purchase_line;
 		$this->id_purchase = $id_purchase;
 		$this->customer = $customer;
 	}
@@ -27,9 +27,9 @@ class Purchase
 		return $this->date;
 	}
 
-	public function getLinePurchase()
+	public function getPurchaseLine()
 	{
-		return $this->line_purchase;
+		return $this->purchase_line;
 	}
 
 	public function getId()
@@ -47,9 +47,9 @@ class Purchase
 		$this->date = $date;
 	}
 
-	public function setLinePurchase($line_purchase)
+	public function setLinePurchase($purchase_line)
 	{
-	 	$this->line_purchase[] = $line_purchase;
+	 	$this->purchase_line[] = $purchase_line;
 	}
 
 	public function setId($id)

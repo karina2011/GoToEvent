@@ -53,12 +53,12 @@
     <div class="container">
 
       <!-- Page Heading -->
-      <h1 class="my-4">Usuarios:
+      <h1 class="my-4">Tickets:
         <small></small>
       </h1>
 
       <!-- Project One -->
-      <?php if (!empty($list)){ foreach ($list as $key => $user){ ?>
+      <?php if (!empty($list)){ foreach ($list as $key => $ticket){ ?>
       <div class="row">
         <div class="col-md-7">
           <a href="#">
@@ -66,17 +66,17 @@
           </a>
         </div>
         <div class="col-md-5">
-          <h3><?php echo $user->getName(); ?></h3><!--Descripcion de la categoria-->
+          <h3><?php echo $ticket->getNumber(); ?></h3><!--Descripcion de la categoria-->
 
-          <form action="<?php echo BASE; ?>User/delete" method="post">
-          <a class="btn btn-primary" href="#">Ver categoria</a><!--cambiar esto a boton tambien-->
-          <button name="description" type="submit" class="btn btn-danger" value="<?php echo $user->getEmail();?>"><i class="fas fa-trash"></i> </button>
+          <form action="<?php echo BASE; ?>Ticket/delete" method="post">
+          <a class="btn btn-primary" href="#">Ver ticket</a><!--cambiar esto a boton tambien-->
+          <button name="description" type="submit" class="btn btn-danger" value="<?php echo $ticket->getNumber();?>"><i class="fas fa-trash"></i> </button>
           </form>
 
         </div>
       </div>
       <hr>
-      <?php } } else { echo '<p>' ."NO HAY USUARIOS CARGADOS" .'</p>'; } ?>
+      <?php } } else { echo '<p>' ."NO HAY TICKETS CARGADOS" .'</p>'; } ?>
       <div class="pagination justify-content-end">
       <button name="idEvent" type="submit" class="btn btn-success" title="agregar usuario"><i class="fas fa-plus"></i></button>
       </div>

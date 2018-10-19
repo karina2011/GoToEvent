@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Ver Categoria</title>
+    <title>Ver Tipos de Plaza</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -53,12 +53,12 @@
     <div class="container">
 
       <!-- Page Heading -->
-      <h1 class="my-4">Usuarios:
+      <h1 class="my-4">Lugares de Evento:
         <small></small>
       </h1>
 
       <!-- Project One -->
-      <?php if (!empty($list)){ foreach ($list as $key => $user){ ?>
+      <?php if (!empty($list)){ foreach ($list as $key => $event_place){ ?>
       <div class="row">
         <div class="col-md-7">
           <a href="#">
@@ -66,17 +66,18 @@
           </a>
         </div>
         <div class="col-md-5">
-          <h3><?php echo $user->getName(); ?></h3><!--Descripcion de la categoria-->
+          <h3><?php echo $event_place->getDescription(); ?></h3><!--Descripcion de la categoria-->
+          <p>Capacidad: <?php echo $event_place->getCapacity(); ?></p>
 
-          <form action="<?php echo BASE; ?>User/delete" method="post">
-          <a class="btn btn-primary" href="#">Ver categoria</a><!--cambiar esto a boton tambien-->
-          <button name="description" type="submit" class="btn btn-danger" value="<?php echo $user->getEmail();?>"><i class="fas fa-trash"></i> </button>
+          <form action="<?php echo BASE; ?>EventPlace/delete" method="post">
+          <a class="btn btn-primary" href="#">Ver Lugar de Evento</a><!--cambiar esto a boton tambien-->
+          <button name="description" type="submit" class="btn btn-danger" value="<?php echo $event_place->getDescription();?>"><i class="fas fa-trash"></i> </button>
           </form>
 
         </div>
       </div>
       <hr>
-      <?php } } else { echo '<p>' ."NO HAY USUARIOS CARGADOS" .'</p>'; } ?>
+      <?php } } else { echo '<p>' ."NO HAY LUGARES DE EVENTOS CARGADOS" .'</p>'; } ?>
       <div class="pagination justify-content-end">
       <button name="idEvent" type="submit" class="btn btn-success" title="agregar usuario"><i class="fas fa-plus"></i></button>
       </div>

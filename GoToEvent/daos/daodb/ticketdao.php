@@ -2,7 +2,7 @@
 namespace daos\daodb;
 
 use models\Ticket as M_Ticket;
-use daos\daobd\connection as Connection;
+use daos\daodb\connection as Connection;
 use PDOException;
 
 /**
@@ -87,15 +87,15 @@ class TicketDao extends Singleton implements \interfaces\Crud
             return false;
     }
 
-    public function update()
+    public function update($object)
     {
 
     }
 
-    public function delete ($dni)
+    public function delete ($number)
     {
-        $sql = "DELETE FROM artists WHERE dni = :dni";
-        $parameters['dni'] = $dni;
+        $sql = "DELETE FROM tickets WHERE numberr = :numberr";
+        $parameters['numberr'] = $number;
 
         try 
         {
@@ -113,7 +113,7 @@ class TicketDao extends Singleton implements \interfaces\Crud
 		$value = is_array($value) ? $value : [];
         
 		$resp = array_map(function($p){
-		    return new M_Artist( $p['numberr'], $p['qr'], $p['id_ticket']);
+		    return new M_Ticket( $p['numberr'], $p['qr'], $p['id_ticket']);
         }, $value);
             
             /* devuelve un arreglo si tiene datos y sino devuelve nulo*/

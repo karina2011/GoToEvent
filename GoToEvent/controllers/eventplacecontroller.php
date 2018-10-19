@@ -1,13 +1,13 @@
 <?php
 namespace controllers;
 
-use models\Type_square;
-use daos\daodb\TypeSquareDao as Dao;
+use models\EventPlace as Event_place;
+use daos\daodb\EventPlaceDao as Dao;
 
 /**
  * 
  */
-class TypeSquareController 
+class EventPlaceController 
 {
     protected $dao; // es una instancia de la Dao lista, para poder comunicarme con ella
 
@@ -16,15 +16,15 @@ class TypeSquareController
         $this->dao=Dao::getInstance(); // esto se instancia en el router
     }
 
-    public function create($description,$event_square)
+    public function create($description,$capacity)
     {
     	//SE CREA EL OBJETO PARA LUEGO AGREGARLO A LA BASE DE DATOS
 
-    	$type_square = new Type_square($description,$event_square);
+    	$event_place = new Event_place($capacity, $description);
 
     	//SE GUARDA EL OBJETO CREADO ANTERIORMENTE EN LA BASE DE DATOS
 
-    	$this->dao->create($type_square);
+    	$this->dao->create($event_place);
 
     	//SE INCLUYE LA VISTA PRINCIPAL PARA PODER SEGUIR NAVEGANDO POR LA WEB
 
@@ -35,9 +35,10 @@ class TypeSquareController
     {
     	//SE GUARDA EN LA VARIABLE LISTA TODO LO QUE DEVUELVE LA CONSULTA A LA BASE DE DATOS
 
-    	$lista = $this->dao->readAll();
+    	$list = $this->dao->readAll();
 
     	//SE INCLUYE LA VISTA EN LA CUAL SE MUESTRA TODO LO TRAIDO POR LA BASE DE DATO
+        require(ROOT . VIEWS . 'vieweventplaces.php');
 
     	//FALTA REALIZAR LA VISTA EN LA CUAL SE MUESTRA LO ANTERIOR
     }
