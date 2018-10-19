@@ -66,7 +66,7 @@ class Event_square
 
 	public function setId($id)
 	{
-		this->id_event_square = $id;
+		$this->id_event_square = $id;
 	}
 
 	public function setTypeSquare($type_square)

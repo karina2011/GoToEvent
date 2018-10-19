@@ -3,7 +3,7 @@ namespace daos\daodb;
 
 use models\Ticket as M_Ticket;
 use daos\daobd\connection as Connection;
-use PDOException
+use PDOException;
 
 /**
  * 

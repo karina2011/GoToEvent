@@ -40,6 +40,11 @@ class ViewsController
 	public function viewDeleteEvent()
 	{
 		require(ROOT . VIEWS . 'DeleteEvent.php');
+    }
+    
+    public function viewCreateUser()
+	{
+		require(ROOT . VIEWS . 'createuser.php');
 	}
 }
 ?>

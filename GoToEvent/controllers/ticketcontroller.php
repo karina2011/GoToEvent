@@ -11,7 +11,7 @@ class TicketController
 {
 	protected $dao;
 	
-	function __construct(argument)
+	function __construct()
 	{
 		$this->dao = Dao::getInstance();
 	}

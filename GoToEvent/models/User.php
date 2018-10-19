@@ -4,19 +4,21 @@ namespace models;
 
 class User
 {
-	private $dni;
-	private $email;
-	private $last_name;
 	private $name;
-	private $rol;
+	private $last_name;
+	private $email;
+	private $dni;
+	private $type;
+	private $id_user;
 	
-	function __construct($name='',$last_name='',$email='',$dni='',$rol='')
+	function __construct($name='',$last_name='',$email='',$dni='',$type='',$id_user='')
 	{
 		$this->name = $name;
 		$this->last_name = $last_name;
 		$this->email = $email;
 		$this->dni = $dni;
-		$this->rol = $rol;
+		$this->type = $type;
+		$this->id_user = $id_user;
 
 	}
 
@@ -32,7 +34,7 @@ class User
 
 	public function getEmail()
 	{
-		return $this->email_;
+		return $this->email;
 	}
 
 	public function getDni()

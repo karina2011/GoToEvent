@@ -2,11 +2,13 @@
 
 namespace daos\daodb;
 
-use models\Type_square as M_Type_square;
-use daos\daobd\connection as Connection;
+use models\User as M_User;
+use daos\daodb\connection as Connection;
 use PDOException;
-
-class TypeSquareDao extends Singleton implements \interfaces\Crud
+/**
+ * 
+ */
+class UserDao extends Singleton implements \interfaces\Crud
 {
     private $connection;
     
@@ -14,15 +16,19 @@ class TypeSquareDao extends Singleton implements \interfaces\Crud
     {
         $this->connection = null;
     }
-    
-    public function create($type_square)
+
+    public function create($user)
     {
-        // Guardo como string la consulta sql utilizando como values, marcadores de parámetros con nombre (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada
+    	// Guardo como string la consulta sql utilizando como values, marcadores de parámetros con nombre (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada
 
-		$sql = "INSERT INTO types_squares (description, id_event_square) VALUES (:description, :id_event_square)";
+		$sql = "INSERT INTO users (name, last_name, dni, email, type) VALUES (:name, :last_name, :dni, :email, :type)";
 
-        $parameters['description'] = $type_square->getDescription();
-        $parameters['id_event_square'] = $artist->getIdEventSquare();
+        $parameters['name'] = $user->getName();
+        $parameters['last_name'] = $user->getLastName();
+        $parameters['dni'] = $user->getDni();
+        $parameters['email'] = $user->getEmail();
+        $parameters['type'] = $user->getEmail();
+
 
 		try {
 			
@@ -38,9 +44,10 @@ class TypeSquareDao extends Singleton implements \interfaces\Crud
 		}
     }
 
+
     public function readAll()
     {
-        $sql = "SELECT * FROM types_squares";
+        $sql = "SELECT * FROM users";
 
         try
         {
@@ -61,11 +68,11 @@ class TypeSquareDao extends Singleton implements \interfaces\Crud
             return false;
     }
 
-    public function read ($description)
+    public function read ($email)
     {
-        $sql = "SELECT * FROM types_squares where description = :description";
+        $sql = "SELECT * FROM users where email = :email";
 
-        $parameters['description'] = $description;
+        $parameters['email'] = $email;
 
         try 
         {
@@ -83,15 +90,16 @@ class TypeSquareDao extends Singleton implements \interfaces\Crud
             return false;
     }
 
-    public function update ($id)
+
+    public function update ($email)
     {
 
     }
 
-    public function delete ($description)
+    public function delete ($email)
     {
-        $sql = "DELETE FROM artists WHERE description = :description";
-        $parameters['description'] = $description;
+        $sql = "DELETE FROM users WHERE email = :email";
+        $parameters['email'] = $email;
 
         try 
         {
@@ -104,26 +112,17 @@ class TypeSquareDao extends Singleton implements \interfaces\Crud
         }
    }
 
-    public function checkDni($dni){
-       
-    }
-
-    /**
-    * Transforma el listado de usuario en
-    * objetos de la clase Usuario
-	*
-	* @param  Array $gente Listado de personas a transformar
-	*/
-	protected function mapear($value) {
+   	protected function mapear($value) {
 
 		$value = is_array($value) ? $value : [];
         
 		$resp = array_map(function($p){
-		    return new M_Artist( $p['description'], $p['id_event_square'], $p['id_type_square']);
+		    return new M_User( $p['name'], $p['last_name'], $p['email'], $p['dni'],$p['type'], $p['id_user']);
         }, $value);
             
             /* devuelve un arreglo si tiene datos y sino devuelve nulo*/
 
             return count($resp) > 0 ? $resp : null;
      }
+
 }
