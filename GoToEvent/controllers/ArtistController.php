@@ -39,12 +39,12 @@ class ArtistController
     {
         $lista = $this->dao->readAll();
         //var_dump($lista);
-        include(VIEWS . "ViewArtistas.php");
+        require (ROOT . VIEWS . "viewartists.php");
     }
 
     public function delete($dni)
     {
-        
+
         $this->dao->delete($dni);
 
         require(ROOT . VIEWS . 'Home.php');
