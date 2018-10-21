@@ -68,7 +68,7 @@
         </div>
         <div class="col-md-5">
           <h3><?php echo $event->getTitle(); ?></h3><!--Titulo del evento-->
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium veniam exercitationem expedita laborum at voluptate. Labore, voluptates totam at aut nemo deserunt rem magni pariatur quos perspiciatis atque eveniet unde.</p>
+          <p>Tipo de evento: <?php echo $event->getDescriptionCategory();  ?></p>
 
           <form action="<?php echo BASE; ?>Event/delete" method="post">
           <a class="btn btn-primary" href="#">Ver evento</a><!--cambiar esto a boton tambien-->

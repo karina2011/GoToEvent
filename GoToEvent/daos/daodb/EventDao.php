@@ -2,7 +2,9 @@
 namespace daos\daodb;
 
 use models\Event as M_Event;
+use models\Category as M_Category;
 use daos\daodb\connection as Connection;
+use daos\daodb\CategoryDao as DaoCategory;
 use PDOException;
 
 class EventDao extends Singleton implements \interfaces\Crud
@@ -20,7 +22,7 @@ class EventDao extends Singleton implements \interfaces\Crud
 		$sql = "INSERT INTO events (title,category) VALUES (:title, :category)";
 
         $parameters['title'] = $event->getTitle();
-        $parameters['category'] = $event->getCategory();
+        $parameters['category'] = $event->getCategoryId();
 
         try 
         {
@@ -118,11 +120,31 @@ class EventDao extends Singleton implements \interfaces\Crud
 		$value = is_array($value) ? $value : [];
         
 		$resp = array_map(function($p){
-		    return new M_Event( $p['title'], $p['category'], $p['id_event']);
+            $category = $this->createCategory($p['category']);
+		    return new M_Event( $p['title'], $category , $p['id_event']);
         }, $value);
             
             /* devuelve un arreglo si tiene datos y sino devuelve nulo*/
 
             return count($resp) > 0 ? $resp : null;
+     }
+
+     protected function createCategory($id_category)
+     {
+        $daoCategory = DaoCategory::getInstance();
+
+        $category = $daoCategory->readById($id_category);
+
+
+        /*echo "<pre>";
+        var_dump($category);
+        echo "</pre>";*/
+        $category = new M_Category($category['0']->getDescription(),$category['0']->getId());
+
+        /*echo "<pre>";
+        var_dump($category);
+        echo "</pre>";*/
+
+        return $category;
      }
 }

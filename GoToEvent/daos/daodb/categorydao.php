@@ -83,6 +83,28 @@ class CategoryDao extends Singleton implements \interfaces\Crud
             return $this->mapear($resultSet);
         else
             return false;
+    }
+    
+    public function readById($id)
+	{
+		$sql = "SELECT * FROM categorys where id_category = :id_category";
+
+        $parameters['id_category'] = $id;
+
+        try 
+        {
+            $this->connection = Connection::getInstance();
+            $resultSet = $this->connection->execute($sql, $parameters);
+        } 
+        catch(PDOException $e) 
+        {
+            echo $e;
+        }
+
+        if(!empty($resultSet))
+            return $this->mapear($resultSet);
+        else
+            return false;
 	}
 
 	public function delete($description)

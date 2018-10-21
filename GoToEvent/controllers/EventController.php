@@ -2,6 +2,7 @@
 namespace controllers;
 //use daos\daoList\EventDao as Dao;
 use models\Event;
+use models\Category;
 use daos\daodb\EventDao as Dao;
 /**
  * 
@@ -16,8 +17,9 @@ class EventController
     }
 
 	public function create($title='',$category='')
-	{
-		
+	{	
+		$category = new Category("Federico",1);
+
 		$event = new Event($title,$category); // modificar "prueba", agregar categoria al forumlario al crear evento
 
 		$this->dao->create($event);

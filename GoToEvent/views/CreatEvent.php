@@ -12,8 +12,8 @@
 			<div>
 				<label>Titulo: </label>
 				<input type="text" name="title">
-				<label>Categoria: </label>
-				<input type="text" name="category">
+				<!--<label>Categoria: </label>
+				<input type="text" name="category"> --> 
 			</div>
 		<br>
 			<div>

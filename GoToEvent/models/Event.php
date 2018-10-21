@@ -30,9 +30,14 @@ class Event
 		return $this->id_calendar;
 	}
 
-	public function getCategory()
+	public function getCategoryId()
 	{
-		return $this->category;
+		return $this->category->getId();
+	}
+
+	public function getDescriptionCategory()
+	{
+		return $this->category->getDescription();
 	}
 
 	public function getIdEvent()
