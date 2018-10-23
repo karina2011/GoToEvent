@@ -4,6 +4,9 @@ namespace controllers;
 use models\Ticket as Ticket;
 use daos\daodb\TicketDao as Dao;
 
+include( BASE . '/assets/phpqrcode/qrlib.php'); // para el codigo qr
+// https://evilnapsis.com/2018/02/26/crear-codigo-qr-con-php/
+
 /**
  * 
  */
@@ -18,8 +21,13 @@ class TicketController
 
 	public function create($number,$qr)
 	{
-		//SE CREA EL OBJETO PARA LUEGO GUARDARLO EN LA BAE DE DATOS
-
+		//SE CREA EL OBJETO PARA LUEGO GUARDARLO EN LA BASE DE DATOS
+		// creamos un ticket aleatorio 
+		$number = rand(1,100000); // numero aleatorio entre 1 y 100000
+		$qr = $number . 'png'; // el codigo qr va a ser el numero de ticket
+		$content = $number;
+		QRcode::png($content,$qr,QR_ECLEVEL_L,10,2); // incluir la libreria para que funcione
+		// primer parametro el contenido del qr, segundo parametro el nombre de la iamgen q se va a generar
 		$ticket = new Ticket($number,$qr);
 
 		//GUARDA EL OBJETO EN LA BASE DE DATOS

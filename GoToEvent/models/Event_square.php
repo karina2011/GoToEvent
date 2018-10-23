@@ -10,18 +10,18 @@ class Event_square
 {
 
 	private $price;
-	private $quantity_available;
-	private $remanente;
+	private $available_quantity;
+	private $remainder;
 	private $id_event_square;
-	private $type_square;
+	private $square_type;
 
-	function __construct($price='',$quantity_available='',$remanente='',$id_event_square='',$type_square='')
+	function __construct($price='',$available_quantity='',$remainder='',$square_type='',$id_event_square='')
 	{
 		$this->price = $price;
-		$this->quantity_available = $quantity_available;
-		$this->remanente = $remanente;
+		$this->available_quantity = $available_quantity;
+		$this->remainder = $remainder;
 		$this->id_event_square = $id_event_square;
-		$this->type_square = $type_square;
+		$this->square_type = $square_type;
 	}
 
 	public function getPrice()
@@ -29,14 +29,14 @@ class Event_square
 		return $this->price;
 	}
 
-	public function getQuantityAvailable()
+	public function getAvailableQuantity()
 	{
-		return $this->quantity_available;
+		return $this->available_quantity;
 	}
 
-	public function getRemanente()
+	public function getRemainder()
 	{
-		return $this->remanente;
+		return $this->remainder;
 	}
 
 	public function getId()
@@ -44,9 +44,14 @@ class Event_square
 		return $this->id_event_square;
 	}
 
-	public function getTypeSquare()
+	public function getSquareTypeId()
 	{
-		return $this->type_square;
+		return $this->square_type->getId();
+	}
+
+	public function getSquareTypeDescription()
+	{
+		return $this->square_type->getDescription();
 	}
 
 	public function setPrice($price)
@@ -54,14 +59,14 @@ class Event_square
 		$this->price = $price;
 	}
 
-	public function setQuantityAvailable($quantity_available)
+	public function setAvailableQuantity($available_quantity)
 	{
-		$this->quantity_available = $quantity_available;
+		$this->available_quantity = $available_quantity;
 	}
 
-	public function setRemanente()
+	public function setRemainder()
 	{
-		$this->remanante = $remanente;
+		$this->remainder = $remainder;
 	}
 
 	public function setId($id)
@@ -69,9 +74,9 @@ class Event_square
 		$this->id_event_square = $id;
 	}
 
-	public function setTypeSquare($type_square)
+	public function setSquareType($square_type)
 	{
-		$this->type_square = $type_square;
+		$this->square_type = $square_type;
 	}
 
 }

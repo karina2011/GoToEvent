@@ -27,7 +27,7 @@ class UserDao extends Singleton implements \interfaces\Crud
         $parameters['last_name'] = $user->getLastName();
         $parameters['dni'] = $user->getDni();
         $parameters['email'] = $user->getEmail();
-        $parameters['type'] = $user->getEmail();
+        $parameters['type'] = $user->getType();
 
 
 		try {

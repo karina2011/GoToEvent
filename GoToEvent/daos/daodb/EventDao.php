@@ -135,15 +135,7 @@ class EventDao extends Singleton implements \interfaces\Crud
 
         $category = $daoCategory->readById($id_category);
 
-
-        /*echo "<pre>";
-        var_dump($category);
-        echo "</pre>";*/
         $category = new M_Category($category['0']->getDescription(),$category['0']->getId());
-
-        /*echo "<pre>";
-        var_dump($category);
-        echo "</pre>";*/
 
         return $category;
      }

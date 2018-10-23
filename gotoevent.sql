@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-10-2018 a las 17:09:44
+-- Tiempo de generación: 23-10-2018 a las 17:35:53
 -- Versión del servidor: 10.1.36-MariaDB
--- Versión de PHP: 7.2.10
+-- Versión de PHP: 7.2.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -37,6 +37,48 @@ CREATE TABLE `event_places` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `event_squares`
+--
+
+CREATE TABLE `event_squares` (
+  `id_event_square` int(11) NOT NULL,
+  `price` float NOT NULL,
+  `available_quantity` int(11) NOT NULL,
+  `remainder` int(11) NOT NULL,
+  `id_square_type` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `event_squares`
+--
+
+INSERT INTO `event_squares` (`id_event_square`, `price`, `available_quantity`, `remainder`, `id_square_type`) VALUES
+(3, 435435, 435, 345, 6),
+(4, 12000, 25887, 1, 6),
+(5, 12000, 25887, 1, 6);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `purchases`
+--
+
+CREATE TABLE `purchases` (
+  `pdate` date NOT NULL,
+  `customer` int(11) NOT NULL,
+  `id_purchase` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `purchases`
+--
+
+INSERT INTO `purchases` (`pdate`, `customer`, `id_purchase`) VALUES
+('2018-10-01', 3, 1);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `square_types`
 --
 
@@ -44,6 +86,14 @@ CREATE TABLE `square_types` (
   `id_square_type` int(11) NOT NULL,
   `description` varchar(75) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `square_types`
+--
+
+INSERT INTO `square_types` (`id_square_type`, `description`) VALUES
+(1, 'Platea'),
+(6, 'Campo');
 
 -- --------------------------------------------------------
 
@@ -73,6 +123,14 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
+-- Volcado de datos para la tabla `users`
+--
+
+INSERT INTO `users` (`name`, `last_name`, `dni`, `email`, `type`, `id_user`) VALUES
+('Federico', 'Elias', '40794525', 'fefe@fefe', 'admin', 3),
+('allan', 'maduro', '19040012', 'allan@allan', 'admin', 4);
+
+--
 -- Índices para tablas volcadas
 --
 
@@ -82,6 +140,18 @@ CREATE TABLE `users` (
 ALTER TABLE `event_places`
   ADD PRIMARY KEY (`id_event_place`),
   ADD UNIQUE KEY `description` (`description`);
+
+--
+-- Indices de la tabla `event_squares`
+--
+ALTER TABLE `event_squares`
+  ADD PRIMARY KEY (`id_event_square`);
+
+--
+-- Indices de la tabla `purchases`
+--
+ALTER TABLE `purchases`
+  ADD PRIMARY KEY (`id_purchase`);
 
 --
 -- Indices de la tabla `square_types`
@@ -114,10 +184,22 @@ ALTER TABLE `event_places`
   MODIFY `id_event_place` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT de la tabla `event_squares`
+--
+ALTER TABLE `event_squares`
+  MODIFY `id_event_square` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT de la tabla `purchases`
+--
+ALTER TABLE `purchases`
+  MODIFY `id_purchase` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT de la tabla `square_types`
 --
 ALTER TABLE `square_types`
-  MODIFY `id_square_type` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_square_type` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `tickets`
@@ -129,7 +211,7 @@ ALTER TABLE `tickets`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

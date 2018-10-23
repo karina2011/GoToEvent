@@ -42,6 +42,16 @@ class User
 		return $this->dni;
 	}
 
+	public function getId()
+	{
+		return $this->id_user;
+	}
+
+	public function getType()
+	{
+		return $this->type;
+	}
+
 	public function setName($name)
 	{
 		$this->name = $name;

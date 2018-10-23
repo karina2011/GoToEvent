@@ -82,6 +82,28 @@ class SquareTypeDao extends Singleton implements \interfaces\Crud
             return false;
     }
 
+    public function readById ($id_square_type)
+    {
+        $sql = "SELECT * FROM square_types where id_square_type = :id_square_type";
+
+        $parameters['id_square_type'] = $id_square_type;
+
+        try 
+        {
+            $this->connection = Connection::getInstance();
+            $resultSet = $this->connection->execute($sql, $parameters);
+        } 
+        catch(PDOException $e) 
+        {
+            echo $e;
+        }
+
+        if(!empty($resultSet))
+            return $this->mapear($resultSet);
+        else
+            return false;
+    }
+
     public function update ($id)
     {
 

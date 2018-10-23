@@ -116,6 +116,18 @@
             <a href="<?php echo BASE; ?>Purchase/readAll" class="list-group-item">Ver Compras</a>
           </div>
 
+          <h2 class="my-4"> Linea compra</h2><!--Solo puede haber un "h1"-->
+          <div class="list-group">
+            <a href="<?php echo BASE; ?>Views/viewCreatePurchaseLine" class="list-group-item">Crear linea Compra</a>
+            <a href="<?php echo BASE; ?>PurchaseLine/readAll" class="list-group-item">Ver linea Compras</a>
+          </div>
+
+          <h2 class="my-4"> Plaza de evento</h2><!--Solo puede haber un "h1"-->
+          <div class="list-group">
+            <a href="<?php echo BASE; ?>Views/viewCreateEventSquare" class="list-group-item">Crear plaza de evento</a>
+            <a href="<?php echo BASE; ?>EventSquare/readAll" class="list-group-item">Ver plazas de vento</a>
+          </div>
+
           
 
         </div>

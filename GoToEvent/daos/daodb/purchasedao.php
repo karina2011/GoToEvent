@@ -18,12 +18,11 @@ class PurchaseDao extends Singleton implements \interfaces\Crud
     {
         // Guardo como string la consulta sql utilizando como values, marcadores de parámetros con nombre (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada
 
-        $sql = "INSERT INTO purchases (pdate,line_purchase,id_purchase,customer) VALUES (:pdate, :line_purchase,:id_purchase,:customer)"; // pdate = purchaste date
+        $sql = "INSERT INTO purchases (pdate,id_purchase,customer) VALUES (:pdate,:id_purchase,:customer)"; // pdate = purchaste date
         // cambiar line purchase a purchase_line // como se guardan parametros que son objetos en BD ???
         $parameters['pdate'] = $purchase->getDate();
-        $parameters['line_purchase'] = $event->getLine_Purchase();
         $parameters['id_purchase'] = $purchase->getId();
-        $parameters['line_purchase'] = $purchase->getCustomer();
+        $parameters['customer'] = $purchase->getCustomerId();
 
         try 
         {

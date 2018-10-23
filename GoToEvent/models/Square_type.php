@@ -24,7 +24,7 @@ class Square_type
 
 	public function getId()
 	{
-		return $this->id_square_type();
+		return $this->id_square_type;
 	}
 
 	public function setDescription()

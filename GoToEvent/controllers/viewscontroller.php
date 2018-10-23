@@ -62,5 +62,19 @@ class ViewsController
         require(ROOT . VIEWS . 'createeventplace.php');
     }
 
+    public function viewCreateEventSquare()
+    {
+        require(ROOT . VIEWS . 'createeventsquare.php');
+    }
+
+    public function viewCreatePurchase()
+    {
+        require(ROOT . VIEWS . 'createpurchase.php');
+    }
+
+    public function viewCreatePurchaseLine()
+    {
+        require(ROOT . VIEWS . 'createpurchaseline.php');
+    }
 }
 ?>

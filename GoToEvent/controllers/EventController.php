@@ -41,8 +41,6 @@ class EventController
 		// despues de borrar un evento, al ya haber recorrido todos los eventos, la lista quedaba vacía, por eso hay q volver a leer
 		require(ROOT . VIEWS . 'ViewEvents.php');
 	}
-
-
 	
 }
 
