@@ -83,7 +83,7 @@ class EventPlaceDao extends Singleton implements \interfaces\Crud
             return false;
     }
 
-    public function read ($id)
+    public function readById ($id)
     {
         $sql = "SELECT * FROM event_places where id_event_place = :id_event_place";
 

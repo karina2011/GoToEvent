@@ -40,7 +40,7 @@ $listEvent = $daoEvent->readAll();
 				<label>Evento: </label>
 				<select name='event'>
 					<?php foreach ($listEvent as $key => $event) { ?>
-						<option value="<?php echo $event->getIdEvent() ?>"><?php echo $event->getTitle(); ?></option>
+						<option value="<?php echo $event->getId() ?>"><?php echo $event->getTitle(); ?></option>
 					<?php } ?>
 				</select>
 

@@ -21,11 +21,6 @@ class Event
 		return $this->title;
 	}
 
-	public function getIdCalendar()
-	{
-		return $this->id_calendar;
-	}
-
 	public function getCategoryId()
 	{
 		return $this->category->getId();
@@ -34,6 +29,11 @@ class Event
 	public function getDescriptionCategory()
 	{
 		return $this->category->getDescription();
+	}
+
+	public function getCategory()
+	{
+		return $this->category;
 	}
 
 	public function getId()

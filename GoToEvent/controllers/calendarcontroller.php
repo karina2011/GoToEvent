@@ -31,10 +31,9 @@ class CalendarController
 
 		// seguir completando esto....
 
-
-		$event = new Event($title,$category); // pasar a calendar
-
-		$this->dao->create($event); 
+		$calendar = new Calendar($date,$artist,$event_place,$event); // pasar a calendar
+		
+		$this->dao->create($calendar); 
 
 		require(ROOT . VIEWS . 'Home.php');
 	}
@@ -46,9 +45,9 @@ class CalendarController
 		include(VIEWS . 'ViewEvents.php');
 	}
 
-	public function delete($title)
+	public function delete($id_calendar)
 	{
-		$this->dao->delete($title);
+		$this->dao->delete($id_calendar);
 		$lista = $this->dao->readAll(); // agregue esto como solucion temporal al problema de borrado // si no da problemas se deja
 		// despues de borrar un evento, al ya haber recorrido todos los eventos, la lista quedaba vacía, por eso hay q volver a leer
 		require(ROOT . VIEWS . 'ViewEvents.php');

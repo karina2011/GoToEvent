@@ -2,18 +2,20 @@
 namespace models;
 
 
-require_once ('Artist.php');
+require_once ('Event.php');
+require_once ('Category.php');
 
 
 class Calendar
 {
 	private $id_calendar;
 	private $date;
+	private $event;
 	private $artist;
 	private $event_place;
-	private $event;
 
-	function __construct($date='',$artist='',$event_place='',$event='',$id_calendar)
+
+	function __construct($date='', $artist='', $event_place='', $event=' ', $id_calendar='')
 	{
 		$this->date = $date;
 		$this->artist = $artist;
@@ -37,9 +39,19 @@ class Calendar
 		return $this->id_calendar;
 	}
 
-	public function getEventPlace()
+	public function getEventPlaceId()
 	{
-		return $this->event_place;
+		return $this->event_place->getId();
+	}
+
+	public function getArtistId()
+	{
+		return $this->artist->getId();
+	}
+
+	public function getEventId()
+	{
+		return $this->event->getId();
 	}
 
 	public function setDate($date)
