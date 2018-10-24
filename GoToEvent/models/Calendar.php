@@ -11,15 +11,15 @@ class Calendar
 	private $date;
 	private $artist;
 	private $event_place;
-	private $event_square;
+	private $event;
 
-	function __construct($date='',$artist='',$id_calendar,$event_place='',$event_square='')
+	function __construct($date='',$artist='',$event_place='',$event='',$id_calendar)
 	{
 		$this->date = $date;
 		$this->artist = $artist;
 		$this->id_calendar = $id_calendar;
 		$this->event_place = $event_place;
-		$this->event_square = $event_square;
+		$this->$event = $event;
 	}
 
 	public function getDate()

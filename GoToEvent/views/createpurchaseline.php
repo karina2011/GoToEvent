@@ -1,3 +1,11 @@
+<?php 
+use daos\daodb\EventSquareDao as D_Event_square;
+
+$daoEventSqaure = D_Event_square::getInstance();
+
+$list = $daoEventSqaure->readAll();
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,7 +23,9 @@
 				<input type="number" name="quantity">
 				<label>Plaza de evento: </label>
 				<select class="custom-select" id="inputGroupSelect01" name="event_square">
-				<?php  foreach ($list as $key => $event_square) { ?>
+				<?php  foreach ($list as $key => $event_square) { 
+					 
+				?>
 				 <option value="<?php echo $event_square->getId(); ?>"><?php  echo $event_square->getSquareTypeDescription(); ?></option>
 				 <?php } ?>			 
 				</select>
