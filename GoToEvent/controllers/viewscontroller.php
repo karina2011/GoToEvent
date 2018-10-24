@@ -76,5 +76,10 @@ class ViewsController
     {
         require(ROOT . VIEWS . 'createpurchaseline.php');
     }
+
+    public function viewCreateCalendar()
+    {
+        require(ROOT . VIEWS . 'createcalendar.php');
+    }
 }
 ?>

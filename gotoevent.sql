@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-10-2018 a las 17:35:53
+-- Tiempo de generación: 24-10-2018 a las 17:27:51
 -- Versión del servidor: 10.1.36-MariaDB
--- Versión de PHP: 7.2.11
+-- Versión de PHP: 7.2.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -25,6 +25,66 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `artists`
+--
+
+CREATE TABLE `artists` (
+  `id_artist` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `last_name` varchar(50) NOT NULL,
+  `dni` varchar(8) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `artists`
+--
+
+INSERT INTO `artists` (`id_artist`, `name`, `last_name`, `dni`) VALUES
+(1, 'Ricardo', 'Arjona', '44444444'),
+(2, 'Pablito', 'Lescano', '11111111');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `categories`
+--
+
+CREATE TABLE `categories` (
+  `id_category` int(11) NOT NULL,
+  `description` varchar(75) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `categories`
+--
+
+INSERT INTO `categories` (`id_category`, `description`) VALUES
+(1, 'musical'),
+(2, 'boxeo');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `events`
+--
+
+CREATE TABLE `events` (
+  `id_event` int(11) NOT NULL,
+  `title` varchar(100) NOT NULL,
+  `category` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `events`
+--
+
+INSERT INTO `events` (`id_event`, `title`, `category`) VALUES
+(1, 'Gran musical', 1),
+(2, 'Pelea del siglo', 2);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `event_places`
 --
 
@@ -33,6 +93,13 @@ CREATE TABLE `event_places` (
   `description` varchar(75) NOT NULL,
   `capacity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `event_places`
+--
+
+INSERT INTO `event_places` (`id_event_place`, `description`, `capacity`) VALUES
+(3, 'monumental', 65000);
 
 -- --------------------------------------------------------
 
@@ -135,6 +202,24 @@ INSERT INTO `users` (`name`, `last_name`, `dni`, `email`, `type`, `id_user`) VAL
 --
 
 --
+-- Indices de la tabla `artists`
+--
+ALTER TABLE `artists`
+  ADD PRIMARY KEY (`id_artist`);
+
+--
+-- Indices de la tabla `categories`
+--
+ALTER TABLE `categories`
+  ADD PRIMARY KEY (`id_category`);
+
+--
+-- Indices de la tabla `events`
+--
+ALTER TABLE `events`
+  ADD PRIMARY KEY (`id_event`);
+
+--
 -- Indices de la tabla `event_places`
 --
 ALTER TABLE `event_places`
@@ -178,10 +263,28 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `artists`
+--
+ALTER TABLE `artists`
+  MODIFY `id_artist` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `categories`
+--
+ALTER TABLE `categories`
+  MODIFY `id_category` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `events`
+--
+ALTER TABLE `events`
+  MODIFY `id_event` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT de la tabla `event_places`
 --
 ALTER TABLE `event_places`
-  MODIFY `id_event_place` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_event_place` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `event_squares`

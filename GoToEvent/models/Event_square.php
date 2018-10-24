@@ -1,11 +1,6 @@
 <?php
 namespace models;
 
-
-require_once ('Calendar.php');
-
-
-
 class Event_square
 {
 
@@ -14,6 +9,7 @@ class Event_square
 	private $remainder;
 	private $id_event_square;
 	private $square_type;
+	private $id_calendario; // agruegar esto, modificar ....
 
 	function __construct($price='',$available_quantity='',$remainder='',$square_type='',$id_event_square='')
 	{

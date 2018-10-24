@@ -1,0 +1,64 @@
+<?php 
+use daos\daodb\ArtistDao as D_Artist;
+use daos\daodb\EventPlaceDao as D_Event_place;
+use daos\daodb\EventDao as D_Event;
+
+$daoArtist = D_Artist::getInstance();
+$daoEventPlace = D_Event_place::getInstance();
+$daoEvent = D_Event::getInstance();
+
+$listArtist = $daoArtist->readAll();
+$listEventPlace = $daoEventPlace->readAll();
+$listEvent = $daoEvent->readAll();
+
+?>
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<h3>Crear Calendario</h3>
+	</div>
+		<br>
+		<form action="<?php echo BASE; ?>calendar/create" method="post">
+			<div>
+				<label>Fecha: </label>
+				<input type="date" name="date">
+				<label>Artistas: </label>
+				<select name="id_artist">
+				<?php foreach ($listArtist as $key => $artist) { ?>
+					<option value="<?php echo $artist->getId(); ?>"><?php echo $artist->getName() . ' ' .  $artist->getLastName(); ?></option>
+				<?php } ?>
+				</select>
+				<label>Lugar de evento: </label>
+				<select name="id_event_place">
+					<?php foreach ($listEventPlace as $key => $event_place) { ?>
+						<option value="<?php echo $event_place->getId(); ?>"><?php echo $event_place->getDescription(); ?></option>
+					<?php } ?>
+				</select>
+				<label>Evento: </label>
+				<select name='event'>
+					<?php foreach ($listEvent as $key => $event) { ?>
+						<option value="<?php echo $event->getIdEvent() ?>"><?php echo $event->getTitle(); ?></option>
+					<?php } ?>
+				</select>
+
+			</div>
+		<br>
+			<div>
+				<input type="submit" name="" value="enviar">
+			</form>
+	</div>
+	<br><br>
+	<div>
+		<a href="<?php echo BASE; ?>views/index">Volver al incio</a>
+	</div>
+</body>
+</html>
+
+<!-- <select class="custom-select" name="id_artist">
+				<?php foreach ($listArtist as $key => $artist) { ?> 
+				 <option value="<?php echo $artist->getId(); ?>"><?php echo $artist->getName(); ?></option>
+				<?php } ?> 		 
+				</select>-->

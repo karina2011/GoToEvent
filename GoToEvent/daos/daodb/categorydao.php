@@ -20,7 +20,7 @@ class CategoryDao extends Singleton implements \interfaces\Crud
 	{
 		// Guardo como string la consulta sql utilizando como values, marcadores de parámetros con nombre (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada
 
-		$sql = "INSERT INTO categorys (description) VALUES (:description)";
+		$sql = "INSERT INTO categories (description) VALUES (:description)";
 
         $parameters['description'] = $category->getDescription();
 
@@ -42,7 +42,7 @@ class CategoryDao extends Singleton implements \interfaces\Crud
 
 	public function readAll()
 	{
-		$sql = "SELECT * FROM categorys";
+		$sql = "SELECT * FROM categories";
 
         try
         {
@@ -65,7 +65,7 @@ class CategoryDao extends Singleton implements \interfaces\Crud
 
 	public function read($description)
 	{
-		$sql = "SELECT * FROM categorys where description = :description";
+		$sql = "SELECT * FROM categories where description = :description";
 
         $parameters['description'] = $description;
 
@@ -87,7 +87,7 @@ class CategoryDao extends Singleton implements \interfaces\Crud
     
     public function readById($id)
 	{
-		$sql = "SELECT * FROM categorys where id_category = :id_category";
+		$sql = "SELECT * FROM categories where id_category = :id_category";
 
         $parameters['id_category'] = $id;
 
@@ -109,7 +109,7 @@ class CategoryDao extends Singleton implements \interfaces\Crud
 
 	public function delete($description)
 	{
-		$sql = "DELETE FROM categorys WHERE description = :description";
+		$sql = "DELETE FROM categories WHERE description = :description";
         $parameters['description'] = $description;
 
         try 

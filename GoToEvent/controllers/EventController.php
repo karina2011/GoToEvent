@@ -18,7 +18,7 @@ class EventController
 
 	public function create($title='',$category='')
 	{	
-		$category = new Category("Federico",1);
+		$category = new Category("Federico",1); // modificar esto
 
 		$event = new Event($title,$category); // modificar "prueba", agregar categoria al forumlario al crear evento
 

@@ -1,10 +1,6 @@
 <?php
 namespace models;
 
-
-require_once ('Calendar.php');
-
-
 class Event
 {
 
@@ -40,7 +36,7 @@ class Event
 		return $this->category->getDescription();
 	}
 
-	public function getIdEvent()
+	public function getId()
 	{
 		return $this->id_event;
 	}

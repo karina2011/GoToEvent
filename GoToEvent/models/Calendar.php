@@ -42,11 +42,6 @@ class Calendar
 		return $this->event_place;
 	}
 
-	public function getEventSquare()
-	{
-		return $this->event_square;
-	}
-
 	public function setDate($date)
 	{
 		$this->date = $date;

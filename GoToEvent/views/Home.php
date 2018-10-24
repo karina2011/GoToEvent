@@ -128,6 +128,12 @@
             <a href="<?php echo BASE; ?>EventSquare/readAll" class="list-group-item">Ver plazas de vento</a>
           </div>
 
+          <h2 class="my-4"> Calendar</h2><!--Solo puede haber un "h1"-->
+          <div class="list-group">
+            <a href="<?php echo BASE; ?>Views/viewCreateCalendar" class="list-group-item">Crear Calendario</a>
+            <a href="<?php echo BASE; ?>Calendar/readAll" class="list-group-item">Ver calendario</a>
+          </div>
+
           
 
         </div>
