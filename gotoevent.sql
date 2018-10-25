@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.6.4
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-10-2018 a las 17:27:51
--- Versión del servidor: 10.1.36-MariaDB
--- Versión de PHP: 7.2.10
+-- Tiempo de generación: 25-10-2018 a las 12:28:05
+-- Versión del servidor: 5.7.14
+-- Versión de PHP: 5.6.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -42,6 +40,27 @@ CREATE TABLE `artists` (
 INSERT INTO `artists` (`id_artist`, `name`, `last_name`, `dni`) VALUES
 (1, 'Ricardo', 'Arjona', '44444444'),
 (2, 'Pablito', 'Lescano', '11111111');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `calendars`
+--
+
+CREATE TABLE `calendars` (
+  `id_calendar` int(11) NOT NULL,
+  `date` date NOT NULL,
+  `id_event` int(11) NOT NULL,
+  `id_artist` int(11) NOT NULL,
+  `id_event_place` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `calendars`
+--
+
+INSERT INTO `calendars` (`id_calendar`, `date`, `id_event`, `id_artist`, `id_event_place`) VALUES
+(3, '2018-10-16', 2, 1, 3);
 
 -- --------------------------------------------------------
 
@@ -208,6 +227,12 @@ ALTER TABLE `artists`
   ADD PRIMARY KEY (`id_artist`);
 
 --
+-- Indices de la tabla `calendars`
+--
+ALTER TABLE `calendars`
+  ADD PRIMARY KEY (`id_calendar`);
+
+--
 -- Indices de la tabla `categories`
 --
 ALTER TABLE `categories`
@@ -267,56 +292,51 @@ ALTER TABLE `users`
 --
 ALTER TABLE `artists`
   MODIFY `id_artist` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
+--
+-- AUTO_INCREMENT de la tabla `calendars`
+--
+ALTER TABLE `calendars`
+  MODIFY `id_calendar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `categories`
 --
 ALTER TABLE `categories`
   MODIFY `id_category` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
 --
 -- AUTO_INCREMENT de la tabla `events`
 --
 ALTER TABLE `events`
   MODIFY `id_event` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
 --
 -- AUTO_INCREMENT de la tabla `event_places`
 --
 ALTER TABLE `event_places`
   MODIFY `id_event_place` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
 -- AUTO_INCREMENT de la tabla `event_squares`
 --
 ALTER TABLE `event_squares`
   MODIFY `id_event_square` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
 --
 -- AUTO_INCREMENT de la tabla `purchases`
 --
 ALTER TABLE `purchases`
   MODIFY `id_purchase` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
 --
 -- AUTO_INCREMENT de la tabla `square_types`
 --
 ALTER TABLE `square_types`
   MODIFY `id_square_type` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
 --
 -- AUTO_INCREMENT de la tabla `tickets`
 --
 ALTER TABLE `tickets`
   MODIFY `id_ticket` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
 --
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
   MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-COMMIT;
-
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

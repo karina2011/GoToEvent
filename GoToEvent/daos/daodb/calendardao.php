@@ -3,7 +3,7 @@ namespace daos\daodb;
 
 use models\Event as M_Event;
 use models\Calendar as M_Calendar;
-use models\Artist as m_Artist;
+use models\Artist as M_Artist;
 use models\EventPlace as M_Event_place;
 use daos\daodb\connection as Connection;
 use daos\daodb\EventDao as D_Event;
@@ -98,11 +98,11 @@ class CalendarDao extends Singleton implements \interfaces\Crud
 
     }
 
-    public function delete ($title)
+    public function delete ($id)
     {
-        $sql = "DELETE FROM events WHERE title = :title";
+        $sql = "DELETE FROM calendars WHERE id_calendar = :id_calendar";
 
-        $parameters['title'] = $title;
+        $parameters['id_calendar'] = $id;
 
         try 
         {
@@ -131,7 +131,7 @@ class CalendarDao extends Singleton implements \interfaces\Crud
             $artist = $this->createArtist($p['id_artist']);
             $event_place = $this->createEventPlace($p['id_event_place']);
             $event = $this->createEvent($p['id_event']);
-		    return new M_Event( $p['date'], $artist, $event_place, $event , $p['id_calendar']);
+		    return new M_Calendar( $p['date'], $artist, $event_place, $event , $p['id_calendar']);
         }, $value);
             
             /* devuelve un arreglo si tiene datos y sino devuelve nulo*/
@@ -145,7 +145,7 @@ class CalendarDao extends Singleton implements \interfaces\Crud
 
         $artist = $daoArtist->readById($id);
 
-        $artist = new M_Category($artist['0']->getDni(),$artist['0']->getName(),$artist['0']->getLastName(),$artist['0']->getId());
+        $artist = new M_Artist($artist['0']->getDni(),$artist['0']->getName(),$artist['0']->getLastName(),$artist['0']->getId());
 
         return $artist;
      }
@@ -169,6 +169,6 @@ class CalendarDao extends Singleton implements \interfaces\Crud
 
         $event = new M_Event($event['0']->getTitle(),$event['0']->getCategory(),$event['0']->getId());
 
-        return $event_place;
+        return $event;
      }
 }

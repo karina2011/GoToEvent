@@ -15,13 +15,13 @@ class Calendar
 	private $event_place;
 
 
-	function __construct($date='', $artist='', $event_place='', $event=' ', $id_calendar='')
+	function __construct($date='', $artist='', $event_place='', $event='', $id_calendar='')
 	{
 		$this->date = $date;
 		$this->artist = $artist;
 		$this->id_calendar = $id_calendar;
 		$this->event_place = $event_place;
-		$this->$event = $event;
+		$this->event = $event;
 	}
 
 	public function getDate()
@@ -52,6 +52,11 @@ class Calendar
 	public function getEventId()
 	{
 		return $this->event->getId();
+	}
+
+	public function getEventTitle()
+	{
+		return $this->event->getTitle();
 	}
 
 	public function setDate($date)

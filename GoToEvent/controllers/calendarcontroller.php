@@ -29,7 +29,7 @@ class CalendarController
 		$event_place = $this->readEventPlaceById($id_event_place);
 		$event = $this->readEventById($id_event);
 
-		// seguir completando esto....
+		// hacer comprobaciones arriba entre cada objeto
 
 		$calendar = new Calendar($date,$artist,$event_place,$event); // pasar a calendar
 		
@@ -40,17 +40,18 @@ class CalendarController
 
 	public function readAll()
 	{
-		$lista = $this->dao->readAll();
+		$list = $this->dao->readAll();
 
-		include(VIEWS . 'ViewEvents.php');
+
+		include(VIEWS . 'viewcalendars.php');
 	}
 
 	public function delete($id_calendar)
 	{
 		$this->dao->delete($id_calendar);
-		$lista = $this->dao->readAll(); // agregue esto como solucion temporal al problema de borrado // si no da problemas se deja
+		$list = $this->dao->readAll(); // agregue esto como solucion temporal al problema de borrado // si no da problemas se deja
 		// despues de borrar un evento, al ya haber recorrido todos los eventos, la lista quedaba vacía, por eso hay q volver a leer
-		require(ROOT . VIEWS . 'ViewEvents.php');
+		require(ROOT . VIEWS . 'viewcalendars.php');
 	}
 
 	public function readArtistById($id){
