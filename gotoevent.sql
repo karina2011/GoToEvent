@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-10-2018 a las 12:28:05
+-- Tiempo de generación: 25-10-2018 a las 15:25:10
 -- Versión del servidor: 5.7.14
 -- Versión de PHP: 5.6.25
 
@@ -51,7 +51,6 @@ CREATE TABLE `calendars` (
   `id_calendar` int(11) NOT NULL,
   `date` date NOT NULL,
   `id_event` int(11) NOT NULL,
-  `id_artist` int(11) NOT NULL,
   `id_event_place` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -59,8 +58,20 @@ CREATE TABLE `calendars` (
 -- Volcado de datos para la tabla `calendars`
 --
 
-INSERT INTO `calendars` (`id_calendar`, `date`, `id_event`, `id_artist`, `id_event_place`) VALUES
-(3, '2018-10-16', 2, 1, 3);
+INSERT INTO `calendars` (`id_calendar`, `date`, `id_event`, `id_event_place`) VALUES
+(1, '2018-10-08', 2, 3),
+(13, '2018-10-02', 1, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `calendars_x_artists`
+--
+
+CREATE TABLE `calendars_x_artists` (
+  `id_artist` int(11) NOT NULL,
+  `id_calendar` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -296,7 +307,7 @@ ALTER TABLE `artists`
 -- AUTO_INCREMENT de la tabla `calendars`
 --
 ALTER TABLE `calendars`
-  MODIFY `id_calendar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_calendar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT de la tabla `categories`
 --
