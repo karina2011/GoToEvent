@@ -11,14 +11,14 @@ class Calendar
 	private $id_calendar;
 	private $date;
 	private $event;
-	private $artist;
+	private $artists = array();
 	private $event_place;
 
 
-	function __construct($date='', $artist='', $event_place='', $event='', $id_calendar='')
+	function __construct($date='', $artists='', $event_place='', $event='', $id_calendar='')
 	{
 		$this->date = $date;
-		$this->artist = $artist;
+		$this->artists = $artists;
 		$this->id_calendar = $id_calendar;
 		$this->event_place = $event_place;
 		$this->event = $event;
@@ -29,9 +29,9 @@ class Calendar
 		return $this->date;
 	}
 
-	public function getArtist()
+	public function getArtists()
 	{
-		return $this->artist;
+		return $this->artists;
 	}
 
 	public function getId()
@@ -42,11 +42,6 @@ class Calendar
 	public function getEventPlaceId()
 	{
 		return $this->event_place->getId();
-	}
-
-	public function getArtistId()
-	{
-		return $this->artist->getId();
 	}
 
 	public function getEventId()
@@ -66,7 +61,7 @@ class Calendar
 
 	public function setArtist($artist)
 	{
-		$this->artist = $artist;
+		$this->artists[] = $artist; // agrega elemento al final del arreglo
 	}
 
 	public function setId($id)

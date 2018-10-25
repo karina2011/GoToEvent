@@ -9,6 +9,7 @@ use daos\daodb\CalendarDao as Dao;
 use daos\daodb\ArtistDao as D_Artist;
 use daos\daodb\EventPlaceDao as D_Event_place;
 use daos\daodb\EventDao as D_Event;
+use daos\daodb\CalendarArtistDao as D_Calendar_artist;
 /**
  * 
  */
@@ -21,19 +22,42 @@ class CalendarController
         $this->dao = Dao::getInstance(); // esto se instancia en el router
     }
 
-	public function create($date="", $id_artist="", $id_event_place="", $id_event="")
+	public function create($date="", $artists="", $id_event_place="", $id_event="")
 	{	
-		// traer el objeto de artista, lugar de evento y evento en base a su id
+		
+		// pasamos el arreglo de id de artistas que recibimos a objetos
+		foreach ($artists as $key => $id_artist) {
+			$artist_list [] = $this->readArtistById($id_artist); // $this-> para llamar al metodo de la propia clase
+		}
 
-		$artist = $this->readArtistById($id_artist); // $this-> para llamar al metodo de la propia clase
+		// traer el objeto de artista, lugar de evento y evento en base a su id
 		$event_place = $this->readEventPlaceById($id_event_place);
 		$event = $this->readEventById($id_event);
 
 		// hacer comprobaciones arriba entre cada objeto
 
-		$calendar = new Calendar($date,$artist,$event_place,$event); // pasar a calendar
-		
+		$calendar = new Calendar($date,$artist_list,$event_place,$event);
+
 		$this->dao->create($calendar); 
+
+		$daoEvent = D_Event::getInstance();
+
+		$event = $daoEvent->read($calendar->getEventTitle());
+
+		$calendar = $this->dao->readByIdEvent($event['0']->getId()); // no sirve pensarlo de otra manera
+
+		$daoCalendarArtist = D_Calendar_artist::getInstance();
+		var_dump($calendar);
+		$list_artist = $calendar->getArtists();
+		
+		foreach ($list_artist as $key => $artist) {
+			$ids_calendar_artist['0'] = $calendar->getId();
+			$ids_calendar_artist['1'] = $artist->getId();
+			var_dump($ids_calendar_artist);
+			$daoCalendarArtist->create($ids_calendar_artist);
+		}
+
+		
 
 		require(ROOT . VIEWS . 'Home.php');
 	}

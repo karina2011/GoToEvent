@@ -9,6 +9,7 @@ use daos\daodb\connection as Connection;
 use daos\daodb\EventDao as D_Event;
 use daos\daodb\EventPlaceDao as D_Event_place;
 use daos\daodb\ArtistDao as D_Artist;
+
 use PDOException;
 
 class CalendarDao extends Singleton implements \interfaces\Crud
@@ -23,10 +24,9 @@ class CalendarDao extends Singleton implements \interfaces\Crud
     {
         // Guardo como string la consulta sql utilizando como values, marcadores de parámetros con nombre (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada
 
-		$sql = "INSERT INTO calendars (date,id_artist,id_event,id_event_place) VALUES (:date, :id_artist, :id_event, :id_event_place)";
+		$sql = "INSERT INTO calendars (date,id_event,id_event_place) VALUES (:date, :id_event, :id_event_place)";
 
         $parameters['date'] = $calendar->getDate();
-        $parameters['id_artist'] = $calendar->getArtistId();
         $parameters['id_event'] = $calendar->getEventId();
         $parameters['id_event_place'] = $calendar->getEventPlaceId();
 
@@ -69,11 +69,38 @@ class CalendarDao extends Singleton implements \interfaces\Crud
 
     }
 
-    public function read ($id)
+    public function readById ($id)
     {
         $sql = "SELECT * FROM calendars where id_calendar = :id_calendar";
 
         $parameters['id_calendar'] = $id;
+
+        try 
+        {
+            $this->connection = Connection::getInstance();
+            $resultSet = $this->connection->execute($sql, $parameters);
+        } 
+        catch(PDOException $e) 
+        {
+            echo $e;
+        }
+
+        if(!empty($resultSet))
+            return $this->mapear($resultSet);
+        else
+            return false;
+    }
+
+    public function read($id)
+    {
+
+    }
+
+    public function readByIdEvent ($id_event)
+    {
+        $sql = "SELECT * FROM calendars where id_event = :id_event";
+
+        $parameters['id_event'] = $id_event;
 
         try 
         {
@@ -128,10 +155,12 @@ class CalendarDao extends Singleton implements \interfaces\Crud
 		$value = is_array($value) ? $value : [];
         
 		$resp = array_map(function($p){
-            $artist = $this->createArtist($p['id_artist']);
             $event_place = $this->createEventPlace($p['id_event_place']);
             $event = $this->createEvent($p['id_event']);
-		    return new M_Calendar( $p['date'], $artist, $event_place, $event , $p['id_calendar']);
+            $artists = array(); 
+            $artists[] = new M_Artist ("12345678", "Juansito", "Perez", 1);
+            //flata buscar en la tabla intermedia todos los artistas que le perteneces a ese calendario
+		    return new M_Calendar( $p['date'],$artists , $event_place, $event , $p['id_calendar']);
         }, $value);
             
             /* devuelve un arreglo si tiene datos y sino devuelve nulo*/
@@ -139,16 +168,7 @@ class CalendarDao extends Singleton implements \interfaces\Crud
             return count($resp) > 0 ? $resp : null;
      }
 
-     protected function createArtist($id)
-     {
-        $daoArtist = D_Artist::getInstance();
 
-        $artist = $daoArtist->readById($id);
-
-        $artist = new M_Artist($artist['0']->getDni(),$artist['0']->getName(),$artist['0']->getLastName(),$artist['0']->getId());
-
-        return $artist;
-     }
 
      protected function createEventPlace($id)
      {

@@ -26,11 +26,16 @@ $listEvent = $daoEvent->readAll();
 				<label>Fecha: </label>
 				<input type="date" name="date">
 				<label>Artistas: </label>
-				<select name="id_artist">
-				<?php foreach ($listArtist as $key => $artist) { ?>
-					<option value="<?php echo $artist->getId(); ?>"><?php echo $artist->getName() . ' ' .  $artist->getLastName(); ?></option>
-				<?php } ?>
-				</select>
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+						<div class="input-group-text">
+							<?php foreach ($listArtist as $key => $artist) { ?>
+							<input type="checkbox" name="artist[]" value="<?php echo $artist->getId(); ?>">
+							<label for="artist"><?php echo $artist->getName() . ' ' .  $artist->getLastName(); ?></label>
+							<?php } ?>
+						</div>
+					</div>
+				</div>
 				<label>Lugar de evento: </label>
 				<select name="id_event_place">
 					<?php foreach ($listEventPlace as $key => $event_place) { ?>
