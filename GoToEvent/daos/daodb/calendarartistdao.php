@@ -20,7 +20,8 @@ class CalendarArtistDao extends Singleton implements \interfaces\Crud
     public function create($ids_calendar_artist)
     {
     	$id_calendar = $ids_calendar_artist['0'];
-    	$id_artist = $ids_calendar_artist['1'];
+        $id_artist = $ids_calendar_artist['1'];
+         echo "id_   ".$ids_calendar_artist['1'];
     	$sql = "INSERT INTO calendars_x_artists (id_calendar,id_artist) VALUES (:id_calendar, :id_artist)";
 
         $parameters['id_calendar'] = $id_calendar;
@@ -41,10 +42,33 @@ class CalendarArtistDao extends Singleton implements \interfaces\Crud
 
     }
 
-    public function read($id)
+    public function read($id_calendar)
     {
+        $sql = "SELECT * FROM calendars_x_artists where id_calendar = :id_calendar";
 
+        $parameters['id_calendar'] = $id_calendar;
+
+        try 
+        {
+            $this->connection = Connection::getInstance();
+            $resultSet = $this->connection->execute($sql, $parameters);
+            /*echo "esto es resulset";
+            echo "<pre>";
+            var_dump($resultSet);
+            echo "</pre>";*/
+
+        } 
+        catch(PDOException $e) 
+        {
+            echo $e;
+        }
+
+        if(isset($resultSet))
+            return $resultSet;
+        else
+            return false;
     }
+    
 
     public function update($id)
     {
@@ -58,7 +82,25 @@ class CalendarArtistDao extends Singleton implements \interfaces\Crud
 
     public function readAll()
     {
-    	
+        $sql = "SELECT * FROM calendars_x_artists";
+
+        try
+        {
+
+            $this->connection = Connection::getInstance();
+            $resultSet = $this->connection->execute($sql);
+
+        } 
+        catch(PDOException $e) 
+        {
+
+            echo $e;
+        }
+
+        if(!empty($resultSet))
+            return $resultSet;
+        else
+            return false;
     }
 
 }

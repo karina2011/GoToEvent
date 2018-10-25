@@ -4,6 +4,7 @@ namespace controllers;
 use models\Event;
 use models\Category;
 use daos\daodb\EventDao as Dao;
+use daos\daodb\CategoryDao as D_Category;
 /**
  * 
  */
@@ -16,11 +17,13 @@ class EventController
         $this->dao = Dao::getInstance(); // esto se instancia en el router
     }
 
-	public function create($title='',$category='')
+	public function create($title='',$id_category='')
 	{	
-		$category = new Category("Federico",1); // modificar esto
+		$daocategory = D_Category::getInstance();
 
-		$event = new Event($title,$category); // modificar "prueba", agregar categoria al forumlario al crear evento
+		$category = $daocategory->readById($id_category);
+
+		$event = new Event($title,$category['0']); // modificar "prueba", agregar categoria al forumlario al crear evento
 
 		$this->dao->create($event);
 

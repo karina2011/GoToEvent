@@ -1,3 +1,11 @@
+<?php
+use daos\daodb\CategoryDao as D_Category;
+
+$daocategory = D_Category::getInstance();
+
+$listCategory = $daocategory->readAll();
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,8 +25,17 @@
 			</div>
 		<br>
 			<div>
+				<label>Categoria: </label>
+				<select name="id_artist" >
+					<?php foreach ($listCategory as $key => $category) { ?>
+							<option value="<?php echo $category->getId();  ?>"><?php echo $category->getDescription(); ?></option>
+					<?php } ?>
+				</select>
+			</div>
+			<div>
 				<input type="submit" name="" value="enviar">
 			</form>
+			</div>
 	</div>
 	<br><br>
 	<div>

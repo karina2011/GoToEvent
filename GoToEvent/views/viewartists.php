@@ -18,7 +18,7 @@
 			<td><?php echo $artista->getName(); ?></td>
 			<td><?php echo $artista->getLastName(); ?></td>
 			<td><?php echo $artista->getDni(); ?></td>
-			<td><?php echo $artista->getIdArtist(); ?></td>
+			<td><?php echo $artista->getId(); ?></td>
 		</tr>
 	<?php } ?>
 	</table>

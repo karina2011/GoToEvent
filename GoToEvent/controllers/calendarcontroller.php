@@ -40,20 +40,19 @@ class CalendarController
 
 		$this->dao->create($calendar); 
 
-		$daoEvent = D_Event::getInstance();
-
-		$event = $daoEvent->read($calendar->getEventTitle());
-
-		$calendar = $this->dao->readByIdEvent($event['0']->getId()); // no sirve pensarlo de otra manera
+		$calendar = $this->dao->readLast(); // te lo devuelve en forma de arreglo
 
 		$daoCalendarArtist = D_Calendar_artist::getInstance();
-		var_dump($calendar);
-		$list_artist = $calendar->getArtists();
+
+		/*echo "<pre>";
+		var_dump($artist_list);
+		echo "</pre>";*/
 		
-		foreach ($list_artist as $key => $artist) {
-			$ids_calendar_artist['0'] = $calendar->getId();
+		foreach ($artist_list as $key => $artist) {
+
+			$ids_calendar_artist['0'] = $calendar['0']->getId();
 			$ids_calendar_artist['1'] = $artist->getId();
-			var_dump($ids_calendar_artist);
+
 			$daoCalendarArtist->create($ids_calendar_artist);
 		}
 
@@ -65,8 +64,9 @@ class CalendarController
 	public function readAll()
 	{
 		$list = $this->dao->readAll();
-
-
+		/*echo "<pre>";
+		var_dump($list);
+		echo "</pre>";*/
 		include(VIEWS . 'viewcalendars.php');
 	}
 
@@ -100,7 +100,7 @@ class CalendarController
 		$daoEventPlace = D_Event_place::getInstance();
 
 		$event_place = $daoEventPlace->readById($id); // el readbyid devuelve el objeto adentro de un arreglo
-
+		
 		$capacity = $event_place['0']->getCapacity(); // en la posicion 0 del arreglo artist, está el objeto artista 
 		$description = $event_place['0']->getDescription();
 		$id_event_place = $event_place['0']->getId();
@@ -124,6 +124,7 @@ class CalendarController
 
 		return $event;
 	}
+
 
 
 }

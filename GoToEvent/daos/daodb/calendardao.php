@@ -9,6 +9,7 @@ use daos\daodb\connection as Connection;
 use daos\daodb\EventDao as D_Event;
 use daos\daodb\EventPlaceDao as D_Event_place;
 use daos\daodb\ArtistDao as D_Artist;
+use daos\daodb\CalendarArtistDao as D_Calendar_artist;
 
 use PDOException;
 
@@ -91,6 +92,28 @@ class CalendarDao extends Singleton implements \interfaces\Crud
             return false;
     }
 
+    public function readLast ()
+    {
+        $sql = "SELECT * FROM calendars ORDER BY id_calendar DESC LIMIT 1";
+
+        $parameters[] = array();
+
+        try 
+        {
+            $this->connection = Connection::getInstance();
+            $resultSet = $this->connection->execute($sql);
+        } 
+        catch(PDOException $e) 
+        {
+            echo $e;
+        }
+
+        if(!empty($resultSet))
+            return $this->mapear($resultSet);
+        else
+            return false;
+    }
+
     public function read($id)
     {
 
@@ -157,9 +180,12 @@ class CalendarDao extends Singleton implements \interfaces\Crud
 		$resp = array_map(function($p){
             $event_place = $this->createEventPlace($p['id_event_place']);
             $event = $this->createEvent($p['id_event']);
-            $artists = array(); 
-            $artists[] = new M_Artist ("12345678", "Juansito", "Perez", 1);
+            $artists = $this->createArtistList($p['id_calendar']); //busca en la tabla intermedia todos los artistas que le corresponden a ese calendario
             //flata buscar en la tabla intermedia todos los artistas que le perteneces a ese calendario
+            /*echo "estos son los artistas";
+            echo "<pre>";
+            var_dump($artists);
+            echo "</pre>";*/
 		    return new M_Calendar( $p['date'],$artists , $event_place, $event , $p['id_calendar']);
         }, $value);
             
@@ -190,5 +216,28 @@ class CalendarDao extends Singleton implements \interfaces\Crud
         $event = new M_Event($event['0']->getTitle(),$event['0']->getCategory(),$event['0']->getId());
 
         return $event;
+     }
+
+     protected function createArtistList($id_calendar)
+     {
+         $daoCalendarArtist = D_Calendar_artist::getInstance();
+
+         $calendarArtistList = $daoCalendarArtist->read($id_calendar);
+
+         /*echo "<pre>";
+         var_dump($calendarArtistList);
+         echo "</pre>";*/
+
+         $daoArtist = D_Artist::getInstance();
+
+         $artistList = array();
+
+         foreach ($calendarArtistList as $key => $list) {
+             $artistList[] = $daoArtist->readById($list['id_artist']);
+         }
+        /*echo "<pre>"; 
+        var_dump($artistList);
+        echo "</pre>";*/
+         return $artistList;
      }
 }

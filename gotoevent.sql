@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.4
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-10-2018 a las 15:25:10
--- Versión del servidor: 5.7.14
--- Versión de PHP: 5.6.25
+-- Tiempo de generación: 25-10-2018 a las 23:00:23
+-- Versión del servidor: 10.1.35-MariaDB
+-- Versión de PHP: 7.2.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -39,7 +41,8 @@ CREATE TABLE `artists` (
 
 INSERT INTO `artists` (`id_artist`, `name`, `last_name`, `dni`) VALUES
 (1, 'Ricardo', 'Arjona', '44444444'),
-(2, 'Pablito', 'Lescano', '11111111');
+(2, 'Pablito', 'Lescano', '11111111'),
+(3, 'Enrique', 'Iglesias', '45871268');
 
 -- --------------------------------------------------------
 
@@ -59,8 +62,11 @@ CREATE TABLE `calendars` (
 --
 
 INSERT INTO `calendars` (`id_calendar`, `date`, `id_event`, `id_event_place`) VALUES
-(1, '2018-10-08', 2, 3),
-(13, '2018-10-02', 1, 3);
+(45, '2018-10-03', 5, 3),
+(44, '2018-10-03', 1, 3),
+(43, '2018-10-03', 1, 3),
+(42, '2018-10-03', 1, 3),
+(41, '2018-10-03', 1, 3);
 
 -- --------------------------------------------------------
 
@@ -72,6 +78,45 @@ CREATE TABLE `calendars_x_artists` (
   `id_artist` int(11) NOT NULL,
   `id_calendar` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `calendars_x_artists`
+--
+
+INSERT INTO `calendars_x_artists` (`id_artist`, `id_calendar`) VALUES
+(1, 18),
+(2, 18),
+(1, 30),
+(2, 30),
+(1, 31),
+(2, 31),
+(1, 32),
+(2, 32),
+(1, 33),
+(2, 33),
+(1, 34),
+(2, 34),
+(2, 35),
+(1, 36),
+(1, 36),
+(3, 37),
+(3, 38),
+(1, 39),
+(1, 39),
+(1, 40),
+(1, 40),
+(1, 41),
+(1, 41),
+(1, 41),
+(2, 42),
+(2, 42),
+(2, 43),
+(2, 43),
+(2, 44),
+(3, 44),
+(1, 45),
+(2, 45),
+(3, 45);
 
 -- --------------------------------------------------------
 
@@ -90,7 +135,8 @@ CREATE TABLE `categories` (
 
 INSERT INTO `categories` (`id_category`, `description`) VALUES
 (1, 'musical'),
-(2, 'boxeo');
+(2, 'boxeo'),
+(3, 'partido de futbol');
 
 -- --------------------------------------------------------
 
@@ -110,7 +156,8 @@ CREATE TABLE `events` (
 
 INSERT INTO `events` (`id_event`, `title`, `category`) VALUES
 (1, 'Gran musical', 1),
-(2, 'Pelea del siglo', 2);
+(2, 'Pelea del siglo', 2),
+(5, 'Super clasico', 3);
 
 -- --------------------------------------------------------
 
@@ -302,52 +349,63 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `artists`
 --
 ALTER TABLE `artists`
-  MODIFY `id_artist` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_artist` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- AUTO_INCREMENT de la tabla `calendars`
 --
 ALTER TABLE `calendars`
-  MODIFY `id_calendar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_calendar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+
 --
 -- AUTO_INCREMENT de la tabla `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id_category` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_category` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- AUTO_INCREMENT de la tabla `events`
 --
 ALTER TABLE `events`
-  MODIFY `id_event` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_event` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
 --
 -- AUTO_INCREMENT de la tabla `event_places`
 --
 ALTER TABLE `event_places`
   MODIFY `id_event_place` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- AUTO_INCREMENT de la tabla `event_squares`
 --
 ALTER TABLE `event_squares`
   MODIFY `id_event_square` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
 --
 -- AUTO_INCREMENT de la tabla `purchases`
 --
 ALTER TABLE `purchases`
   MODIFY `id_purchase` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- AUTO_INCREMENT de la tabla `square_types`
 --
 ALTER TABLE `square_types`
   MODIFY `id_square_type` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
 --
 -- AUTO_INCREMENT de la tabla `tickets`
 --
 ALTER TABLE `tickets`
   MODIFY `id_ticket` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
   MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

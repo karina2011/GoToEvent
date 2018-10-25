@@ -68,8 +68,11 @@
         <div class="col-md-5">
           <h3><?php echo $calendar->getDate(); ?></h3>
           <h3><?php echo $calendar->getEventTitle(); ?></h3>
-
-          <form action="<?php echo BASE; ?>Calendar/delete" method="post">
+          <?php $artistlist = $calendar->getArtists();
+                foreach ($artistlist as $key => $artist) { ?>
+                  <h3><?php echo $artist['0']->getName(); ?></h3>
+          <?php } ?>
+          <form action="<?php echo BASE; ?>Calendar/prueba" method="post">
           <a class="btn btn-primary" href="#">Ver Calendario</a><!--cambiar esto a boton tambien-->
           <button name="id" type="submit" class="btn btn-danger" value="<?php echo $calendar->getId();?>"><i class="fas fa-trash"></i> </button>
           </form>
