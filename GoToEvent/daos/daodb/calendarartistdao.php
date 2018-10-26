@@ -21,7 +21,7 @@ class CalendarArtistDao extends Singleton implements \interfaces\Crud
     {
     	$id_calendar = $ids_calendar_artist['0'];
         $id_artist = $ids_calendar_artist['1'];
-         echo "id_   ".$ids_calendar_artist['1'];
+        
     	$sql = "INSERT INTO calendars_x_artists (id_calendar,id_artist) VALUES (:id_calendar, :id_artist)";
 
         $parameters['id_calendar'] = $id_calendar;

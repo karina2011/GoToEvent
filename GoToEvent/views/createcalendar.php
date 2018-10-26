@@ -28,7 +28,7 @@ $listEvent = $daoEvent->readAll();
 			<div>
 				<label>Fecha: </label>
 				<input type="date" name="date">
-				<label>Artistas: </label>
+				<label>Artistas: (HACER UNA COMPROBACION PARA Q NO INGRESE NINGUN ARTISTA, SINO SALTA ERROR) </label>
 				<div class="input-group mb-3">
 					<div class="input-group-prepend">
 						<div class="input-group-text">

@@ -46,6 +46,29 @@ class CalendarDao extends Singleton implements \interfaces\Crud
 
     }
 
+    public function validateDateInEventPlace($date,$id_event_place)
+    {
+        $sql = "Select * 
+                from calendars c inner join event_places ep on c.id_event_place = ep.id_event_place
+                where c.date = :date and ep.id_event_place = :id_event_place ";
+
+        $parameters['date'] = $date;
+        $parameters['id_event_place'] = $id_event_place;
+
+        try 
+        {
+            
+            $this->connection = Connection::getInstance();
+
+            return $this->connection->ExecuteNonQuery($sql, $parameters);
+
+        } 
+        catch(PDOException $e)
+        {
+            echo $e;
+        }
+    }
+
     public function readAll()
     {
         $sql = "SELECT * FROM calendars";

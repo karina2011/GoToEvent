@@ -24,41 +24,52 @@ class CalendarController
 
 	public function create($date="", $artists="", $id_event_place="", $id_event="")
 	{	
+		$fechaActual=strftime( "%Y-%m-%d", time()); // devuelve la fecha actual, en formato Año-mes-dia, igual q date
+
+		if ($date < $fechaActual){ // comprobar q la fecha sea posterior a la actual
+			echo "NO PODES CREAR EVENTOS EN EL PASADO INUTIL"; // pasar a alert
+		} 
+			else{
+				$res = $this->validateDateInEventPlace($date,$id_event_place); //si res devuelve 0 es porque la fecha esta disponible
+				
+				//falta comprobar que los artistas esten disponibles para esa fecha
+				
+					if($res == 0){// pasamos el arreglo de id de artistas que recibimos a objetos
+						echo "ENTREEEEEE";
+						foreach ($artists as $key => $id_artist) {
+						$artist_list [] = $this->readArtistById($id_artist); // $this-> para llamar al metodo de la propia  clase
+						}
+
+					// traer el objeto de artista, lugar de evento y evento en base a su id
+					$event_place = $this->readEventPlaceById($id_event_place);
+					$event = $this->readEventById($id_event);
+
+					// hacer comprobaciones arriba entre cada objeto
+
+					$calendar = new Calendar($date,$artist_list,$event_place,$event);
+
+					$this->dao->create($calendar); 
+
+					$calendar = $this->dao->readLast(); // te lo devuelve en forma de arreglo
+
+					$daoCalendarArtist = D_Calendar_artist::getInstance();
+				
+						foreach ($artist_list as $key => $artist) {
+
+							$ids_calendar_artist['0'] = $calendar['0']->getId();
+							$ids_calendar_artist['1'] = $artist->getId();
+
+							$daoCalendarArtist->create($ids_calendar_artist);
+						}
+					}
+				}
 		
-		// pasamos el arreglo de id de artistas que recibimos a objetos
-		foreach ($artists as $key => $id_artist) {
-			$artist_list [] = $this->readArtistById($id_artist); // $this-> para llamar al metodo de la propia clase
-		}
-
-		// traer el objeto de artista, lugar de evento y evento en base a su id
-		$event_place = $this->readEventPlaceById($id_event_place);
-		$event = $this->readEventById($id_event);
-
-		// hacer comprobaciones arriba entre cada objeto
-
-		$calendar = new Calendar($date,$artist_list,$event_place,$event);
-
-		$this->dao->create($calendar); 
-
-		$calendar = $this->dao->readLast(); // te lo devuelve en forma de arreglo
-
-		$daoCalendarArtist = D_Calendar_artist::getInstance();
-
-		/*echo "<pre>";
-		var_dump($artist_list);
-		echo "</pre>";*/
-		
-		foreach ($artist_list as $key => $artist) {
-
-			$ids_calendar_artist['0'] = $calendar['0']->getId();
-			$ids_calendar_artist['1'] = $artist->getId();
-
-			$daoCalendarArtist->create($ids_calendar_artist);
-		}
-
-		
-
 		require(ROOT . VIEWS . 'Home.php');
+	}
+
+	public function validateDateInEventPlace($date,$id_event_place)
+	{
+		return $this->dao->validateDateInEventPlace($date,$id_event_place);
 	}
 
 	public function readAll()
