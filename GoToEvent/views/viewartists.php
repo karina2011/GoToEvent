@@ -4,6 +4,9 @@
 	<title>Ver artistas</title>
 </head>
 <body>
+
+	<?php include_once (VIEWS."header.php");?>
+	
 <?php if(isset($lista)){  ?>
 	<table border="1">
 		<tr>

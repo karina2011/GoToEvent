@@ -2,7 +2,8 @@
 namespace controllers;
 
 use models\Purchase;
-use models\Purchase_line; // ver si sacar esto
+use models\PurchaseLine;
+use models\Ticket;
 use models\User; // cliente
 use daos\daodb\PurchaseDao as Dao;
 use daos\daodb\UserDao as D_User;

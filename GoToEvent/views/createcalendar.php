@@ -18,6 +18,9 @@ $listEvent = $daoEvent->readAll();
 	<title></title>
 </head>
 <body>
+
+	<?php include_once (VIEWS."header.php");?>
+	
 	<h3>Crear Calendario</h3>
 	</div>
 		<br>

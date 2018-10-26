@@ -212,7 +212,7 @@ class CalendarDao extends Singleton implements \interfaces\Crud
         $daoEvent = D_Event::getInstance();
 
         $event = $daoEvent->readById($id);
-
+        
         $event = new M_Event($event['0']->getTitle(),$event['0']->getCategory(),$event['0']->getId());
 
         return $event;

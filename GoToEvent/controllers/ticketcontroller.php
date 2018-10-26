@@ -3,8 +3,9 @@ namespace controllers;
 
 use models\Ticket as Ticket;
 use daos\daodb\TicketDao as Dao;
+//use assets\phpqrcode\bindings\tcpdf\QRcode; // descomentar para ver el otro error
 
-include( BASE . '/assets/phpqrcode/qrlib.php'); // para el codigo qr
+include( ROOT . 'assets/phpqrcode/qrlib.php'); // para el codigo qr
 // https://evilnapsis.com/2018/02/26/crear-codigo-qr-con-php/
 
 /**
@@ -19,7 +20,7 @@ class TicketController
 		$this->dao = Dao::getInstance();
 	}
 
-	public function create($number,$qr)
+	public function create($number)
 	{
 		//SE CREA EL OBJETO PARA LUEGO GUARDARLO EN LA BASE DE DATOS
 		// creamos un ticket aleatorio 

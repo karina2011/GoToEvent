@@ -13,7 +13,9 @@ $list = $daoSquareType->readAll();
 	<title></title>
 </head>
 <body>
-
+	
+	<?php include_once (VIEWS."header.php");?>
+	
 	<h3>Crear plaza de evento</h3>
 	</div>
 		<br>

@@ -3,12 +3,12 @@ namespace models;
 
 
 
-class Purchase_line
+class PurchaseLine
 {
 
 	private $price;
 	private $quantity;
-	private $event_square;
+	private $event_square; 
 	private $ticket;
 	private $id_purchase;
 	private $id_purchase_line;

@@ -4,15 +4,16 @@
 	<title></title>
 </head>
 <body>
+
+	<?php include_once (VIEWS."header.php");?>
+	
 	<h3>Crear Ticket</h3>
 	</div>
 		<br>
 		<form action="<?php echo BASE; ?>ticket/create" method="post">
 			<div>
 				<label>Numero: </label>
-				<input type="text" name="Numero">
-				<label>qr: </label>
-				<input type="text" name="qr">
+				<input type="text" name="number">
 			</div>
 		<br>
 			<div>

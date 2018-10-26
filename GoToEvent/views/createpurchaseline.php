@@ -12,10 +12,13 @@ $list = $daoEventSqaure->readAll();
 	<title></title>
 </head>
 <body>
-	<h3>Crear COMPRA</h3>
+
+	<?php include_once (VIEWS."header.php");?>
+	
+	<h3>Crear Linea Compra</h3>
 	</div>
 		<br>
-		<form action="<?php echo BASE; ?>purchase/create" method="post">
+		<form action="<?php echo BASE; ?>purchaseLine/create" method="post">
 			<div>
 				<label>precio: </label>
 				<input type="number" name="price">

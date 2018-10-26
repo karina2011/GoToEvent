@@ -5,6 +5,8 @@
 </head>
 <body>
 
+	<?php include_once (VIEWS."header.php");?>
+	
 	<h3>Crear usuario</h3>
 	</div>
 		<br>

@@ -4,6 +4,9 @@
 	<title></title>
 </head>
 <body>
+
+	<?php include_once (VIEWS."header.php");?>
+
 	<h1>Crear artista</h1>
 	<br><br>
 	<form action="<?php echo BASE; ?>Artist/create" method="post" accept-charset="utf-8">

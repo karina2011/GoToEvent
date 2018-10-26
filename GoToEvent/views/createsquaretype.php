@@ -4,6 +4,9 @@
 	<title></title>
 </head>
 <body>
+
+	<?php include_once (VIEWS."header.php");?>
+	
 	<h3>Crear Tipo de Plaza</h3>
 	</div>
 		<br>
