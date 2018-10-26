@@ -1,4 +1,4 @@
-<?php 
+<?php
 use daos\daodb\ArtistDao as D_Artist;
 use daos\daodb\EventPlaceDao as D_Event_place;
 use daos\daodb\EventDao as D_Event;
@@ -20,7 +20,7 @@ $listEvent = $daoEvent->readAll();
 <body>
 
 	<?php include_once (VIEWS."header.php");?>
-	
+
 	<h3>Crear Calendario</h3>
 	</div>
 		<br>
@@ -28,7 +28,7 @@ $listEvent = $daoEvent->readAll();
 			<div>
 				<label>Fecha: </label>
 				<input type="date" name="date">
-				<label>Artistas: (HACER UNA COMPROBACION PARA Q NO INGRESE NINGUN ARTISTA, SINO SALTA ERROR) </label>
+				<label require>Artistas: (HACER UNA COMPROBACION PARA Q NO INGRESE NINGUN ARTISTA, SINO SALTA ERROR) </label>
 				<div class="input-group mb-3">
 					<div class="input-group-prepend">
 						<div class="input-group-text">
@@ -66,7 +66,7 @@ $listEvent = $daoEvent->readAll();
 </html>
 
 <!-- <select class="custom-select" name="id_artist">
-				<?php foreach ($listArtist as $key => $artist) { ?> 
+				<?php foreach ($listArtist as $key => $artist) { ?>
 				 <option value="<?php echo $artist->getId(); ?>"><?php echo $artist->getName(); ?></option>
-				<?php } ?> 		 
+				<?php } ?>
 				</select>-->

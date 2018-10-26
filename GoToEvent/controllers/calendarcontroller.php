@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace controllers;
 
 use models\Calendar;
@@ -11,62 +11,68 @@ use daos\daodb\EventPlaceDao as D_Event_place;
 use daos\daodb\EventDao as D_Event;
 use daos\daodb\CalendarArtistDao as D_Calendar_artist;
 /**
- * 
+ *
  */
 class CalendarController
 {
 	protected $dao;
-	
+
 	public function __construct()
     {
         $this->dao = Dao::getInstance(); // esto se instancia en el router
     }
 
 	public function create($date="", $artists="", $id_event_place="", $id_event="")
-	{	
+	{
 		$fechaActual=strftime( "%Y-%m-%d", time()); // devuelve la fecha actual, en formato Año-mes-dia, igual q date
 
-		if ($date < $fechaActual){ // comprobar q la fecha sea posterior a la actual
+		if ($date < $fechaActual) // comprobar q la fecha sea posterior a la actual
+		{
 			echo "NO PODES CREAR EVENTOS EN EL PASADO INUTIL"; // pasar a alert
-		} 
-			else{
+		} else
+			{
 				$res = $this->validateDateInEventPlace($date,$id_event_place); //si res devuelve 0 es porque la fecha esta disponible
-				
+
 				//falta comprobar que los artistas esten disponibles para esa fecha
-				
-					if($res == 0){// pasamos el arreglo de id de artistas que recibimos a objetos
-						echo "ENTREEEEEE";
+
+					if($res == 0)
+					{// pasamos el arreglo de id de artistas que recibimos a objetos
 						foreach ($artists as $key => $id_artist) {
 						$artist_list [] = $this->readArtistById($id_artist); // $this-> para llamar al metodo de la propia  clase
 						}
 
-					// traer el objeto de artista, lugar de evento y evento en base a su id
-					$event_place = $this->readEventPlaceById($id_event_place);
-					$event = $this->readEventById($id_event);
+						// traer el objeto de lugar de evento y evento en base a su id
+						$event_place = $this->readEventPlaceById($id_event_place);
+						$event = $this->readEventById($id_event);
 
-					// hacer comprobaciones arriba entre cada objeto
+						// hacer comprobaciones arriba entre cada objeto
 
-					$calendar = new Calendar($date,$artist_list,$event_place,$event);
+						$calendar = new Calendar($date,$artist_list,$event_place,$event);
 
-					$this->dao->create($calendar); 
+						$this->dao->create($calendar); //crea el calendario en la base de datos
 
-					$calendar = $this->dao->readLast(); // te lo devuelve en forma de arreglo
+						$calendar = $this->dao->readLast(); // te lo devuelve en forma de arreglo al ultimo calendario cargado
 
-					$daoCalendarArtist = D_Calendar_artist::getInstance();
-				
-						foreach ($artist_list as $key => $artist) {
+						$daoCalendarArtist = D_Calendar_artist::getInstance(); // se obtiene una instancia del dao de calendario x artista
 
-							$ids_calendar_artist['0'] = $calendar['0']->getId();
-							$ids_calendar_artist['1'] = $artist->getId();
+							/* bucle realizado para recorrer todos los artistas que perteneces a un evento y guardarlo en la tabla intermedia */
+							foreach ($artist_list as $key => $artist) {
 
-							$daoCalendarArtist->create($ids_calendar_artist);
-						}
+								$ids_calendar_artist['0'] = $calendar['0']->getId();
+								$ids_calendar_artist['1'] = $artist->getId();
+
+								$daoCalendarArtist->create($ids_calendar_artist);
+							}
+					} else {
+						echo "<script> alert('No esta disponible en esa fecha'); </script>";
 					}
 				}
-		
+
 		require(ROOT . VIEWS . 'Home.php');
 	}
 
+ 	/* Funcion que valida que el evento no este ocupado
+	para la fecha que recibe por parametro   */
 	public function validateDateInEventPlace($date,$id_event_place)
 	{
 		return $this->dao->validateDateInEventPlace($date,$id_event_place);
@@ -93,9 +99,9 @@ class CalendarController
 
 		$daoArtist = D_Artist::getInstance();
 
-		$artist = $daoArtist->readById($id); // el readbyid devuelve el objeto adentro de un arreglo 
+		$artist = $daoArtist->readById($id); // el readbyid devuelve el objeto adentro de un arreglo
 
-		$dni = $artist['0']->getDni(); // en la posicion 0 del arreglo artist, está el objeto artista 
+		$dni = $artist['0']->getDni(); // en la posicion 0 del arreglo artist, está el objeto artista
 		$name = $artist['0']->getName();
 		$last_name = $artist['0']->getLastName();
 		$id_artist = $artist['0']->getId();
@@ -105,14 +111,14 @@ class CalendarController
 		return $artist;
 
 	}
-	
+
 	public function readEventPlaceById($id){
 
 		$daoEventPlace = D_Event_place::getInstance();
 
 		$event_place = $daoEventPlace->readById($id); // el readbyid devuelve el objeto adentro de un arreglo
-		
-		$capacity = $event_place['0']->getCapacity(); // en la posicion 0 del arreglo artist, está el objeto artista 
+
+		$capacity = $event_place['0']->getCapacity(); // en la posicion 0 del arreglo artist, está el objeto artista
 		$description = $event_place['0']->getDescription();
 		$id_event_place = $event_place['0']->getId();
 
@@ -125,9 +131,9 @@ class CalendarController
 
 		$daoEvent = D_Event::getInstance();
 
-		$event = $daoEvent->readById($id); // el readbyid devuelve el objeto adentro de un arreglo 
+		$event = $daoEvent->readById($id); // el readbyid devuelve el objeto adentro de un arreglo
 
-		$title = $event['0']->getTitle(); // en la posicion 0 del arreglo artist, está el objeto artista 
+		$title = $event['0']->getTitle(); // en la posicion 0 del arreglo artist, está el objeto artista
 		$category = $event['0']->getCategory();
 		$id_event = $event['0']->getId();
 
