@@ -58,6 +58,15 @@ class PurchaseLine
 		return $this->id_purchase;
 	}
 
+	public function getEventSquareDescription()
+	{
+		return $this->event_square->getSquareTypeDescription();
+	}
+
+	public function getTicketNumber(){
+		return $this->ticket->getNumber();
+	}
+
 	public function getTotalPrice(){
 		return $price * $quantity;
 	}

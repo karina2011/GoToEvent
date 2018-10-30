@@ -129,7 +129,7 @@ class EventSquareDao extends Singleton implements \interfaces\Crud
             
             /* devuelve un arreglo si hay mas de 1 dato, sino un objeto*/
 
-            return count($resp) > 1 ? $resp : $resp['0']; // se modifico para q devuelva un solo objeto y no arreglo en caso de haber 1 solo // borrar comentario
+            return count($resp) > 1 ? $resp : $resp['0']; // se modifico para q devuelva un solo objeto y no arreglo en caso de haber 1 solo // borrar comentario si funciona bien
      }
 
      protected function createSquareType($id_square_type)

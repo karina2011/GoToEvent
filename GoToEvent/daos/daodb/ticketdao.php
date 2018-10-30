@@ -65,7 +65,29 @@ class TicketDao extends Singleton implements \interfaces\Crud
             return false;
     }
 
-    public function read ($number)
+    public function read ($id)
+    {
+        $sql = "SELECT * FROM tickets where id_ticket = :id_ticket";
+
+        $parameters['id_ticket'] = $id;
+
+        try 
+        {
+            $this->connection = Connection::getInstance();
+            $resultSet = $this->connection->execute($sql, $parameters);
+        } 
+        catch(PDOException $e) 
+        {
+            echo $e;
+        }
+
+        if(!empty($resultSet))
+            return $this->mapear($resultSet);
+        else
+            return false;
+    }
+
+    public function readByNumber ($number)
     {
         $sql = "SELECT * FROM tickets where numberr = :numberr";
 
@@ -134,9 +156,9 @@ class TicketDao extends Singleton implements \interfaces\Crud
 		    return new M_Ticket( $p['numberr'], $p['qr'], $p['id_ticket']);
         }, $value);
             
-            /* devuelve un arreglo si tiene datos y sino devuelve nulo*/
+            /* devuelve un arreglo si tiene mas de 1 dato, sino un objeto si es solo 1*/
 
-            return count($resp) > 0 ? $resp : null;
+            return count($resp) > 1 ? $resp : $resp['0'];
     }
 
 }

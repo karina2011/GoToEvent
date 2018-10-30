@@ -2,8 +2,9 @@
 namespace daos\daodb;
 
 use models\PurchaseLine as M_Purchase_line;
-use models\Purchase as M_Purchase;
 use daos\daodb\connection as Connection;
+use daos\daodb\EventSquareDao as D_Event_Square;
+use daos\daodb\TicketDao as D_Ticket;
 use PDOException;
 
 class PurchaseLineDao extends Singleton implements \interfaces\Crud
@@ -45,7 +46,7 @@ class PurchaseLineDao extends Singleton implements \interfaces\Crud
 
     public function readAll()
     {
-        $sql = "SELECT * FROM purchases";
+        $sql = "SELECT * FROM purchase_lines";
 
         try
         {
@@ -67,11 +68,11 @@ class PurchaseLineDao extends Singleton implements \interfaces\Crud
 
     }
 
-    public function read ($id_purchase)
+    public function read ($id_purchase_line)
     {
-        $sql = "SELECT * FROM purchases where id_purchase = :id_purchase";
+        $sql = "SELECT * FROM purchase_lines where id_purchase_line = :id_purchase_line";
 
-        $parameters['id_purchase'] = $id_purchase;
+        $parameters['id_purchase_line'] = $id_purchase_line;
 
         try 
         {
@@ -94,11 +95,11 @@ class PurchaseLineDao extends Singleton implements \interfaces\Crud
 
     }
 
-    public function delete ($id_purchase)
+    public function delete ($id_purchase_line)
     {
-        $sql = "DELETE FROM purchases WHERE id_purchase = :id_purchase";
+        $sql = "DELETE FROM purchase_line WHERE id_purchase_line = :id_purchase_line";
 
-        $parameters['id_purchase'] = $id_purchase;
+        $parameters['id_purchase_line'] = $id_purchase_line;
 
         try 
         {
@@ -114,21 +115,31 @@ class PurchaseLineDao extends Singleton implements \interfaces\Crud
     
 
     /**
-    * Transforma el listado de compras en
-    * objetos de la clase Compra
+    * Transforma el listado de lineas de compra en
+    * objetos de la clase linea de compra
 	*
-	* @param  Array $gente Listado de compras a transformar
+	* @param  Array lineas de compra a transformar
 	*/
 	protected function mapear($value) {
 
 		$value = is_array($value) ? $value : [];
         
 		$resp = array_map(function($p){
-		    return new M_Purchase( $p['date'], $p['line_purchase'], $p['id_purchase'], $p['customer']);
+
+            $daoEventSquare = D_Event_Square::getInstance();
+            $daoTicket = D_Ticket::getInstance();
+
+            $event_square = $daoEventSquare->read($p['id_event_square']);
+            $ticket = $daoTicket->read($p['id_ticket']);
+
+
+		    return new M_Purchase_line( $p['price'], $p['quantity'], $event_square , $ticket,
+            $p['id_purchase'], $p['id_purchase_line'] );
+            
         }, $value);
             
-            /* devuelve un arreglo si tiene datos y sino devuelve nulo*/
+            /*  devuelve un arreglo si hay mas de 1 dato, sino un objeto*/
 
-            return count($resp) > 0 ? $resp : null;
+            return count($resp) > 1 ? $resp : $resp['0'];
      }
 }

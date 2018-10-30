@@ -43,7 +43,7 @@ class PurchaseLineController
 
 	public function readAll()
 	{
-		echo" SEGUIR HACIENDO ESTA PARTE" ;
+
 		$list = $this->dao->readAll();
 
 		include(VIEWS . 'viewpurchaselines.php');

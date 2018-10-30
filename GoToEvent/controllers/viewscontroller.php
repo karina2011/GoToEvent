@@ -81,5 +81,12 @@ class ViewsController
     {
         require(ROOT . VIEWS . 'createcalendar.php');
     }
+
+    public function login()
+    {
+        require(ROOT . VIEWS . 'login.php');
+    }
+
+
 }
 ?>

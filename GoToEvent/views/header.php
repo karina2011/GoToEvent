@@ -37,7 +37,7 @@
               <a class="nav-link" href="#">Services</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Contact</a>
+              <a class="nav-link" href="<?php echo BASE; ?>views/login">Iniciar Sesion</a>
             </li>
           </ul>
         </div>
