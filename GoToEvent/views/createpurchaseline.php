@@ -20,20 +20,16 @@ $list = $daoEventSqaure->readAll();
 		<br>
 		<form action="<?php echo BASE; ?>purchaseLine/create" method="post">
 			<div>
-				<label>precio: </label>
-				<input type="number" name="price">
-				<label>Cantidad:  </label>
-				<input type="number" name="quantity">
 				<label>Plaza de evento: </label>
 				<select class="custom-select" id="inputGroupSelect01" name="event_square">
 				<?php  foreach ($list as $key => $event_square) { 
-					 
 				?>
-				 <option value="<?php echo $event_square->getId(); ?>"><?php  echo $event_square->getSquareTypeDescription(); ?></option>
+				 <option value="<?php echo $event_square->getId(); ?>"><?php  echo $event_square->getSquareTypeDescription(); ?>
+				 $<?php echo $event_square->getPrice();?></option>
 				 <?php } ?>			 
 				</select>
-				<label>Email de cliente: seguir completando esta parte </label>
-				<input type="email" name="email">
+				<label>Cantidad:  </label>
+				<input type="number" name="quantity">
 			</div>
 		<br>
 			<div>

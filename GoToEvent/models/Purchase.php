@@ -6,14 +6,18 @@ class Purchase
 {
 
 	private $date;
-	private $id_purchase;
 	private $customer;
+	private $purchaselines = array();
+	private $price; // agregado por allan, ver si es necesario
+	private $id_purchase;
+	
 
 	function __construct($date='',$customer='',$id_purchase='')
 	{
 		$this->date = $date;
-		$this->id_purchase = $id_purchase;
 		$this->customer = $customer;
+		$this->id_purchase = $id_purchase;
+		
 	}
 	
 	public function getDate()
@@ -31,6 +35,13 @@ class Purchase
 		return $this->customer->getId();
 	}
 
+	public function getPrice (){
+		$total = 0;
+		foreach ($purchaselines as $key => $purchaseline) {
+			$total = $total + $purchaseline->getTotalPrice();
+		}
+		return $total;
+	}
 	public function setDate($date)
 	{
 		$this->date = $date;
@@ -44,6 +55,10 @@ class Purchase
 	public function setCustomer($customer)
 	{
 		$this->customer = $customer;
+	}
+
+	public function setPurchaseLine ($purchaseline){
+		$purchaselines[] = $purchaseline;
 	}
 
 }

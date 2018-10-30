@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-10-2018 a las 23:00:23
+-- Tiempo de generación: 30-10-2018 a las 05:02:48
 -- Versión del servidor: 10.1.35-MariaDB
 -- Versión de PHP: 7.2.9
 
@@ -199,7 +199,8 @@ CREATE TABLE `event_squares` (
 INSERT INTO `event_squares` (`id_event_square`, `price`, `available_quantity`, `remainder`, `id_square_type`) VALUES
 (3, 435435, 435, 345, 6),
 (4, 12000, 25887, 1, 6),
-(5, 12000, 25887, 1, 6);
+(5, 12000, 25887, 1, 6),
+(7, 230, 1200, 90, 1);
 
 -- --------------------------------------------------------
 
@@ -219,6 +220,29 @@ CREATE TABLE `purchases` (
 
 INSERT INTO `purchases` (`pdate`, `customer`, `id_purchase`) VALUES
 ('2018-10-01', 3, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `purchase_lines`
+--
+
+CREATE TABLE `purchase_lines` (
+  `price` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `id_event_square` int(11) NOT NULL,
+  `id_ticket` int(11) NOT NULL,
+  `id_purchase` int(11) NOT NULL,
+  `id_purchase_line` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `purchase_lines`
+--
+
+INSERT INTO `purchase_lines` (`price`, `quantity`, `id_event_square`, `id_ticket`, `id_purchase`, `id_purchase_line`) VALUES
+(435435, 444, 3, 10, 0, 12),
+(12000, 67, 5, 11, 0, 13);
 
 -- --------------------------------------------------------
 
@@ -250,6 +274,20 @@ CREATE TABLE `tickets` (
   `numberr` int(11) NOT NULL,
   `qr` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `tickets`
+--
+
+INSERT INTO `tickets` (`id_ticket`, `numberr`, `qr`) VALUES
+(4, 64404, '64404'),
+(5, 97526, '97526'),
+(6, 49814, '49814'),
+(7, 62365, '62365'),
+(8, 85383, '85383'),
+(9, 28454, '28454'),
+(10, 31464, '31464'),
+(11, 75029, '75029');
 
 -- --------------------------------------------------------
 
@@ -322,6 +360,13 @@ ALTER TABLE `purchases`
   ADD PRIMARY KEY (`id_purchase`);
 
 --
+-- Indices de la tabla `purchase_lines`
+--
+ALTER TABLE `purchase_lines`
+  ADD PRIMARY KEY (`id_purchase_line`),
+  ADD UNIQUE KEY `id_ticket` (`id_ticket`);
+
+--
 -- Indices de la tabla `square_types`
 --
 ALTER TABLE `square_types`
@@ -379,13 +424,19 @@ ALTER TABLE `event_places`
 -- AUTO_INCREMENT de la tabla `event_squares`
 --
 ALTER TABLE `event_squares`
-  MODIFY `id_event_square` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_event_square` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `purchases`
 --
 ALTER TABLE `purchases`
   MODIFY `id_purchase` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `purchase_lines`
+--
+ALTER TABLE `purchase_lines`
+  MODIFY `id_purchase_line` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `square_types`
@@ -397,7 +448,7 @@ ALTER TABLE `square_types`
 -- AUTO_INCREMENT de la tabla `tickets`
 --
 ALTER TABLE `tickets`
-  MODIFY `id_ticket` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_ticket` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `users`

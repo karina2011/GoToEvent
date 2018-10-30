@@ -21,6 +21,7 @@ class PurchaseController
 
 	public function create($date='',$userEmail='')
 	{	
+		//Pensar bien esto, primero fijarse si hay un usuario en session y extraer el usuario de ahi
 		$daoUser = D_User::getInstance();
 
 		$customer = $daoUser->read($userEmail);

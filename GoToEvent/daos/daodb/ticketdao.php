@@ -67,7 +67,7 @@ class TicketDao extends Singleton implements \interfaces\Crud
 
     public function read ($number)
     {
-        $sql = "SELECT * FROM artists where numberr = :numberr";
+        $sql = "SELECT * FROM tickets where numberr = :numberr";
 
         $parameters['numberr'] = $number;
 
@@ -87,6 +87,24 @@ class TicketDao extends Singleton implements \interfaces\Crud
             return false;
     }
 
+    public function getMaxId (){ // retorna el id maximo de los tickets
+        $sql = "SELECT max(id_ticket) FROM tickets";
+
+        try 
+        {
+            $this->connection = Connection::getInstance();
+            $resultSet = $this->connection->execute($sql); // execute para select // executeNonQuery para inset, update y delete
+        } 
+        catch(PDOException $e) 
+        {
+            echo $e;
+        }
+
+        if(!empty($resultSet))
+            return $resultSet['0']['0']; // retornamos el valor del select, que esta adentro de un arreglo dentro de otro 
+        else
+            return false;
+    }
     public function update($object)
     {
 

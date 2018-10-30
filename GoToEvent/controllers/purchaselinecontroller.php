@@ -4,14 +4,14 @@ namespace controllers;
 use models\Purchase;
 use models\PurchaseLine;
 use models\Ticket;
-use models\User; // cliente
-use daos\daodb\PurchaseDao as Dao;
-use daos\daodb\UserDao as D_User;
+use daos\daodb\PurchaseLineDao as Dao;
+use daos\daodb\EventSquareDao as D_Event_Square;
+use daos\daodb\TicketDAo as D_Ticket;
 
 /**
  * 
  */
-class PurchaseController
+class PurchaseLineController
 {
 	protected $dao;
 	
@@ -20,48 +20,41 @@ class PurchaseController
         $this->dao = Dao::getInstance(); // esto se instancia en el router
     }
 
-	public function create($date='',$userEmail='')
-	{	
-		$daoUser = D_User::getInstance();
+	public function create($event_square_id='', $quantity='', $id_purchase='')
+	{
+		// buscar el event_square en base al id q recibimos a la base de datos de eventos
+		$daoEventSquare = D_Event_Square::getInstance();
 
-		$customer = $daoUser->read($userEmail);
+		$event_square = $daoEventSquare->read($event_square_id);		
+		$price = $event_square->getPrice();
+	
+		$ticket = new Ticket (); 
+		$ticket->generateRandomTicket(); // generamos un ticket aleatorio
+		$daoTicket = D_Ticket::getInstance();
+		$daoTicket->create($ticket); // y agregamos el ticket a la base de datos
+		// crear el objeto linea de compra para enviarlo a la base de datos
+		$purchaseline = new Purchaseline($price,$quantity,$event_square, $ticket, $id_purchase);
 
-		if($customer){
+		$this->dao->create($purchaseline);
 
-			$name = $customer[0]->getName();
-		 	$last_name = $customer[0]->getLastName();
-		 	$email = $customer[0]->getEmail();
-		 	$dni = $customer[0]->getDni();
-		 	$type = $customer[0]->getType();
-		 	$id_user =  $customer[0]->getId();
+		require(ROOT . VIEWS . 'Home.php');
 
-		 	$customer = new User($name,$last_name,$email,$dni,$type,$id_user);
-
-			$purchase = new Purchase($date, $customer); 
-
-			$this->dao->create($purchase);
-
-			require(ROOT . VIEWS . 'Home.php');
-		} else {
-			echo "No exsiste el clinete";
-			// modificar el require segun lo que se valla a hacer si ingreso mal el email
-			require(ROOT . VIEWS . "Home.php");
-		}
 	}
 
 	public function readAll()
 	{
+		echo" SEGUIR HACIENDO ESTA PARTE" ;
 		$list = $this->dao->readAll();
 
-		include(VIEWS . 'viewpurchase.php');
+		include(VIEWS . 'viewpurchaselines.php');
 	}
 
 	public function delete($id)
 	{
 		$this->dao->delete($id);
 		$list = $this->dao->readAll(); // agregue esto como solucion temporal al problema de borrado // si no da problemas se deja
-		// despues de borrar un evento, al ya haber recorrido todos los eventos, la lista quedaba vacía, por eso hay q volver a leer
-		require(ROOT . VIEWS . 'viewpurchase.php');
+		// despues de borrar una linea de compra, al ya haber recorrido todos las lineas de compra, la lista quedaba vacía, por eso hay q volver a leer
+		require(ROOT . VIEWS . 'viewpurchaselines.php');
 	}
 	
 }

@@ -127,9 +127,9 @@ class EventSquareDao extends Singleton implements \interfaces\Crud
 		    return new M_Event_square( $p['price'], $p['available_quantity'], $p['remainder'],$square_type, $p['id_event_square']);
         }, $value);
             
-            /* devuelve un arreglo si tiene datos y sino devuelve nulo*/
+            /* devuelve un arreglo si hay mas de 1 dato, sino un objeto*/
 
-            return count($resp) > 0 ? $resp : null;
+            return count($resp) > 1 ? $resp : $resp['0']; // se modifico para q devuelva un solo objeto y no arreglo en caso de haber 1 solo // borrar comentario
      }
 
      protected function createSquareType($id_square_type)

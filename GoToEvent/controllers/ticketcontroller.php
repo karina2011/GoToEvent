@@ -3,16 +3,12 @@ namespace controllers;
 
 use models\Ticket as Ticket;
 use daos\daodb\TicketDao as Dao;
-//use assets\phpqrcode\bindings\tcpdf\QRcode; // descomentar para ver el otro error
-//use assets\phpqrcode\QRimage; // se uso para probar // eliminar
 
-include( ROOT . 'assets/phpqrcode/qrlib.php'); // para el codigo qr
-// https://evilnapsis.com/2018/02/26/crear-codigo-qr-con-php/
 
 /**
  * 
  */
-class TicketController
+class TicketController // fijarse si esta controladora es necesaria - Allan
 {
 	protected $dao;
 	
@@ -21,16 +17,12 @@ class TicketController
 		$this->dao = Dao::getInstance();
 	}
 
-	public function create($number)
+	public function create()
 	{
 		//SE CREA EL OBJETO PARA LUEGO GUARDARLO EN LA BASE DE DATOS
-		// creamos un ticket aleatorio 
-		$number = rand(1,100000); // numero aleatorio entre 1 y 100000
-		$qr = $number .  '.png'; // el codigo qr va a ser el numero de ticket
-		$content = $number;
-		//QRCode::png($content,$qr,QR_ECLEVEL_L,10,2);// primer parametro el contenido del qr, segundo parametro el nombre de la imagen q se va a generar // tira error con autoload y request , como si no existiera la funcion png dentro de la clase QRcode
-		
-		$ticket = new Ticket($number,$qr);
+
+		$ticket = new Ticket(); // crea un ticket vacio
+		$ticket->generateRandomTicket(); // creamos un ticket aleatorio
 
 		//GUARDA EL OBJETO EN LA BASE DE DATOS
 

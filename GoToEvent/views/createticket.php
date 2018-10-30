@@ -11,13 +11,9 @@
 	</div>
 		<br>
 		<form action="<?php echo BASE; ?>ticket/create" method="post">
-			<div>
-				<label>Numero: </label>
-				<input type="text" name="number">
-			</div>
 		<br>
 			<div>
-				<input type="submit" name="" value="enviar">
+				<input type="submit" name="" value="Generar Ticket">
 			</form>
 	</div>
 	<br><br>
