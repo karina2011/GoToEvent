@@ -30,6 +30,8 @@ $list = $daoEventSqaure->readAll();
 				</select>
 				<label>Cantidad:  </label>
 				<input type="number" name="quantity">
+				<label>ID de compra: (hardcodeado)  </label>
+				<input type="number" name="id_purchase">
 			</div>
 		<br>
 			<div>

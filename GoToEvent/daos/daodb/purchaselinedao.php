@@ -16,7 +16,7 @@ class PurchaseLineDao extends Singleton implements \interfaces\Crud
         $this->connection = null;
     }
 
-    public function create($purchaseline)
+    public function create($purchaseline, $id_purchase='')
     {
         // Guardo como string la consulta sql utilizando como values, marcadores de parámetros con nombre (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada
 
@@ -27,7 +27,7 @@ class PurchaseLineDao extends Singleton implements \interfaces\Crud
         $parameters['quantity'] = $purchaseline->getQuantity();
         $parameters['id_event_square'] = $purchaseline->getEventSquareId();
         $parameters['id_ticket'] = $purchaseline->getTicketId();
-        $parameters['id_purchase'] = $purchaseline->getPurchaseId();
+        $parameters['id_purchase'] = $id_purchase;
 
         try 
         {
@@ -134,7 +134,7 @@ class PurchaseLineDao extends Singleton implements \interfaces\Crud
 
 
 		    return new M_Purchase_line( $p['price'], $p['quantity'], $event_square , $ticket,
-            $p['id_purchase'], $p['id_purchase_line'] );
+            $p['id_purchase_line'] );
             
         }, $value);
             

@@ -10,16 +10,14 @@ class PurchaseLine
 	private $quantity;
 	private $event_square; 
 	private $ticket;
-	private $id_purchase; // sacar esto y modificar. Al guardar compra en la base de datos, se va a ir guardando cada linea de compra en la bd, y se pasa por parametro el id de compra
 	private $id_purchase_line;
 
-	function __construct($price='', $quantity='', $event_square='', $ticket='',$id_purchase='', $id_purchase_line='')
+	function __construct($price='', $quantity='', $event_square='', $ticket='', $id_purchase_line='')
 	{
 		$this->price = $price;
 		$this->quantity = $quantity;
 		$this->event_square = $event_square;
 		$this->ticket = $ticket;
-		$this->id_purchase = $id_purchase;
 		$this->id_purchase_line = $id_purchase_line;
 	}
 
@@ -51,11 +49,6 @@ class PurchaseLine
 	public function getTicketId()
 	{
 		return $this->ticket->getId();
-	}
-
-	public function getPurchaseId()
-	{
-		return $this->id_purchase;
 	}
 
 	public function getEventSquareDescription()

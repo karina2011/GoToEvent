@@ -33,10 +33,10 @@ class PurchaseLineController
 		$daoTicket = D_Ticket::getInstance();
 		$daoTicket->create($ticket); // y agregamos el ticket a la base de datos
 		// crear el objeto linea de compra para enviarlo a la base de datos
-		$purchaseline = new Purchaseline($price,$quantity,$event_square, $ticket, $id_purchase);
+		$purchaseline = new Purchaseline($price,$quantity,$event_square, $ticket);
 
-		$this->dao->create($purchaseline);
-
+		$this->dao->create($purchaseline,$id_purchase); // el id de compra es para relacionar cada linea con su respectiva compra en la BD 
+		// pero en el objeto no se van a relacionar con nada // al guardar compra en su bd, vamos guardando tambien sus lineas de compras en la bd de lineas de c.
 		require(ROOT . VIEWS . 'Home.php');
 
 	}
