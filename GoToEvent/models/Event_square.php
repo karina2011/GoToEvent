@@ -9,7 +9,7 @@ class Event_square
 	private $remainder;
 	private $id_event_square;
 	private $square_type;
-	private $id_calendario; // agruegar esto, modificar ....
+	private $calendario; // agregado // modificar todo en base a esto
 
 	function __construct($price='',$available_quantity='',$remainder='',$square_type='',$id_event_square='')
 	{

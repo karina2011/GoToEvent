@@ -122,7 +122,7 @@ class UserDao extends Singleton implements \interfaces\Crud
             
             /* devuelve un arreglo si tiene datos y sino devuelve nulo*/
 
-            return count($resp) > 0 ? $resp : null;
+            return count($resp) > 1 ? $resp : $resp['0'];
      }
 
 }

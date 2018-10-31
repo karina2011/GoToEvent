@@ -10,7 +10,7 @@ class PurchaseLine
 	private $quantity;
 	private $event_square; 
 	private $ticket;
-	private $id_purchase; // id q Purchase va a ir a buscar a la base de datos para saber q lineas de compra tiene
+	private $id_purchase; // sacar esto y modificar. Al guardar compra en la base de datos, se va a ir guardando cada linea de compra en la bd, y se pasa por parametro el id de compra
 	private $id_purchase_line;
 
 	function __construct($price='', $quantity='', $event_square='', $ticket='',$id_purchase='', $id_purchase_line='')

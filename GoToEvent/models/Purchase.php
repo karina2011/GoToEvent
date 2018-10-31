@@ -6,16 +6,18 @@ class Purchase
 {
 
 	private $date;
-	private $customer;
+	private $customer; // customer = user
 	private $purchaselines = array();
 	private $price; // agregado por allan, ver si es necesario
 	private $id_purchase;
 	
 
-	function __construct($date='',$customer='',$id_purchase='')
+	function __construct($date='',$customer='',$purchaselines='', $price='', $id_purchase='')
 	{
 		$this->date = $date;
 		$this->customer = $customer;
+		$this->purchaselines = $purchaselines;
+		$this->price = $price;
 		$this->id_purchase = $id_purchase;
 		
 	}
@@ -33,6 +35,11 @@ class Purchase
 	public function getCustomerId()
 	{
 		return $this->customer->getId();
+	}
+
+	public function getCustomerEmail()
+	{
+		return $this->customer->getEmail();
 	}
 
 	public function getPrice (){

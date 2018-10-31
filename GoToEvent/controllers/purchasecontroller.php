@@ -2,7 +2,7 @@
 namespace controllers;
 
 use models\Purchase;
-use models\Purchase_line; // ver si sacar esto
+use models\Purchase_line; // ver si es necesario
 use models\User; // cliente
 use daos\daodb\PurchaseDao as Dao;
 use daos\daodb\UserDao as D_User;
@@ -19,31 +19,28 @@ class PurchaseController
         $this->dao = Dao::getInstance(); // esto se instancia en el router
     }
 
-	public function create($date='',$userEmail='')
+	public function create($userEmail='', $purchaselines='')
 	{	
+		var_dump($purchaselines);
 		//Pensar bien esto, primero fijarse si hay un usuario en session y extraer el usuario de ahi
-		$daoUser = D_User::getInstance();
+
+		$daoUser = D_User::getInstance(); // una vez hecho lo de session con usuarios, se saca esto
 
 		$customer = $daoUser->read($userEmail);
 
 		if($customer){
+			$price = 0;
+			foreach ($purchaselines as $key => $purchaseline) {
+				$price += $purchaseline->getPrice() * $purchaseline->getQuantity();
+			}
 
-			$name = $customer[0]->getName();
-		 	$last_name = $customer[0]->getLastName();
-		 	$email = $customer[0]->getEmail();
-		 	$dni = $customer[0]->getDni();
-		 	$type = $customer[0]->getType();
-		 	$id_user =  $customer[0]->getId();
-
-		 	$customer = new User($name,$last_name,$email,$dni,$type,$id_user);
-
-			$purchase = new Purchase($date, $customer); 
+			$purchase = new Purchase(strftime( "%Y-%m-%d", time()), $customer, $purchaselines, $price); // pasamos la fecha actual como parametro
 
 			$this->dao->create($purchase);
 
 			require(ROOT . VIEWS . 'Home.php');
 		} else {
-			echo "No exsiste el clinete";
+			echo "No existe el cliente";
 			// modificar el require segun lo que se valla a hacer si ingreso mal el email
 			require(ROOT . VIEWS . "Home.php");
 		}
