@@ -25,7 +25,8 @@
 				 <option value="admin">Admin</option>
 				 <option value="cliente">Cliente</option>
 				</select>
-				
+				<label>Contraseña: </label>
+				<input type="password" name="pass">				
 			</div>
 		<br>
 			<div>

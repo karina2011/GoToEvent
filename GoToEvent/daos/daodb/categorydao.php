@@ -34,7 +34,7 @@ class CategoryDao extends Singleton implements \interfaces\Crud
         } catch(PDOException $e) 
 		{
             echo "<script> alert('No se pudo crear: la categoria ya existe');</script>";
-            
+            // https://sweetalert.js.org/ // for alerts with nice view 
             
             
 		}

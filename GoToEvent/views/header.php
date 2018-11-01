@@ -1,21 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
+<?php 
+use controllers\UserController as C_User;
+use models\User as M_User;
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Shop Homepage - Start Bootstrap Template</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="<?php echo BASE; ?>assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="<?php echo BASE; ?>assets/css/shop-homepage.css" rel="stylesheet">
-</head>
-<body>
+$userController = new C_User;
+$user = $userController->checkSession();
+?>
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container">
@@ -30,22 +19,39 @@
                 <span class="sr-only">(current)</span>
               </a>
             </li>
+          <?php if($user) { 
+                  if ($user->getType() == "admin") { ?>
             <li class="nav-item">
-              <a class="nav-link" href="#">About</a>
+              <a class="nav-link" href="#">Administrar</a>
+            </li>
+          <?php } }?>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Carrito <i class="fas fa-shopping-cart"></i></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Services</a>
-            </li>
-            <li class="nav-item">
+              <?php  if(!$user){ ?>
               <a class="nav-link" href="<?php echo BASE; ?>views/login">Iniciar Sesion</a>
+            <?php } else { ?>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                         <?= $user->getName() . ' ' . $user->getLastName() ?> 
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                         <a class="dropdown-item" href="#">
+                              <i class="mr-2" data-feather="user" width="20" height="20"></i>Mi perfil
+                         </a>
+                         <a class="dropdown-item" href="<?php echo BASE; ?>user/logout">
+                              <i class="mr-2" data-feather="log-out" width="20" height="20"></i> Cerrar Sesion
+                         </a>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            <?php } ?>
             </li>
           </ul>
         </div>
       </div>
     </nav>
-
-    <!-- Bootstrap core JavaScript -->
-    <script src="<?php echo BASE; ?>assets/vendor/jquery/jquery.min.js"></script>
-    <script src="<?php echo BASE; ?>assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>

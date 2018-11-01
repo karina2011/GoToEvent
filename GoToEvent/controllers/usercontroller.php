@@ -17,11 +17,11 @@ class UserController
 		$this->dao = Dao::getInstance();
 	}
 
-	public function create($name,$last_name,$email,$dni,$type)
+	public function create($name,$last_name,$email,$dni,$type,$pass)
 	{
 		//crea el objeto user para luego agregarlo a la base de datos
 
-		$user = new User($name,$last_name,$email,$dni,$type);
+		$user = new User($name,$last_name,$email,$dni,$type,$pass);
 
 		//llama al metodo del dao para guardarlo en la base de datos
 
@@ -64,5 +64,59 @@ class UserController
 		//INCLUYE LA VISTA PRINCIPAL
 		
 		require(ROOT . VIEWS . 'Home.php');
+	}
+
+	public function login ($email='', $pass='')
+	{
+		$user = $this->dao->read($email);
+
+		if($user)
+		{
+			if($user->getPass() == $pass)
+			{
+				$this->setSession($user);
+				require(ROOT . VIEWS . 'Home.php');
+
+			} else {
+				require(ROOT . VIEWS . 'login.php');
+				echo "<script> alert('Contraseña Incorrecta');</script>";
+			}
+		} else {
+			require(ROOT . VIEWS . 'login.php');
+			echo "<script> alert('Usuario Incorrecta');</script>";
+		}
+
+	}
+
+	public function checkSession ()
+	{
+		if (session_status() == PHP_SESSION_NONE)
+            session_start();
+
+        if(isset($_SESSION['user'])) {
+
+            $user = $this->dao->read($_SESSION['user']->getEmail());
+
+            if($user->getPass() == $_SESSION['user']->getPass())
+                return $user;
+
+          } else {
+            return false;
+          }
+    }
+
+	public function setSession($user)
+	{
+		$_SESSION['user'] = $user;
+	}
+
+	public function logout()
+	{
+		if (session_status() == PHP_SESSION_NONE)
+               session_start();
+
+          unset($_SESSION['user']);
+          require(ROOT . VIEWS . 'Home.php');
+
 	}
 }

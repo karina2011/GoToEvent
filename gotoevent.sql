@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 31-10-2018 a las 16:48:16
+-- Tiempo de generación: 01-11-2018 a las 16:57:01
 -- Versión del servidor: 10.1.36-MariaDB
 -- Versión de PHP: 7.2.10
 
@@ -304,6 +304,7 @@ CREATE TABLE `users` (
   `dni` varchar(8) NOT NULL,
   `email` varchar(50) NOT NULL,
   `type` varchar(10) NOT NULL,
+  `pass` varchar(50) NOT NULL,
   `id_user` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -311,9 +312,9 @@ CREATE TABLE `users` (
 -- Volcado de datos para la tabla `users`
 --
 
-INSERT INTO `users` (`name`, `last_name`, `dni`, `email`, `type`, `id_user`) VALUES
-('Federico', 'Elias', '40794525', 'fefe@fefe', 'admin', 3),
-('allan', 'maduro', '19040012', 'allan@allan', 'admin', 4);
+INSERT INTO `users` (`name`, `last_name`, `dni`, `email`, `type`, `pass`, `id_user`) VALUES
+('Allan', 'Maduro', '19040012', 'allanavatar@hotmail.com', 'admin', '1234', 6),
+('Fede', 'Elias', '40794525', 'fede@fede.com', 'cliente', 'admin', 7);
 
 --
 -- Índices para tablas volcadas
@@ -457,7 +458,7 @@ ALTER TABLE `tickets`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

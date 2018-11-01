@@ -21,13 +21,14 @@ class UserDao extends Singleton implements \interfaces\Crud
     {
     	// Guardo como string la consulta sql utilizando como values, marcadores de parámetros con nombre (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada
 
-		$sql = "INSERT INTO users (name, last_name, dni, email, type) VALUES (:name, :last_name, :dni, :email, :type)";
+		$sql = "INSERT INTO users (name, last_name, dni, email, type, pass) VALUES (:name, :last_name, :dni, :email, :type, :pass)";
 
         $parameters['name'] = $user->getName();
         $parameters['last_name'] = $user->getLastName();
         $parameters['dni'] = $user->getDni();
         $parameters['email'] = $user->getEmail();
         $parameters['type'] = $user->getType();
+        $parameters['pass'] = $user->getPass();
 
 
 		try {
@@ -117,7 +118,7 @@ class UserDao extends Singleton implements \interfaces\Crud
 		$value = is_array($value) ? $value : [];
         
 		$resp = array_map(function($p){
-		    return new M_User( $p['name'], $p['last_name'], $p['email'], $p['dni'],$p['type'], $p['id_user']);
+		    return new M_User( $p['name'], $p['last_name'], $p['email'], $p['dni'],$p['type'],$p['pass'], $p['id_user']);
         }, $value);
             
             /* devuelve un arreglo si tiene datos y sino devuelve nulo*/
