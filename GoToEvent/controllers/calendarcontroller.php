@@ -10,6 +10,8 @@ use daos\daodb\ArtistDao as D_Artist;
 use daos\daodb\EventPlaceDao as D_Event_place;
 use daos\daodb\EventDao as D_Event;
 use daos\daodb\CalendarArtistDao as D_Calendar_artist;
+
+$daoEvent = D_Event::getInstance();
 /**
  *
  */
@@ -129,8 +131,6 @@ class CalendarController
 
 	public function readEventById($id){
 
-		$daoEvent = D_Event::getInstance();
-
 		$event = $daoEvent->readById($id); // el readbyid devuelve el objeto adentro de un arreglo
 
 		$title = $event['0']->getTitle(); // en la posicion 0 del arreglo artist, está el objeto artista
@@ -142,6 +142,12 @@ class CalendarController
 		return $event;
 	}
 
+	public function readEventsByDate ($date){
+
+		$events = $daoEvent->readByDate($date);
+		
+		return $events;
+	}
 
 
 }

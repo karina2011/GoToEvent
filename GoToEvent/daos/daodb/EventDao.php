@@ -107,6 +107,28 @@ class EventDao extends Singleton implements \interfaces\Crud
             return false;
     }
 
+    public function readByDate ($date)
+    {
+        $sql = "SELECT * FROM events where date = :date";
+
+        $parameters['date'] = $date;
+
+        try 
+        {
+            $this->connection = Connection::getInstance();
+            $resultSet = $this->connection->execute($sql, $parameters);
+        } 
+        catch(PDOException $e) 
+        {
+            echo $e;
+        }
+
+        if(!empty($resultSet))
+            return $this->mapear($resultSet);
+        else
+            return false;
+    }
+
     public function update ($id)
     {
 

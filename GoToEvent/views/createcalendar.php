@@ -24,10 +24,19 @@ $listEvent = $daoEvent->readAll();
 	<h3>Crear Calendario</h3>
 	</div>
 		<br>
-		<form action="<?php echo BASE; ?>calendar/create" method="post">
+		<form id="create-calendar-form" method="post">
 			<div>
 				<label>Fecha: </label>
-				<input type="date" name="date">
+				<input id="create-calendar" type="date" name="date">
+
+				<label>Evento: </label>
+				<select  name='event'>
+					<?php foreach ($listEvent as $key => $event) { ?>
+						<option value="<?php echo $event->getId() ?>"><?php echo $event->getTitle(); ?></option>
+					<?php } ?>
+				</select>-->
+
+				<!--
 				<label require>Artistas: (HACER UNA COMPROBACION PARA Q NO INGRESE NINGUN ARTISTA, SINO SALTA ERROR) </label>
 				<div class="input-group mb-3">
 					<div class="input-group-prepend">
@@ -50,18 +59,21 @@ $listEvent = $daoEvent->readAll();
 					<?php foreach ($listEvent as $key => $event) { ?>
 						<option value="<?php echo $event->getId() ?>"><?php echo $event->getTitle(); ?></option>
 					<?php } ?>
-				</select>
+				</select>-->
 
 			</div>
 		<br>
 			<div>
-				<input type="submit" name="" value="enviar">
+				<button type="submit" name="">Enviar</button>
 			</form>
 	</div>
 	<br><br>
 	<div>
 		<a href="<?php echo BASE; ?>views/index">Volver al incio</a>
 	</div>
+
+	<script src="<?php echo BASE; ?>assets/vendor/jquery/jquery.min.js"></script>
+	<script src="<?php echo BASE; ?>assets/ajax.js"></script>
 </body>
 </html>
 
