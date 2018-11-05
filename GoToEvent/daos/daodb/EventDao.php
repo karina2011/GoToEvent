@@ -19,19 +19,19 @@ class EventDao extends Singleton implements \interfaces\Crud
     {
         // Guardo como string la consulta sql utilizando como values, marcadores de parámetros con nombre (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada
 
-		$sql = "INSERT INTO events (title,category) VALUES (:title, :category)";
+		$sql = "INSERT INTO events (title,id_category) VALUES (:title, :id_category)";
 
         $parameters['title'] = $event->getTitle();
-        $parameters['category'] = $event->getCategoryId();
+        $parameters['id_category'] = $event->getCategoryId();
 
-        try 
+        try
         {
-            
+
             $this->connection = Connection::getInstance();
 
             return $this->connection->ExecuteNonQuery($sql, $parameters);
 
-        } 
+        }
         catch(PDOException $e)
         {
             echo $e;
@@ -49,8 +49,8 @@ class EventDao extends Singleton implements \interfaces\Crud
             $this->connection = Connection::getInstance();
             $resultSet = $this->connection->execute($sql);
 
-        } 
-        catch(PDOException $e) 
+        }
+        catch(PDOException $e)
         {
 
             echo $e;
@@ -59,7 +59,7 @@ class EventDao extends Singleton implements \interfaces\Crud
         if(!empty($resultSet))
             return $this->mapear($resultSet);
         else
-            return false;       
+            return false;
 
     }
 
@@ -69,12 +69,12 @@ class EventDao extends Singleton implements \interfaces\Crud
 
         $parameters['title'] = $title;
 
-        try 
+        try
         {
             $this->connection = Connection::getInstance();
             $resultSet = $this->connection->execute($sql, $parameters);
-        } 
-        catch(PDOException $e) 
+        }
+        catch(PDOException $e)
         {
             echo $e;
         }
@@ -91,12 +91,12 @@ class EventDao extends Singleton implements \interfaces\Crud
 
         $parameters['id_event'] = $id;
 
-        try 
+        try
         {
             $this->connection = Connection::getInstance();
             $resultSet = $this->connection->execute($sql, $parameters);
-        } 
-        catch(PDOException $e) 
+        }
+        catch(PDOException $e)
         {
             echo $e;
         }
@@ -113,12 +113,12 @@ class EventDao extends Singleton implements \interfaces\Crud
 
         $parameters['date'] = $date;
 
-        try 
+        try
         {
             $this->connection = Connection::getInstance();
             $resultSet = $this->connection->execute($sql, $parameters);
-        } 
-        catch(PDOException $e) 
+        }
+        catch(PDOException $e)
         {
             echo $e;
         }
@@ -140,18 +140,18 @@ class EventDao extends Singleton implements \interfaces\Crud
 
         $parameters['title'] = $title;
 
-        try 
+        try
         {
             $this->connection = Connection::getInstance();
             return $this->connection->ExecuteNonQuery($sql, $parameters);
-        } 
-        catch(PDOException $e) 
+        }
+        catch(PDOException $e)
         {
             echo $e;
         }
    }
 
-    
+
 
     /**
     * Transforma el listado de usuario en
@@ -162,12 +162,12 @@ class EventDao extends Singleton implements \interfaces\Crud
 	protected function mapear($value) {
 
 		$value = is_array($value) ? $value : [];
-        
+
 		$resp = array_map(function($p){
-            $category = $this->createCategory($p['category']);
+            $category = $this->createCategory($p['id_category']);
 		    return new M_Event( $p['title'], $category , $p['id_event']);
         }, $value);
-            
+
             /* devuelve un arreglo si tiene datos y sino devuelve nulo*/
 
             return count($resp) > 0 ? $resp : null;

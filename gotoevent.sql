@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-11-2018 a las 16:57:01
+-- Tiempo de generación: 05-11-2018 a las 19:46:21
 -- Versión del servidor: 10.1.36-MariaDB
--- Versión de PHP: 7.2.10
+-- Versión de PHP: 7.2.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -30,9 +30,9 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `artists` (
   `id_artist` int(11) NOT NULL,
-  `name` varchar(50) NOT NULL,
-  `last_name` varchar(50) NOT NULL,
-  `dni` varchar(8) NOT NULL
+  `name` varchar(50) DEFAULT NULL,
+  `last_name` varchar(50) DEFAULT NULL,
+  `dni` varchar(8) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -40,9 +40,8 @@ CREATE TABLE `artists` (
 --
 
 INSERT INTO `artists` (`id_artist`, `name`, `last_name`, `dni`) VALUES
-(1, 'Ricardo', 'Arjona', '44444444'),
-(2, 'Pablito', 'Lescano', '11111111'),
-(3, 'Enrique', 'Iglesias', '45871268');
+(1, 'Federico', 'Elias', '23456789'),
+(2, 'Ricardo', 'Arjona', '56426894');
 
 -- --------------------------------------------------------
 
@@ -52,21 +51,10 @@ INSERT INTO `artists` (`id_artist`, `name`, `last_name`, `dni`) VALUES
 
 CREATE TABLE `calendars` (
   `id_calendar` int(11) NOT NULL,
-  `date` date NOT NULL,
-  `id_event` int(11) NOT NULL,
-  `id_event_place` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `calendars`
---
-
-INSERT INTO `calendars` (`id_calendar`, `date`, `id_event`, `id_event_place`) VALUES
-(45, '2018-10-03', 5, 3),
-(44, '2018-10-03', 1, 3),
-(43, '2018-10-03', 1, 3),
-(42, '2018-10-03', 1, 3),
-(41, '2018-10-03', 1, 3);
+  `date` datetime DEFAULT NULL,
+  `id_event` int(11) DEFAULT NULL,
+  `id_event_place` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -77,46 +65,7 @@ INSERT INTO `calendars` (`id_calendar`, `date`, `id_event`, `id_event_place`) VA
 CREATE TABLE `calendars_x_artists` (
   `id_artist` int(11) NOT NULL,
   `id_calendar` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `calendars_x_artists`
---
-
-INSERT INTO `calendars_x_artists` (`id_artist`, `id_calendar`) VALUES
-(1, 18),
-(2, 18),
-(1, 30),
-(2, 30),
-(1, 31),
-(2, 31),
-(1, 32),
-(2, 32),
-(1, 33),
-(2, 33),
-(1, 34),
-(2, 34),
-(2, 35),
-(1, 36),
-(1, 36),
-(3, 37),
-(3, 38),
-(1, 39),
-(1, 39),
-(1, 40),
-(1, 40),
-(1, 41),
-(1, 41),
-(1, 41),
-(2, 42),
-(2, 42),
-(2, 43),
-(2, 43),
-(2, 44),
-(3, 44),
-(1, 45),
-(2, 45),
-(3, 45);
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -126,7 +75,7 @@ INSERT INTO `calendars_x_artists` (`id_artist`, `id_calendar`) VALUES
 
 CREATE TABLE `categories` (
   `id_category` int(11) NOT NULL,
-  `description` varchar(75) NOT NULL
+  `description` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -134,9 +83,11 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id_category`, `description`) VALUES
-(1, 'musical'),
-(2, 'boxeo'),
-(3, 'partido de futbol');
+(2, 'Boxeo'),
+(5, 'Futbol'),
+(4, 'Kickboxing'),
+(1, 'Musical'),
+(3, 'Teatro');
 
 -- --------------------------------------------------------
 
@@ -146,18 +97,21 @@ INSERT INTO `categories` (`id_category`, `description`) VALUES
 
 CREATE TABLE `events` (
   `id_event` int(11) NOT NULL,
-  `title` varchar(100) NOT NULL,
-  `category` int(11) NOT NULL
+  `title` varchar(50) DEFAULT NULL,
+  `id_category` int(11) DEFAULT NULL,
+  `img` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `events`
 --
 
-INSERT INTO `events` (`id_event`, `title`, `category`) VALUES
-(1, 'Gran musical', 1),
-(2, 'Pelea del siglo', 2),
-(5, 'Super clasico', 3);
+INSERT INTO `events` (`id_event`, `title`, `id_category`, `img`) VALUES
+(1, 'Gran evento musical', 1, NULL),
+(2, 'Pelea por el titulo peso pesados', 2, NULL),
+(3, 'Canta arjona', 1, NULL),
+(4, 'Obra de teatro infantil', 3, NULL),
+(5, 'A ver este', 2, NULL);
 
 -- --------------------------------------------------------
 
@@ -167,16 +121,19 @@ INSERT INTO `events` (`id_event`, `title`, `category`) VALUES
 
 CREATE TABLE `event_places` (
   `id_event_place` int(11) NOT NULL,
-  `description` varchar(75) NOT NULL,
-  `capacity` int(11) NOT NULL
+  `capacity` bigint(20) DEFAULT NULL,
+  `description` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `event_places`
 --
 
-INSERT INTO `event_places` (`id_event_place`, `description`, `capacity`) VALUES
-(3, 'monumental', 65000);
+INSERT INTO `event_places` (`id_event_place`, `capacity`, `description`) VALUES
+(1, 55000, 'Monumental'),
+(2, 3000, 'Teatro comun'),
+(3, 38000, 'Gran Rex'),
+(4, 45000, 'Libertadores de America');
 
 -- --------------------------------------------------------
 
@@ -186,21 +143,21 @@ INSERT INTO `event_places` (`id_event_place`, `description`, `capacity`) VALUES
 
 CREATE TABLE `event_squares` (
   `id_event_square` int(11) NOT NULL,
-  `price` float NOT NULL,
-  `available_quantity` int(11) NOT NULL,
-  `remainder` int(11) NOT NULL,
-  `id_square_type` int(11) NOT NULL
+  `id_square_type` int(11) DEFAULT NULL,
+  `price` float DEFAULT NULL,
+  `available_quantity` int(11) DEFAULT NULL,
+  `remainder` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `event_squares`
 --
 
-INSERT INTO `event_squares` (`id_event_square`, `price`, `available_quantity`, `remainder`, `id_square_type`) VALUES
-(3, 435435, 435, 345, 6),
-(4, 12000, 25887, 1, 6),
-(5, 12000, 25887, 1, 6),
-(7, 230, 1200, 90, 1);
+INSERT INTO `event_squares` (`id_event_square`, `id_square_type`, `price`, `available_quantity`, `remainder`) VALUES
+(1, 1, 500, 1000, 1000),
+(2, 2, 1000, 400, 400),
+(3, 3, 330, 3000, 3000),
+(4, 4, 4533, 43567, 43567);
 
 -- --------------------------------------------------------
 
@@ -209,20 +166,10 @@ INSERT INTO `event_squares` (`id_event_square`, `price`, `available_quantity`, `
 --
 
 CREATE TABLE `purchases` (
-  `date` date NOT NULL,
-  `customer_email` varchar(20) NOT NULL,
-  `price` float NOT NULL,
-  `id_purchase` int(11) NOT NULL
+  `id_purchase` int(11) NOT NULL,
+  `pdate` datetime DEFAULT NULL,
+  `customer` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `purchases`
---
-
-INSERT INTO `purchases` (`date`, `customer_email`, `price`, `id_purchase`) VALUES
-('0000-00-00', 'fefe@fefe', 0, 1),
-('2018-10-31', 'allan@allan', 0, 2),
-('2018-10-31', 'allan@allan', 0, 3);
 
 -- --------------------------------------------------------
 
@@ -231,21 +178,13 @@ INSERT INTO `purchases` (`date`, `customer_email`, `price`, `id_purchase`) VALUE
 --
 
 CREATE TABLE `purchase_lines` (
-  `price` int(11) NOT NULL,
-  `quantity` int(11) NOT NULL,
-  `id_event_square` int(11) NOT NULL,
-  `id_ticket` int(11) NOT NULL,
-  `id_purchase` int(11) NOT NULL,
-  `id_purchase_line` int(10) UNSIGNED NOT NULL
+  `id_purchase_line` int(11) NOT NULL,
+  `price` float DEFAULT NULL,
+  `quantity` int(11) DEFAULT NULL,
+  `id_event_square` int(11) DEFAULT NULL,
+  `id_ticket` int(11) DEFAULT NULL,
+  `id_purchase` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `purchase_lines`
---
-
-INSERT INTO `purchase_lines` (`price`, `quantity`, `id_event_square`, `id_ticket`, `id_purchase`, `id_purchase_line`) VALUES
-(435435, 444, 3, 10, 0, 12),
-(12000, 67, 5, 11, 0, 13);
 
 -- --------------------------------------------------------
 
@@ -255,7 +194,7 @@ INSERT INTO `purchase_lines` (`price`, `quantity`, `id_event_square`, `id_ticket
 
 CREATE TABLE `square_types` (
   `id_square_type` int(11) NOT NULL,
-  `description` varchar(75) NOT NULL
+  `description` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -263,8 +202,10 @@ CREATE TABLE `square_types` (
 --
 
 INSERT INTO `square_types` (`id_square_type`, `description`) VALUES
+(3, 'Campo'),
 (1, 'Platea'),
-(6, 'Campo');
+(4, 'Popular'),
+(2, 'Vip');
 
 -- --------------------------------------------------------
 
@@ -274,23 +215,16 @@ INSERT INTO `square_types` (`id_square_type`, `description`) VALUES
 
 CREATE TABLE `tickets` (
   `id_ticket` int(11) NOT NULL,
-  `numberr` int(11) NOT NULL,
-  `qr` varchar(15) NOT NULL
+  `number` int(11) DEFAULT NULL,
+  `qr` varchar(15) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `tickets`
 --
 
-INSERT INTO `tickets` (`id_ticket`, `numberr`, `qr`) VALUES
-(4, 64404, '64404'),
-(5, 97526, '97526'),
-(6, 49814, '49814'),
-(7, 62365, '62365'),
-(8, 85383, '85383'),
-(9, 28454, '28454'),
-(10, 31464, '31464'),
-(11, 75029, '75029');
+INSERT INTO `tickets` (`id_ticket`, `number`, `qr`) VALUES
+(1, 78909, '78909');
 
 -- --------------------------------------------------------
 
@@ -299,22 +233,22 @@ INSERT INTO `tickets` (`id_ticket`, `numberr`, `qr`) VALUES
 --
 
 CREATE TABLE `users` (
-  `name` varchar(50) NOT NULL,
-  `last_name` varchar(50) NOT NULL,
-  `dni` varchar(8) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `type` varchar(10) NOT NULL,
-  `pass` varchar(50) NOT NULL,
-  `id_user` int(11) NOT NULL
+  `id_user` int(11) NOT NULL,
+  `name` varchar(30) DEFAULT NULL,
+  `last_name` varchar(30) DEFAULT NULL,
+  `dni` varchar(8) DEFAULT NULL,
+  `email` varchar(50) DEFAULT NULL,
+  `type` varchar(10) DEFAULT NULL,
+  `pass` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `users`
 --
 
-INSERT INTO `users` (`name`, `last_name`, `dni`, `email`, `type`, `pass`, `id_user`) VALUES
-('Allan', 'Maduro', '19040012', 'allanavatar@hotmail.com', 'admin', '1234', 6),
-('Fede', 'Elias', '40794525', 'fede@fede.com', 'cliente', 'admin', 7);
+INSERT INTO `users` (`id_user`, `name`, `last_name`, `dni`, `email`, `type`, `pass`) VALUES
+(1, 'Leonardo', 'Izurieta', '45187639', 'leo@leo', 'cliente', 'leo'),
+(2, 'Federico', 'Elias', '40794525', 'fede@fede', 'admin', 'admin');
 
 --
 -- Índices para tablas volcadas
@@ -324,71 +258,93 @@ INSERT INTO `users` (`name`, `last_name`, `dni`, `email`, `type`, `pass`, `id_us
 -- Indices de la tabla `artists`
 --
 ALTER TABLE `artists`
-  ADD PRIMARY KEY (`id_artist`);
+  ADD PRIMARY KEY (`id_artist`),
+  ADD UNIQUE KEY `unq_name_artist` (`name`),
+  ADD UNIQUE KEY `unq_las_name_artist` (`last_name`),
+  ADD UNIQUE KEY `unq_dni_artist` (`dni`);
 
 --
 -- Indices de la tabla `calendars`
 --
 ALTER TABLE `calendars`
-  ADD PRIMARY KEY (`id_calendar`);
+  ADD PRIMARY KEY (`id_calendar`),
+  ADD KEY `fk_id_event` (`id_event`),
+  ADD KEY `fk_id_event_place` (`id_event_place`);
+
+--
+-- Indices de la tabla `calendars_x_artists`
+--
+ALTER TABLE `calendars_x_artists`
+  ADD KEY `fk_id_artist` (`id_artist`),
+  ADD KEY `fk_id_calendar` (`id_calendar`);
 
 --
 -- Indices de la tabla `categories`
 --
 ALTER TABLE `categories`
-  ADD PRIMARY KEY (`id_category`);
+  ADD PRIMARY KEY (`id_category`),
+  ADD UNIQUE KEY `unq_description_category` (`description`);
 
 --
 -- Indices de la tabla `events`
 --
 ALTER TABLE `events`
-  ADD PRIMARY KEY (`id_event`);
+  ADD PRIMARY KEY (`id_event`),
+  ADD UNIQUE KEY `unq_title` (`title`),
+  ADD KEY `fk_id_category` (`id_category`);
 
 --
 -- Indices de la tabla `event_places`
 --
 ALTER TABLE `event_places`
   ADD PRIMARY KEY (`id_event_place`),
-  ADD UNIQUE KEY `description` (`description`);
+  ADD UNIQUE KEY `unq_description_event_place` (`description`);
 
 --
 -- Indices de la tabla `event_squares`
 --
 ALTER TABLE `event_squares`
-  ADD PRIMARY KEY (`id_event_square`);
+  ADD PRIMARY KEY (`id_event_square`),
+  ADD KEY `fk_square_type` (`id_square_type`);
 
 --
 -- Indices de la tabla `purchases`
 --
 ALTER TABLE `purchases`
-  ADD PRIMARY KEY (`id_purchase`);
+  ADD PRIMARY KEY (`id_purchase`),
+  ADD KEY `fk_customer` (`customer`);
 
 --
 -- Indices de la tabla `purchase_lines`
 --
 ALTER TABLE `purchase_lines`
   ADD PRIMARY KEY (`id_purchase_line`),
-  ADD UNIQUE KEY `id_ticket` (`id_ticket`);
+  ADD KEY `fk_event_square` (`id_event_square`),
+  ADD KEY `fk_ticket` (`id_ticket`),
+  ADD KEY `fk_purchase` (`id_purchase`);
 
 --
 -- Indices de la tabla `square_types`
 --
 ALTER TABLE `square_types`
-  ADD PRIMARY KEY (`id_square_type`);
+  ADD PRIMARY KEY (`id_square_type`),
+  ADD UNIQUE KEY `unq_description_square_type` (`description`);
 
 --
 -- Indices de la tabla `tickets`
 --
 ALTER TABLE `tickets`
-  ADD PRIMARY KEY (`id_ticket`);
+  ADD PRIMARY KEY (`id_ticket`),
+  ADD UNIQUE KEY `unq_number` (`number`),
+  ADD UNIQUE KEY `unq_qr` (`qr`);
 
 --
 -- Indices de la tabla `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id_user`),
-  ADD UNIQUE KEY `email` (`email`),
-  ADD UNIQUE KEY `dni` (`dni`);
+  ADD UNIQUE KEY `unq_dni` (`dni`),
+  ADD UNIQUE KEY `unq_email` (`email`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -398,19 +354,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `artists`
 --
 ALTER TABLE `artists`
-  MODIFY `id_artist` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_artist` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `calendars`
 --
 ALTER TABLE `calendars`
-  MODIFY `id_calendar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id_calendar` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id_category` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_category` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `events`
@@ -422,43 +378,87 @@ ALTER TABLE `events`
 -- AUTO_INCREMENT de la tabla `event_places`
 --
 ALTER TABLE `event_places`
-  MODIFY `id_event_place` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_event_place` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `event_squares`
 --
 ALTER TABLE `event_squares`
-  MODIFY `id_event_square` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_event_square` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `purchases`
 --
 ALTER TABLE `purchases`
-  MODIFY `id_purchase` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_purchase` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `purchase_lines`
 --
 ALTER TABLE `purchase_lines`
-  MODIFY `id_purchase_line` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_purchase_line` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `square_types`
 --
 ALTER TABLE `square_types`
-  MODIFY `id_square_type` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_square_type` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `tickets`
 --
 ALTER TABLE `tickets`
-  MODIFY `id_ticket` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_ticket` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `calendars`
+--
+ALTER TABLE `calendars`
+  ADD CONSTRAINT `fk_id_event` FOREIGN KEY (`id_event`) REFERENCES `events` (`id_event`),
+  ADD CONSTRAINT `fk_id_event_place` FOREIGN KEY (`id_event_place`) REFERENCES `event_places` (`id_event_place`);
+
+--
+-- Filtros para la tabla `calendars_x_artists`
+--
+ALTER TABLE `calendars_x_artists`
+  ADD CONSTRAINT `fk_id_artist` FOREIGN KEY (`id_artist`) REFERENCES `artists` (`id_artist`),
+  ADD CONSTRAINT `fk_id_calendar` FOREIGN KEY (`id_calendar`) REFERENCES `calendars` (`id_calendar`);
+
+--
+-- Filtros para la tabla `events`
+--
+ALTER TABLE `events`
+  ADD CONSTRAINT `fk_id_category` FOREIGN KEY (`id_category`) REFERENCES `categories` (`id_category`);
+
+--
+-- Filtros para la tabla `event_squares`
+--
+ALTER TABLE `event_squares`
+  ADD CONSTRAINT `fk_square_type` FOREIGN KEY (`id_square_type`) REFERENCES `square_types` (`id_square_type`);
+
+--
+-- Filtros para la tabla `purchases`
+--
+ALTER TABLE `purchases`
+  ADD CONSTRAINT `fk_customer` FOREIGN KEY (`customer`) REFERENCES `users` (`id_user`);
+
+--
+-- Filtros para la tabla `purchase_lines`
+--
+ALTER TABLE `purchase_lines`
+  ADD CONSTRAINT `fk_event_square` FOREIGN KEY (`id_event_square`) REFERENCES `event_squares` (`id_event_square`),
+  ADD CONSTRAINT `fk_purchase` FOREIGN KEY (`id_purchase`) REFERENCES `purchases` (`id_purchase`),
+  ADD CONSTRAINT `fk_ticket` FOREIGN KEY (`id_ticket`) REFERENCES `tickets` (`id_ticket`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
