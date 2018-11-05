@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace controllers;
 //use daos\daoList\EventDao as Dao;
 use models\Event;
@@ -6,19 +6,19 @@ use models\Category;
 use daos\daodb\EventDao as Dao;
 use daos\daodb\CategoryDao as D_Category;
 /**
- * 
+ *
  */
 class EventController
 {
 	protected $dao;
-	
+
 	public function __construct()
     {
         $this->dao = Dao::getInstance(); // esto se instancia en el router
     }
 
 	public function create($title='',$id_category='')
-	{	
+	{
 		$daocategory = D_Category::getInstance();
 
 		$category = $daocategory->readById($id_category);
@@ -44,7 +44,7 @@ class EventController
 		// despues de borrar un evento, al ya haber recorrido todos los eventos, la lista quedaba vacía, por eso hay q volver a leer
 		require(ROOT . VIEWS . 'ViewEvents.php');
 	}
-	
+
 }
 
 ?>
