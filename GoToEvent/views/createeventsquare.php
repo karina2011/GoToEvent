@@ -1,4 +1,4 @@
-<?php 
+<?php
 use daos\daodb\SquareTypeDao as DaoSquareType;
 
 $daoSquareType = DaoSquareType::getInstance();
@@ -11,11 +11,16 @@ $list = $daoSquareType->readAll();
 <html>
 <head>
 	<title></title>
+	 <link href="<?php echo BASE; ?>assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="<?php echo BASE; ?>assets/css/shop-homepage.css" rel="stylesheet">
+
 </head>
 <body>
-	
+
 	<?php include_once (VIEWS."header.php");?>
-	
+
 	<h3>Crear plaza de evento</h3>
 	</div>
 		<br>
@@ -31,11 +36,11 @@ $list = $daoSquareType->readAll();
 				<select class="custom-select" id="inputGroupSelect01" name="square_type">
 				<?php  foreach ($list as $key => $square_type) { ?>
 				 <option value="<?php echo $square_type->getId(); ?>"><?php  echo $square_type->getDescription(); ?></option>
-				 <?php } ?>			 
+				 <?php } ?>
 				</select>
-				
-				
-				
+
+
+
 			</div>
 		<br>
 			<div>
@@ -46,7 +51,8 @@ $list = $daoSquareType->readAll();
 	<div>
 		<a href="<?php echo BASE; ?>views/index">Volver al incio</a>
 	</div>
-	
 
+	<script src="<?php echo BASE; ?>assets/vendor/jquery/jquery.min.js"></script>
+	<script src="<?php echo BASE; ?>assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

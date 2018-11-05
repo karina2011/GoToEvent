@@ -15,7 +15,12 @@ $listEvent = $daoEvent->readAll();
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<title>GoToEvent</title>
+	 <link href="<?php echo BASE; ?>assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="<?php echo BASE; ?>assets/css/shop-homepage.css" rel="stylesheet">
+
 </head>
 <body>
 

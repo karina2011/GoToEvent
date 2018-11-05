@@ -1,10 +1,10 @@
-<?php 
+<?php
 namespace controllers;
 
 use models\Category;
 use daos\daodb\CategoryDao as Dao;
 /**
- * 
+ *
  */
 class CategoryController
 {
@@ -27,7 +27,9 @@ class CategoryController
 	{
 		$lista = $this->dao->readAll();
 
-		//falta incluir la vista que muestre todos los eventos
+		//falta incluir la vista que muestre todos las categorias
+
+		
 	}
 
 	public function read($description)

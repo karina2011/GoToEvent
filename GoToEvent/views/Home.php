@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Shop Homepage - Start Bootstrap Template</title>
+    <title>GoToEvent</title>
 
     <!-- Bootstrap core CSS -->
     <link href="<?php echo BASE; ?>assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -56,7 +56,7 @@
           <h2 class="my-4"> Categorias</h2><!--Solo puede haber un "h1"-->
           <div class="list-group">
             <a href="<?php echo BASE; ?>Views/viewCreateCategory" class="list-group-item">Crear Categoria</a>
-            <a href="<?php echo BASE; ?>Category/readAll" class="list-group-item">Ver Categoria</a>
+            <a href="<?php echo BASE; ?>Category/readAll" class="list-group-item">Ver Categoria(nofunciona)</a>
             <a href="<?php echo BASE; ?>Views/viewDeleteCategory" class="list-group-item">Borrar Categoria</a>
           </div>
 
@@ -111,7 +111,7 @@
             <a href="<?php echo BASE; ?>Calendar/readAll" class="list-group-item">Ver calendario</a>
           </div>
 
-          
+
 
         </div>
         <!-- /.col-lg-3 -->

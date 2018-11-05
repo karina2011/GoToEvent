@@ -21,8 +21,8 @@
   </head>
 
   <body>
-  
-  <?php include_once (VIEWS."header.php");?>
+
+  <?php include_once (VIEWS."header.php");  ?>
 
     <!-- Page Content -->
     <div class="container">
@@ -33,7 +33,7 @@
       </h1>
 
       <!-- Project One -->
-      <?php if (!empty($list)){ foreach ($list as $key => $user){ ?>
+      <?php if (!empty($list)){  foreach ($list as $key => $user){  ?>
       <div class="row">
         <div class="col-md-7">
           <a href="#">
