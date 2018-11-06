@@ -12,46 +12,6 @@ class ViewsController
         require(ROOT . VIEWS . 'Home.php');
     }
 
-    public function viewCreateArtist()
-    {
-        require(ROOT . VIEWS . 'CreateArtist.php');
-    }
-
-    public function viewDeleteArtist()
-    {
-        require(ROOT . VIEWS . 'DeleteArtist.php');
-    }
-
-    public function viewCreateCategory()
-	{
-		require(ROOT . VIEWS . 'createcategory.php');
-	}
-
-	public function viewDeleteCategory()
-	{
-        echo "SIN HACER";
-	}
-
-	public function viewCreateEvent()
-	{
-		require(ROOT . VIEWS . 'CreatEvent.php');
-	}
-
-	public function viewDeleteEvent()
-	{
-		require(ROOT . VIEWS . 'DeleteEvent.php');
-    }
-    
-    public function viewCreateUser()
-	{
-		require(ROOT . VIEWS . 'createuser.php');
-	}
-
-    public function viewCreateTicket()
-    {
-        require(ROOT . VIEWS . 'createticket.php');
-    }
-
     public function viewCreateSquareType()
     {
         require(ROOT . VIEWS . 'createsquaretype.php');
@@ -87,6 +47,29 @@ class ViewsController
         require(ROOT . VIEWS . 'login.php');
     }
 
+    public function viewAdmin(){
+        require(ROOT . VIEWS . 'admin.php');
+    }
+
+    public function viewArtistsAdmin(){
+        require(ROOT . VIEWS . 'artistsadmin.php');
+    }
+
+    public function viewEventsAdmin(){
+        require(ROOT . VIEWS . 'eventsadmin.php');
+    }
+
+    public function viewCategoriesAdmin(){
+        require(ROOT . VIEWS . 'categoriesAdmin.php');
+    }
+
+    public function viewUsersAdmin(){
+        require(ROOT . VIEWS . 'usersAdmin.php');
+    }
+
+    public function viewTicketsAdmin(){
+        require(ROOT . VIEWS . 'ticketsAdmin.php');
+    }
 
 }
 ?>

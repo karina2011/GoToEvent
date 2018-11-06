@@ -26,7 +26,7 @@ class Event
 		return $this->category->getId();
 	}
 
-	public function getDescriptionCategory()
+	public function getCategoryDescription()
 	{
 		return $this->category->getDescription();
 	}

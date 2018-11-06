@@ -22,7 +22,7 @@ $user = $userController->checkSession();
           <?php if($user) { 
                   if ($user->getType() == "admin") { ?>
             <li class="nav-item">
-              <a class="nav-link" href="#">Administrar</a>
+              <a class="nav-link" href="<?php echo BASE; ?>views/viewadmin">Administrar</a>
             </li>
           <?php } }?>
             <li class="nav-item">

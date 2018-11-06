@@ -15,6 +15,7 @@
 
     <!-- Custom styles for this template -->
     <link href="<?php echo BASE; ?>assets/css/shop-homepage.css" rel="stylesheet">
+    
     <!-- FontAwesome-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
 
@@ -39,40 +40,7 @@
             <a href="#" class="list-group-item">Category 3</a>
           </div>-->
           <!-- Opciones artistas y eventos están aca de prueba, despues se debe pasar a su respectiva vista-->
-          <h2 class="my-4">Artistas</h2><!--Solo puede haber un "h1"-->
-          <div class="list-group">
-            <a href="<?php echo BASE; ?>Views/viewCreateArtist" class="list-group-item">Crear Artista</a>
-            <a href="<?php echo BASE; ?>Artist/readAll" class="list-group-item">Ver Artista</a>
-            <a href="<?php echo BASE; ?>Views/viewDeleteArtist" class="list-group-item">Borrar Artista</a>
-          </div>
 
-          <h2 class="my-4"> Eventos</h2><!--Solo puede haber un "h1"-->
-          <div class="list-group">
-            <a href="<?php echo BASE; ?>Views/viewCreateEvent" class="list-group-item">Crear Evento</a>
-            <a href="<?php echo BASE; ?>Event/readAll" class="list-group-item">Ver Evento</a>
-            <a href="<?php echo BASE; ?>Views/viewDeleteEvent" class="list-group-item">Borrar Evento</a>
-          </div>
-
-          <h2 class="my-4"> Categorias</h2><!--Solo puede haber un "h1"-->
-          <div class="list-group">
-            <a href="<?php echo BASE; ?>Views/viewCreateCategory" class="list-group-item">Crear Categoria</a>
-            <a href="<?php echo BASE; ?>Category/readAll" class="list-group-item">Ver Categoria(nofunciona)</a>
-            <a href="<?php echo BASE; ?>Views/viewDeleteCategory" class="list-group-item">Borrar Categoria</a>
-          </div>
-
-          <h2 class="my-4"> Usuarios</h2><!--Solo puede haber un "h1"-->
-          <div class="list-group">
-            <a href="<?php echo BASE; ?>Views/viewCreateUser" class="list-group-item">Crear Usuario</a>
-            <a href="<?php echo BASE; ?>user/readAll" class="list-group-item">Ver Usuarios</a>
-            <a href="<?php echo BASE; ?>Views/viewDeleteUser" class="list-group-item">Borrar Usuario</a>
-          </div>
-
-          <h2 class="my-4"> Tickets</h2><!--Solo puede haber un "h1"-->
-          <div class="list-group">
-            <a href="<?php echo BASE; ?>Views/viewCreateTicket" class="list-group-item">Crear Ticket</a>
-            <a href="<?php echo BASE; ?>Ticket/readAll" class="list-group-item">Ver Ticket</a>
-            <a href="<?php echo BASE; ?>Views/viewDeleteCategory" class="list-group-item">Borrar Ticket</a>
-          </div>
 
           <h2 class="my-4"> Tipos de Plaza</h2><!--Solo puede haber un "h1"-->
           <div class="list-group">

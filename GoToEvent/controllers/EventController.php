@@ -23,26 +23,25 @@ class EventController
 
 		$category = $daocategory->readById($id_category);
 
-		$event = new Event($title,$category['0']); // modificar "prueba", agregar categoria al forumlario al crear evento
+		$event = new Event($title,$category['0']);
 
 		$this->dao->create($event);
 
-		require(ROOT . VIEWS . 'Home.php');
+		require(ROOT . VIEWS . 'eventsAdmin.php');
 	}
 
 	public function readAll()
 	{
-		$lista = $this->dao->readAll();
+		$list = $this->dao->readAll();
 
-		include(VIEWS . 'ViewEvents.php');
+		return $list;
 	}
 
 	public function delete($title)
 	{
 		$this->dao->delete($title);
-		$lista = $this->dao->readAll(); // agregue esto como solucion temporal al problema de borrado // si no da problemas se deja
-		// despues de borrar un evento, al ya haber recorrido todos los eventos, la lista quedaba vacía, por eso hay q volver a leer
-		require(ROOT . VIEWS . 'ViewEvents.php');
+
+		require(ROOT . VIEWS . 'eventsAdmin.php');
 	}
 
 }

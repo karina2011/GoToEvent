@@ -30,20 +30,22 @@ class TicketController // fijarse si esta controladora es necesaria - Allan
 
 		//INCLUYE LA VISTA PRINCIPAL
 
-		require(ROOT . VIEWS . 'Home.php');
+		require(ROOT . VIEWS . 'ticketsAdmin.php');
 	}
 
+	// devuelve un arreglo con los objetos dentro o un arreglo vacio en caso de no haber nada en la BD
 	public function readAll()
 	{
 		//SE GUARDA EN LA LISTA TODOS LOS TICKETS QUE DEVUELVE LA BASE DE DATOS
 
 		$list = $this->dao->readAll();
-
-		//INCLUYE LA VISTA DONDE SE MUESTRA LO LEIDO
-
-		require(ROOT . VIEWS . 'viewtickets.php');
-
-		//FALTA REALIZAR LA VISTA DONDE SE MUESTRAN LOS TICKETS
+		if (!is_array($list)){
+			$array[] = $list; 
+			$list = $array; // para que devuelva un arreglo en caso de haber solo 1 objeto // esto para cuando queremos hacer foreach al listar, ya que no se puede hacer foreach sobre un objeto
+		}
+		// REVISAR ESTO YA QUE AL NO HABER DATOS EN BD, DEVUELVE UN FALSE , Y ESTARIAMOS TRABAJANDO SOBRE UN FALSE
+		//SOLUCIONAR!
+		return $list;
 	}
 
 	public function read($number)
@@ -63,6 +65,6 @@ class TicketController // fijarse si esta controladora es necesaria - Allan
 
 		//SE INCLUYE LA VISTA PRINCIPAL PARA QUE EL USUARIO PUEDA SEGUIR NAVEGANDO EN LA PAGINA WEB
 
-		require(ROOT . VIEWS . 'Home.php');
+		require(ROOT . VIEWS . 'ticketsAdmin.php');
 	}
 }

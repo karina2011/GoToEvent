@@ -22,32 +22,24 @@ class ArtistController
     {
         $artist = new Artist($dni,$nombre,$apellido);
 
-        //$flag = $this->dao->create($artist);
         $this->dao->create($artist);
 
-        /*if($flag){
-            echo "Artista creado" . "<br><br>";
-        } else {
-            echo "No se pudo crear el artista" . "<br><br>";
-        }*/
-
-        require(ROOT . VIEWS . 'Home.php');
+        require(ROOT . VIEWS . 'artistsAdmin.php');
 
     }
 
     public function readAll()
     {
-        $lista = $this->dao->readAll();
-        //var_dump($lista);
-        require (ROOT . VIEWS . "viewartists.php");
+        $list = $this->dao->readAll();
+        return $list;
+
     }
 
     public function delete($dni)
     {
-
         $this->dao->delete($dni);
 
-        require(ROOT . VIEWS . 'Home.php');
+        require(ROOT . VIEWS . 'artistsAdmin.php');
     }
 
 

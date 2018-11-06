@@ -20,13 +20,14 @@ class CategoryController
 
 		$this->dao->create($category);
 
-		require(ROOT . VIEWS . 'Home.php');
+		require(ROOT . VIEWS . 'categoriesAdmin.php');
 	}
 
 	public function readAll()
 	{
-		$lista = $this->dao->readAll();
+		$list = $this->dao->readAll();
 
+		return $list;
 		//falta incluir la vista que muestre todos las categorias
 
 		
@@ -43,7 +44,7 @@ class CategoryController
 	{
 		$this->dao->delete($description);
 
-		require(ROOT . VIEWS . 'Home.php');
+		require(ROOT . VIEWS . 'categoriesAdmin.php');
 	}
 
 

@@ -28,7 +28,7 @@ class UserController
 		$this->dao->create($user);
 
 		//luego de guardarlo en la base de datos se muetra el inicio de la pagina
-		require(ROOT . VIEWS . 'Home.php');
+		require(ROOT . VIEWS . 'usersAdmin.php');
 	}
 
 	public function readAll()
@@ -37,9 +37,8 @@ class UserController
 
 		$list = $this->dao->readAll();
 		
-		include(VIEWS . 'viewusers.php');
+		return $list;
 
-		//falta hacer la vista para mostrarlos
 
 	}
 
@@ -63,7 +62,7 @@ class UserController
 
 		//INCLUYE LA VISTA PRINCIPAL
 		
-		require(ROOT . VIEWS . 'Home.php');
+		require(ROOT . VIEWS . 'usersAdmin.php');
 	}
 
 	public function login ($email='', $pass='')
