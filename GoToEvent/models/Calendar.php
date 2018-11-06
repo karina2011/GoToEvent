@@ -13,15 +13,17 @@ class Calendar
 	private $event;
 	private $artists = array();
 	private $event_place;
+	private $event_squares = array();
 
 
-	function __construct($date='', $artists='', $event_place='', $event='', $id_calendar='')
+	function __construct($date='', $artists='', $event_place='', $event='', $event_square='', $id_calendar='')
 	{
 		$this->date = $date;
 		$this->artists = $artists;
 		$this->id_calendar = $id_calendar;
 		$this->event_place = $event_place;
 		$this->event = $event;
+		$this->event_squares = $event_square;
 	}
 
 	public function getDate()
@@ -52,6 +54,16 @@ class Calendar
 	public function getEventTitle()
 	{
 		return $this->event->getTitle();
+	}
+
+	public function getEventSquares()
+	{
+		return $this->event_squares;
+	}
+
+	public function getEventSquareId()
+	{
+		return $this->event_square->getId();
 	}
 
 	public function setDate($date)

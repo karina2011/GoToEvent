@@ -5,11 +5,13 @@ use models\Event as M_Event;
 use models\Calendar as M_Calendar;
 use models\Artist as M_Artist;
 use models\EventPlace as M_Event_place;
+use models\EventSquare as M_Event_square;
 use daos\daodb\connection as Connection;
 use daos\daodb\EventDao as D_Event;
 use daos\daodb\EventPlaceDao as D_Event_place;
 use daos\daodb\ArtistDao as D_Artist;
 use daos\daodb\CalendarArtistDao as D_Calendar_artist;
+use daos\daodb\EventSquareDao as D_Event_square;
 
 use PDOException;
 
@@ -25,20 +27,21 @@ class CalendarDao extends Singleton implements \interfaces\Crud
     {
         // Guardo como string la consulta sql utilizando como values, marcadores de parámetros con nombre (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada
 
-		$sql = "INSERT INTO calendars (date,id_event,id_event_place) VALUES (:date, :id_event, :id_event_place)";
+		$sql = "INSERT INTO calendars (date,id_event,id_event_place,id_event_square) VALUES (:date, :id_event, :id_event_place, :id_event_square)";
 
         $parameters['date'] = $calendar->getDate();
         $parameters['id_event'] = $calendar->getEventId();
         $parameters['id_event_place'] = $calendar->getEventPlaceId();
+        $parameters['id_event_square'] = $clendar->getEventSquareId();
 
-        try 
+        try
         {
-            
+
             $this->connection = Connection::getInstance();
 
             return $this->connection->ExecuteNonQuery($sql, $parameters);
 
-        } 
+        }
         catch(PDOException $e)
         {
             echo $e;
@@ -48,21 +51,21 @@ class CalendarDao extends Singleton implements \interfaces\Crud
 
     public function validateDateInEventPlace($date,$id_event_place)
     {
-        $sql = "Select * 
+        $sql = "Select *
                 from calendars c inner join event_places ep on c.id_event_place = ep.id_event_place
                 where c.date = :date and ep.id_event_place = :id_event_place ";
 
         $parameters['date'] = $date;
         $parameters['id_event_place'] = $id_event_place;
 
-        try 
+        try
         {
-            
+
             $this->connection = Connection::getInstance();
 
             return $this->connection->ExecuteNonQuery($sql, $parameters);
 
-        } 
+        }
         catch(PDOException $e)
         {
             echo $e;
@@ -79,8 +82,8 @@ class CalendarDao extends Singleton implements \interfaces\Crud
             $this->connection = Connection::getInstance();
             $resultSet = $this->connection->execute($sql);
 
-        } 
-        catch(PDOException $e) 
+        }
+        catch(PDOException $e)
         {
 
             echo $e;
@@ -89,7 +92,7 @@ class CalendarDao extends Singleton implements \interfaces\Crud
         if(!empty($resultSet))
             return $this->mapear($resultSet);
         else
-            return false;       
+            return false;
 
     }
 
@@ -99,12 +102,12 @@ class CalendarDao extends Singleton implements \interfaces\Crud
 
         $parameters['id_calendar'] = $id;
 
-        try 
+        try
         {
             $this->connection = Connection::getInstance();
             $resultSet = $this->connection->execute($sql, $parameters);
-        } 
-        catch(PDOException $e) 
+        }
+        catch(PDOException $e)
         {
             echo $e;
         }
@@ -121,12 +124,12 @@ class CalendarDao extends Singleton implements \interfaces\Crud
 
         $parameters[] = array();
 
-        try 
+        try
         {
             $this->connection = Connection::getInstance();
             $resultSet = $this->connection->execute($sql);
-        } 
-        catch(PDOException $e) 
+        }
+        catch(PDOException $e)
         {
             echo $e;
         }
@@ -148,12 +151,12 @@ class CalendarDao extends Singleton implements \interfaces\Crud
 
         $parameters['id_event'] = $id_event;
 
-        try 
+        try
         {
             $this->connection = Connection::getInstance();
             $resultSet = $this->connection->execute($sql, $parameters);
-        } 
-        catch(PDOException $e) 
+        }
+        catch(PDOException $e)
         {
             echo $e;
         }
@@ -164,7 +167,7 @@ class CalendarDao extends Singleton implements \interfaces\Crud
             return false;
     }
 
-    
+
 
     public function update ($id)
     {
@@ -177,18 +180,18 @@ class CalendarDao extends Singleton implements \interfaces\Crud
 
         $parameters['id_calendar'] = $id;
 
-        try 
+        try
         {
             $this->connection = Connection::getInstance();
             return $this->connection->ExecuteNonQuery($sql, $parameters);
-        } 
-        catch(PDOException $e) 
+        }
+        catch(PDOException $e)
         {
             echo $e;
         }
    }
 
-    
+
 
     /**
     * Transforma el listado de usuario en
@@ -199,9 +202,10 @@ class CalendarDao extends Singleton implements \interfaces\Crud
 	protected function mapear($value) {
 
 		$value = is_array($value) ? $value : [];
-        
+
 		$resp = array_map(function($p){
             $event_place = $this->createEventPlace($p['id_event_place']);
+            $event_squares = $this->createEventSquare($p['id_event_square']);
             $event = $this->createEvent($p['id_event']);
             $artists = $this->createArtistList($p['id_calendar']); //busca en la tabla intermedia todos los artistas que le corresponden a ese calendario
             //flata buscar en la tabla intermedia todos los artistas que le perteneces a ese calendario
@@ -209,9 +213,9 @@ class CalendarDao extends Singleton implements \interfaces\Crud
             echo "<pre>";
             var_dump($artists);
             echo "</pre>";*/
-		    return new M_Calendar( $p['date'],$artists , $event_place, $event , $p['id_calendar']);
+		    return new M_Calendar( $p['date'],$artists , $event_place, $event , $event_squares, $p['id_calendar']);
         }, $value);
-            
+
             /* devuelve un arreglo si tiene datos y sino devuelve nulo*/
 
             return count($resp) > 0 ? $resp : null;
@@ -235,7 +239,7 @@ class CalendarDao extends Singleton implements \interfaces\Crud
         $daoEvent = D_Event::getInstance();
 
         $event = $daoEvent->readById($id);
-        
+
         $event = new M_Event($event['0']->getTitle(),$event['0']->getCategory(),$event['0']->getId());
 
         return $event;
@@ -258,9 +262,27 @@ class CalendarDao extends Singleton implements \interfaces\Crud
          foreach ($calendarArtistList as $key => $list) {
              $artistList[] = $daoArtist->readById($list['id_artist']);
          }
-        /*echo "<pre>"; 
+        /*echo "<pre>";
         var_dump($artistList);
         echo "</pre>";*/
          return $artistList;
+     }
+
+     protected function createEventSquare($id_event_square)
+     {
+       $daoEventSqaure = D_Event_square::getInstance();
+
+       $event_square = $daoEventSquare->read($id_event_square);
+
+       if(is_array($event_square)){
+
+         foreach ($event_square as $key => $value) {
+           $eventSquareList[] = $daoEventSquare->read($value['id_event_square']);
+         }
+
+         return $eventSquareList;
+       } else {
+         return $event_square;
+       }
      }
 }
