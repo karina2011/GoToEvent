@@ -69,4 +69,4 @@ if ($user){ ?>
   </body>
 
 </html>
-<?php } else require(ROOT . VIEWS . 'Home.php'); ?>
+<?php } else { echo '<script>alert("ALTO AHI VAQUERO");</script>';  require(ROOT . VIEWS . 'Home.php'); }?>

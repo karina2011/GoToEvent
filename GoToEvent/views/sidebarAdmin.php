@@ -62,7 +62,7 @@
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" href="">
+          <a class="nav-link" href="<?php echo BASE; ?>Views/calendarsAdmin">
           <i class="far fa-calendar-alt"></i>
             <span>Calendarios</span></a>
         </li>

@@ -39,12 +39,12 @@ class TicketController // fijarse si esta controladora es necesaria - Allan
 		//SE GUARDA EN LA LISTA TODOS LOS TICKETS QUE DEVUELVE LA BASE DE DATOS
 
 		$list = $this->dao->readAll();
-		if (!is_array($list) && $list != false){
+		if (!is_array($list) && $list != false){ // si no hay nada cargado, readall devuelve false
 			$array[] = $list; 
-			$list = $array; // para que devuelva un arreglo en caso de haber solo 1 objeto // esto para cuando queremos hacer foreach al listar, ya que no se puede hacer foreach sobre un objeto
+			$list = $array; // para que devuelva un arreglo en caso de haber solo 1 objeto // esto para cuando queremos hacer foreach al listar, ya que no se puede hacer foreach sobre un objeto ni sobre un false
 		}
-		// REVISAR ESTO YA QUE AL NO HABER DATOS EN BD, DEVUELVE UN FALSE , Y ESTARIAMOS TRABAJANDO SOBRE UN FALSE
-		//SOLUCIONAR! // PARECE Q YA ESTA SOLUCIONADO
+		
+		//SOLUCIONADO, HACER ESTO EN LAS DEMAS CONTROLADORAS
 		return $list;
 	}
 

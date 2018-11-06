@@ -30,7 +30,7 @@ class CalendarController
 
 		if ($date < $fechaActual) // comprobar q la fecha sea posterior a la actual
 		{
-			echo "NO PODES CREAR EVENTOS EN EL PASADO INUTIL"; // pasar a alert
+			echo '<script>alert("NO PODES CREAR EVENTOS EN EL PASADO INUTIL");</script>';
 		} else
 			{
 				$res = $this->validateDateInEventPlace($date,$id_event_place); //si res devuelve 0 es porque la fecha esta disponible
@@ -83,10 +83,7 @@ class CalendarController
 	public function readAll()
 	{
 		$list = $this->dao->readAll();
-		/*echo "<pre>";
-		var_dump($list);
-		echo "</pre>";*/
-		include(VIEWS . 'viewcalendars.php');
+		return $list;
 	}
 
 	public function delete($id_calendar)

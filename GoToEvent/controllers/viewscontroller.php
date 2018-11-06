@@ -71,5 +71,9 @@ class ViewsController
     public function viewEventSquaresAdmin(){
         require(ROOT . VIEWS . 'eventsquaresadmin.php');
     }
+
+    public function calendarsAdmin(){
+        require(ROOT . VIEWS . 'calendarsadmin.php');
+    }
 }
 ?>
