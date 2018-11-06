@@ -46,7 +46,7 @@ class PurchaseLineController
 
 		$list = $this->dao->readAll();
 
-		include(VIEWS . 'viewpurchaselines.php');
+		return $list;
 	}
 
 	public function delete($id)

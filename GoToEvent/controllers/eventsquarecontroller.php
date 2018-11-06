@@ -21,7 +21,7 @@ class EventSquareController
         include(BASE . VIEWS . "Home.php");
     }
 
-    public function create($price='',$availble_quantity='',$remainder='',$square_type='')
+    public function create($square_type='', $price='',$availble_quantity='',$remainder='')
     {
         // $squaretype vine en formato de id, y hay q pasarlo a objeto
         $daoSquareType = DaoSquareType::getInstance();
@@ -42,7 +42,7 @@ class EventSquareController
             echo "No se pudo crear el artista" . "<br><br>";
         }*/
 
-        require(ROOT . VIEWS . 'Home.php');
+        require(ROOT . VIEWS . 'eventsquaresadmin.php');
 
     }
 
@@ -50,7 +50,7 @@ class EventSquareController
     {
         $list = $this->dao->readAll();
         
-        require (ROOT . VIEWS . "vieweventsquares.php");
+        return $list;
     }
 
     public function delete($dni)
@@ -58,7 +58,7 @@ class EventSquareController
 
         $this->dao->delete($dni);
 
-        require(ROOT . VIEWS . 'Home.php');
+        require(ROOT . VIEWS . 'eventsquaresadmin.php');
     }
 
 

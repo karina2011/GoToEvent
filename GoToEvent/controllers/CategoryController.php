@@ -28,7 +28,6 @@ class CategoryController
 		$list = $this->dao->readAll();
 
 		return $list;
-		//falta incluir la vista que muestre todos las categorias
 
 		
 	}

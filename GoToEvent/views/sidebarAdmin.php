@@ -32,19 +32,19 @@
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" href="">
+          <a class="nav-link" href="<?php echo BASE; ?>Views/viewSquareTypesAdmin">
           <i class="fas fa-chair"></i>
             <span>Tipos de plaza</span></a>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" href="">
+          <a class="nav-link" href="<?php echo BASE; ?>Views/viewEventPlacesAdmin">
           <i class="fas fa-map-marker-alt"></i>
             <span>Lugares de evento</span></a>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" href="">
+          <a class="nav-link" href="<?php echo BASE; ?>Views/viewPurchasesAdmin">
           <i class="fas fa-shopping-cart"></i>
             <span>Compras</span></a>
         </li>
@@ -56,7 +56,7 @@
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" href="">
+          <a class="nav-link" href="<?php echo BASE; ?>Views/viewEventSquaresAdmin">
           <i class="fas fa-archway"></i>
             <span>Plazas de evento</span></a>
         </li>

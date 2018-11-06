@@ -42,6 +42,11 @@ class Purchase
 		return $this->customer->getEmail();
 	}
 
+	public function getPurchaseLines()
+	{
+		return $this->purchaselines;
+	}
+
 	public function getPrice (){
 		$total = 0;
 		foreach ($purchaselines as $key => $purchaseline) {

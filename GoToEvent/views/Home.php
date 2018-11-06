@@ -42,19 +42,6 @@
           <!-- Opciones artistas y eventos están aca de prueba, despues se debe pasar a su respectiva vista-->
 
 
-          <h2 class="my-4"> Tipos de Plaza</h2><!--Solo puede haber un "h1"-->
-          <div class="list-group">
-            <a href="<?php echo BASE; ?>Views/viewCreateSquareType" class="list-group-item">Crear Tipo de Plaza</a>
-            <a href="<?php echo BASE; ?>SquareType/readAll" class="list-group-item">Ver Tipo de Plaza</a>
-            <a href="<?php echo BASE; ?>Views/viewDeleteSquareType" class="list-group-item">Borrar Tipo de Plaza</a>
-          </div>
-
-          <h2 class="my-4"> Lugar de evento</h2><!--Solo puede haber un "h1"-->
-          <div class="list-group">
-            <a href="<?php echo BASE; ?>Views/viewCreateEventPlace" class="list-group-item">Crear lugar de evento</a>
-            <a href="<?php echo BASE; ?>EventPlace/readAll" class="list-group-item">Ver lugares de evento</a>
-          </div>
-
           <h2 class="my-4"> Compras</h2><!--Solo puede haber un "h1"-->
           <div class="list-group">
             <a href="<?php echo BASE; ?>Views/viewCreatePurchase" class="list-group-item">Crear Compra</a>
@@ -65,12 +52,6 @@
           <div class="list-group">
             <a href="<?php echo BASE; ?>Views/viewCreatePurchaseLine" class="list-group-item">Crear linea Compra</a>
             <a href="<?php echo BASE; ?>PurchaseLine/readAll" class="list-group-item">Ver linea Compras</a>
-          </div>
-
-          <h2 class="my-4"> Plaza de evento</h2><!--Solo puede haber un "h1"-->
-          <div class="list-group">
-            <a href="<?php echo BASE; ?>Views/viewCreateEventSquare" class="list-group-item">Crear plaza de evento</a>
-            <a href="<?php echo BASE; ?>EventSquare/readAll" class="list-group-item">Ver plazas de vento</a>
           </div>
 
           <h2 class="my-4"> Calendar</h2><!--Solo puede haber un "h1"-->

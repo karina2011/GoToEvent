@@ -28,7 +28,7 @@ class SquareTypeController
 
     	//SE INCLUYE LA VISTA PRINCIPAL PARA PODER SEGUIR NAVEGANDO POR LA WEB
 
-    	require(ROOT . VIEWS . 'Home.php');
+    	require(ROOT . VIEWS . 'squaretypesadmin.php');
     }
 
     public function readAll()
@@ -37,10 +37,7 @@ class SquareTypeController
 
     	$list = $this->dao->readAll();
 
-    	//SE INCLUYE LA VISTA EN LA CUAL SE MUESTRA TODO LO TRAIDO POR LA BASE DE DATO
-        require(ROOT . VIEWS . 'viewsquaretypes.php');
-
-    	//FALTA REALIZAR LA VISTA EN LA CUAL SE MUESTRA LO ANTERIOR
+    	return $list;
     }
 
     public function read($description)
@@ -62,6 +59,6 @@ class SquareTypeController
 
     	//SE INCLUYE LA VISTA PRINCIPAL PARA PODER SEGUIR NAVEGANDO POR LA PAGINA WEB
 
-    	require(ROOT . VIEWS . 'Home.php');
+    	require(ROOT . VIEWS . 'squaretypesadmin.php');
     }
 }

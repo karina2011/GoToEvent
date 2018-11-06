@@ -12,21 +12,6 @@ class ViewsController
         require(ROOT . VIEWS . 'Home.php');
     }
 
-    public function viewCreateSquareType()
-    {
-        require(ROOT . VIEWS . 'createsquaretype.php');
-    }
-
-    public function viewCreateEventPlace()
-    {
-        require(ROOT . VIEWS . 'createeventplace.php');
-    }
-
-    public function viewCreateEventSquare()
-    {
-        require(ROOT . VIEWS . 'createeventsquare.php');
-    }
-
     public function viewCreatePurchase()
     {
         require(ROOT . VIEWS . 'createpurchase.php');
@@ -71,5 +56,20 @@ class ViewsController
         require(ROOT . VIEWS . 'ticketsAdmin.php');
     }
 
+    public function viewSquareTypesAdmin(){
+        require(ROOT . VIEWS . 'squaretypesadmin.php');
+    }
+
+    public function viewEventPlacesAdmin(){
+        require(ROOT . VIEWS . 'eventplacesadmin.php');
+    }
+
+    public function viewPurchasesAdmin(){
+        require(ROOT . VIEWS . 'purchasesadmin.php');
+    }
+
+    public function viewEventSquaresAdmin(){
+        require(ROOT . VIEWS . 'eventsquaresadmin.php');
+    }
 }
 ?>

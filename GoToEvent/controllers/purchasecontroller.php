@@ -38,11 +38,11 @@ class PurchaseController
 
 			$this->dao->create($purchase);
 
-			require(ROOT . VIEWS . 'Home.php');
+			require(ROOT . VIEWS . 'purchaselinesadmin.php');
 		} else {
 			echo "No existe el cliente";
 			// modificar el require segun lo que se valla a hacer si ingreso mal el email
-			require(ROOT . VIEWS . "Home.php");
+			require(ROOT . VIEWS . "purchaselinesadmin.php");
 		}
 	}
 
@@ -50,7 +50,7 @@ class PurchaseController
 	{
 		$list = $this->dao->readAll();
 
-		include(VIEWS . 'viewpurchase.php');
+		return $list;
 	}
 
 	public function delete($id)
@@ -58,7 +58,7 @@ class PurchaseController
 		$this->dao->delete($id);
 		$list = $this->dao->readAll(); // agregue esto como solucion temporal al problema de borrado // si no da problemas se deja
 		// despues de borrar un evento, al ya haber recorrido todos los eventos, la lista quedaba vacía, por eso hay q volver a leer
-		require(ROOT . VIEWS . 'viewpurchase.php');
+		require(ROOT . VIEWS . 'purchaselinesadmin.php');
 	}
 	
 }

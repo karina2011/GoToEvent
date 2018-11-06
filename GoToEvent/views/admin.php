@@ -4,7 +4,8 @@ use models\User as M_User;
 
 $userController = new C_User;
 $user = $userController->checkSession();
-?>
+
+if ($user){ ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -68,3 +69,4 @@ $user = $userController->checkSession();
   </body>
 
 </html>
+<?php } else require(ROOT . VIEWS . 'Home.php'); ?>

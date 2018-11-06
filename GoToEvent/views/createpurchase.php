@@ -38,7 +38,7 @@ $listUser = $daoUser->readAll();
 					<div class="input-group-prepend">
 						<div class="input-group-text">
 							<?php foreach ($listPurchaseLine as $key => $purchase_line) { ?>
-							<input type="checkbox" name="purchaselines[]" value="<?php echo $daoPurchaseLine->read($purchase_line->getId()); ?>"> <!-- enviamos como valor el objeto de linea de compra, ya que el create de compra tiene q recibir objetos de linea de compra-->
+							<input type="checkbox" name="purchaselines[]" value="<?php echo $purchase_line->getId(); ?>"> <!-- enviamos como valor el objeto de linea de compra, ya que el create de compra tiene q recibir objetos de linea de compra-->
 							<label for="purchase_line[]"><?php echo $purchase_line->getEventSquareDescription() ?></label>
 							<?php } ?>
 						</div>
