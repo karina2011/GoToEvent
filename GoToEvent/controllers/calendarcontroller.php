@@ -163,10 +163,38 @@ class CalendarController
 			}
 
 		} else		{
-			
+
 			$id = $list->getId();
 			$date = $list->getDate();
-			$options = "<option value='$list->getId();'>$list->getDate();</option>";
+			$options = "<option value='". $id ."'>".  $date . "</option>";
+		}
+
+		echo $options;
+	}
+
+	public function readEventSquareAjax($id)
+	{
+		$calendar_list = $this->dao->readById($id);
+		$options = null;
+		$event_squares = $calendar_list['0']->getEventSquares();
+
+		if(is_array($event_squares)){
+
+			foreach ($event_squares as $key => $event_square) {
+				$id = $event_square->getId();
+				$description = $event_square->getSquareTypeDescription();
+				$price = $event_square->getPrice();
+
+				$options .= "<option value='". $id ."'>".  $description . $price . "</option>";
+
+			}
+		} else {
+
+			$id = $event_squares->getId();
+			$description = $event_squares->getSquareTypeDescription();
+			$price = $event_squares->getPrice();
+
+			$options .= "<option value='". $id ."'>".  $description . " " . $price . "$" . "</option>";
 		}
 
 		echo $options;

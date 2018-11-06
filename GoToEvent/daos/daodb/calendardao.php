@@ -270,7 +270,7 @@ class CalendarDao extends Singleton implements \interfaces\Crud
 
      protected function createEventSquare($id_event_square)
      {
-       $daoEventSqaure = D_Event_square::getInstance();
+       $daoEventSquare = D_Event_square::getInstance();
 
        $event_square = $daoEventSquare->read($id_event_square);
 

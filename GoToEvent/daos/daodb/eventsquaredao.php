@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace daos\daodb;
 
@@ -27,14 +27,14 @@ class EventSquareDao extends Singleton implements \interfaces\Crud
         $parameters['remainder'] = $event_square->getRemainder();
         $parameters['id_square_type'] = $event_square->getSquareTypeId();
 
-        try 
+        try
         {
-            
+
             $this->connection = Connection::getInstance();
 
             return $this->connection->ExecuteNonQuery($sql, $parameters);
 
-        } 
+        }
         catch(PDOException $e)
         {
             echo $e;
@@ -52,8 +52,8 @@ class EventSquareDao extends Singleton implements \interfaces\Crud
             $this->connection = Connection::getInstance();
             $resultSet = $this->connection->execute($sql);
 
-        } 
-        catch(PDOException $e) 
+        }
+        catch(PDOException $e)
         {
 
             echo $e;
@@ -62,7 +62,7 @@ class EventSquareDao extends Singleton implements \interfaces\Crud
         if(!empty($resultSet))
             return $this->mapear($resultSet);
         else
-            return false;       
+            return false;
 
     }
 
@@ -72,12 +72,12 @@ class EventSquareDao extends Singleton implements \interfaces\Crud
 
         $parameters['id_event_square'] = $id_event_square;
 
-        try 
+        try
         {
             $this->connection = Connection::getInstance();
             $resultSet = $this->connection->execute($sql, $parameters);
-        } 
-        catch(PDOException $e) 
+        }
+        catch(PDOException $e)
         {
             echo $e;
         }
@@ -99,18 +99,18 @@ class EventSquareDao extends Singleton implements \interfaces\Crud
 
         $parameters['id_event_square'] = $id_event_square;
 
-        try 
+        try
         {
             $this->connection = Connection::getInstance();
             return $this->connection->ExecuteNonQuery($sql, $parameters);
-        } 
-        catch(PDOException $e) 
+        }
+        catch(PDOException $e)
         {
             echo $e;
         }
    }
 
-    
+
 
     /**
     * Transforma el listado de usuario en
@@ -121,12 +121,12 @@ class EventSquareDao extends Singleton implements \interfaces\Crud
 	protected function mapear($value) {
 
 		$value = is_array($value) ? $value : [];
-        
+
 		$resp = array_map(function($p){
             $square_type = $this->createSquareType($p['id_square_type']);
 		    return new M_Event_square( $p['price'], $p['available_quantity'], $p['remainder'],$square_type, $p['id_event_square']);
         }, $value);
-            
+
             /* devuelve un arreglo si hay mas de 1 dato, sino un objeto*/
 
             return count($resp) > 1 ? $resp : $resp['0']; // se modifico para q devuelva un solo objeto y no arreglo en caso de haber 1 solo // borrar comentario si funciona bien
