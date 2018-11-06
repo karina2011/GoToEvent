@@ -142,14 +142,38 @@ class CalendarController
 		return $event;
 	}
 
-	public function readEventsByDate ($date){
+	public function readEventsByDate ($date)
+	{
 
 		$events = $daoEvent->readByDate($date);
-		
+
 		return $events;
 	}
 
+	public function readDateByIdEvent($idEvent)
+	{
+		$options = null;
+		$list = $this->dao->readByIdEvent($idEvent);
+		//Comprueba que lo devuelto por la base de datos sea un array o un objeto
+		if(is_array($list))		{
+			//recorre el arreglo para crear los options que luegon son enviados al jqeury
+			foreach ($list as $key => $value) {
+				$id = $value->getId();
+				$date = $value->getDate();
+				//en options se guardan todas las fechas para luego mostrarlas mediante jquery
+				$options .= "<option value='". $id ."'>".  $date . "</option>";
 
+			}
+
+		} else		{
+			
+			$id = $list->getId();
+			$date = $list->getDate();
+			$options = "<option value='$list->getId();'>$list->getDate();</option>";
+		}
+
+		echo $options;
+	}
 }
 
 ?>
