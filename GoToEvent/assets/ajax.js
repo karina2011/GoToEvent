@@ -38,6 +38,8 @@ $(document).ready(function() {
         data : { 'id' : id},
       })
       .done(function(e){
+        $('#dateLabel').removeClass('d-none')
+        $('#date').removeClass('d-none')
         $('#date').html(e)
         console.log(e)
       })
@@ -46,11 +48,25 @@ $(document).ready(function() {
       })
     })
 
-    $('#date'),change(function(e){
+    $('#date').change(function(e){
       e.preventDefault();
       var id = $(this).val();
       $.ajax({
-        url : ajaxurl + 'calendar/read'
+        url : ajaxurl + 'calendar/readEventSquareAjax',
+        type : 'POST',
+        data : {'id' : id},
+      })
+      .done(function(e){
+        event_square_label
+        $('#event_square_label').removeClass('d-none')
+        $('#event_square').removeClass('d-none')
+        $('#event_square').html(e)
+        $('#cantidad_label').removeClass('d-none')
+        $('#cantidad_input').removeClass('d-none')
+        console.log(e)
+      })
+      .fail(function(){
+        alert("Ocurrio un error")
       })
     })
 

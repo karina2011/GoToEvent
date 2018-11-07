@@ -34,23 +34,21 @@ $listEvent = $daoEvent->readAll();
 					<?php } ?>
 				</select>
 
-				<label for="">Fechas: </label>
-				<select class="custom-select" name="dates" id='date' required>
-					<option value="0">Seleciona una fecha</option>
+				<label class="d-none" id="dateLabel">Fechas: </label>
+				<select class="custom-select d-none" name="dates" id='date' required>
+          <!-- LOS OPTIONS SE AGREGAN POR JQUERY -->
 				</select>
 
-				<label>Plaza de evento: </label>
-				<select class="custom-select" id="inputGroupSelect01" name="event_square">
-				<?php  foreach ($list as $key => $event_square) {
-				?>
-				 <option value="<?php echo $event_square->getId(); ?>"><?php  echo $event_square->getSquareTypeDescription(); ?>
-				 $<?php echo $event_square->getPrice();?></option>
-				 <?php } ?>
+				<label class="d-none" id="event_square_label">Plaza de evento: </label>
+				<select class="custom-select d-none" id="event_square" name="event_square">
+          <!-- LOS OPTIONS SE AGREGAN POR JQUERY -->
 				</select>
-				<label>Cantidad:  </label>
-				<input type="number" name="quantity">
-				<label>ID de compra: (hardcodeado)  </label>
-				<input type="number" name="id_purchase">
+
+
+				<label class="d-none" id="cantidad_label">Cantidad:  </label>
+				<input type="number" name="quantity" id="cantidad_input" class="d-none">
+				<!--<label>ID de compra: (hardcodeado)  </label>
+				<input type="number" name="id_purchase">-->
 			</div>
 		<br>
 			<div>

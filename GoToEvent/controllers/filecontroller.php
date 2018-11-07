@@ -1,7 +1,7 @@
 <?php
 namespace controllers;
 
-use model\File as M_File;
+use models\File as M_File;
 
 /**
  *
@@ -29,9 +29,11 @@ class FileController
          return $this->maxSize;
   }
 
-  public function upload($value, $tipo)
+  public function upload($value='', $tipo='')
   {
-
+      echo "<pre>";
+      var_dump($value);
+      echo "</pre>";
       $fileAvatar = new M_File('', $tipo, $value[$tipo]['name'], $value[$tipo]['tmp_name'], $value[$tipo]['size']);
 
       $filePath = $this->uploadFilePath . "/$tipo/";
@@ -59,14 +61,16 @@ class FileController
 
                               //$alerta = 'el archivo '. $nombreArchivo .' fue subido correctamente.';
                           return true;
+                   } else {
+                     echo "Ocurrio un error al intentar guardar el archivo";
                    }
+              } else {
+                echo "Tamaño del archivo superior al permitido";
               }
           }
+        } else {
+          echo "La extension del archivo no es valido";
         }
         return false;
   }
-
-
-
-
- ?>
+}
