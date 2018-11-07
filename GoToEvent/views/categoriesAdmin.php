@@ -67,7 +67,7 @@ $list = $categoryController->readAll();
                     <tr>
                       <td><?php echo $category->getDescription(); ?></td>
                       <td><?php echo $category->getId(); ?></td>
-                      <td> <form class="text-center" action="<?php echo BASE; ?>category/delete" method="post">
+                      <td> <form action="<?php echo BASE; ?>category/delete" method="post">
           <button type="submit" class="btn btn-danger" name="dni" value="<?php echo $category->getDescription();?>"><i class="fas fa-trash"></i></button>
           </form> </td>
                     </tr>

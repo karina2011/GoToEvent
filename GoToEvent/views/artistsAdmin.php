@@ -48,7 +48,7 @@ $list = $artistController->readAll();
             
             <hr>
 
-          <!-- DataTables -->
+          <!-- DataTables Example -->
           <div class="card mb-3">
             <div class="card-header">
               <i class="fas fa-table"></i> Artistas
@@ -81,7 +81,7 @@ $list = $artistController->readAll();
                       <td><?php echo $artist->getLastName(); ?></td>
                       <td><?php echo $artist->getDni(); ?></td>
                       <td><?php echo $artist->getId(); ?></td>
-                      <td> <form class="text-center" action="<?php echo BASE; ?>Artist/delete" method="post">
+                      <td> <form action="<?php echo BASE; ?>Artist/delete" method="post">
           <button type="submit" class="btn btn-danger" name="dni" value="<?php echo $artist->getDni();?>"><i class="fas fa-trash"></i></button>
           </form> </td>
                     </tr>

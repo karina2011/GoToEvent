@@ -105,7 +105,7 @@ $list = $userController->readAll();
                       <td><?php echo $user->getType(); ?></td>
                       <td><?php echo $user->getPass(); ?></td>
                       <td><?php echo $user->getId(); ?></td>
-                      <td> <form class="text-center" action="<?php echo BASE; ?>user/delete" method="post">
+                      <td> <form action="<?php echo BASE; ?>user/delete" method="post">
           <button type="submit" class="btn btn-danger" name="dni" value="<?php echo $user->getEmail();?>"><i class="fas fa-trash"></i></button>
           </form> </td>
                     </tr>
