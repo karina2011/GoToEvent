@@ -5,11 +5,13 @@ use models\Calendar;
 use models\Artist;
 use models\EventPlace;
 use models\Event;
+use models\Event_square;
 use daos\daodb\CalendarDao as Dao;
 use daos\daodb\ArtistDao as D_Artist;
 use daos\daodb\EventPlaceDao as D_Event_place;
 use daos\daodb\EventDao as D_Event;
 use daos\daodb\CalendarArtistDao as D_Calendar_artist;
+use daos\daodb\EventSquareDao as D_Event_square;
 
 $daoEvent = D_Event::getInstance();
 /**
@@ -24,11 +26,15 @@ class CalendarController
         $this->dao = Dao::getInstance(); // esto se instancia en el router
     }
 
-	public function create($date="", $artists="", $id_event_place="", $id_event="")
+	public function create($date="", $artists="", $id_event_place="", $id_event="", $event_squares='')
 	{
+		//el error esta en que siempre el id de artista te llega con un tres
+		echo "<pre>";
+		var_dump($artists);
+		echo "</pre>";
 		$fechaActual=strftime( "%Y-%m-%d", time()); // devuelve la fecha actual, en formato Año-mes-dia, igual q date
 
-		if ($date < $fechaActual) // comprobar q la fecha sea posterior a la actual
+		if ($date < $fechaActual) // comprobar q la fecha sea posterior a la actua
 		{
 			echo '<script>alert("NO PODES CREAR EVENTOS EN EL PASADO INUTIL");</script>';
 		} else
@@ -39,9 +45,23 @@ class CalendarController
 
 					if($res == 0)
 					{// pasamos el arreglo de id de artistas que recibimos a objetos
-						foreach ($artists as $key => $id_artist) {
-						$artist_list [] = $this->readArtistById($id_artist); // $this-> para llamar al metodo de la propia  clase
+						if(is_array($artists)){
+							foreach ($artists as $key => $id_artist) {
+								$artist_list [] = $this->readArtistById($id_artist); // $this-> para llamar al metodo de la propia  clase
+							}
+						} else {
+							$artist_list [] = $this->readArtistById($artists);
 						}
+
+						if(is_array($event_squares)){
+							foreach ($event_squares as $key => $id_event_square) {
+								$event_square_list[] = $this->readEventSquareById($id_event_square);
+							}
+						} else {
+								$event_square_list[] = $this->readEventSquareById($event_squares);
+						}
+
+
 
 						// traer el objeto de lugar de evento y evento en base a su id
 						$event_place = $this->readEventPlaceById($id_event_place);
@@ -51,11 +71,14 @@ class CalendarController
 
 						$calendar = new Calendar($date,$artist_list,$event_place,$event);
 
-						$this->dao->create($calendar); //crea el calendario en la base de datos
+
 
 						$calendar = $this->dao->readLast(); // te lo devuelve en forma de arreglo al ultimo calendario cargado
 
 						$daoCalendarArtist = D_Calendar_artist::getInstance(); // se obtiene una instancia del dao de calendario x artista
+
+						//crea el calendario en la base de datos
+						$this->dao->create($calendar);
 
 							/* bucle realizado para recorrer todos los artistas que perteneces a un evento y guardarlo en la tabla intermedia */
 							foreach ($artist_list as $key => $artist) {
@@ -99,7 +122,7 @@ class CalendarController
 		$daoArtist = D_Artist::getInstance();
 
 		$artist = $daoArtist->readById($id); // el readbyid devuelve el objeto adentro de un arreglo
-
+		var_dump($artist);
 		$dni = $artist['0']->getDni(); // en la posicion 0 del arreglo artist, está el objeto artista
 		$name = $artist['0']->getName();
 		$last_name = $artist['0']->getLastName();
@@ -109,6 +132,15 @@ class CalendarController
 
 		return $artist;
 
+	}
+
+	public function readEventSquareById($id)
+	{
+		$daoEventSquare = D_Event_square::getInstance();
+
+		$event_square = $daoEventSquare->read($id);
+		echo "esto es lo que devuelve lo que se leeo de event suare por id: ";
+		var_dump($event_square);
 	}
 
 	public function readEventPlaceById($id){

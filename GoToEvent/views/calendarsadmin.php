@@ -1,10 +1,11 @@
-<?php 
+<?php
 use controllers\UserController as C_User;
 use controllers\CalendarController as C_Calendar;
 use controllers\EventController as C_Event;
 use controllers\ArtistController as C_Artist;
 use controllers\EventPlaceController as C_Event_place;
 use controllers\EventSquareController as C_Event_square;
+use controllers\SquareTypeController as C_Square_type;
 
 use models\User as M_User;
 
@@ -25,6 +26,9 @@ $listEventPlaces = $eventPlaceController->readAll();
 
 $eventSquareController = new C_Event_square;
 $listEventSquares = $eventSquareController->readAll();
+
+$squareTypeController = new C_Square_type;
+$listSquareType = $squareTypeController->readAll();
 
 ?>
 <!DOCTYPE html>
@@ -56,30 +60,33 @@ $listEventSquares = $eventSquareController->readAll();
                 <div class="form-group">
                     <label for="event">Evento</label>
                     <select class="custom-select"  name="event">
+                      <option value="0">Seleccione un evento☺</option>
                       <?php  foreach ($listEvents as $key => $event) { ?>
                        <option value="<?php echo $event->getId(); ?>"><?php  echo $event->getTitle(); ?></option>
-                       <?php } ?>      
+                       <?php } ?>
                    </select>
                 </div>
 
-                <label >Artista/s (ARREGLAR ESTO )</label> 
+                <label >Artista/s</label><p>El error esta en que en a la controladora siemre le llega el id de artista 3</p>
+                <!-- Allan lo solucione agregando el id del input con el id del artista y el for de label con el mismo id del artista -->
                 <?php foreach ($listArtists as $key => $artist) { ?>
                 <div class="custom-control custom-checkbox ">
-                        <input type="checkbox" class="custom-control-input" id="customCheck1" name="artists[]" value="<?php echo $artist->getId(); ?>">
-                        <label class="custom-control-label" for="customCheck1"><?php echo $artist->getName() . ' ' .  $artist->getLastName(); ?></label>         
+                        <input type="checkbox" class="custom-control-input" id="<?php echo $artist->getDni(); ?>" name="artists[]" value="<?php echo $artist->getId(); ?>">
+                        <label class="custom-control-label" for="<?php echo $artist->getDni(); ?>" ><?php echo $artist->getName() . ' ' .  $artist->getLastName(); ?></label>
+                        <?php echo $artist->getId(); ?>
                 </div>
                 <?php } ?>
 
                 <div class="form-group">
                     <label for="eventPlaces">Lugar de evento</label>
                     <select class="custom-select"  name="eventPlaces">
+                      <option value="0">Seleccione un lugar de evento</option>
                       <?php  foreach ($listEventPlaces as $key => $eventplace) { ?>
-                       <option value="<?php echo $eventplace->getId(); ?>"><?php  echo $eventplace->getDescription(); ?></option>
-                       <?php } ?>      
+                       <option value="<?php echo $eventplace->getId(); ?>" id="eventplace"><?php  echo $eventplace->getDescription(); ?></option>
+                       <?php } ?>
                    </select>
                 </div>
-
-                <div class="form-group">
+                <div class="form-group"> LO COMENTE PARA HACERLO DE OTRA MANERA
                     <label for="eventSquares[]">Plazas de evento:</label>
                     <div class="input-group-prepend">
                       <div class="input-group-text">
@@ -95,7 +102,7 @@ $listEventSquares = $eventSquareController->readAll();
                 <button type="submit" class="btn btn-primary">Crear calendario</button>
             </form>
 
-            
+
             <hr>
 
           <!-- DataTables Example -->
@@ -138,7 +145,7 @@ $listEventSquares = $eventSquareController->readAll();
           <button type="submit" class="btn btn-danger" name="dni" value="<?php echo $purchase->getId();?>"><i class="fas fa-trash"></i></button>
           </form> </td>
                     </tr>
-                    <?php } ?> 
+                    <?php } ?>
                   </tbody>
                 </table>
               </div>
@@ -186,6 +193,9 @@ $listEventSquares = $eventSquareController->readAll();
     <!-- Demo scripts for this page-->
     <script src="<?php echo BASE; ?>assets/js/demo/datatables-demo.js"></script>
     <script src="<?php echo BASE; ?>assets/js/demo/chart-area-demo.js"></script>
+
+
+  	<script src="<?php echo BASE; ?>assets/ajax.js"></script>
 
   </body>
 

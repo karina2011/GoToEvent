@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace daos\daodb;
 
 /**
@@ -13,14 +13,14 @@ class Connection {
      /**
       *
       */
-     public function __construct() 
+     public function __construct()
      {
-          try 
+          try
           {
                $this->pdo = new \PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASS);
                $this->pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
-          } 
-          catch (Exception $ex) 
+          }
+          catch (Exception $ex)
           {
                throw $ex;
           }
@@ -69,6 +69,9 @@ class Connection {
       */
      public function executeNonQuery($query, $parameters = array())
      {
+          /*echo "<pre>";
+          var_dump($parameters);
+          echo "</pre>";*/
           try
           {
                // Creo una sentencia llamando a prepare. Esto devuelve un objeto statement

@@ -70,5 +70,46 @@ $(document).ready(function() {
       })
     })
 
+    $('#addEventSquare').click(function(e){
+      e.preventDefault;
+      $('#createeventsquare').removeClass('d-none');
+
+      /*var typeSqaure = function() {
+        $('#typeSqaure').change(function(e){
+          e.preventDefault;
+          var typeSqaure = $(this).val();
+
+        })
+      }
+
+      $('#typeSqaure').change(function(e){
+        e.preventDefault;
+        var typeSqaure = $(this).val();
+        console.log(typeSqaure);
+      })
+
+      $('#price').change(function(e){
+        e.preventDefault;
+        var price = $('#price').val();
+        console.log(price);
+      })
+
+      $('#remainder').change(function(e){
+        e.preventDefault;
+        var remainder = $('#remainder').val();
+        console.log(remainder);
+      })
+
+      $('#available_quantity').change(function(e){
+        e.preventDefault;
+        var available_quantity = $('#available_quantity').val();
+        console.log(available_quantity);
+      })
+      console.log(typeSqaure);*/
+      //console.log(typeSquare,price,remainder,available_quantity);
+
+    })
+
+
 
 });
