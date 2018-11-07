@@ -59,6 +59,10 @@ class Request
         } else {
             $this->parametros = $_POST;
         }
+
+        if($_FILES){
+          $this->parametros[] = $_FILES;
+        }
         /*echo '<pre>';
     var_dump($this);
     echo '</pre>';

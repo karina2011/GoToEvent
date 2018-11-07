@@ -1,4 +1,4 @@
-<?php 
+<?php
 use controllers\UserController as C_User;
 use controllers\EventController as C_Event;
 use models\User as M_User;
@@ -34,7 +34,7 @@ $listCategory = $daocategory->readAll();
 
             <h3>Crear Evento</h3>
 
-            <form action="<?php echo BASE; ?>event/create" method="post">
+            <form action="<?php echo BASE; ?>event/create" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="title">Titulo</label>
                     <input type="text" class="form-control" id="title" placeholder="Titulo" name="title">
@@ -43,14 +43,18 @@ $listCategory = $daocategory->readAll();
                     <label for="category">Categoria</label>
                     <select name="id_category">
 					<?php foreach ($listCategory as $key => $category) { ?>
-							<option value="<?php echo $category->getId();  ?>"><?php echo $category->getDescription(); ?></option>
+							         <option value="<?php echo $category->getId();  ?>"><?php echo $category->getDescription(); ?></option>
 					<?php } ?>
-				    </select>
+				            </select>
+                </div>
+                <div class="form-group">
+                  <label>Cargar imagen: </label>
+                  <input type="file" name="eventimg" value="eventimg">
                 </div>
                 <button type="submit" class="btn btn-primary">Crear evento</button>
             </form>
 
-            
+
             <hr>
 
           <!-- DataTables Example -->
@@ -90,7 +94,7 @@ $listCategory = $daocategory->readAll();
           <button type="submit" class="btn btn-danger" name="dni" value="<?php echo $event->getTitle();?>"><i class="fas fa-trash"></i></button>
           </form> </td>
                     </tr>
-                    <?php } ?> 
+                    <?php } ?>
                   </tbody>
                 </table>
               </div>
