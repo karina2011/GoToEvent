@@ -74,7 +74,7 @@ $list = $eventPlaceController->readAll();
                       <td><?php echo $eventPlace->getDescription(); ?></td>
                       <td><?php echo $eventPlace->getCapacity(); ?></td>
                       <td><?php echo $eventPlace->getId(); ?></td>
-                      <td> <form action="<?php echo BASE; ?>eventPlace/delete" method="post">
+                      <td> <form class="text-center" action="<?php echo BASE; ?>eventPlace/delete" method="post">
           <button type="submit" class="btn btn-danger" name="dni" value="<?php echo $eventPlace->getDescription();?>"><i class="fas fa-trash"></i></button>
           </form> </td>
                     </tr>

@@ -106,7 +106,7 @@ $listSquareType = $squareTypeController->readAll();
                       <td><?php echo $eventSquare->getRemainder(); ?></td>
                       <td> echo $eventSquare->getPrice(); (????</td>
                       <td><?php echo $eventSquare->getId(); ?></td>
-                      <td> <form action="<?php echo BASE; ?>eventsquare/delete" method="post">
+                      <td> <form class="text-center" action="<?php echo BASE; ?>eventsquare/delete" method="post">
           <button type="submit" class="btn btn-danger" name="dni" value="<?php echo $eventSquare->getId();?>"><i class="fas fa-trash"></i></button>
           </form> </td>
                     </tr>

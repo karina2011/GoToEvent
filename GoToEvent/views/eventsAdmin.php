@@ -90,7 +90,7 @@ $listCategory = $daocategory->readAll();
                       <td><?php echo $event->getCategoryDescription(); ?></td>
                       <td><img src="<?php echo BASE.IMG_EVENT.$event->getImg(); ?>" width='42' height='42'</td><!-- modificar models y agregar img-->
                       <td><?php echo $event->getId(); ?></td>
-                      <td> <form action="<?php echo BASE; ?>event/delete" method="post">
+                      <td> <form class="text-center" action="<?php echo BASE; ?>event/delete" method="post">
           <button type="submit" class="btn btn-danger" name="dni" value="<?php echo $event->getTitle();?>"><i class="fas fa-trash"></i></button>
           </form> </td>
                     </tr>

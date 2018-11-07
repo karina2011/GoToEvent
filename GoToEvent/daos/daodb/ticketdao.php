@@ -135,7 +135,7 @@ class TicketDao extends Singleton implements \interfaces\Crud
     public function delete ($number)
     {
         $sql = "DELETE FROM tickets WHERE number = :number";
-        $parameters['numberr'] = $number;
+        $parameters['number'] = $number;
 
         try
         {
