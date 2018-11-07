@@ -19,10 +19,11 @@ class EventDao extends Singleton implements \interfaces\Crud
     {
         // Guardo como string la consulta sql utilizando como values, marcadores de parámetros con nombre (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada
 
-		$sql = "INSERT INTO events (title,id_category) VALUES (:title, :id_category)";
+		$sql = "INSERT INTO events (title,id_category,img) VALUES (:title, :id_category, :img)";
 
         $parameters['title'] = $event->getTitle();
         $parameters['id_category'] = $event->getCategoryId();
+        $parameters['img'] = $event->getImg();
 
         try
         {
@@ -129,6 +130,28 @@ class EventDao extends Singleton implements \interfaces\Crud
             return false;
     }
 
+    public function readByImg($img)
+    {
+      $sql = "SELECT * FROM events where img = :img";
+
+      $parameters['img'] = $img;
+
+      try
+      {
+          $this->connection = Connection::getInstance();
+          $resultSet = $this->connection->execute($sql, $parameters);
+      }
+      catch(PDOException $e)
+      {
+          echo $e;
+      }
+
+      if(!empty($resultSet))
+          return $this->mapear($resultSet);
+      else
+          return false;
+    }
+
     public function update ($id)
     {
 
@@ -147,7 +170,8 @@ class EventDao extends Singleton implements \interfaces\Crud
         }
         catch(PDOException $e)
         {
-            echo $e;
+            //echo $e;
+            echo '<script>alert("No se puede borrar porque el evento esta vinculado");</script>';
         }
    }
 
@@ -165,7 +189,7 @@ class EventDao extends Singleton implements \interfaces\Crud
 
 		$resp = array_map(function($p){
             $category = $this->createCategory($p['id_category']);
-		    return new M_Event( $p['title'], $category , $p['id_event']);
+		    return new M_Event( $p['title'], $category ,$p['img'], $p['id_event']);
         }, $value);
 
             /* devuelve un arreglo si tiene datos y sino devuelve nulo*/
