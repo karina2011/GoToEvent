@@ -13,6 +13,7 @@ define('DB_USER',"root");
 define('DB_PASS',"");
 define('DB_NAME',"GoToEvent");
 define('IMG_UPLOADS',ROOT.'assets/img');
+define('IMG_EVENT','assets/img/eventimg/');
 
 
 ?>

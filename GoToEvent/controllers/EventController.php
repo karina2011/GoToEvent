@@ -23,14 +23,14 @@ class EventController
 
 		$fileController = new FileController();
 
-		$resp = $fileController->upload($file,'event');
-
-		if($resp){
+		$resp = $fileController->upload($file,'eventimg');
+		//echo "aca pasa algo: ".$resp;
+		if($resp != null){
 			$daocategory = D_Category::getInstance();
 
 			$category = $daocategory->readById($id_category);
 
-			$event = new Event($title,$category['0']);
+			$event = new Event($title,$category['0'],$resp);
 
 			$this->dao->create($event);
 

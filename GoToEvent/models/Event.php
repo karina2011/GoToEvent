@@ -7,13 +7,15 @@ class Event
 	private $title;
 	private $id_event;
 	private $category;
+	private $img;
 
-	function __construct($title='',$category='',$id_event='')
+	function __construct($title='',$category='', $img='' ,$id_event='')
 	{
 		$this->title = $title;
 		$this->id_event=$id_event;
 		$this->category = $category;
-		
+		$this->img = $img;
+
 	}
 
 	public function getTitle()
@@ -49,6 +51,11 @@ class Event
 	public function setCategory($category)
 	{
 		$this->category = $category;
+	}
+
+	public function getImg()
+	{
+		return $this->img;
 	}
 
 }

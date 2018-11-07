@@ -2,6 +2,7 @@
 namespace controllers;
 
 use models\File as M_File;
+use daos\daodb\EventDao as D_Event;
 
 /**
  *
@@ -31,9 +32,10 @@ class FileController
 
   public function upload($value='', $tipo='')
   {
-      echo "<pre>";
+      /*echo "<pre>";
       var_dump($value);
       echo "</pre>";
+      echo "$tipo";*/
       $fileAvatar = new M_File('', $tipo, $value[$tipo]['name'], $value[$tipo]['tmp_name'], $value[$tipo]['size']);
 
       $filePath = $this->uploadFilePath . "/$tipo/";
@@ -43,8 +45,9 @@ class FileController
            mkdir($filePath);
 
       $fileName = $fileAvatar->getValue();
+      $generateName = $this->generateImgName().".".pathinfo($fileName, PATHINFO_EXTENSION);
 
-      $fileLocation = $filePath . $fileName;	// ruta completa y archivo.
+      $fileLocation = $filePath . $generateName;	// ruta completa y archivo.
 
       //Obtenemos la extensión del archivo. No sirve para comprobar el verdadero tipo del archivo
       $fileExtension = pathinfo($fileName, PATHINFO_EXTENSION);
@@ -60,17 +63,37 @@ class FileController
                    {	//guarda el archivo subido en el directorio 'images/' tomando true si lo subio, y false si no lo hizo
 
                               //$alerta = 'el archivo '. $nombreArchivo .' fue subido correctamente.';
-                          return true;
+                          return $generateName;
                    } else {
                      echo "Ocurrio un error al intentar guardar el archivo";
                    }
               } else {
                 echo "Tamaño del archivo superior al permitido";
               }
+          } else {
+            echo "Ya exsiste un archivo con ese nombre";
           }
         } else {
           echo "La extension del archivo no es valido";
         }
         return false;
+  }
+
+  protected function generateImgName()
+  {
+    $flag = true;
+		$i = 0;
+		$daoEvent = D_Event::getInstance();
+		while ($flag == true && $i < 100000){
+
+			$number = rand(1,100000); // numero aleatorio entre 1 y 100000
+
+			$flag = $daoEvent->readByImg($number); // si devuelve false, significa q el numero no existe en la BD
+
+			$i ++; // por si algun dia llegamos a los 100mil tickets, q no se quede en loop infinito
+
+		}
+
+		return $number;
   }
 }

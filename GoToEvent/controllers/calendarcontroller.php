@@ -149,7 +149,7 @@ class CalendarController
 
 	public function readDateByIdEvent($idEvent)
 	{
-		$options = null;
+		$options = "<option value='0'>Seleccione una opcion</option>";
 		$list = $this->dao->readByIdEvent($idEvent);
 		//Comprueba que lo devuelto por la base de datos sea un array o un objeto
 		if(is_array($list))		{
@@ -175,7 +175,7 @@ class CalendarController
 	public function readEventSquareAjax($id)
 	{
 		$calendar_list = $this->dao->readById($id);
-		$options = null;
+		$options = "<option value='0'>Seleccione una opcion</option>";
 		$event_squares = $calendar_list['0']->getEventSquares();
 
 		if(is_array($event_squares)){
