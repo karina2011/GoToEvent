@@ -31,6 +31,11 @@ class ArtistController
     public function readAll()
     {
         $list = $this->dao->readAll();
+
+        if (!is_array($list) && $list != false){ // si no hay nada cargado, readall devuelve false
+            $array[] = $list; 
+            $list = $array; // para que devuelva un arreglo en caso de haber solo 1 objeto // esto para cuando queremos hacer foreach al listar, ya que no se puede hacer foreach sobre un objeto ni sobre un false
+        }
         return $list;
 
     }

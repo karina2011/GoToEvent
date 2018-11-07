@@ -134,7 +134,7 @@ $listEventSquares = $eventSquareController->readAll();
                       <td><?php echo $purchase->getPurchaseLines(); ?></td>
                       <td><?php echo $purchase->getPrice(); ?></td>
                       <td><?php echo $purchase->getId(); ?></td>
-                      <td> <form action="<?php echo BASE; ?>purchase/delete" method="post">
+                      <td> <form class="text-center" action="<?php echo BASE; ?>purchase/delete" method="post">
           <button type="submit" class="btn btn-danger" name="dni" value="<?php echo $purchase->getId();?>"><i class="fas fa-trash"></i></button>
           </form> </td>
                     </tr>

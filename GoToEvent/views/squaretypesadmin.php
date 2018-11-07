@@ -67,7 +67,7 @@ $list = $squareTypeController->readAll();
                     <tr>
                       <td><?php echo $squareType->getDescription(); ?></td>
                       <td><?php echo $squareType->getId(); ?></td>
-                      <td> <form action="<?php echo BASE; ?>squaretype/delete" method="post">
+                      <td> <form class="text-center" action="<?php echo BASE; ?>squaretype/delete" method="post">
           <button type="submit" class="btn btn-danger" name="dni" value="<?php echo $squareType->getDescription();?>"><i class="fas fa-trash"></i></button>
           </form> </td>
                     </tr>

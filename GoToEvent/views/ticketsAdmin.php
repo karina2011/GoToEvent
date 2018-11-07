@@ -67,8 +67,8 @@ $list = $ticketController->readAll();
                       <td><?php echo $ticket->getNumber(); ?></td>
                       <td><?php echo $ticket->getQr(); ?></td>
                       <td><?php echo $ticket->getId(); ?></td>
-                      <td> <form action="<?php echo BASE; ?>ticket/delete" method="post">
-                      <button type="submit" class="btn btn-danger" name="dni" value="<?php echo $ticket->getNumber();?>"><i class="fas fa-trash"></i></button>
+                      <td> <form class="text-center" action="<?php echo BASE; ?>ticket/delete" method="post">
+                      <button type="submit" class="btn btn-danger" name="number" value="<?php echo $ticket->getNumber();?>"><i class="fas fa-trash"></i></button>
                       </form> </td>
                     </tr>
                     <?php } ?> 
