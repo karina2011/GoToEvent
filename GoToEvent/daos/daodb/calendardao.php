@@ -205,7 +205,7 @@ class CalendarDao extends Singleton implements \interfaces\Crud
 
 		$resp = array_map(function($p){
             $event_place = $this->createEventPlace($p['id_event_place']);
-            $event_squares = $this->createEventSquare($p['id_event_square']);
+            //$event_squares = $this->createEventSquare($p['id_event_square']);
             $event = $this->createEvent($p['id_event']);
             $artists = $this->createArtistList($p['id_calendar']); //busca en la tabla intermedia todos los artistas que le corresponden a ese calendario
             //flata buscar en la tabla intermedia todos los artistas que le perteneces a ese calendario
@@ -213,7 +213,7 @@ class CalendarDao extends Singleton implements \interfaces\Crud
             echo "<pre>";
             var_dump($artists);
             echo "</pre>";*/
-		    return new M_Calendar( $p['date'],$artists , $event_place, $event , $event_squares, $p['id_calendar']);
+		    return new M_Calendar( $p['date'],$artists , $event_place, $event , null, $p['id_calendar']);
         }, $value);
 
             /* devuelve un arreglo si tiene datos y sino devuelve nulo*/
@@ -240,7 +240,7 @@ class CalendarDao extends Singleton implements \interfaces\Crud
 
         $event = $daoEvent->readById($id);
 
-        $event = new M_Event($event['0']->getTitle(),$event['0']->getCategory(),$event['0']->getId());
+        $event = new M_Event($event['0']->getTitle(),$event['0']->getCategory(),$event['0']->getImg(),$event['0']->getId());
 
         return $event;
      }

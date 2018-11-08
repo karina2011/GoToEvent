@@ -56,6 +56,11 @@ class Calendar
 		return $this->event->getTitle();
 	}
 
+	public function getCategoryDescription()
+	{
+		return $this->event->getCategoryDescription();
+	}
+
 	public function getEventSquares()
 	{
 		return $this->event_squares;
@@ -65,6 +70,12 @@ class Calendar
 	{
 		return $this->event_square->getId();
 	}
+
+	public function getEventImg()
+	{
+		return $this->event->getImg();
+	}
+
 
 	public function setDate($date)
 	{
