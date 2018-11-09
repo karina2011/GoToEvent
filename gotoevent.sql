@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-11-2018 a las 19:46:21
+-- Tiempo de generación: 09-11-2018 a las 14:35:33
 -- Versión del servidor: 10.1.36-MariaDB
 -- Versión de PHP: 7.2.11
 
@@ -41,7 +41,9 @@ CREATE TABLE `artists` (
 
 INSERT INTO `artists` (`id_artist`, `name`, `last_name`, `dni`) VALUES
 (1, 'Federico', 'Elias', '23456789'),
-(2, 'Ricardo', 'Arjona', '56426894');
+(2, 'Ricardo', 'Arjona', '56426894'),
+(4, 'Bad', 'Bunny', '87452148'),
+(5, 'Jose', 'Martinez', '2222222');
 
 -- --------------------------------------------------------
 
@@ -56,6 +58,15 @@ CREATE TABLE `calendars` (
   `id_event_place` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `calendars`
+--
+
+INSERT INTO `calendars` (`id_calendar`, `date`, `id_event`, `id_event_place`) VALUES
+(1, '2018-11-30 00:00:00', 3, 4),
+(2, '2018-12-13 00:00:00', 2, 1),
+(3, '2018-11-28 00:00:00', 6, 2);
+
 -- --------------------------------------------------------
 
 --
@@ -65,6 +76,17 @@ CREATE TABLE `calendars` (
 CREATE TABLE `calendars_x_artists` (
   `id_artist` int(11) NOT NULL,
   `id_calendar` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `calendar_x_eventsquare`
+--
+
+CREATE TABLE `calendar_x_eventsquare` (
+  `id_calendar` int(11) DEFAULT NULL,
+  `id_event_square` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -107,11 +129,12 @@ CREATE TABLE `events` (
 --
 
 INSERT INTO `events` (`id_event`, `title`, `id_category`, `img`) VALUES
-(1, 'Gran evento musical', 1, NULL),
-(2, 'Pelea por el titulo peso pesados', 2, NULL),
-(3, 'Canta arjona', 1, NULL),
-(4, 'Obra de teatro infantil', 3, NULL),
-(5, 'A ver este', 2, NULL);
+(1, 'Gran evento musical', 1, '49887.png'),
+(2, 'Pelea por el titulo peso pesados', 2, '49887.png'),
+(3, 'Canta arjona', 1, '49887.png'),
+(4, 'Obra de teatro infantil', 3, '49887.png'),
+(5, 'A ver este', 2, '49887.png'),
+(6, 'nose que onda ', 2, '49887.png');
 
 -- --------------------------------------------------------
 
@@ -279,6 +302,13 @@ ALTER TABLE `calendars_x_artists`
   ADD KEY `fk_id_calendar` (`id_calendar`);
 
 --
+-- Indices de la tabla `calendar_x_eventsquare`
+--
+ALTER TABLE `calendar_x_eventsquare`
+  ADD KEY `fkk_id_calendar` (`id_calendar`),
+  ADD KEY `fkk_event_square` (`id_event_square`);
+
+--
 -- Indices de la tabla `categories`
 --
 ALTER TABLE `categories`
@@ -354,13 +384,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `artists`
 --
 ALTER TABLE `artists`
-  MODIFY `id_artist` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_artist` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `calendars`
 --
 ALTER TABLE `calendars`
-  MODIFY `id_calendar` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_calendar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `categories`
@@ -372,7 +402,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT de la tabla `events`
 --
 ALTER TABLE `events`
-  MODIFY `id_event` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_event` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `event_places`
@@ -433,6 +463,13 @@ ALTER TABLE `calendars`
 ALTER TABLE `calendars_x_artists`
   ADD CONSTRAINT `fk_id_artist` FOREIGN KEY (`id_artist`) REFERENCES `artists` (`id_artist`),
   ADD CONSTRAINT `fk_id_calendar` FOREIGN KEY (`id_calendar`) REFERENCES `calendars` (`id_calendar`);
+
+--
+-- Filtros para la tabla `calendar_x_eventsquare`
+--
+ALTER TABLE `calendar_x_eventsquare`
+  ADD CONSTRAINT `fkk_event_square` FOREIGN KEY (`id_event_square`) REFERENCES `event_squares` (`id_event_square`),
+  ADD CONSTRAINT `fkk_id_calendar` FOREIGN KEY (`id_calendar`) REFERENCES `calendars` (`id_calendar`);
 
 --
 -- Filtros para la tabla `events`
