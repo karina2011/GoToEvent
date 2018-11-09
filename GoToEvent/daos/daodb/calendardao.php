@@ -25,14 +25,14 @@ class CalendarDao extends Singleton implements \interfaces\Crud
 
     public function create($calendar)
     {
+
         // Guardo como string la consulta sql utilizando como values, marcadores de parámetros con nombre (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada
 
-		$sql = "INSERT INTO calendars (date,id_event,id_event_place,id_event_square) VALUES (:date, :id_event, :id_event_place, :id_event_square)";
+		$sql = "INSERT INTO calendars (date,id_event,id_event_place) VALUES (:date, :id_event, :id_event_place)";
 
         $parameters['date'] = $calendar->getDate();
         $parameters['id_event'] = $calendar->getEventId();
         $parameters['id_event_place'] = $calendar->getEventPlaceId();
-        $parameters['id_event_square'] = $clendar->getEventSquareId();
 
         try
         {
@@ -44,6 +44,9 @@ class CalendarDao extends Singleton implements \interfaces\Crud
         }
         catch(PDOException $e)
         {
+            /*echo "<pre>";
+            var_dump($e);
+            echo "</pre>";*/
             echo $e;
         }
 
@@ -142,7 +145,24 @@ class CalendarDao extends Singleton implements \interfaces\Crud
 
     public function read($id)
     {
+      $sql = "SELECT * FROM calendars where id_calendar = :id_calendar";
 
+      $parameters['id_calendar'] = $id;
+
+      try
+      {
+          $this->connection = Connection::getInstance();
+          $resultSet = $this->connection->execute($sql, $parameters);
+      }
+      catch(PDOException $e)
+      {
+          echo $e;
+      }
+
+      if(!empty($resultSet))
+          return $this->mapear($resultSet);
+      else
+          return false;
     }
 
     public function readByIdEvent ($id_event)
@@ -213,7 +233,7 @@ class CalendarDao extends Singleton implements \interfaces\Crud
             echo "<pre>";
             var_dump($artists);
             echo "</pre>";*/
-		    return new M_Calendar( $p['date'],$artists , $event_place, $event , null, $p['id_calendar']);
+		    return new M_Calendar( $p['date'],$artists , $event_place, $event , $p['id_calendar']);
         }, $value);
 
             /* devuelve un arreglo si tiene datos y sino devuelve nulo*/

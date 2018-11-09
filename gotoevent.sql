@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-11-2018 a las 14:35:33
+-- Tiempo de generación: 09-11-2018 a las 22:01:52
 -- Versión del servidor: 10.1.36-MariaDB
 -- Versión de PHP: 7.2.11
 
@@ -65,7 +65,14 @@ CREATE TABLE `calendars` (
 INSERT INTO `calendars` (`id_calendar`, `date`, `id_event`, `id_event_place`) VALUES
 (1, '2018-11-30 00:00:00', 3, 4),
 (2, '2018-12-13 00:00:00', 2, 1),
-(3, '2018-11-28 00:00:00', 6, 2);
+(3, '2018-11-28 00:00:00', 6, 2),
+(8, '2018-11-25 00:00:00', 3, 4),
+(9, '2019-02-09 00:00:00', 5, 3),
+(10, '2018-11-29 00:00:00', 3, 1),
+(11, '2019-01-12 00:00:00', 1, 1),
+(12, '2018-11-25 00:00:00', 4, 3),
+(13, '2019-01-18 00:00:00', 4, 4),
+(14, '2019-01-25 00:00:00', 2, 2);
 
 -- --------------------------------------------------------
 
@@ -77,6 +84,17 @@ CREATE TABLE `calendars_x_artists` (
   `id_artist` int(11) NOT NULL,
   `id_calendar` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `calendars_x_artists`
+--
+
+INSERT INTO `calendars_x_artists` (`id_artist`, `id_calendar`) VALUES
+(4, 12),
+(5, 12),
+(1, 13),
+(2, 14),
+(4, 14);
 
 -- --------------------------------------------------------
 
@@ -169,18 +187,19 @@ CREATE TABLE `event_squares` (
   `id_square_type` int(11) DEFAULT NULL,
   `price` float DEFAULT NULL,
   `available_quantity` int(11) DEFAULT NULL,
-  `remainder` int(11) DEFAULT NULL
+  `remainder` int(11) DEFAULT NULL,
+  `id_calendar` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `event_squares`
 --
 
-INSERT INTO `event_squares` (`id_event_square`, `id_square_type`, `price`, `available_quantity`, `remainder`) VALUES
-(1, 1, 500, 1000, 1000),
-(2, 2, 1000, 400, 400),
-(3, 3, 330, 3000, 3000),
-(4, 4, 4533, 43567, 43567);
+INSERT INTO `event_squares` (`id_event_square`, `id_square_type`, `price`, `available_quantity`, `remainder`, `id_calendar`) VALUES
+(1, 1, 500, 1000, 1000, 1),
+(2, 2, 1000, 400, 400, 2),
+(3, 3, 330, 3000, 3000, 3),
+(4, 4, 4533, 43567, 43567, 2);
 
 -- --------------------------------------------------------
 
@@ -335,7 +354,8 @@ ALTER TABLE `event_places`
 --
 ALTER TABLE `event_squares`
   ADD PRIMARY KEY (`id_event_square`),
-  ADD KEY `fk_square_type` (`id_square_type`);
+  ADD KEY `fk_square_type` (`id_square_type`),
+  ADD KEY `fk_calendar_event_squares` (`id_calendar`);
 
 --
 -- Indices de la tabla `purchases`
@@ -390,7 +410,7 @@ ALTER TABLE `artists`
 -- AUTO_INCREMENT de la tabla `calendars`
 --
 ALTER TABLE `calendars`
-  MODIFY `id_calendar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_calendar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `categories`
@@ -481,6 +501,7 @@ ALTER TABLE `events`
 -- Filtros para la tabla `event_squares`
 --
 ALTER TABLE `event_squares`
+  ADD CONSTRAINT `fk_calendar_event_squares` FOREIGN KEY (`id_calendar`) REFERENCES `calendars` (`id_calendar`),
   ADD CONSTRAINT `fk_square_type` FOREIGN KEY (`id_square_type`) REFERENCES `square_types` (`id_square_type`);
 
 --

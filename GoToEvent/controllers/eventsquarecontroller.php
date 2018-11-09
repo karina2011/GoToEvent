@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace controllers;
 //use daos\daoList\ArtistDao as Dao;
@@ -21,7 +21,7 @@ class EventSquareController
         include(BASE . VIEWS . "Home.php");
     }
 
-    public function create($square_type='', $price='',$availble_quantity='',$remainder='')
+    public function create($square_type='', $price='',$availble_quantity='',$remainder='',$id_calendar='')
     {
         // $squaretype vine en formato de id, y hay q pasarlo a objeto
         $daoSquareType = DaoSquareType::getInstance();
@@ -31,7 +31,7 @@ class EventSquareController
         $square_type = new Square_type($square_type[0]->getDescription(),$square_type[0]->getId());
 
 
-        $event_square = new Event_square($price,$availble_quantity,$remainder,$square_type);
+        $event_square = new Event_square($price,$availble_quantity,$remainder,$square_type,$id_calendar);
 
         //$flag = $this->dao->create($artist);
         $this->dao->create($event_square);
@@ -51,10 +51,10 @@ class EventSquareController
         $list = $this->dao->readAll();
 
         if (!is_array($list) && $list != false){ // si no hay nada cargado, readall devuelve false
-            $array[] = $list; 
+            $array[] = $list;
             $list = $array; // para que devuelva un arreglo en caso de haber solo 1 objeto // esto para cuando queremos hacer foreach al listar, ya que no se puede hacer foreach sobre un objeto ni sobre un false
         }
-        
+
         return $list;
     }
 

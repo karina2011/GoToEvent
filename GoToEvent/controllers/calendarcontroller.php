@@ -26,12 +26,10 @@ class CalendarController
         $this->dao = Dao::getInstance(); // esto se instancia en el router
     }
 
-	public function create($date="", $artists="", $id_event_place="", $id_event="", $event_squares='')
+	public function create($date="", $id_event="", $artists=[], $id_event_place="")
 	{
 		//el error esta en que siempre el id de artista te llega con un tres
-		echo "<pre>";
-		var_dump($artists);
-		echo "</pre>";
+
 		$fechaActual=strftime( "%Y-%m-%d", time()); // devuelve la fecha actual, en formato Año-mes-dia, igual q date
 
 		if ($date < $fechaActual) // comprobar q la fecha sea posterior a la actua
@@ -53,16 +51,6 @@ class CalendarController
 							$artist_list [] = $this->readArtistById($artists);
 						}
 
-						if(is_array($event_squares)){
-							foreach ($event_squares as $key => $id_event_square) {
-								$event_square_list[] = $this->readEventSquareById($id_event_square);
-							}
-						} else {
-								$event_square_list[] = $this->readEventSquareById($event_squares);
-						}
-
-
-
 						// traer el objeto de lugar de evento y evento en base a su id
 						$event_place = $this->readEventPlaceById($id_event_place);
 						$event = $this->readEventById($id_event);
@@ -71,23 +59,21 @@ class CalendarController
 
 						$calendar = new Calendar($date,$artist_list,$event_place,$event);
 
-
-
-						$calendar = $this->dao->readLast(); // te lo devuelve en forma de arreglo al ultimo calendario cargado
-
 						$daoCalendarArtist = D_Calendar_artist::getInstance(); // se obtiene una instancia del dao de calendario x artista
 
 						//crea el calendario en la base de datos
 						$this->dao->create($calendar);
 
-							/* bucle realizado para recorrer todos los artistas que perteneces a un evento y guardarlo en la tabla intermedia */
-							foreach ($artist_list as $key => $artist) {
+						$calendar = $this->dao->readLast(); // te lo devuelve en forma de arreglo al ultimo calendario cargado
+						/* bucle realizado para recorrer todos los artistas que perteneces a un evento y guardarlo en la tabla intermedia */
 
+						foreach ($artist_list as $key => $artist)
+						{
 								$ids_calendar_artist['0'] = $calendar['0']->getId();
 								$ids_calendar_artist['1'] = $artist->getId();
 
 								$daoCalendarArtist->create($ids_calendar_artist);
-							}
+						}
 					} else {
 						echo "<script> alert('No esta disponible en esa fecha'); </script>";
 					}
@@ -122,7 +108,6 @@ class CalendarController
 		$daoArtist = D_Artist::getInstance();
 
 		$artist = $daoArtist->readById($id); // el readbyid devuelve el objeto adentro de un arreglo
-		var_dump($artist);
 		$dni = $artist['0']->getDni(); // en la posicion 0 del arreglo artist, está el objeto artista
 		$name = $artist['0']->getName();
 		$last_name = $artist['0']->getLastName();
@@ -159,14 +144,16 @@ class CalendarController
 	}
 
 	public function readEventById($id){
+		$daoEvent = D_Event::getInstance();
 
 		$event = $daoEvent->readById($id); // el readbyid devuelve el objeto adentro de un arreglo
 
-		$title = $event['0']->getTitle(); // en la posicion 0 del arreglo artist, está el objeto artista
+		$title = $event['0']->getTitle();
 		$category = $event['0']->getCategory();
 		$id_event = $event['0']->getId();
+		$img = $event['0']->getImg();
 
-		$event = new Event ($title, $category, $id_event);
+		$event = new Event ($title, $category,$img, $id_event);
 
 		return $event;
 	}

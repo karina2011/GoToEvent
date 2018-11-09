@@ -4,8 +4,10 @@ namespace daos\daodb;
 
 use models\Event_square as M_Event_square;
 use models\Square_type as M_Square_type;
+use models\Calendar as M_Calendar;
 use daos\daodb\connection as Connection;
 use daos\daodb\SquareTypeDao as DaoSquareType;
+use daos\daodb\CalendarDao as DaoCalendar;
 use PDOException;
 
 class EventSquareDao extends Singleton implements \interfaces\Crud
@@ -20,12 +22,13 @@ class EventSquareDao extends Singleton implements \interfaces\Crud
     {
         // Guardo como string la consulta sql utilizando como values, marcadores de parámetros con nombre (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada
 
-		$sql = "INSERT INTO event_squares (price,available_quantity,remainder,id_square_type) VALUES (:price, :available_quantity, :remainder, :id_square_type)";
+		$sql = "INSERT INTO event_squares (price,available_quantity,remainder,id_square_type,id_calendar) VALUES (:price, :available_quantity, :remainder, :id_square_type, :id_calendar)";
 
         $parameters['price'] = $event_square->getPrice();
         $parameters['available_quantity'] = $event_square->getAvailableQuantity();
         $parameters['remainder'] = $event_square->getRemainder();
         $parameters['id_square_type'] = $event_square->getSquareTypeId();
+        $parameters['id_calendar'] = $event_square->getCalendar();
 
         try
         {
@@ -124,7 +127,8 @@ class EventSquareDao extends Singleton implements \interfaces\Crud
 
 		$resp = array_map(function($p){
             $square_type = $this->createSquareType($p['id_square_type']);
-		    return new M_Event_square( $p['price'], $p['available_quantity'], $p['remainder'],$square_type, $p['id_event_square']);
+            $calendar = $this->createCalendar($p['id_calendar']);
+		        return new M_Event_square( $p['price'], $p['available_quantity'], $p['remainder'],$square_type, $calendar ,$p['id_event_square']);
         }, $value);
 
             /* devuelve un arreglo si hay mas de 1 dato, sino un objeto*/
@@ -141,6 +145,17 @@ class EventSquareDao extends Singleton implements \interfaces\Crud
         $square_type = new M_Square_type($square_type['0']->getDescription(),$square_type['0']->getId());
 
         return $square_type;
+     }
+
+     protected function createCalendar($id)
+     {
+       $daoCalendar = DaoCalendar::getInstance();
+
+       $calendar = $daoCalendar->readById($id);
+
+       $calendar = new M_Calendar($calendar['0']->getDate(),$calendar['0']->getArtists(),$calendar['0']->getEventPlace(),$calendar['0']->getEvent(),$calendar['0']->getId());
+
+       return $calendar;
      }
 
  }?>

@@ -47,7 +47,6 @@ $listSquareType = $squareTypeController->readAll();
 
         <div class="container-fluid">
 
-
             <h3>Crear calendario </h3>
 
             <form action="<?php echo BASE; ?>calendar/create" method="post">
@@ -72,8 +71,7 @@ $listSquareType = $squareTypeController->readAll();
                 <?php foreach ($listArtists as $key => $artist) { ?>
                 <div class="custom-control custom-checkbox ">
                         <input type="checkbox" class="custom-control-input" id="<?php echo $artist->getDni(); ?>" name="artists[]" value="<?php echo $artist->getId(); ?>">
-                        <label class="custom-control-label" for="<?php echo $artist->getDni(); ?>" ><?php echo $artist->getName() . ' ' .  $artist->getLastName(); ?></label>
-                        <?php echo $artist->getId(); ?>
+                        <label class="custom-control-label" for="<?php echo $artist->getDni(); ?>" ><?php echo $artist->getName() . ' ' .  $artist->getLastName(). " " . $artist->getId(); ?></label>
                 </div>
                 <?php } ?>
 
@@ -86,7 +84,7 @@ $listSquareType = $squareTypeController->readAll();
                        <?php } ?>
                    </select>
                 </div>
-                <div class="form-group"> LO COMENTE PARA HACERLO DE OTRA MANERA
+                <!--<div class="form-group"> LO COMENTE PARA HACERLO DE OTRA MANERA
                     <label for="eventSquares[]">Plazas de evento:</label>
                     <div class="input-group-prepend">
                       <div class="input-group-text">
@@ -95,13 +93,17 @@ $listSquareType = $squareTypeController->readAll();
                         <label for="eventSquares[]"><?php  echo $eventsquare->getSquareTypeDescription() . ' ' .  $eventsquare->getAvailableQuantity(); ?></label>
                         <?php } ?>
                       </div>
-                    </div>
-                </div>
+                    </div>-->
+
+              </div>
 
 
                 <button type="submit" class="btn btn-primary">Crear calendario</button>
             </form>
 
+            <div class="">
+              <button onclick="location.href='<?php echo BASE; ?>eventsquare/create'">Agregar plaza de evento</button>
+            </div>
 
             <hr>
 
@@ -115,43 +117,39 @@ $listSquareType = $squareTypeController->readAll();
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
+                      <th>Evento</th>
                       <th>Fecha</th>
-                      <th>Cliente</th>
-                      <th>Lineas de compra</th>
-                      <th>Precio</th>
-                      <th>ID</th>
+                      <th>Lugar del evento</th>
                       <th></th><!-- para el boton de borrar-->
                     </tr>
                   </thead>
+                  <tbody>
+                  <?php foreach ($list as $key => $calendar){   ?>
+                    <tr>
+                      <td><?php echo $calendar->getEventTitle(); ?></td>
+                      <td><?php echo $calendar->getDate(); ?></td>
+                      <td><?php echo $calendar->getEventPlaceDescription(); ?></td>
+                      <td>
+                          <form class="text-center" action="<?php echo BASE; ?>calendar/delete" method="post">
+                            <button type="submit" class="btn btn-danger" name="id" value="<?php echo $calendar->getId();?>"><i class="fas fa-trash"></i></button>
+                          </form>
+                      </td>
+                    </tr>
+                  <?php } ?>
+                  </tbody>
                   <tfoot>
                     <tr>
+                      <th>Evento</th>
                       <th>Fecha</th>
-                      <th>Cliente</th>
-                      <th>Lineas de compra</th>
-                      <th>Precio</th>
-                      <th>ID</th>
-                      <th></th>
+                      <th>Lugar del evento</th>
+                      <th></th><!-- para el boton de borrar-->
                     </tr>
                   </tfoot>
-                  <tbody>
-                  <?php foreach ($list as $key => $purchase){ ?>
-                    <tr>
-                      <td><?php echo $purchase->getDate(); ?></td>
-                      <td><?php echo $purchase->getCustomerEmail(); ?></td>
-                      <td><?php echo $purchase->getPurchaseLines(); ?></td>
-                      <td><?php echo $purchase->getPrice(); ?></td>
-                      <td><?php echo $purchase->getId(); ?></td>
-                      <td> <form class="text-center" action="<?php echo BASE; ?>purchase/delete" method="post">
-          <button type="submit" class="btn btn-danger" name="dni" value="<?php echo $purchase->getId();?>"><i class="fas fa-trash"></i></button>
-          </form> </td>
-                    </tr>
-                    <?php } ?>
-                  </tbody>
+
                 </table>
               </div>
             </div>
           </div>
-
         </div>
         <!-- /.container-fluid -->
 

@@ -1,15 +1,15 @@
-<?php 
+<?php
 namespace daos\daodb;
 
 use PDOException;
 use daos\daodb\connection as Connection;
 
 /**
- * 
+ *
  */
 class CalendarArtistDao extends Singleton implements \interfaces\Crud
 {
-	
+
     private $connection;
 
     public function __construct()
@@ -19,22 +19,22 @@ class CalendarArtistDao extends Singleton implements \interfaces\Crud
 
     public function create($ids_calendar_artist)
     {
-    	$id_calendar = $ids_calendar_artist['0'];
+    		$id_calendar = $ids_calendar_artist['0'];
         $id_artist = $ids_calendar_artist['1'];
-        
+
     	$sql = "INSERT INTO calendars_x_artists (id_calendar,id_artist) VALUES (:id_calendar, :id_artist)";
 
         $parameters['id_calendar'] = $id_calendar;
         $parameters['id_artist'] = $id_artist;
 
-        try 
+        try
         {
-            
+
             $this->connection = Connection::getInstance();
 
             return $this->connection->ExecuteNonQuery($sql, $parameters);
 
-        } 
+        }
         catch(PDOException $e)
         {
             echo $e;
@@ -48,7 +48,7 @@ class CalendarArtistDao extends Singleton implements \interfaces\Crud
 
         $parameters['id_calendar'] = $id_calendar;
 
-        try 
+        try
         {
             $this->connection = Connection::getInstance();
             $resultSet = $this->connection->execute($sql, $parameters);
@@ -57,8 +57,8 @@ class CalendarArtistDao extends Singleton implements \interfaces\Crud
             var_dump($resultSet);
             echo "</pre>";*/
 
-        } 
-        catch(PDOException $e) 
+        }
+        catch(PDOException $e)
         {
             echo $e;
         }
@@ -68,7 +68,7 @@ class CalendarArtistDao extends Singleton implements \interfaces\Crud
         else
             return false;
     }
-    
+
 
     public function update($id)
     {
@@ -90,8 +90,8 @@ class CalendarArtistDao extends Singleton implements \interfaces\Crud
             $this->connection = Connection::getInstance();
             $resultSet = $this->connection->execute($sql);
 
-        } 
-        catch(PDOException $e) 
+        }
+        catch(PDOException $e)
         {
 
             echo $e;

@@ -43,6 +43,11 @@ class Event
 		return $this->id_event;
 	}
 
+	public function getImg()
+	{
+		return $this->img;
+	}
+
 	public function setTitle($title)
 	{
 		$this->title = $title;
@@ -53,10 +58,7 @@ class Event
 		$this->category = $category;
 	}
 
-	public function getImg()
-	{
-		return $this->img;
-	}
+
 
 }
 ?>
