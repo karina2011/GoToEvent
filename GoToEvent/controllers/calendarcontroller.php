@@ -38,10 +38,10 @@ class CalendarController
 		} else
 			{
 				$res = $this->validateDateInEventPlace($date,$id_event_place); //si res devuelve 0 es porque la fecha esta disponible
-
+				$res2 = $this->validateDateInArtists($date,$artists);
 				//falta comprobar que los artistas esten disponibles para esa fecha
 
-					if($res == 0)
+					if($res == 0 && $res2 == 0)
 					{// pasamos el arreglo de id de artistas que recibimos a objetos
 						if(is_array($artists)){
 							foreach ($artists as $key => $id_artist) {
@@ -79,7 +79,7 @@ class CalendarController
 					}
 				}
 
-		require(ROOT . VIEWS . 'Home.php');
+		require(ROOT . VIEWS . 'calendarsadmin.php');
 	}
 
  	/* Funcion que valida que el evento no este ocupado
@@ -87,6 +87,17 @@ class CalendarController
 	public function validateDateInEventPlace($date,$id_event_place)
 	{
 		return $this->dao->validateDateInEventPlace($date,$id_event_place);
+	}
+
+	public function validateDateInArtists($date,$artists)
+	{
+		$res = 0;
+		foreach ($artists as $key => $artist) {
+			$res = $this->dao->validateDateInArtist($date,$artist);
+			if($res > 0)
+				return $res;
+		}
+		return $res;
 	}
 
 	public function readAll()

@@ -75,6 +75,28 @@ class CalendarDao extends Singleton implements \interfaces\Crud
         }
     }
 
+    public function validateDateInArtist($date,$id_artist)
+    {
+        $sql = "SELECT * FROM artists a inner join calendars_x_artists ca on a.id_artist=ca.id_artist
+                                        inner join calendars c on c.id_calendar = ca.id_calendar where c.date = :date and a.id_artist = :id_artist";
+
+        $parameters['date'] = $date;
+        $parameters['id_artist'] = $id_artist;
+
+        try
+        {
+
+            $this->connection = Connection::getInstance();
+
+            return $this->connection->ExecuteNonQuery($sql, $parameters);
+
+        }
+        catch(PDOException $e)
+        {
+            echo $e;
+        }
+    }
+
     public function readAll()
     {
         $sql = "SELECT * FROM calendars";
@@ -304,5 +326,27 @@ class CalendarDao extends Singleton implements \interfaces\Crud
        } else {
          return $event_square;
        }
+     }
+
+     public function getLastCalendar()
+     {
+         $sql = "SELECT * FROM calendars order by id_calendar desc limit 1";
+
+         $parameters = array();
+
+         try
+         {
+             $this->connection = Connection::getInstance();
+             $resultSet = $this->connection->Execute($sql, $parameters);
+         }
+         catch(PDOException $e)
+         {
+             echo $e;
+         }
+
+         if(!empty($resultSet))
+             return $this->mapear($resultSet);
+         else
+             return false;
      }
 }

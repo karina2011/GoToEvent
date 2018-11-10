@@ -23,6 +23,7 @@ class EventSquareController
 
     public function create($square_type='', $price='',$availble_quantity='',$remainder='',$id_calendar='')
     {
+      echo "id:".$id_calendar;
         // $squaretype vine en formato de id, y hay q pasarlo a objeto
         $daoSquareType = DaoSquareType::getInstance();
 

@@ -68,7 +68,8 @@ class ViewsController
         require(ROOT . VIEWS . 'purchasesadmin.php');
     }
 
-    public function viewEventSquaresAdmin(){
+    public function viewEventSquaresAdmin($id_calendar=''){
+        //echo "id de calendar: " . $id_calendar;
         require(ROOT . VIEWS . 'eventsquaresadmin.php');
     }
 

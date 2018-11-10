@@ -1,4 +1,4 @@
-<?php 
+<?php
 use controllers\UserController as C_User;
 use controllers\EventSquareController as C_Event_square;
 use controllers\SquareTypeController as C_Square_type;
@@ -39,7 +39,7 @@ $listSquareType = $squareTypeController->readAll();
                     <select class="custom-select"  name="squaretype">
                       <?php  foreach ($listSquareType as $key => $squaretype) { ?>
                        <option value="<?php echo $squaretype->getId(); ?>"><?php  echo $squaretype->getDescription(); ?></option>
-                       <?php } ?>      
+                       <?php } ?>
                     </select>
                 </div>
 
@@ -61,10 +61,10 @@ $listSquareType = $squareTypeController->readAll();
                 <div class="form-group">
                     <label for="calendar">Calendario // HACER ESTO</label>
                 </div>
-
+                <input type="hidden" name="$id_calendar" value="<?php echo $id_calendar; ?>">
                 <button type="submit" class="btn btn-primary">Crear plaza de evento</button>
             </form>
-            
+
             <hr>
 
           <!-- DataTables Example -->
@@ -110,7 +110,7 @@ $listSquareType = $squareTypeController->readAll();
           <button type="submit" class="btn btn-danger" name="dni" value="<?php echo $eventSquare->getId();?>"><i class="fas fa-trash"></i></button>
           </form> </td>
                     </tr>
-                    <?php } ?> 
+                    <?php } ?>
                   </tbody>
                 </table>
               </div>

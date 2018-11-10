@@ -6,8 +6,11 @@ use controllers\ArtistController as C_Artist;
 use controllers\EventPlaceController as C_Event_place;
 use controllers\EventSquareController as C_Event_square;
 use controllers\SquareTypeController as C_Square_type;
+use daos\daodb\CalendarDao as D_Calendar;
 
 use models\User as M_User;
+
+$daoCalendar = D_Calendar::getInstance();
 
 $userController = new C_User;
 $user = $userController->checkSession();
@@ -100,11 +103,17 @@ $listSquareType = $squareTypeController->readAll();
 
                 <button type="submit" class="btn btn-primary">Crear calendario</button>
             </form>
-
             <div class="">
-              <button onclick="location.href='<?php echo BASE; ?>eventsquare/create'">Agregar plaza de evento</button>
-            </div>
+                <form action="<?php echo BASE; ?>views/viewEventSquaresAdmin" method="post">
+                  <?php $lastCalendar = $daoCalendar->getLastCalendar(); ?>
 
+                  <input type="hidden" name="id_calendar" value="<?php echo $lastCalendar[0]->getId(); ?>">
+                  
+                  <div class="form-group">
+                      <button type="submit" class="btn btn-primary">Crear Plaza de evento</button>
+                  </div>
+                </form>
+            </div>
             <hr>
 
           <!-- DataTables Example -->
