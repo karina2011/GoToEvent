@@ -229,6 +229,11 @@ class CalendarController
 
 		echo $options;
 	}
+
+	public function generateId(){
+		$id = $this->dao->getLastId();
+		return $id;
+	}
 }
 
 ?>

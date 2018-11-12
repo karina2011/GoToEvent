@@ -31,7 +31,7 @@ $listSquareType = $squareTypeController->readAll();
         <div class="container-fluid">
 
 
-            <h3>Crear Plazas de evento</h3>
+            <h3>Crear Plazas de evento // ESTA PARTE VA A QUEDAR OBSOLETA</h3>
 
             <form action="<?php echo BASE; ?>eventsquare/create" method="post">
                 <div class="form-group">

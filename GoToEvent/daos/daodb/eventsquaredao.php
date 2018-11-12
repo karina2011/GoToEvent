@@ -51,7 +51,6 @@ class EventSquareDao extends Singleton implements \interfaces\Crud
 
         try
         {
-
             $this->connection = Connection::getInstance();
             $resultSet = $this->connection->execute($sql);
 
@@ -66,7 +65,30 @@ class EventSquareDao extends Singleton implements \interfaces\Crud
             return $this->mapear($resultSet);
         else
             return false;
+    }
+    
+    public function readAllByCalendarId($id_calendar)
+    {
+        $sql = "SELECT * FROM event_squares WHERE id_calendar = :id_calendar";
 
+        $parameters['id_calendar'] = $id_calendar;
+
+        try
+        {
+            $this->connection = Connection::getInstance();
+            $resultSet = $this->connection->execute($sql,$parameters);
+
+        }
+        catch(PDOException $e)
+        {
+
+            echo $e;
+        }
+
+        if(!empty($resultSet))
+            return $this->mapear($resultSet);
+        else
+            return false;
     }
 
     public function read ($id_event_square)
@@ -153,7 +175,7 @@ class EventSquareDao extends Singleton implements \interfaces\Crud
 
        $calendar = $daoCalendar->readById($id);
 
-       $calendar = new M_Calendar($calendar['0']->getDate(),$calendar['0']->getArtists(),$calendar['0']->getEventPlace(),$calendar['0']->getEvent(),$calendar['0']->getId());
+       $calendar = new M_Calendar($calendar->getDate(),$calendar->getArtists(),$calendar->getEventPlace(),$calendar->getEvent(),$calendar->getId());
 
        return $calendar;
      }

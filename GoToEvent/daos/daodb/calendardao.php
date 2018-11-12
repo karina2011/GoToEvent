@@ -260,7 +260,7 @@ class CalendarDao extends Singleton implements \interfaces\Crud
 
             /* devuelve un arreglo si tiene datos y sino devuelve nulo*/
 
-            return count($resp) > 0 ? $resp : null;
+            return count($resp) > 1 ? $resp : $resp['0'];
      }
 
 
@@ -328,7 +328,7 @@ class CalendarDao extends Singleton implements \interfaces\Crud
        }
      }
 
-     public function getLastCalendar()
+     public function getLastCalendar() // fijarse si no hay q borrar esto
      {
          $sql = "SELECT * FROM calendars order by id_calendar desc limit 1";
 
@@ -348,5 +348,23 @@ class CalendarDao extends Singleton implements \interfaces\Crud
              return $this->mapear($resultSet);
          else
              return false;
+     }
+
+     public function getLastId(){ // devuelve el ultimo id del auto_increment , por mas q se hayan borrado algunos
+        $sql = "SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'gotoevent' AND TABLE_NAME = 'calendars'";
+        // https://es.stackoverflow.com/questions/111980/saber-el-auto-increment-de-una-tabla-mysql-despues-de-borrarse-los-ultimos-ids
+        try
+        {
+            $this->connection = Connection::getInstance();
+            $resultSet = $this->connection->execute($sql);
+        }
+        catch(PDOException $e)
+        {
+            echo $e;
+        }
+        if(!empty($resultSet))
+            return $resultSet['0']['AUTO_INCREMENT']; // el resultado está ahi adentro
+        else
+            return false;
      }
 }

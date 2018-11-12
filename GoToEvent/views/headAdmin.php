@@ -20,4 +20,7 @@
 <!-- Custom styles for this template-->
 <link href="<?php echo BASE; ?>assets/css/sb-admin.css" rel="stylesheet">
 
+<!-- Styles.css-->
+<link href="<?php echo BASE; ?>assets/css/modal.css" rel="stylesheet">
+
 </head>
