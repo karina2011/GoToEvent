@@ -28,8 +28,6 @@ class CalendarController
 
 	public function create($date="", $id_event="", $artists=[], $id_event_place="")
 	{
-		//el error esta en que siempre el id de artista te llega con un tres
-
 		$fechaActual=strftime( "%Y-%m-%d", time()); // devuelve la fecha actual, en formato Año-mes-dia, igual q date
 
 		if ($date < $fechaActual) // comprobar q la fecha sea posterior a la actua
@@ -69,7 +67,7 @@ class CalendarController
 
 						foreach ($artist_list as $key => $artist)
 						{
-								$ids_calendar_artist['0'] = $calendar['0']->getId();
+								$ids_calendar_artist['0'] = $calendar->getId();
 								$ids_calendar_artist['1'] = $artist->getId();
 
 								$daoCalendarArtist->create($ids_calendar_artist);

@@ -1,4 +1,4 @@
-<?php 
+<?php
 use controllers\UserController as C_User;
 
 use models\User as M_User;
@@ -26,10 +26,9 @@ $list = $userController->readAll();
 
         <div class="container-fluid">
 
+          <a href="#" id="createUser"><h3 >Crear Usuario</h3></a>
 
-            <h3>Crear Usuario</h3>
-
-            <form action="<?php echo BASE; ?>user/create" method="post">
+            <form action="<?php echo BASE; ?>user/create" method="post" class="" id="formcreateuser">
                 <div class="form-group">
                     <label for="name">Nombre</label>
                     <input type="text" class="form-control" id="name" placeholder="Nombre" name="name">
@@ -60,7 +59,7 @@ $list = $userController->readAll();
 
                 <button type="submit" class="btn btn-primary">Crear usuario</button>
             </form>
-            
+
             <hr>
 
           <!-- DataTables Example -->
@@ -109,7 +108,7 @@ $list = $userController->readAll();
           <button type="submit" class="btn btn-danger" name="dni" value="<?php echo $user->getEmail();?>"><i class="fas fa-trash"></i></button>
           </form> </td>
                     </tr>
-                    <?php } ?> 
+                    <?php } ?>
                   </tbody>
                 </table>
               </div>

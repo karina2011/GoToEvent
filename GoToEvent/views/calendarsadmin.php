@@ -93,9 +93,9 @@ $listSquareType = $squareTypeController->readAll();
                 <div class="form-group">
                     <label for="eventSquares[]">Plazas de evento:</label>
                     <div class="">
-                        <?php if ($listEventSquares == false) { 
+                        <?php if ($listEventSquares == false) {
                           //  HACER ESTO CON TODOS LOS FOREACH DE TODAS LAS VISTAS EN ADMIN
-                          echo "NO HAY PLAZAS DE EVENTOS CARGADOS PARA ESTE CALENDARIO";} 
+                          echo "NO HAY PLAZAS DE EVENTOS CARGADOS PARA ESTE CALENDARIO";}
                           else { ?>
                         <?php foreach ($listEventSquares as $key => $eventsquare) { ?>
                         <b>-<?php  echo $eventsquare->getSquareTypeDescription() ?></b>
@@ -104,49 +104,50 @@ $listSquareType = $squareTypeController->readAll();
                     </div>
                 </div>
 
-                <a href="#openModal" class="btn btn-success">Agregar plaza de evento</a> <!-- para ventana emergente/modal/flotante/comosellame-->
-                    
-                    <div id="openModal" class="modalDialog">
-                      <div>
-                        <a href="#close" title="Close" class="close">X</a>
-                        <h3>Crear Plazas de evento</h3>
-
-                            <form action="<?php echo BASE; ?>eventsquare/create" method="post" >
-                                <div class="form-group">
-                                    <label for="squaretype">Tipo de plaza:</label>
-                                    <select class="custom-select"  name="squaretype">
-                                      <?php  foreach ($listSquareType as $key => $squaretype) { ?>
-                                      <option value="<?php echo $squaretype->getId(); ?>"><?php  echo $squaretype->getDescription(); ?></option>
-                                      <?php } ?>
-                                    </select>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="price">Precio</label>
-                                    <input type="number" class="form-control" id="price" placeholder="Precio" name="price">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="available_quantity">Cantidad disponible</label>
-                                    <input type="number" class="form-control" id="available_quantity" placeholder="Cantidad" name="available_quantity">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="remainder">Remanente</label>
-                                    <input type="number" class="form-control" id="remainder" placeholder="Remanente" name="remainder">
-                                </div>
-
-                                <input type="hidden" name="id_calendar" value="<?php echo $calendarId; ?>">
-                                <button type="submit" class="btn btn-primary">Crear plaza de evento// funciona mal</button>
-                            </form>
-                      </div>
-                    </div>
-
-                    <br>
-                    <br>
-
                 <button type="submit" class="btn btn-primary">Crear calendario</button>
             </form>
+
+            <br>
+            <br>
+
+            <a href="#openModal" class="btn btn-success">Agregar plaza de evento</a> <!-- para ventana emergente/modal/flotante/comosellame-->
+
+                <div id="openModal" class="modalDialog">
+                  <div>
+                    <a href="#close" title="Close" class="close">X</a>
+                    <h3>Crear Plazas de evento</h3>
+
+                        <form action="<?php echo BASE; ?>eventsquare/create" method="post" >
+                            <?php $lastCalendar = $daoCalendar->readLast(); ?>
+                            <div class="form-group">
+                                <label for="squaretype">Tipo de plaza:</label>
+                                <select class="custom-select"  name="squaretype">
+                                  <?php  foreach ($listSquareType as $key => $squaretype) { ?>
+                                  <option value="<?php echo $squaretype->getId(); ?>"><?php  echo $squaretype->getDescription(); ?></option>
+                                  <?php } ?>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="price">Precio</label>
+                                <input type="number" class="form-control" id="price" placeholder="Precio" name="price">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="available_quantity">Cantidad disponible</label>
+                                <input type="number" class="form-control" id="available_quantity" placeholder="Cantidad" name="available_quantity">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="remainder">Remanente</label>
+                                <input type="number" class="form-control" id="remainder" placeholder="Remanente" name="remainder">
+                            </div>
+
+                            <input type="hidden" name="id_calendar" value="<?php echo $lastCalendar->getId(); ?>">
+                            <button type="submit" class="btn btn-primary">Crear plaza de evento// funciona mal</button>
+                        </form>
+                  </div>
+                </div>
 
             <hr>
 

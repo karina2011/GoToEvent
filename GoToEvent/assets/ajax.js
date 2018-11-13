@@ -29,6 +29,10 @@ $(document).ready(function() {
             }
         });
     });
+    $('#createUser').on('click',function(){
+      alert("Hola");
+      $('#formcreateuser').removeClass('d-none');
+    })
     $('#event').change(function(e){
       e.preventDefault;
       var id = $(this).val();
