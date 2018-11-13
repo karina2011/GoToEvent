@@ -34,8 +34,33 @@ $calendarlist = $calendardao->readAll();
   <body>
 
     <?php include_once (VIEWS."header.php");?>
-
-
+    <div id="slider" class="carousel slide mb-5" data-ride="carousel">
+            <ol class="carousel-indicators">
+              <li data-target="#slider" data-slide-to="0" class="active"></li>
+              <li data-target="#slider" data-slide-to="1"></li>
+              <li data-target="#slider" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner" role="listbox">
+              <div class="carousel-item active">
+                <img class="d-block w-100" src="https://www.masquenegocio.com/wp-content/uploads/2018/03/evento-concierto-874x492.jpg" alt="First slide">
+              </div>
+              <div class="carousel-item">
+                <img class="d-block img-fluid w-100" src="https://www.masquenegocio.com/wp-content/uploads/2018/03/evento-concierto-874x492.jpg" alt="Second slide">
+              </div>
+              <div class="carousel-item">
+                <img class="d-block img-fluid w-100" src="http://placehold.it/900x350" alt="Third slide">
+              </div>
+            </div>
+            <a class="carousel-control-prev" href="#slider" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#slider" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+    
     <!-- Page Content -->
     <div class="container">
 
@@ -52,57 +77,17 @@ $calendarlist = $calendardao->readAll();
           <!-- Opciones artistas y eventos están aca de prueba, despues se debe pasar a su respectiva vista-->
 
 
-          <h2 class="my-4"> Compras</h2><!--Solo puede haber un "h1"-->
-          <div class="list-group">
-            <a href="<?php echo BASE; ?>Views/viewCreatePurchase" class="list-group-item">Crear Compra</a>
-            <a href="<?php echo BASE; ?>Purchase/readAll" class="list-group-item">Ver Compras</a>
-          </div>
-
-          <h2 class="my-4"> Linea compra</h2><!--Solo puede haber un "h1"-->
+          <!--<h2 class="my-4"> Linea compra</h2>
           <div class="list-group">
             <a href="<?php echo BASE; ?>Views/viewCreatePurchaseLine" class="list-group-item">Crear linea Compra</a>
             <a href="<?php echo BASE; ?>PurchaseLine/readAll" class="list-group-item">Ver linea Compras</a>
-          </div>
-
-          <h2 class="my-4"> Calendar</h2><!--Solo puede haber un "h1"-->
-          <div class="list-group">
-            <a href="<?php echo BASE; ?>Views/viewCreateCalendar" class="list-group-item">Crear Calendario</a>
-            <a href="<?php echo BASE; ?>Calendar/readAll" class="list-group-item">Ver calendario</a>
-          </div>
-
+          </div>-->
 
 
         </div>
         <!-- /.col-lg-3 -->
 
-        <div class="col-lg-9">
-
-          <div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
-            <ol class="carousel-indicators">
-              <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-              <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-              <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-            </ol>
-            <div class="carousel-inner" role="listbox">
-              <div class="carousel-item active">
-                <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="First slide">
-              </div>
-              <div class="carousel-item">
-                <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="Second slide">
-              </div>
-              <div class="carousel-item">
-                <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="Third slide">
-              </div>
-            </div>
-            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="sr-only">Next</span>
-            </a>
-          </div>
+        <div class="col-lg-13">
 
           <div class="row">
             <?php if($calendarlist) { ?>
