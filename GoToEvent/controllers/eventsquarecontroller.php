@@ -23,7 +23,6 @@ class EventSquareController
 
     public function create($square_type='', $price='',$availble_quantity='',$remainder='',$id_calendar='')
     {
-      echo "id:".$id_calendar;
         // $squaretype vine en formato de id, y hay q pasarlo a objeto
         $daoSquareType = DaoSquareType::getInstance();
 
@@ -43,7 +42,7 @@ class EventSquareController
             echo "No se pudo crear el artista" . "<br><br>";
         }*/
 
-        require(ROOT . VIEWS . 'calendarsadmin.php');
+        require(ROOT . VIEWS . 'addeventsquarestocalendar.php');
 
     }
 

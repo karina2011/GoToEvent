@@ -32,6 +32,7 @@ class CalendarController
 
 		if ($date < $fechaActual) // comprobar q la fecha sea posterior a la actua
 		{
+			require(ROOT . VIEWS . 'calendarsadmin.php');
 			echo '<script>alert("NO PODES CREAR EVENTOS EN EL PASADO INUTIL");</script>';
 		} else
 			{
@@ -72,12 +73,13 @@ class CalendarController
 
 								$daoCalendarArtist->create($ids_calendar_artist);
 						}
+						require(ROOT . VIEWS . 'addeventsquarestocalendar.php');
+
 					} else {
+						require(ROOT . VIEWS . 'calendarsadmin.php');
 						echo "<script> alert('No esta disponible en esa fecha'); </script>";
 					}
 				}
-
-		require(ROOT . VIEWS . 'calendarsadmin.php');
 	}
 
  	/* Funcion que valida que el evento no este ocupado
@@ -231,6 +233,10 @@ class CalendarController
 	public function generateId(){
 		$id = $this->dao->getLastId();
 		return $id;
+	}
+
+	public function readLastCalendar(){
+		return $this->dao->readLast();
 	}
 }
 
