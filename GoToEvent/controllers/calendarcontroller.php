@@ -99,7 +99,11 @@ class CalendarController
 		}
 		return $res;
 	}
-
+	public function readEventPlaceByCalendarId($id_calendar)
+	{
+		$capacity = $this->dao->readEventPlaceByCalendarId($id_calendar);
+		return $capacity['0']['capacity'];
+	}
 	public function readAll()
 	{
 		$list = $this->dao->readAll();

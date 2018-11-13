@@ -143,6 +143,28 @@ class CalendarDao extends Singleton implements \interfaces\Crud
             return false;
     }
 
+    public function readEventPlaceByCalendarId ($id_calendar)
+    {
+        $sql = "SELECT ep.capacity FROM calendars c inner join event_places ep on c.id_event_place = ep.id_event_place where c.id_calendar = :id_calendar";
+
+        $parameters['id_calendar'] = $id_calendar;
+
+        try
+        {
+            $this->connection = Connection::getInstance();
+            $resultSet = $this->connection->execute($sql, $parameters);
+        }
+        catch(PDOException $e)
+        {
+            echo $e;
+        }
+
+        if(!empty($resultSet))
+            return $resultSet;
+        else
+            return false;
+    }
+
     public function readLast ()
     {
         $sql = "SELECT * FROM calendars ORDER BY id_calendar DESC LIMIT 1";

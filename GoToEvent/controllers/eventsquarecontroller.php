@@ -6,6 +6,7 @@ use models\Event_square;
 use models\Square_type;
 use daos\daodb\EventSquareDao as Dao;
 use daos\daodb\SquareTypeDao as DaoSquareType;
+use controllers\CalendarController as C_Calendar;
 
 class EventSquareController
 {
@@ -23,26 +24,45 @@ class EventSquareController
 
     public function create($square_type='', $price='',$availble_quantity='',$remainder='',$id_calendar='')
     {
-        // $squaretype vine en formato de id, y hay q pasarlo a objeto
-        $daoSquareType = DaoSquareType::getInstance();
+        $quantity = 0;
+        $list = $this->readAllByCalendarId($id_calendar);
+        foreach ($list as $key => $event_square) {
+          $quantity = $quantity + $event_square->getAvailableQuantity();
+        }
 
-        $square_type = $daoSquareType->readById($square_type);
-        // hay q hacer new porq devuelve en forma de arreglo
-        $square_type = new Square_type($square_type[0]->getDescription(),$square_type[0]->getId());
+        $calendarController = new C_Calendar();
 
+        $capacity = $calendarController->readEventPlaceByCalendarId($id_calendar);
 
-        $event_square = new Event_square($price,$availble_quantity,$remainder,$square_type,$id_calendar);
+        $quantity = $quantity + $availble_quantity;
 
-        //$flag = $this->dao->create($artist);
-        $this->dao->create($event_square);
-
-        /*if($flag){
-            echo "Artista creado" . "<br><br>";
+        if($quantity > $capacity){
+          require(ROOT . VIEWS . 'addeventsquarestocalendar.php');
+          echo "<script>alert('Se paso de la capacidad del estadio')</script>";
         } else {
-            echo "No se pudo crear el artista" . "<br><br>";
-        }*/
+          // $squaretype vine en formato de id, y hay q pasarlo a objeto
+          $daoSquareType = DaoSquareType::getInstance();
 
-        require(ROOT . VIEWS . 'addeventsquarestocalendar.php');
+          $square_type = $daoSquareType->readById($square_type);
+          // hay q hacer new porq devuelve en forma de arreglo
+          $square_type = new Square_type($square_type[0]->getDescription(),$square_type[0]->getId());
+
+
+          $event_square = new Event_square($price,$availble_quantity,$remainder,$square_type,$id_calendar);
+
+          //$flag = $this->dao->create($artist);
+          $this->dao->create($event_square);
+
+          /*if($flag){
+              echo "Artista creado" . "<br><br>";
+          } else {
+              echo "No se pudo crear el artista" . "<br><br>";
+          }*/
+          require(ROOT . VIEWS . 'addeventsquarestocalendar.php');
+        }
+
+
+
 
     }
 
