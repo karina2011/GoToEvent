@@ -6,11 +6,10 @@ use controllers\ArtistController as C_Artist;
 use controllers\EventPlaceController as C_Event_place;
 use controllers\EventSquareController as C_Event_square;
 use controllers\SquareTypeController as C_Square_type;
-use daos\daodb\CalendarDao as D_Calendar;
 
 use models\User as M_User;
 
-$daoCalendar = D_Calendar::getInstance();
+
 
 $userController = new C_User;
 $user = $userController->checkSession();

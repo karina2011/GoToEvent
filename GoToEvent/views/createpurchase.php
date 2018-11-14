@@ -1,14 +1,12 @@
-<?php 
-use daos\daodb\PurchaseLineDao as DaoPurchaseLine;
-use daos\daodb\UserDao as DaoUser;
+<?php
+use controllers\PurchaseLineController as C_Purchase_line;
+use controllers\UserController as C_User;
 
-$daoPurchaseLine = DaoPurchaseLine::getInstance();
-$daoUser = DaoUser::getInstance();
+$purchaseLineController = new C_Purchase_line();
+$userController = new C_User();
 
-$listPurchaseLine = $daoPurchaseLine->readAll();
-$listUser = $daoUser->readAll();
-
-
+$listPurchaseLine = $purchaseLineController->readAll();
+$listUser = $userController->readAll();
 
  ?>
 
@@ -20,7 +18,7 @@ $listUser = $daoUser->readAll();
 <body>
 
 	<?php include_once (VIEWS."header.php");?>
-	
+
 	<h3>Crear COMPRA</h3>
 	</div>
 		<br>
@@ -30,7 +28,7 @@ $listUser = $daoUser->readAll();
 				<select class="custom-select"  name="userEmail">
 				<?php  foreach ($listUser as $key => $user) { ?>
 				 <option value="<?php echo $user->getEmail(); ?>"><?php  echo $user->getEmail(); ?></option>
-				 <?php } ?>			 
+				 <?php } ?>
 				</select>
 				<br>
 				<label>Linea de compra:</label>

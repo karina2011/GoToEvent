@@ -1,4 +1,4 @@
-<?php 
+<?php
 use controllers\CalendarController as C_Calendar;
 use controllers\EventSquareController as C_Event_square;
 
@@ -9,6 +9,7 @@ $calendarId = $_GET["id_calendar"];
 
 $calendar = $calendarController->readById($calendarId);
 
+$event_squares = $eventSquareController->readAllByCalendarId($calendar->getId());
 
  ?>
 <!DOCTYPE html>
@@ -67,7 +68,7 @@ $calendar = $calendarController->readById($calendarId);
           <p class="lead"><?php echo $calendar->getEventPlaceDescription(); ?></p>
 
           <hr>
-        
+
 
         </div>
 
@@ -98,11 +99,44 @@ $calendar = $calendarController->readById($calendarId);
             </div>
           </div>
 
+          <div class="card my-4">
+            <h5 class="card-header">Plazas de evento</h5>
+            <div class="card-body">
+              <div class="col-lg-6">
+                  <ul class="list-unstyled mb-0">
+                    <?php if($event_squares != null){ ?>
+                    <?php foreach ($event_squares as $key => $event_square) { ?>
+                    <li>
+                      <p>- <?php echo $event_square->getSquareTypeDescription(); ?>  precio: <?php echo $event_square->getPrice(); ?></p>
+                    </li>
+                    <?php }
+                  } else {?>
+                    <p>No hay plazas de eventos para este evento </p>
+                  <?php } ?>
+                  </ul>
+              </div>
+            </div>
+          </div>
+
         </div>
 
       </div>
       <!-- /.row -->
-
+      <?php if($event_squares != null){ ?>
+      <form action="#" method="post">
+        <?php foreach ($event_squares as $key => $event_square) { ?>
+        <div class="form-group">
+          <label for="">- <?php echo $event_square->getSquareTypeDescription(); ?> precio: $<?php echo $event_square->getPrice(); ?></label>
+          <input type="number" name="event_square" value="" class="form-control" placeholder="Cantidad de entradas">
+        </div>
+      <?php } ?>
+        <div class="form-group">
+          <button type="button" name="button" class="btn btn-primary">Comprar</button>
+        </div>
+      </form>
+    <?php } else { ?>
+      <h3>No hay plazas de evento cargadas</h3>
+    <?php } ?>
     </div>
     <!-- /.container -->
 

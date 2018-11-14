@@ -1,12 +1,12 @@
-<?php
-use daos\daodb\EventSquareDao as D_Event_square;
-use daos\daodb\EventDao as D_Event;
+<?php namespace views;
+use controllers\EventSquareController as C_Event_square;
+use controllers\EventController as C_Event;
 
-$daoEventSquare = D_Event_square::getInstance();
-$daoEvent = D_Event::getInstance();
+$eventSquareController = new C_Event_square();
+$eventController = new C_Event();
 
-$list = $daoEventSquare->readAll();
-$listEvent = $daoEvent->readAll();
+$list = $eventSquareController->readAll();
+$listEvent = $eventController->readAll();
 
 
  ?>

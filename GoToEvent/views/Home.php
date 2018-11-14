@@ -1,10 +1,10 @@
 <?php
 use models\Calendar as M_Calendar;
-use daos\daodb\CalendarDao as D_Calendar;
+use controllers\CalendarController as C_Calendar;
 
-$calendardao = D_Calendar::getInstance(); // pasar a controller
+$calendarController = new C_Calendar();
 
-$calendarlist = $calendardao->readAll();
+$calendarlist = $calendarController->readAll();
 
 ?>
 
@@ -60,7 +60,7 @@ $calendarlist = $calendardao->readAll();
               <span class="sr-only">Next</span>
             </a>
           </div>
-    
+
     <!-- Page Content -->
     <div class="container">
 
@@ -97,7 +97,7 @@ $calendarlist = $calendardao->readAll();
                                   <a href="<?php echo BASE; ?>views/viewEvent?id_calendar=<?php echo $calendar->getId(); ?>"><img src="<?php echo BASE.IMG_EVENT.$calendar->getEventImg(); ?>" class="card-img-top" alt=""></a>
                                   <div class="card-body">
                                     <h4 class="card-title">
-                                      <a href="#"><?php echo $calendar->getEventTitle(); ?></a>
+                                      <a href="<?php echo BASE; ?>views/viewEvent?id_calendar=<?php echo $calendar->getId(); ?>"><?php echo $calendar->getEventTitle(); ?></a>
                                     </h4>
                                     <p class="card-text"><?php echo $calendar->getCategoryDescription(); ?></p>
                                   </div>
@@ -118,7 +118,7 @@ $calendarlist = $calendardao->readAll();
             </div>
 
 
-            
+
           </div>
           <!-- /.row -->
 
