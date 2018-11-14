@@ -82,6 +82,13 @@ class CalendarController
 				}
 	}
 
+	public function readById($id)
+	{
+		$calendar = $this->dao->readById($id);
+
+		return $calendar;
+	}
+
  	/* Funcion que valida que el evento no este ocupado
 	para la fecha que recibe por parametro   */
 	public function validateDateInEventPlace($date,$id_event_place)

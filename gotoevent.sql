@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-11-2018 a las 22:01:52
+-- Tiempo de generación: 14-11-2018 a las 16:33:57
 -- Versión del servidor: 10.1.36-MariaDB
--- Versión de PHP: 7.2.11
+-- Versión de PHP: 7.2.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -72,7 +72,9 @@ INSERT INTO `calendars` (`id_calendar`, `date`, `id_event`, `id_event_place`) VA
 (11, '2019-01-12 00:00:00', 1, 1),
 (12, '2018-11-25 00:00:00', 4, 3),
 (13, '2019-01-18 00:00:00', 4, 4),
-(14, '2019-01-25 00:00:00', 2, 2);
+(14, '2019-01-25 00:00:00', 2, 2),
+(15, '2019-03-20 00:00:00', 7, 2),
+(16, '2019-02-05 00:00:00', 8, 1);
 
 -- --------------------------------------------------------
 
@@ -94,18 +96,9 @@ INSERT INTO `calendars_x_artists` (`id_artist`, `id_calendar`) VALUES
 (5, 12),
 (1, 13),
 (2, 14),
-(4, 14);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `calendar_x_eventsquare`
---
-
-CREATE TABLE `calendar_x_eventsquare` (
-  `id_calendar` int(11) DEFAULT NULL,
-  `id_event_square` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+(4, 14),
+(2, 15),
+(4, 16);
 
 -- --------------------------------------------------------
 
@@ -147,12 +140,14 @@ CREATE TABLE `events` (
 --
 
 INSERT INTO `events` (`id_event`, `title`, `id_category`, `img`) VALUES
-(1, 'Gran evento musical', 1, '49887.png'),
-(2, 'Pelea por el titulo peso pesados', 2, '49887.png'),
-(3, 'Canta arjona', 1, '49887.png'),
-(4, 'Obra de teatro infantil', 3, '49887.png'),
-(5, 'A ver este', 2, '49887.png'),
-(6, 'nose que onda ', 2, '49887.png');
+(1, 'Gran evento musical', 1, '39938.png'),
+(2, 'Pelea por el titulo peso pesados', 2, '39938.png'),
+(3, 'Canta arjona', 1, '39938.png'),
+(4, 'Obra de teatro infantil', 3, '39938.png'),
+(5, 'A ver este', 2, '39938.png'),
+(6, 'nose que onda ', 2, '39938.png'),
+(7, 'boc', 5, '80378.png'),
+(8, 'Monumental', 5, '39938.png');
 
 -- --------------------------------------------------------
 
@@ -199,7 +194,9 @@ INSERT INTO `event_squares` (`id_event_square`, `id_square_type`, `price`, `avai
 (1, 1, 500, 1000, 1000, 1),
 (2, 2, 1000, 400, 400, 2),
 (3, 3, 330, 3000, 3000, 3),
-(4, 4, 4533, 43567, 43567, 2);
+(4, 4, 4533, 43567, 43567, 2),
+(5, 3, 12, 12, 12, 15),
+(6, 3, 1, 1, 1, 16);
 
 -- --------------------------------------------------------
 
@@ -321,13 +318,6 @@ ALTER TABLE `calendars_x_artists`
   ADD KEY `fk_id_calendar` (`id_calendar`);
 
 --
--- Indices de la tabla `calendar_x_eventsquare`
---
-ALTER TABLE `calendar_x_eventsquare`
-  ADD KEY `fkk_id_calendar` (`id_calendar`),
-  ADD KEY `fkk_event_square` (`id_event_square`);
-
---
 -- Indices de la tabla `categories`
 --
 ALTER TABLE `categories`
@@ -410,7 +400,7 @@ ALTER TABLE `artists`
 -- AUTO_INCREMENT de la tabla `calendars`
 --
 ALTER TABLE `calendars`
-  MODIFY `id_calendar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_calendar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `categories`
@@ -422,7 +412,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT de la tabla `events`
 --
 ALTER TABLE `events`
-  MODIFY `id_event` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_event` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `event_places`
@@ -434,7 +424,7 @@ ALTER TABLE `event_places`
 -- AUTO_INCREMENT de la tabla `event_squares`
 --
 ALTER TABLE `event_squares`
-  MODIFY `id_event_square` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_event_square` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `purchases`
@@ -483,13 +473,6 @@ ALTER TABLE `calendars`
 ALTER TABLE `calendars_x_artists`
   ADD CONSTRAINT `fk_id_artist` FOREIGN KEY (`id_artist`) REFERENCES `artists` (`id_artist`),
   ADD CONSTRAINT `fk_id_calendar` FOREIGN KEY (`id_calendar`) REFERENCES `calendars` (`id_calendar`);
-
---
--- Filtros para la tabla `calendar_x_eventsquare`
---
-ALTER TABLE `calendar_x_eventsquare`
-  ADD CONSTRAINT `fkk_event_square` FOREIGN KEY (`id_event_square`) REFERENCES `event_squares` (`id_event_square`),
-  ADD CONSTRAINT `fkk_id_calendar` FOREIGN KEY (`id_calendar`) REFERENCES `calendars` (`id_calendar`);
 
 --
 -- Filtros para la tabla `events`
