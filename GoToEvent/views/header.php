@@ -15,7 +15,7 @@ $user = $userController->checkSession();
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="#">Home
+              <a class="nav-link" href="<?php echo BASE; ?>views/index">Inicio
                 <span class="sr-only">(current)</span>
               </a>
             </li>
@@ -36,7 +36,7 @@ $user = $userController->checkSession();
                 <ul class="navbar-nav ml-auto">
                   <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                         <?= $user->getName() . ' ' . $user->getLastName() ?> 
+                         <?= $user->getName() . ' ' . $user->getLastName() ?> <i class="fas fa-user-circle fa-fw"></i>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                          <a class="dropdown-item" href="#">

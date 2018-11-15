@@ -128,7 +128,7 @@ class CalendarController
 		$this->dao->delete($id_calendar);
 		$list = $this->dao->readAll(); // agregue esto como solucion temporal al problema de borrado // si no da problemas se deja
 		// despues de borrar un evento, al ya haber recorrido todos los eventos, la lista quedaba vacía, por eso hay q volver a leer
-		require(ROOT . VIEWS . 'viewcalendars.php');
+		require(ROOT . VIEWS . 'calendarsadmin.php');
 	}
 
 	public function readArtistById($id){

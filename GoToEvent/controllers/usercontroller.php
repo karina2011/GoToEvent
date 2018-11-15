@@ -86,7 +86,7 @@ class UserController
 			}
 		} else {
 			require(ROOT . VIEWS . 'login.php');
-			echo "<script> alert('Usuario Incorrecta');</script>";
+			echo "<script> alert('Usuario Incorrecto');</script>";
 		}
 
 	}

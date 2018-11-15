@@ -171,7 +171,7 @@ class EventDao extends Singleton implements \interfaces\Crud
         catch(PDOException $e)
         {
             //echo $e;
-            echo '<script>alert("No se puede borrar porque el evento esta vinculado");</script>';
+            echo '<script>alert("No se puede borrar porque el evento esta vinculado a un calendario");</script>';
         }
    }
 

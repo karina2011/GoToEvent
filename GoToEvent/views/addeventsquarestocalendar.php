@@ -51,7 +51,7 @@ $listSquareType = $squareTypeController->readAll();
                         <?php } }?>
 
                         <br>
-
+                        
             <a href="#openModal" class="btn btn-success">Agregar plaza de evento</a> <!-- para ventana emergente/modal/flotante/comosellame-->
 
                 <div id="openModal" class="modalDialog">
@@ -77,11 +77,6 @@ $listSquareType = $squareTypeController->readAll();
                             <div class="form-group">
                                 <label for="available_quantity">Cantidad disponible</label>
                                 <input type="number" class="form-control" id="available_quantity" placeholder="Cantidad" name="available_quantity">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="remainder">Remanente</label>
-                                <input type="number" class="form-control" id="remainder" placeholder="Remanente" name="remainder">
                             </div>
 
                             <input type="hidden" name="id_calendar" value="<?php echo $calendar->getId(); ?>">

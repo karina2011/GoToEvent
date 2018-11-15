@@ -6,6 +6,7 @@ $calendarController = new C_Calendar();
 
 $calendarlist = $calendarController->readAll();
 
+
 ?>
 
 <!DOCTYPE html>
@@ -42,13 +43,13 @@ $calendarlist = $calendarController->readAll();
             </ol>
             <div class="carousel-inner" role="listbox">
               <div class="carousel-item active">
-                <img class="d-block w-100" src="https://www.masquenegocio.com/wp-content/uploads/2018/03/evento-concierto-874x492.jpg" alt="First slide">
+                <img class="d-block w-100" src="https://bombanoise.com/wp-content/uploads/2017/08/concert.jpg" alt="First slide">
               </div>
               <div class="carousel-item">
-                <img class="d-block img-fluid w-100" src="https://www.masquenegocio.com/wp-content/uploads/2018/03/evento-concierto-874x492.jpg" alt="Second slide">
+                <img class="d-block img-fluid w-100" src="http://xeneizesmillonarios.com.ar/wp-content/uploads/2017/09/MONU.jpg" alt="Second slide">
               </div>
               <div class="carousel-item">
-                <img class="d-block img-fluid w-100" src="http://placehold.it/900x350" alt="Third slide">
+                <img class="d-block img-fluid w-100" src="http://ilusound.wpengine.com/wp-content/uploads/2016/01/slide-ilusound-kalaidoscope.jpg" alt="Third slide">
               </div>
             </div>
             <a class="carousel-control-prev" href="#slider" role="button" data-slide="prev">
@@ -105,7 +106,7 @@ $calendarlist = $calendarController->readAll();
                               </div>
                 <?php } ?>
               <?php } ?>
-            <div class="col-lg-4 col-md-6 mb-4">
+            <!--COMO EJEMPLO<div class="col-lg-4 col-md-6 mb-4">
               <div class="card h-100">
                 <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
                 <div class="card-body">
@@ -115,7 +116,7 @@ $calendarlist = $calendarController->readAll();
                   <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur! Lorem ipsum dolor sit amet.</p>
                 </div>
               </div>
-            </div>
+            </div>-->
 
 
 

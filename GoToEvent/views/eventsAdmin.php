@@ -36,19 +36,19 @@ $listCategory = $categoryController->readAll();
             <form action="<?php echo BASE; ?>event/create" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="title">Titulo</label>
-                    <input type="text" class="form-control" id="title" placeholder="Titulo" name="title">
+                    <input type="text" class="form-control" id="title" placeholder="Titulo" name="title" required>
                 </div>
                 <div class="form-group">
                     <label for="category">Categoria</label>
-                    <select name="id_category">
+                    <select name="id_category" required>
 					<?php foreach ($listCategory as $key => $category) { ?>
 							         <option value="<?php echo $category->getId();  ?>"><?php echo $category->getDescription(); ?></option>
 					<?php } ?>
 				            </select>
                 </div>
                 <div class="form-group">
-                  <label>Cargar imagen: </label>
-                  <input type="file" name="eventimg" value="eventimg">
+                  <label>Cargar imagen (Max. 5MB): </label>
+                  <input type="file" name="eventimg" value="eventimg" required>
                 </div>
                 <button type="submit" class="btn btn-primary">Crear evento</button>
             </form>
@@ -83,6 +83,7 @@ $listCategory = $categoryController->readAll();
                     </tr>
                   </tfoot>
                   <tbody>
+                  <?php if($list != false) { ?>
                   <?php foreach ($list as $key => $event){ ?>
                     <tr>
                       <td><?php echo $event->getTitle(); ?></td>
@@ -93,7 +94,7 @@ $listCategory = $categoryController->readAll();
           <button type="submit" class="btn btn-danger" name="dni" value="<?php echo $event->getTitle();?>"><i class="fas fa-trash"></i></button>
           </form> </td>
                     </tr>
-                    <?php } ?>
+                    <?php } }?>
                   </tbody>
                 </table>
               </div>
@@ -104,7 +105,7 @@ $listCategory = $categoryController->readAll();
         <!-- /.container-fluid -->
 
         <!-- Sticky Footer -->
-        <footer class="sticky-footer">
+        <!--<footer class="sticky-footer">
           <div class="container my-auto">
             <div class="copyright text-center my-auto">
               <span>Copyright © Your Website 2018</span>
@@ -112,7 +113,7 @@ $listCategory = $categoryController->readAll();
           </div>
         </footer>
 
-      </div>
+      </div>-->
       <!-- /.content-wrapper -->
 
     </div>

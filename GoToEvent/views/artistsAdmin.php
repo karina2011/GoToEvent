@@ -32,15 +32,15 @@ $list = $artistController->readAll();
             <form action="<?php echo BASE; ?>Artist/create" method="post">
                 <div class="form-group">
                     <label for="name">Nombre</label>
-                    <input type="text" class="form-control" id="name" placeholder="Nombre" name="name">
+                    <input type="text" class="form-control" id="name" placeholder="Nombre" name="name" required>
                 </div>
                 <div class="form-group">
                     <label for="lastname">Apellido</label>
-                    <input type="text" class="form-control" id="lastname" placeholder="Apellido" name="lastname">
+                    <input type="text" class="form-control" id="lastname" placeholder="Apellido" name="lastname" required>
                 </div>
                 <div class="form-group">
                     <label for="dni">DNI</label>
-                    <input type="number" class="form-control" id="dni" placeholder="DNI" name="dni">
+                    <input type="number" class="form-control" id="dni" placeholder="DNI" name="dni" required>
                 </div>
                 <button type="submit" class="btn btn-primary">Crear artista</button>
             </form>
@@ -75,6 +75,7 @@ $list = $artistController->readAll();
                     </tr>
                   </tfoot>
                   <tbody>
+                  <?php if($list != false) { ?>
                   <?php foreach ($list as $key => $artist){ ?>
                     <tr>
                       <td><?php echo $artist->getName(); ?></td>
@@ -85,7 +86,7 @@ $list = $artistController->readAll();
           <button type="submit" class="btn btn-danger" name="dni" value="<?php echo $artist->getDni();?>"><i class="fas fa-trash"></i></button>
           </form> </td>
                     </tr>
-                    <?php } ?> 
+                    <?php } }?> 
                   </tbody>
                 </table>
               </div>
@@ -96,7 +97,7 @@ $list = $artistController->readAll();
         <!-- /.container-fluid -->
 
         <!-- Sticky Footer -->
-        <footer class="sticky-footer">
+        <!--<footer class="sticky-footer">
           <div class="container my-auto">
             <div class="copyright text-center my-auto">
               <span>Copyright © Your Website 2018</span>
@@ -104,7 +105,7 @@ $list = $artistController->readAll();
           </div>
         </footer>
 
-      </div>
+      </div>-->
       <!-- /.content-wrapper -->
 
     </div>

@@ -32,7 +32,7 @@ $list = $squareTypeController->readAll();
             <form action="<?php echo BASE; ?>squaretype/create" method="post">
                 <div class="form-group">
                     <label for="descrption">Descripcion de tipo de plaza:</label>
-                    <input type="text" class="form-control" id="description" placeholder="Descripcion" name="description">
+                    <input type="text" class="form-control" id="description" placeholder="Descripcion" name="description" required>
                 </div>
 
                 <button type="submit" class="btn btn-primary">Crear tipo de plaza</button>
@@ -63,6 +63,7 @@ $list = $squareTypeController->readAll();
                     </tr>
                   </tfoot>
                   <tbody>
+                  <?php if($list != false) { ?>
                   <?php foreach ($list as $key => $squareType){ ?>
                     <tr>
                       <td><?php echo $squareType->getDescription(); ?></td>
@@ -71,7 +72,7 @@ $list = $squareTypeController->readAll();
           <button type="submit" class="btn btn-danger" name="dni" value="<?php echo $squareType->getDescription();?>"><i class="fas fa-trash"></i></button>
           </form> </td>
                     </tr>
-                    <?php } ?> 
+                    <?php } }?> 
                   </tbody>
                 </table>
               </div>
@@ -82,7 +83,7 @@ $list = $squareTypeController->readAll();
         <!-- /.container-fluid -->
 
         <!-- Sticky Footer -->
-        <footer class="sticky-footer">
+        <!--SACADO PORQ NO SERIA NECESARIO<footer class="sticky-footer">
           <div class="container my-auto">
             <div class="copyright text-center my-auto">
               <span>Copyright © Your Website 2018</span>
@@ -90,7 +91,7 @@ $list = $squareTypeController->readAll();
           </div>
         </footer>
 
-      </div>
+      </div>->
       <!-- /.content-wrapper -->
 
     </div>

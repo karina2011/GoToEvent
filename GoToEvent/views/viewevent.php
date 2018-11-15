@@ -22,7 +22,7 @@ $event_squares = $eventSquareController->readAllByCalendarId($calendar->getId())
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Blog Post - Start Bootstrap Template</title>
+    <title>Ver evento</title>
     <!-- https://startbootstrap.com/template-overviews/blog-post/-->
 
     <!-- Bootstrap core CSS -->
@@ -64,7 +64,7 @@ $event_squares = $eventSquareController->readAllByCalendarId($calendar->getId())
           <hr>
 
           <!-- Post Content -->
-          <h3>Lugar de evento: </h3>
+          <h3>Lugar de evento </h3>
           <p class="lead"><?php echo $calendar->getEventPlaceDescription(); ?></p>
 
           <hr>
@@ -111,7 +111,7 @@ $event_squares = $eventSquareController->readAllByCalendarId($calendar->getId())
                     </li>
                     <?php }
                   } else {?>
-                    <p>No hay plazas de eventos para este evento </p>
+                    <p>Este evento no tiene plazas disponibles </p>
                   <?php } ?>
                   </ul>
               </div>
@@ -122,11 +122,12 @@ $event_squares = $eventSquareController->readAllByCalendarId($calendar->getId())
 
       </div>
       <!-- /.row -->
+      <h3>Plazas de evento</h3>
       <?php if($event_squares != null){ ?>
       <form action="#" method="post">
         <?php foreach ($event_squares as $key => $event_square) { ?>
         <div class="form-group">
-          <label for="">- <?php echo $event_square->getSquareTypeDescription(); ?> precio: $<?php echo $event_square->getPrice(); ?></label>
+          <label for=""><?php echo $event_square->getSquareTypeDescription(); ?>-->Precio: $<?php echo $event_square->getPrice(); ?></label>
           <input type="number" name="event_square" value="" class="form-control" placeholder="Cantidad de entradas">
         </div>
       <?php } ?>
@@ -135,7 +136,7 @@ $event_squares = $eventSquareController->readAllByCalendarId($calendar->getId())
         </div>
       </form>
     <?php } else { ?>
-      <h3>No hay plazas de evento cargadas</h3>
+      <p>Este evento no tiene plazas disponibles</p>
     <?php } ?>
     </div>
     <!-- /.container -->

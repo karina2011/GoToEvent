@@ -114,6 +114,7 @@ $listSquareType = $squareTypeController->readAll();
                     </tr>
                   </thead>
                   <tbody>
+                  <?php if($list != false) { ?>
                   <?php foreach ($list as $key => $calendar){   ?>
                     <tr>
                       <td><?php echo $calendar->getEventTitle(); ?></td>
@@ -125,7 +126,7 @@ $listSquareType = $squareTypeController->readAll();
                           </form>
                       </td>
                     </tr>
-                  <?php } ?>
+                  <?php } }?>
                   </tbody>
                   <tfoot>
                     <tr>
@@ -144,7 +145,7 @@ $listSquareType = $squareTypeController->readAll();
         <!-- /.container-fluid -->
 
         <!-- Sticky Footer -->
-        <footer class="sticky-footer">
+        <!--DA PROBLEMAS CON LOS ALERT<footer class="sticky-footer">
           <div class="container my-auto">
             <div class="copyright text-center my-auto">
               <span>Copyright © Your Website 2018</span>
@@ -152,7 +153,7 @@ $listSquareType = $squareTypeController->readAll();
           </div>
         </footer>
 
-      </div>
+      </div>-->
       <!-- /.content-wrapper -->
 
     </div>

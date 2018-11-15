@@ -33,12 +33,13 @@ class EventController
 			$event = new Event($title,$category['0'],$resp);
 
 			$this->dao->create($event);
+			require(ROOT . VIEWS . 'eventsAdmin.php');
 
 		} else {
-			echo "<script>alert('Ocurrio un error')</script>";
+			require(ROOT . VIEWS . 'eventsAdmin.php');
+			echo "<script>alert('Ocurrio un error al cargar la imagen')</script>";
 		}
 
-		require(ROOT . VIEWS . 'eventsAdmin.php');
 	}
 
 	public function readAll()

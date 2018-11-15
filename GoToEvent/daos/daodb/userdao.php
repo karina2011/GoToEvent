@@ -82,7 +82,9 @@ class UserDao extends Singleton implements \interfaces\Crud
         } 
         catch(PDOException $e) 
         {
-            echo $e;
+            echo '<script>';
+            echo 'console.log("Error en base de datos. Archivo: userdao.php")';
+            echo '</script>';
         }
 
         if(!empty($resultSet))

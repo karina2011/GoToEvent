@@ -31,7 +31,7 @@ $listSquareType = $squareTypeController->readAll();
         <div class="container-fluid">
 
 
-            <h3>Crear Plazas de evento // ESTA PARTE VA A QUEDAR OBSOLETA</h3>
+            <!--<h3>Crear Plazas de evento // ESTO YA NO SE USA ACA // se deja por si acaso</h3>
 
             <form action="<?php echo BASE; ?>eventsquare/create" method="post">
                 <div class="form-group">
@@ -58,14 +58,11 @@ $listSquareType = $squareTypeController->readAll();
                     <input type="number" class="form-control" id="remainder" placeholder="Remanente" name="remainder">
                 </div>
 
-                <div class="form-group">
-                    <label for="calendar">Calendario // HACER ESTO</label>
-                </div>
                 <input type="hidden" name="$id_calendar" value="<?php echo $id_calendar; ?>">
                 <button type="submit" class="btn btn-primary">Crear plaza de evento</button>
             </form>
 
-            <hr>
+            <hr> -->
 
           <!-- DataTables Example -->
           <div class="card mb-3">
@@ -98,19 +95,20 @@ $listSquareType = $squareTypeController->readAll();
                     </tr>
                   </tfoot>
                   <tbody>
+                  <?php if($list != false) { ?>
                   <?php foreach ($list as $key => $eventSquare){ ?>
                     <tr>
                       <td><?php echo $eventSquare->getSquareTypeDescription(); ?></td>
                       <td><?php echo $eventSquare->getPrice(); ?></td>
                       <td><?php echo $eventSquare->getAvailableQuantity(); ?></td>
                       <td><?php echo $eventSquare->getRemainder(); ?></td>
-                      <td> echo $eventSquare->getPrice(); (????</td>
+                      <td>Evento: <?php echo $eventSquare->getCalendarEvent() . '<br>Fecha: ' . $eventSquare->getCalendarDate(); ?></td>
                       <td><?php echo $eventSquare->getId(); ?></td>
                       <td> <form class="text-center" action="<?php echo BASE; ?>eventsquare/delete" method="post">
           <button type="submit" class="btn btn-danger" name="dni" value="<?php echo $eventSquare->getId();?>"><i class="fas fa-trash"></i></button>
           </form> </td>
                     </tr>
-                    <?php } ?>
+                    <?php } }?>
                   </tbody>
                 </table>
               </div>
@@ -121,7 +119,7 @@ $listSquareType = $squareTypeController->readAll();
         <!-- /.container-fluid -->
 
         <!-- Sticky Footer -->
-        <footer class="sticky-footer">
+        <!--<footer class="sticky-footer">
           <div class="container my-auto">
             <div class="copyright text-center my-auto">
               <span>Copyright © Your Website 2018</span>
@@ -129,7 +127,7 @@ $listSquareType = $squareTypeController->readAll();
           </div>
         </footer>
 
-      </div>
+      </div>-->
       <!-- /.content-wrapper -->
 
     </div>

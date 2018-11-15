@@ -32,11 +32,11 @@ $list = $eventPlaceController->readAll();
             <form action="<?php echo BASE; ?>eventPlace/create" method="post">
                 <div class="form-group">
                     <label for="description">Descripcion</label>
-                    <input type="text" class="form-control" id="description" placeholder="Descripcion" name="description">
+                    <input type="text" class="form-control" id="description" placeholder="Descripcion" name="description" required>
                 </div>
                 <div class="form-group">
                     <label for="capacity">Capacidad</label>
-                    <input type="number" class="form-control" id="capacity" placeholder="Capacidad" name="capacity">
+                    <input type="number" class="form-control" id="capacity" placeholder="Capacidad" name="capacity" required>
                 </div>
                 <button type="submit" class="btn btn-primary">Crear lugar de evento</button>
             </form>
@@ -69,6 +69,7 @@ $list = $eventPlaceController->readAll();
                     </tr>
                   </tfoot>
                   <tbody>
+                  <?php if($list != false) { ?>
                   <?php foreach ($list as $key => $eventPlace){ ?>
                     <tr>
                       <td><?php echo $eventPlace->getDescription(); ?></td>
@@ -78,7 +79,7 @@ $list = $eventPlaceController->readAll();
           <button type="submit" class="btn btn-danger" name="dni" value="<?php echo $eventPlace->getDescription();?>"><i class="fas fa-trash"></i></button>
           </form> </td>
                     </tr>
-                    <?php } ?> 
+                    <?php } }?> 
                   </tbody>
                 </table>
               </div>
@@ -89,7 +90,7 @@ $list = $eventPlaceController->readAll();
         <!-- /.container-fluid -->
 
         <!-- Sticky Footer -->
-        <footer class="sticky-footer">
+        <!--DA PROBLEMAS CON ALERTS<footer class="sticky-footer">
           <div class="container my-auto">
             <div class="copyright text-center my-auto">
               <span>Copyright © Your Website 2018</span>
@@ -97,7 +98,7 @@ $list = $eventPlaceController->readAll();
           </div>
         </footer>
 
-      </div>
+      </div>-->
       <!-- /.content-wrapper -->
 
     </div>

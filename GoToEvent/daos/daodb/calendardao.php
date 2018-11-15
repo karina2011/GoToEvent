@@ -111,7 +111,10 @@ class CalendarDao extends Singleton implements \interfaces\Crud
         catch(PDOException $e)
         {
 
-            echo $e;
+            //echo $e;
+            echo '<script>';
+            echo 'console.log("Error en base de datos. Archivo: calendardao.php")';
+            echo '</script>';
         }
 
         if(!empty($resultSet))

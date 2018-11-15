@@ -8,7 +8,7 @@ class Event_square
 	private $available_quantity;
 	private $remainder;
 	private $square_type;
-	private $calendar; // agregado // modificar todo en base a esto
+	private $calendar;
 	private $id_event_square;
 
 	function __construct($price='',$available_quantity='',$remainder='',$square_type='',$calendar='',$id_event_square='')
@@ -60,6 +60,16 @@ class Event_square
 	public function getCalendar()
 	{
 		return $this->calendar;
+	}
+
+	public function getCalendarEvent(){
+
+		return $this->calendar->getEventTitle();
+	}
+
+	public function getCalendarDate(){
+		
+		return $this->calendar->getDate();
 	}
 
 	public function setPrice($price)

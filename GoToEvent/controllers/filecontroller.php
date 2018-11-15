@@ -32,10 +32,7 @@ class FileController
 
   public function upload($value='', $tipo='')
   {
-      /*echo "<pre>";
-      var_dump($value);
-      echo "</pre>";
-      echo "$tipo";*/
+      
       $fileAvatar = new M_File('', $tipo, $value[$tipo]['name'], $value[$tipo]['tmp_name'], $value[$tipo]['size']);
 
       $filePath = $this->uploadFilePath . "/$tipo/";
@@ -71,10 +68,11 @@ class FileController
                 echo "Tamaño del archivo superior al permitido";
               }
           } else {
-            echo "Ya exsiste un archivo con ese nombre";
+            echo "Ya existe un archivo con ese nombre";
           }
         } else {
-          echo "La extension del archivo no es valido";
+          //echo "<script>alert('La extension del archivo no es valida')</script>";
+          echo "La extension del archivo no es valida";
         }
         return false;
   }

@@ -62,7 +62,7 @@ $list = $ticketController->readAll();
                     </tr>
                   </tfoot>
                   <tbody>
-                  <?php foreach ($list as $key => $ticket){ ?>
+                  <?php if($list != false){ foreach ($list as $key => $ticket){ ?>
                     <tr>
                       <td><?php echo $ticket->getNumber(); ?></td>
                       <td><?php echo $ticket->getQr(); ?></td>
@@ -71,7 +71,7 @@ $list = $ticketController->readAll();
                       <button type="submit" class="btn btn-danger" name="number" value="<?php echo $ticket->getNumber();?>"><i class="fas fa-trash"></i></button>
                       </form> </td>
                     </tr>
-                    <?php } ?> 
+                    <?php }} ?> 
                   </tbody>
                 </table>
               </div>

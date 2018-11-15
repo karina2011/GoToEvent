@@ -22,7 +22,7 @@ class EventSquareController
         include(BASE . VIEWS . "Home.php");
     }
 
-    public function create($square_type='', $price='',$availble_quantity='',$remainder='',$id_calendar='')
+    public function create($square_type='', $price='',$availble_quantity='',$id_calendar='')
     {
         $quantity = 0;
         $list = $this->readAllByCalendarId($id_calendar);
@@ -35,6 +35,8 @@ class EventSquareController
         $capacity = $calendarController->readEventPlaceByCalendarId($id_calendar);
 
         $quantity = $quantity + $availble_quantity;
+
+        $remainder = $availble_quantity;
 
         if($quantity > $capacity){
           require(ROOT . VIEWS . 'addeventsquarestocalendar.php');

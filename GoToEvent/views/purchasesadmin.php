@@ -89,6 +89,7 @@ $listPurchaseLine = $purchaseLineController->readAll();
                     </tr>
                   </tfoot>
                   <tbody>
+                  <?php if($list != false) { ?>
                   <?php foreach ($list as $key => $purchase){ ?>
                     <tr>
                       <td><?php echo $purchase->getDate(); ?></td>
@@ -100,7 +101,7 @@ $listPurchaseLine = $purchaseLineController->readAll();
           <button type="submit" class="btn btn-danger" name="dni" value="<?php echo $purchase->getId();?>"><i class="fas fa-trash"></i></button>
           </form> </td>
                     </tr>
-                    <?php } ?> 
+                    <?php } }?> 
                   </tbody>
                 </table>
               </div>
@@ -111,7 +112,7 @@ $listPurchaseLine = $purchaseLineController->readAll();
         <!-- /.container-fluid -->
 
         <!-- Sticky Footer -->
-        <footer class="sticky-footer">
+        <!-- SACADO PORQ DA PROBLEMAS CON LOS ALERT<footer class="sticky-footer">
           <div class="container my-auto">
             <div class="copyright text-center my-auto">
               <span>Copyright © Your Website 2018</span>
@@ -119,7 +120,7 @@ $listPurchaseLine = $purchaseLineController->readAll();
           </div>
         </footer>
 
-      </div>
+      </div>-->
       <!-- /.content-wrapper -->
 
     </div>

@@ -26,35 +26,35 @@ $list = $userController->readAll();
 
         <div class="container-fluid">
 
-          <a href="#" id="createUser"><h3 >Crear Usuario</h3></a>
+          <h3 >Crear Usuario</h3>
 
             <form action="<?php echo BASE; ?>user/create" method="post" class="" id="formcreateuser">
                 <div class="form-group">
                     <label for="name">Nombre</label>
-                    <input type="text" class="form-control" id="name" placeholder="Nombre" name="name">
+                    <input type="text" class="form-control" id="name" placeholder="Nombre" name="name" required>
                 </div>
                 <div class="form-group">
                     <label for="lastname">Apellido</label>
-                    <input type="text" class="form-control" id="lastname" placeholder="Apellido" name="lastname">
+                    <input type="text" class="form-control" id="lastname" placeholder="Apellido" name="lastname" required>
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" class="form-control" id="email" placeholder="Email" name="email">
+                    <input type="email" class="form-control" id="email" placeholder="Email" name="email" required>
                 </div>
                 <div class="form-group">
                     <label for="dni">DNI</label>
-                    <input type="number" class="form-control" id="dni" placeholder="DNI" name="dni">
+                    <input type="number" class="form-control" id="dni" placeholder="DNI" name="dni" required>
                 </div>
                 <div class="form-group">
                     <label for="type">Tipo</label>
-                    <select class="custom-select" id="inputGroupSelect01" name="type">
+                    <select class="custom-select" id="inputGroupSelect01" name="type" required>
 				     <option value="admin">Admin</option>
 				     <option value="cliente">Cliente</option>
 				    </select>
                 </div>
                 <div class="form-group">
                     <label for="pass">Contraseña</label>
-                    <input type="pass" class="form-control" id="pass" placeholder="Contraseña" name="pass">
+                    <input type="pass" class="form-control" id="pass" placeholder="Contraseña" name="pass" required>
                 </div>
 
                 <button type="submit" class="btn btn-primary">Crear usuario</button>
@@ -95,6 +95,7 @@ $list = $userController->readAll();
                     </tr>
                   </tfoot>
                   <tbody>
+                  <?php if($list != false) { ?>
                   <?php foreach ($list as $key => $user){ ?>
                     <tr>
                       <td><?php echo $user->getName(); ?></td>
@@ -108,7 +109,7 @@ $list = $userController->readAll();
           <button type="submit" class="btn btn-danger" name="dni" value="<?php echo $user->getEmail();?>"><i class="fas fa-trash"></i></button>
           </form> </td>
                     </tr>
-                    <?php } ?>
+                    <?php } }?>
                   </tbody>
                 </table>
               </div>
@@ -119,7 +120,7 @@ $list = $userController->readAll();
         <!-- /.container-fluid -->
 
         <!-- Sticky Footer -->
-        <footer class="sticky-footer">
+        <!--<footer class="sticky-footer">
           <div class="container my-auto">
             <div class="copyright text-center my-auto">
               <span>Copyright © Your Website 2018</span>
@@ -127,7 +128,7 @@ $list = $userController->readAll();
           </div>
         </footer>
 
-      </div>
+      </div>-->
       <!-- /.content-wrapper -->
 
     </div>

@@ -32,7 +32,7 @@ $list = $categoryController->readAll();
             <form action="<?php echo BASE; ?>category/create" method="post">
                 <div class="form-group">
                     <label for="descrption">Descripcion de categoria:</label>
-                    <input type="text" class="form-control" id="description" placeholder="Descripcion" name="description">
+                    <input type="text" class="form-control" id="description" placeholder="Descripcion" name="description" required>
                 </div>
 
                 <button type="submit" class="btn btn-primary">Crear categoria</button>
@@ -63,6 +63,7 @@ $list = $categoryController->readAll();
                     </tr>
                   </tfoot>
                   <tbody>
+                  <?php if($list != false) { ?>
                   <?php foreach ($list as $key => $category){ ?>
                     <tr>
                       <td><?php echo $category->getDescription(); ?></td>
@@ -71,7 +72,7 @@ $list = $categoryController->readAll();
           <button type="submit" class="btn btn-danger" name="dni" value="<?php echo $category->getDescription();?>"><i class="fas fa-trash"></i></button>
           </form> </td>
                     </tr>
-                    <?php } ?> 
+                    <?php } }?> 
                   </tbody>
                 </table>
               </div>
