@@ -12,6 +12,7 @@ use daos\daodb\EventPlaceDao as D_Event_place;
 use daos\daodb\EventDao as D_Event;
 use daos\daodb\CalendarArtistDao as D_Calendar_artist;
 use daos\daodb\EventSquareDao as D_Event_square;
+use controllers\ViewsController as C_Views;
 
 $daoEvent = D_Event::getInstance();
 /**
@@ -28,6 +29,23 @@ class CalendarController
 
 	public function create($date="", $id_event="", $artists=[], $id_event_place="")
 	{
+		$viewsController = new C_Views;
+		if(empty($id_event)){
+
+			$viewsController->calendarsAdmin();
+			exit("<script>alert('Rellene todos los campos por favor')</script>");
+		}
+		if(empty($artists)){
+
+			$viewsController->calendarsAdmin();
+			exit("<script>alert('Rellene todos los campos por favor')</script>");
+		}
+		if(empty($id_event_place)){
+
+			$viewsController->calendarsAdmin();
+			exit("<script>alert('Rellene todos los campos por favor')</script>");
+		}
+
 		$fechaActual=strftime( "%Y-%m-%d", time()); // devuelve la fecha actual, en formato Año-mes-dia, igual q date
 
 		if ($date < $fechaActual) // comprobar q la fecha sea posterior a la actua

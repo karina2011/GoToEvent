@@ -56,7 +56,7 @@ $listSquareType = $squareTypeController->readAll();
             <form action="<?php echo BASE; ?>calendar/create" method="post">
                 <div class="form-group">
                     <label for="date">Fecha:</label>
-                    <input type="date" class="form-control" id="date" placeholder="Fecha" name="date">
+                    <input type="date" class="form-control" id="date" placeholder="Fecha" name="date" required>
                 </div>
 
 
@@ -72,7 +72,7 @@ $listSquareType = $squareTypeController->readAll();
 
                 <label >Artista/s</label>
                 <!-- Allan lo solucione agregando el id del input con el id del artista y el for de label con el mismo id del artista -->
-                <?php foreach ($listArtists as $key => $artist) { ?>
+                <?php $cont=0; foreach ($listArtists as $key => $artist) { $cont++;?>
                 <div class="custom-control custom-checkbox ">
                         <input type="checkbox" class="custom-control-input" id="<?php echo $artist->getDni(); ?>" name="artists[]" value="<?php echo $artist->getId(); ?>">
                         <label class="custom-control-label" for="<?php echo $artist->getDni(); ?>" ><?php echo $artist->getName() . ' ' .  $artist->getLastName(). " " . $artist->getId(); ?></label>

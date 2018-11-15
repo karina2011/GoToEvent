@@ -1,4 +1,4 @@
-<?php 
+<?php
 use controllers\UserController as C_User;
 use controllers\PurchaseController as C_Purchase;
 use controllers\PurchaseLineController as C_Purchase_line;
@@ -40,24 +40,28 @@ $listPurchaseLine = $purchaseLineController->readAll();
                     <select class="custom-select"  name="userEmail">
                       <?php  foreach ($listUser as $key => $user) { ?>
                        <option value="<?php echo $user->getEmail(); ?>"><?php  echo $user->getEmail(); ?></option>
-                       <?php } ?>      
+                       <?php } ?>
                    </select>
                 </div>
                 <div class="form-group">
                     <label for="purchaseline">Linea de compra</label>
                     <div class="input-group-prepend">
                       <div class="input-group-text">
+                  <?php if (is_array($listPurchaseLine)) { ?>
                         <?php foreach ($listPurchaseLine as $key => $purchaseline) { ?>
                         <input type="checkbox" aria-label="linea de compra" name="purchaselines[]" value="<?php echo $purchase_line->getId(); ?>">
                         <label for="purchaselines[]"><?php echo $purchase_line->getEventSquareDescription() ?></label>
-                        <?php } ?>
+                        <?php }
+                      } else { ?>
+                        <p>No hay lineas de compra actualmente</p>
+                      <?php } ?>
                       </div>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Crear compra</button>
             </form>
 
-            
+
             <hr>
 
           <!-- DataTables Example -->
@@ -101,7 +105,7 @@ $listPurchaseLine = $purchaseLineController->readAll();
           <button type="submit" class="btn btn-danger" name="dni" value="<?php echo $purchase->getId();?>"><i class="fas fa-trash"></i></button>
           </form> </td>
                     </tr>
-                    <?php } }?> 
+                    <?php } }?>
                   </tbody>
                 </table>
               </div>
