@@ -6,16 +6,18 @@ use models\Category;
 use controllers\FileController;
 use daos\daodb\EventDao as Dao;
 use daos\daodb\CategoryDao as D_Category;
-/**
- *
- */
+
+use controllers\ViewsController as C_View;
+
 class EventController
 {
 	protected $dao;
+	private $viewController;
 
 	public function __construct()
     {
         $this->dao = Dao::getInstance(); // esto se instancia en el router
+        $this->viewController = new C_View;
     }
 
 	public function create($title='',$id_category='', $file= '')
@@ -33,10 +35,11 @@ class EventController
 			$event = new Event($title,$category['0'],$resp);
 
 			$this->dao->create($event);
-			require(ROOT . VIEWS . 'eventsAdmin.php');
+
+			$this->viewController->viewEventsAdmin();
 
 		} else {
-			require(ROOT . VIEWS . 'eventsAdmin.php');
+			$this->viewController->viewEventsAdmin();
 			echo "<script>alert('Ocurrio un error al cargar la imagen')</script>";
 		}
 

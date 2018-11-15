@@ -1,13 +1,7 @@
-<?php namespace views;
-use controllers\EventSquareController as C_Event_square;
-use controllers\EventController as C_Event;
+<?php 
+namespace views;
 
-$eventSquareController = new C_Event_square();
-$eventController = new C_Event();
-
-$list = $eventSquareController->readAll();
-$listEvent = $eventController->readAll();
-
+// esta vista se deja por el ejemplo de ajax
 
  ?>
 <head>

@@ -1,19 +1,5 @@
 <?php
-use controllers\UserController as C_User;
-use controllers\PurchaseController as C_Purchase;
-use controllers\PurchaseLineController as C_Purchase_line;
-use models\User as M_User;
-
-$userController = new C_User;
-$user = $userController->checkSession();
-$listUser = $userController->readAll();
-
-$purchaseController = new C_Purchase;
-$list = $purchaseController->readAll();
-
-$purchaseLineController = new C_Purchase_line;
-$listPurchaseLine = $purchaseLineController->readAll();
-
+namespace views;
 ?>
 <!DOCTYPE html>
 <html lang="en">

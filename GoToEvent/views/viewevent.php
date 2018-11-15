@@ -1,17 +1,6 @@
 <?php
-use controllers\CalendarController as C_Calendar;
-use controllers\EventSquareController as C_Event_square;
-
-$calendarController = new C_Calendar;
-$eventSquareController = new C_Event_square;
-
-$calendarId = $_GET["id_calendar"];
-
-$calendar = $calendarController->readById($calendarId);
-
-$event_squares = $eventSquareController->readAllByCalendarId($calendar->getId());
-
- ?>
+namespace views;
+?>
 <!DOCTYPE html>
 <html lang="en">
 

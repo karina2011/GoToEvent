@@ -1,13 +1,5 @@
 <?php
-use controllers\PurchaseLineController as C_Purchase_line;
-use controllers\UserController as C_User;
-
-$purchaseLineController = new C_Purchase_line();
-$userController = new C_User();
-
-$listPurchaseLine = $purchaseLineController->readAll();
-$listUser = $userController->readAll();
-
+// borrar este archivo
  ?>
 
 <!DOCTYPE html>

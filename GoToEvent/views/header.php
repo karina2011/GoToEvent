@@ -1,9 +1,5 @@
 <?php
-use controllers\UserController as C_User;
-use models\User as M_User;
-
-$userController = new C_User;
-$user = $userController->checkSession();
+namespace views;
 ?>
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">

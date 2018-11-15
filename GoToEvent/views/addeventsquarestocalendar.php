@@ -1,24 +1,5 @@
 <?php
-use controllers\UserController as C_User;
-use controllers\CalendarController as C_Calendar;
-use controllers\EventSquareController as C_Event_square;
-use controllers\SquareTypeController as C_Square_type;
-
-use models\User as M_User;
-
-$userController = new C_User;
-$user = $userController->checkSession();
-
-$calendarController = new C_Calendar;
-
-$calendar = $calendarController->readLastCalendar();
-
-$eventSquareController = new C_Event_square;
-$listEventSquares = $eventSquareController->readAllByCalendarId($calendar->getId()); // traer solo los eventsquares que correspondan al id calendario q se creo ultimo
-
-$squareTypeController = new C_Square_type;
-$listSquareType = $squareTypeController->readAll();
-
+namespace views;
 ?>
 <!DOCTYPE html>
 <html lang="en">

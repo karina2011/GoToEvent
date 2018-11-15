@@ -1,14 +1,5 @@
 <?php
-use controllers\UserController as C_User;
-
-use models\User as M_User;
-
-
-$userController = new C_User;
-$user = $userController->checkSession();
-
-$list = $userController->readAll();
-
+namespace views;
 ?>
 <!DOCTYPE html>
 <html lang="en">

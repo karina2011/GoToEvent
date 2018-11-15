@@ -5,16 +5,20 @@ namespace controllers;
 use models\User as User;
 use daos\daodb\UserDao as Dao;
 
+use controllers\ViewsController as C_View;
+
 /**
  *
  */
 class UserController
 {
 	protected $dao;
+	private $viewController;
 
 	function __construct()
 	{
 		$this->dao = Dao::getInstance();
+		$this->viewController = new C_View;
 	}
 
 	public function create($name,$last_name,$email,$dni,$pass,$type='')
@@ -28,8 +32,9 @@ class UserController
 
 			$this->dao->create($user);
 
-			//luego de guardarlo en la base de datos se muetra el inicio de la pagina
-			require(ROOT . VIEWS . 'usersAdmin.php');}
+			//luego de guardarlo en la base de datos se muestra la vista admin de users
+			$this->viewController->viewUsersAdmin();
+		}
 		else {
 			//crea el objeto user para luego agregarlo a la base de datos
 			$type='cliente';
@@ -40,7 +45,7 @@ class UserController
 			$this->dao->create($user);
 
 			//luego de guardarlo en la base de datos se muetra el inicio de la pagina
-			require(ROOT . VIEWS . 'login.php');
+			$this->viewController->login();
 		}
 	}
 
@@ -81,7 +86,7 @@ class UserController
 
 		//INCLUYE LA VISTA PRINCIPAL
 
-		require(ROOT . VIEWS . 'usersAdmin.php');
+		$this->viewController->viewUsersAdmin();
 	}
 
 	public function login ($email='', $pass='')
@@ -93,14 +98,14 @@ class UserController
 			if($user->getPass() == $pass)
 			{
 				$this->setSession($user);
-				require(ROOT . VIEWS . 'Home.php');
+				$this->viewController->index();
 
 			} else {
-				require(ROOT . VIEWS . 'login.php');
+				$this->viewController->login();
 				echo "<script> alert('Contraseña Incorrecta');</script>";
 			}
 		} else {
-			require(ROOT . VIEWS . 'login.php');
+			$this->viewController->login();
 			echo "<script> alert('Usuario Incorrecto');</script>";
 		}
 
@@ -134,10 +139,11 @@ class UserController
                session_start();
 
           unset($_SESSION['user']);
-          require(ROOT . VIEWS . 'Home.php');
+          $this->viewController->index();
 
 	}
 
+	/* para registrar usuario, no se usa 
 	public function signUp($name,$last_name,$email,$dni,$pass,$type=''){ // adaptar
 
 		$user = new User($email, $name, $pass);
@@ -154,5 +160,5 @@ class UserController
 			echo "<script> alert('No se pudo crear usuario');</script>";
 		}
 
-	}
+	} */
 }

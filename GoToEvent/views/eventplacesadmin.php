@@ -1,14 +1,5 @@
 <?php 
-use controllers\UserController as C_User;
-use controllers\EventPlaceController as C_Event_place;
-use models\User as M_User;
-
-$userController = new C_User;
-$user = $userController->checkSession();
-
-$eventPlaceController = new C_Event_place;
-$list = $eventPlaceController->readAll();
-
+namespace views;
 ?>
 <!DOCTYPE html>
 <html lang="en">

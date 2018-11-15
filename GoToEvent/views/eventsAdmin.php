@@ -1,18 +1,5 @@
 <?php
-use controllers\UserController as C_User;
-use controllers\EventController as C_Event;
-use controllers\CategoryController as C_Category;
-use models\User as M_User;
-
-$userController = new C_User;
-$user = $userController->checkSession();
-
-$eventController = new C_Event;
-$list = $eventController->readAll();
-
-$categoryController = new C_Category();
-$listCategory = $categoryController->readAll();
-
+namespace views;
 ?>
 <!DOCTYPE html>
 <html lang="en">

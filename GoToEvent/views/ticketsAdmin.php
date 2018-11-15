@@ -1,15 +1,5 @@
 <?php 
-use controllers\UserController as C_User;
-use controllers\TicketController as C_Ticket;
-
-use models\User as M_User;
-
-$userController = new C_User;
-$user = $userController->checkSession();
-
-$ticketController = new C_Ticket;
-$list = $ticketController->readAll();
-
+namespace views;
 ?>
 <!DOCTYPE html>
 <html lang="en">

@@ -3,15 +3,18 @@ namespace controllers;
 
 use models\Category;
 use daos\daodb\CategoryDao as Dao;
-/**
- *
- */
+
+use controllers\ViewsController as C_View;
+
 class CategoryController
 {
 	protected $dao;
+	private $viewController;
+
 	function __construct()
 	{
 		$this->dao=Dao::getInstance(); // esto se instancia en el router
+		$this->viewController = new C_View;
 	}
 
 	public function create($description='')
@@ -20,7 +23,7 @@ class CategoryController
 
 		$this->dao->create($category);
 
-		require(ROOT . VIEWS . 'categoriesAdmin.php');
+		$this->viewController->viewCategoriesAdmin();
 	}
 
 	public function readAll()
@@ -48,7 +51,7 @@ class CategoryController
 	{
 		$this->dao->delete($description);
 
-		require(ROOT . VIEWS . 'categoriesAdmin.php');
+		$this->viewController->viewCategoriesAdmin();
 	}
 
 

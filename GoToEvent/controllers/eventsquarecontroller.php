@@ -8,18 +8,22 @@ use daos\daodb\EventSquareDao as Dao;
 use daos\daodb\SquareTypeDao as DaoSquareType;
 use controllers\CalendarController as C_Calendar;
 
+use controllers\ViewsController as C_View;
+
 class EventSquareController
 {
     protected $dao; // es una instancia de la Dao lista, para poder comunicarme con ella
+    private $viewController;
 
     public function __construct()
     {
         $this->dao=Dao::getInstance(); // esto se instancia en el router
+        $this->viewController = new C_View;
     }
 
     public function index() // funcion por defecto de cada controladora
     {
-        include(BASE . VIEWS . "Home.php");
+      $this->viewController->index();
     }
 
     public function create($square_type='', $price='',$availble_quantity='',$id_calendar='')
@@ -41,7 +45,7 @@ class EventSquareController
         $remainder = $availble_quantity;
 
         if($quantity > $capacity){
-          require(ROOT . VIEWS . 'addeventsquarestocalendar.php');
+          $this->viewController->addEventSquareToCalendar();
           echo "<script>alert('Se paso de la capacidad del estadio')</script>";
         } else {
           // $squaretype vine en formato de id, y hay q pasarlo a objeto
@@ -62,7 +66,7 @@ class EventSquareController
           } else {
               echo "No se pudo crear el artista" . "<br><br>";
           }*/
-          require(ROOT . VIEWS . 'addeventsquarestocalendar.php');
+          $this->viewController->addEventSquareToCalendar();
         }
 
 
@@ -99,7 +103,7 @@ class EventSquareController
 
         $this->dao->delete($dni);
 
-        require(ROOT . VIEWS . 'eventsquaresadmin.php');
+        $this->viewController->viewEventSquaresAdmin();
     }
 
 

@@ -7,16 +7,20 @@ use models\User; // cliente
 use daos\daodb\PurchaseDao as Dao;
 use daos\daodb\UserDao as D_User;
 
+use controllers\ViewsController as C_View;
+
 /**
  * 
  */
 class PurchaseController
 {
 	protected $dao;
+	private $viewController;
 	
 	public function __construct()
     {
         $this->dao = Dao::getInstance(); // esto se instancia en el router
+        $this->viewController = new C_View;
     }
 
 	public function create($userEmail='', $purchaselines='')
@@ -38,11 +42,11 @@ class PurchaseController
 
 			$this->dao->create($purchase);
 
-			require(ROOT . VIEWS . 'purchaselinesadmin.php');
+			$this->viewController->viewPurchasesAdmin();
 		} else {
 			echo "No existe el cliente";
 			// modificar el require segun lo que se valla a hacer si ingreso mal el email
-			require(ROOT . VIEWS . "purchaselinesadmin.php");
+			$this->viewController->viewPurchasesAdmin();
 		}
 	}
 
@@ -63,7 +67,7 @@ class PurchaseController
 		$this->dao->delete($id);
 		$list = $this->dao->readAll(); // agregue esto como solucion temporal al problema de borrado // si no da problemas se deja
 		// despues de borrar un evento, al ya haber recorrido todos los eventos, la lista quedaba vacía, por eso hay q volver a leer
-		require(ROOT . VIEWS . 'purchaselinesadmin.php');
+		$this->viewController->viewPurchasesAdmin();
 	}
 	
 }

@@ -4,18 +4,22 @@ namespace controllers;
 use models\Artist;
 use daos\daodb\ArtistDao as Dao;
 
+use controllers\ViewsController as C_View;
+
 class ArtistController
 {
     protected $dao; // es una instancia de la Dao lista, para poder comunicarme con ella
+    private $viewController;
 
     public function __construct()
     {
         $this->dao=Dao::getInstance(); // esto se instancia en el router
+        $this->viewController = new C_View();
     }
 
     public function index() // funcion por defecto de cada controladora
     {
-        include(BASE . VIEWS . "Home.php");
+        $this->viewController->index();
     }
 
     public function create($nombre,$apellido,$dni)
@@ -24,7 +28,7 @@ class ArtistController
 
         $this->dao->create($artist);
 
-        require(ROOT . VIEWS . 'artistsAdmin.php');
+        $this->viewController->viewArtistsAdmin();
 
     }
 
@@ -44,7 +48,9 @@ class ArtistController
     {
         $this->dao->delete($dni);
 
-        require(ROOT . VIEWS . 'artistsAdmin.php');
+        $this->viewController->viewArtistsAdmin();
+
+        //require(ROOT . VIEWS . 'artistsAdmin.php');
     }
 
 

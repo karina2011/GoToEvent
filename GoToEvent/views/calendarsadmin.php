@@ -1,39 +1,5 @@
 <?php
-use controllers\UserController as C_User;
-use controllers\CalendarController as C_Calendar;
-use controllers\EventController as C_Event;
-use controllers\ArtistController as C_Artist;
-use controllers\EventPlaceController as C_Event_place;
-use controllers\EventSquareController as C_Event_square;
-use controllers\SquareTypeController as C_Square_type;
-
-use models\User as M_User;
-
-
-
-$userController = new C_User;
-$user = $userController->checkSession();
-
-$calendarController = new C_Calendar;
-$list = $calendarController->readAll();
-
-$eventController = new C_Event;
-$listEvents = $eventController->readAll();
-
-$artistController = new C_Artist;
-$listArtists = $artistController->readAll();
-
-$eventPlaceController = new C_Event_place;
-$listEventPlaces = $eventPlaceController->readAll();
-
-$calendarId = $calendarController->generateId(); // devuelve el id que va a usar el calendario a crear
-
-$eventSquareController = new C_Event_square;
-$listEventSquares = $eventSquareController->readAllByCalendarId($calendarId); // traer solo los eventsquares que correspondan al id calendario q se va a crear
-
-$squareTypeController = new C_Square_type;
-$listSquareType = $squareTypeController->readAll();
-
+namespace views;
 ?>
 <!DOCTYPE html>
 <html lang="en">

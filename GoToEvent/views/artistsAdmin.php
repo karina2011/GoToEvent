@@ -1,15 +1,6 @@
 <?php 
-use controllers\UserController as C_User;
-use controllers\ArtistController as C_Artist;
-use models\User as M_User;
-
-$userController = new C_User;
-$user = $userController->checkSession();
-
-$artistController = new C_Artist;
-$list = $artistController->readAll();
-
-?>
+namespace views;
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 

@@ -8,16 +8,20 @@ use daos\daodb\PurchaseLineDao as Dao;
 use daos\daodb\EventSquareDao as D_Event_Square;
 use daos\daodb\TicketDAo as D_Ticket;
 
+use controllers\ViewsController as C_View;
+
 /**
  *
  */
 class PurchaseLineController
 {
 	protected $dao;
+	private $viewController;
 
 	public function __construct()
     {
         $this->dao = Dao::getInstance(); // esto se instancia en el router
+        $this->viewController = new C_View;
     }
 
 	public function create($event_square_id='', $quantity='', $id_purchase='')
@@ -37,7 +41,8 @@ class PurchaseLineController
 
 		$this->dao->create($purchaseline,$id_purchase); // el id de compra es para relacionar cada linea con su respectiva compra en la BD
 		// pero en el objeto no se van a relacionar con nada // al guardar compra en su bd, vamos guardando tambien sus lineas de compras en la bd de lineas de c.
-		require(ROOT . VIEWS . 'Home.php');
+
+		$this->viewController->index();
 
 	}
 
@@ -59,7 +64,8 @@ class PurchaseLineController
 		$this->dao->delete($id);
 		$list = $this->dao->readAll(); // agregue esto como solucion temporal al problema de borrado // si no da problemas se deja
 		// despues de borrar una linea de compra, al ya haber recorrido todos las lineas de compra, la lista quedaba vacía, por eso hay q volver a leer
-		require(ROOT . VIEWS . 'viewpurchaselines.php');
+
+		$this->viewController->viewPurchaseLinesAdmin();
 	}
 
 }

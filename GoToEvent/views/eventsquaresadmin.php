@@ -1,18 +1,5 @@
 <?php
-use controllers\UserController as C_User;
-use controllers\EventSquareController as C_Event_square;
-use controllers\SquareTypeController as C_Square_type;
-use models\User as M_User;
-
-$userController = new C_User;
-$user = $userController->checkSession();
-
-$eventSquareController = new C_Event_square;
-$list = $eventSquareController->readAll();
-
-$squareTypeController = new C_Square_type;
-$listSquareType = $squareTypeController->readAll();
-
+namespace views;
 ?>
 <!DOCTYPE html>
 <html lang="en">

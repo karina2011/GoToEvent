@@ -12,7 +12,8 @@ use daos\daodb\EventPlaceDao as D_Event_place;
 use daos\daodb\EventDao as D_Event;
 use daos\daodb\CalendarArtistDao as D_Calendar_artist;
 use daos\daodb\EventSquareDao as D_Event_square;
-use controllers\ViewsController as C_Views;
+
+use controllers\ViewsController as C_View;
 
 $daoEvent = D_Event::getInstance();
 /**
@@ -21,28 +22,29 @@ $daoEvent = D_Event::getInstance();
 class CalendarController
 {
 	protected $dao;
+	private $viewController;
 
 	public function __construct()
     {
         $this->dao = Dao::getInstance(); // esto se instancia en el router
+        $this->viewController = new C_View;
     }
 
 	public function create($date="", $id_event="", $artists=[], $id_event_place="")
 	{
-		$viewsController = new C_Views;
 		if(empty($id_event)){
 
-			$viewsController->calendarsAdmin();
+			$this->viewController->calendarsAdmin();
 			exit("<script>alert('Rellene todos los campos por favor')</script>");
 		}
 		if(empty($artists)){
 
-			$viewsController->calendarsAdmin();
+			$this->viewController->calendarsAdmin();
 			exit("<script>alert('Rellene todos los campos por favor')</script>");
 		}
 		if(empty($id_event_place)){
 
-			$viewsController->calendarsAdmin();
+			$this->viewController->calendarsAdmin();
 			exit("<script>alert('Rellene todos los campos por favor')</script>");
 		}
 
@@ -50,7 +52,7 @@ class CalendarController
 
 		if ($date < $fechaActual) // comprobar q la fecha sea posterior a la actua
 		{
-			require(ROOT . VIEWS . 'calendarsadmin.php');
+			$this->viewController->calendarsAdmin();
 			echo '<script>alert("NO PODES CREAR EVENTOS EN EL PASADO INUTIL");</script>';
 		} else
 			{
@@ -91,10 +93,10 @@ class CalendarController
 
 								$daoCalendarArtist->create($ids_calendar_artist);
 						}
-						require(ROOT . VIEWS . 'addeventsquarestocalendar.php');
+						$this->viewController->addEventSquareToCalendar();
 
 					} else {
-						require(ROOT . VIEWS . 'calendarsadmin.php');
+						$this->viewController->calendarsAdmin();
 						echo "<script> alert('No esta disponible en esa fecha'); </script>";
 					}
 				}
@@ -146,7 +148,7 @@ class CalendarController
 		$this->dao->delete($id_calendar);
 		$list = $this->dao->readAll(); // agregue esto como solucion temporal al problema de borrado // si no da problemas se deja
 		// despues de borrar un evento, al ya haber recorrido todos los eventos, la lista quedaba vacía, por eso hay q volver a leer
-		require(ROOT . VIEWS . 'calendarsadmin.php');
+		$this->viewController->calendarsAdmin();
 	}
 
 	public function readArtistById($id){

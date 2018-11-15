@@ -1,11 +1,6 @@
 <?php 
-use controllers\UserController as C_User;
-use models\User as M_User;
-
-$userController = new C_User;
-$user = $userController->checkSession();
-
-if ($user){ ?>
+namespace views;
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -69,4 +64,3 @@ if ($user){ ?>
   </body>
 
 </html>
-<?php } else { echo '<script>alert("ALTO AHI VAQUERO");</script>';  require(ROOT . VIEWS . 'Home.php'); }?>

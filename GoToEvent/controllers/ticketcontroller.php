@@ -4,6 +4,7 @@ namespace controllers;
 use models\Ticket as Ticket;
 use daos\daodb\TicketDao as Dao;
 
+use controllers\ViewsController as C_View;
 
 /**
  * 
@@ -11,10 +12,12 @@ use daos\daodb\TicketDao as Dao;
 class TicketController // fijarse si esta controladora es necesaria - Allan
 {
 	protected $dao;
+	private $viewController;
 	
 	function __construct()
 	{
 		$this->dao = Dao::getInstance();
+		$this->viewController = new C_View;
 	}
 
 	public function create()
@@ -28,9 +31,8 @@ class TicketController // fijarse si esta controladora es necesaria - Allan
 
 		$this->dao->create($ticket);
 
-		//INCLUYE LA VISTA PRINCIPAL
-
-		require(ROOT . VIEWS . 'ticketsAdmin.php');
+		// incluye la vista admin de ticket
+		$this->viewController->viewTicketsAdmin();
 	}
 
 	// devuelve un arreglo con los objetos dentro o un arreglo vacio en caso de no haber nada en la BD
@@ -65,6 +67,7 @@ class TicketController // fijarse si esta controladora es necesaria - Allan
 
 		//SE INCLUYE LA VISTA PRINCIPAL PARA QUE EL USUARIO PUEDA SEGUIR NAVEGANDO EN LA PAGINA WEB
 
-		require(ROOT . VIEWS . 'ticketsAdmin.php');
+		$this->viewController->viewTicketsAdmin();
+
 	}
 }

@@ -4,16 +4,19 @@ namespace controllers;
 use models\Square_type as Square_type;
 use daos\daodb\SquareTypeDao as Dao;
 
+use controllers\ViewsController as C_View;
 /**
  * 
  */
 class SquareTypeController 
 {
-    protected $dao; // es una instancia de la Dao lista, para poder comunicarme con ella
+    protected $dao; // es una instancia de la Dao db, para poder comunicarme con ella
+    private $viewController;
 
     public function __construct()
     {
         $this->dao=Dao::getInstance(); // esto se instancia en el router
+        $this->viewController = new C_View;
     }
 
     public function create($description)
@@ -27,8 +30,7 @@ class SquareTypeController
     	$this->dao->create($square_type);
 
     	//SE INCLUYE LA VISTA PRINCIPAL PARA PODER SEGUIR NAVEGANDO POR LA WEB
-
-    	require(ROOT . VIEWS . 'squaretypesadmin.php');
+        $this->viewController->viewSquareTypesAdmin();
     }
 
     public function readAll()
@@ -64,6 +66,6 @@ class SquareTypeController
 
     	//SE INCLUYE LA VISTA PRINCIPAL PARA PODER SEGUIR NAVEGANDO POR LA PAGINA WEB
 
-    	require(ROOT . VIEWS . 'squaretypesadmin.php');
+        $this->viewController->viewSquareTypesAdmin();
     }
 }

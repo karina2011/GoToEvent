@@ -4,16 +4,20 @@ namespace controllers;
 use models\EventPlace as Event_place;
 use daos\daodb\EventPlaceDao as Dao;
 
+use controllers\ViewsController as C_View;
+
 /**
  * 
  */
 class EventPlaceController 
 {
     protected $dao; // es una instancia de la Dao lista, para poder comunicarme con ella
+    private $viewController;    
 
     public function __construct()
     {
         $this->dao=Dao::getInstance(); // esto se instancia en el router
+        $this->viewController = new C_View;
     }
 
     public function create($description,$capacity)
@@ -27,8 +31,7 @@ class EventPlaceController
     	$this->dao->create($event_place);
 
     	//SE INCLUYE LA VISTA PRINCIPAL PARA PODER SEGUIR NAVEGANDO POR LA WEB
-
-    	require(ROOT . VIEWS . 'eventplacesadmin.php');
+        $this->viewController->viewEventPlacesAdmin();
     }
 
     public function readAll()
@@ -64,6 +67,6 @@ class EventPlaceController
 
     	//SE INCLUYE LA VISTA PRINCIPAL PARA PODER SEGUIR NAVEGANDO POR LA PAGINA WEB
 
-    	require(ROOT . VIEWS . 'eventplacesadmin.php');
+        $this->viewController->viewEventPlacesAdmin();
     }
 }

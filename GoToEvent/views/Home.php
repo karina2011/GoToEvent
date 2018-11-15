@@ -1,14 +1,6 @@
 <?php
-use models\Calendar as M_Calendar;
-use controllers\CalendarController as C_Calendar;
-
-$calendarController = new C_Calendar();
-
-$calendarlist = $calendarController->readAll();
-
-
+namespace views;
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
