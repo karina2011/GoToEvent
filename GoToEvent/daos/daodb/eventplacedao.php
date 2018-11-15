@@ -22,14 +22,14 @@ class EventPlaceDao extends Singleton implements \interfaces\Crud
         $parameters['capacity'] = $event_place->getCapacity();
         $parameters['description'] = $event_place->getDescription();
 
-        try 
+        try
         {
-            
+
             $this->connection = Connection::getInstance();
 
             return $this->connection->ExecuteNonQuery($sql, $parameters);
 
-        } 
+        }
         catch(PDOException $e)
         {
             echo $e;
@@ -47,8 +47,8 @@ class EventPlaceDao extends Singleton implements \interfaces\Crud
             $this->connection = Connection::getInstance();
             $resultSet = $this->connection->execute($sql);
 
-        } 
-        catch(PDOException $e) 
+        }
+        catch(PDOException $e)
         {
 
             echo $e;
@@ -57,7 +57,7 @@ class EventPlaceDao extends Singleton implements \interfaces\Crud
         if(!empty($resultSet))
             return $this->mapear($resultSet);
         else
-            return false;       
+            return false;
 
     }
 
@@ -67,12 +67,12 @@ class EventPlaceDao extends Singleton implements \interfaces\Crud
 
         $parameters['description'] = $description;
 
-        try 
+        try
         {
             $this->connection = Connection::getInstance();
             $resultSet = $this->connection->execute($sql, $parameters);
-        } 
-        catch(PDOException $e) 
+        }
+        catch(PDOException $e)
         {
             echo $e;
         }
@@ -89,12 +89,12 @@ class EventPlaceDao extends Singleton implements \interfaces\Crud
 
         $parameters['id_event_place'] = $id;
 
-        try 
+        try
         {
             $this->connection = Connection::getInstance();
             $resultSet = $this->connection->execute($sql, $parameters);
-        } 
-        catch(PDOException $e) 
+        }
+        catch(PDOException $e)
         {
             echo $e;
         }
@@ -105,9 +105,21 @@ class EventPlaceDao extends Singleton implements \interfaces\Crud
             return false;
     }
 
-    public function update ($id)
+    public function update ($id,$description)
     {
+      $sql = "UPDATE event_places SET description = :description  WHERE id_event_place = :id_event_place";
+      $parameters['id_event_place'] = $id;
+      $parameters['description'] = $description;
 
+      try
+      {
+          $this->connection = Connection::getInstance();
+          return $this->connection->ExecuteNonQuery($sql, $parameters);
+      }
+      catch(PDOException $e)
+      {
+          echo $e;
+      }
     }
 
     public function delete ($description)
@@ -116,18 +128,18 @@ class EventPlaceDao extends Singleton implements \interfaces\Crud
 
         $parameters['description'] = $description;
 
-        try 
+        try
         {
             $this->connection = Connection::getInstance();
             return $this->connection->ExecuteNonQuery($sql, $parameters);
-        } 
-        catch(PDOException $e) 
+        }
+        catch(PDOException $e)
         {
             echo $e;
         }
    }
 
-    
+
 
     /**
     * Transforma el listado de lugares de evento en
@@ -137,11 +149,11 @@ class EventPlaceDao extends Singleton implements \interfaces\Crud
 	protected function mapear($value) {
 
 		$value = is_array($value) ? $value : [];
-        
+
 		$resp = array_map(function($p){
 		    return new M_Event_place( $p['capacity'], $p['description'], $p['id_event_place']);
         }, $value);
-            
+
             /* devuelve un arreglo si tiene datos y sino devuelve nulo*/
 
             return count($resp) > 0 ? $resp : null;

@@ -236,9 +236,21 @@ class CalendarDao extends Singleton implements \interfaces\Crud
 
 
 
-    public function update ($id)
+    public function update ($id,$date)
     {
+      $sql = "UPDATE calendar SET date = :date  WHERE id_calendar = :id_calendar";
+      $parameters['id_calendar'] = $id;
+      $parameters['date'] = $date;
 
+      try
+      {
+          $this->connection = Connection::getInstance();
+          return $this->connection->ExecuteNonQuery($sql, $parameters);
+      }
+      catch(PDOException $e)
+      {
+          echo $e;
+      }
     }
 
     public function delete ($id)

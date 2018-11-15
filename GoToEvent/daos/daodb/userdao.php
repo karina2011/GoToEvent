@@ -6,12 +6,12 @@ use models\User as M_User;
 use daos\daodb\connection as Connection;
 use PDOException;
 /**
- * 
+ *
  */
 class UserDao extends Singleton implements \interfaces\Crud
 {
     private $connection;
-    
+
     public function __construct()
     {
         $this->connection = null;
@@ -32,13 +32,13 @@ class UserDao extends Singleton implements \interfaces\Crud
 
 
 		try {
-			
+
 
             $this->connection = Connection::getInstance();
 
             return $this->connection->ExecuteNonQuery($sql, $parameters);
 
-        } 
+        }
         catch(PDOException $e) {
 
 			echo $e;
@@ -56,8 +56,8 @@ class UserDao extends Singleton implements \interfaces\Crud
             $this->connection = Connection::getInstance();
             $resultSet = $this->connection->execute($sql);
 
-        } 
-        catch(PDOException $e) 
+        }
+        catch(PDOException $e)
         {
 
 			echo $e;
@@ -75,12 +75,12 @@ class UserDao extends Singleton implements \interfaces\Crud
 
         $parameters['email'] = $email;
 
-        try 
+        try
         {
             $this->connection = Connection::getInstance();
             $resultSet = $this->connection->execute($sql, $parameters);
-        } 
-        catch(PDOException $e) 
+        }
+        catch(PDOException $e)
         {
             echo '<script>';
             echo 'console.log("Error en base de datos. Archivo: userdao.php")';
@@ -94,9 +94,21 @@ class UserDao extends Singleton implements \interfaces\Crud
     }
 
 
-    public function update ($email)
+    public function update ($id,$pass)
     {
+      $sql = "UPDATE users SET pass = :pass  WHERE id_user = :id_user";
+      $parameters['id_user'] = $id;
+      $parameters['pass'] = $pass;
 
+      try
+      {
+          $this->connection = Connection::getInstance();
+          return $this->connection->ExecuteNonQuery($sql, $parameters);
+      }
+      catch(PDOException $e)
+      {
+          echo $e;
+      }
     }
 
     public function delete ($email)
@@ -104,12 +116,12 @@ class UserDao extends Singleton implements \interfaces\Crud
         $sql = "DELETE FROM users WHERE email = :email";
         $parameters['email'] = $email;
 
-        try 
+        try
         {
             $this->connection = Connection::getInstance();
             return $this->connection->ExecuteNonQuery($sql, $parameters);
-        } 
-        catch(PDOException $e) 
+        }
+        catch(PDOException $e)
         {
             echo $e;
         }
@@ -118,11 +130,11 @@ class UserDao extends Singleton implements \interfaces\Crud
    	protected function mapear($value) {
 
 		$value = is_array($value) ? $value : [];
-        
+
 		$resp = array_map(function($p){
 		    return new M_User( $p['name'], $p['last_name'], $p['email'], $p['dni'],$p['type'],$p['pass'], $p['id_user']);
         }, $value);
-            
+
             /* devuelve un arreglo si tiene datos y sino devuelve nulo*/
 
             return count($resp) > 1 ? $resp : $resp['0'];

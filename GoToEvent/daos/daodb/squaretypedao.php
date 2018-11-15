@@ -9,12 +9,12 @@ use PDOException;
 class SquareTypeDao extends Singleton implements \interfaces\Crud
 {
     private $connection;
-    
+
     public function __construct()
     {
         $this->connection = null;
     }
-    
+
     public function create($square_type)
     {
         // Guardo como string la consulta sql utilizando como values, marcadores de parámetros con nombre (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada
@@ -24,13 +24,13 @@ class SquareTypeDao extends Singleton implements \interfaces\Crud
         $parameters['description'] = $square_type->getDescription();
 
 		try {
-			
+
 
             $this->connection = Connection::getInstance();
 
             return $this->connection->ExecuteNonQuery($sql, $parameters);
 
-        } 
+        }
         catch(PDOException $e) {
 
 			echo $e;
@@ -47,8 +47,8 @@ class SquareTypeDao extends Singleton implements \interfaces\Crud
             $this->connection = Connection::getInstance();
             $resultSet = $this->connection->execute($sql);
 
-        } 
-        catch(PDOException $e) 
+        }
+        catch(PDOException $e)
         {
 
 			echo $e;
@@ -66,12 +66,12 @@ class SquareTypeDao extends Singleton implements \interfaces\Crud
 
         $parameters['description'] = $description;
 
-        try 
+        try
         {
             $this->connection = Connection::getInstance();
             $resultSet = $this->connection->execute($sql, $parameters);
-        } 
-        catch(PDOException $e) 
+        }
+        catch(PDOException $e)
         {
             echo $e;
         }
@@ -88,12 +88,12 @@ class SquareTypeDao extends Singleton implements \interfaces\Crud
 
         $parameters['id_square_type'] = $id_square_type;
 
-        try 
+        try
         {
             $this->connection = Connection::getInstance();
             $resultSet = $this->connection->execute($sql, $parameters);
-        } 
-        catch(PDOException $e) 
+        }
+        catch(PDOException $e)
         {
             echo $e;
         }
@@ -104,9 +104,21 @@ class SquareTypeDao extends Singleton implements \interfaces\Crud
             return false;
     }
 
-    public function update ($id)
+    public function update ($id,$description)
     {
+      $sql = "UPDATE square_types SET description = :description  WHERE id_purchase_line = :id_purchase_line";
+      $parameters['id_purchase_line'] = $id;
+      $parameters['description'] = $description;
 
+      try
+      {
+          $this->connection = Connection::getInstance();
+          return $this->connection->ExecuteNonQuery($sql, $parameters);
+      }
+      catch(PDOException $e)
+      {
+          echo $e;
+      }
     }
 
     public function delete ($description)
@@ -114,19 +126,19 @@ class SquareTypeDao extends Singleton implements \interfaces\Crud
         $sql = "DELETE FROM square_types WHERE description = :description";
         $parameters['description'] = $description;
 
-        try 
+        try
         {
             $this->connection = Connection::getInstance();
             return $this->connection->ExecuteNonQuery($sql, $parameters);
-        } 
-        catch(PDOException $e) 
+        }
+        catch(PDOException $e)
         {
             echo $e;
         }
    }
 
     public function checkDni($dni){
-       
+
     }
 
     /**
@@ -138,11 +150,11 @@ class SquareTypeDao extends Singleton implements \interfaces\Crud
 	protected function mapear($value) {
 
 		$value = is_array($value) ? $value : [];
-        
+
 		$resp = array_map(function($p){
 		    return new M_Square_type( $p['description'], $p['id_square_type']);
         }, $value);
-            
+
             /* devuelve un arreglo si tiene datos y sino devuelve nulo*/
 
             return count($resp) > 0 ? $resp : null;

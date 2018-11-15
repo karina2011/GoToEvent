@@ -21,22 +21,22 @@ class PurchaseLineDao extends Singleton implements \interfaces\Crud
         // Guardo como string la consulta sql utilizando como values, marcadores de parámetros con nombre (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada
 
         $sql = "INSERT INTO purchase_lines (price,quantity,id_event_square, id_ticket, id_purchase)
-         VALUES (:price,:quantity,:id_event_square,:id_ticket,:id_purchase)"; 
-        
+         VALUES (:price,:quantity,:id_event_square,:id_ticket,:id_purchase)";
+
         $parameters['price'] = $purchaseline->getPrice();
         $parameters['quantity'] = $purchaseline->getQuantity();
         $parameters['id_event_square'] = $purchaseline->getEventSquareId();
         $parameters['id_ticket'] = $purchaseline->getTicketId();
         $parameters['id_purchase'] = $id_purchase;
 
-        try 
+        try
         {
-            
+
             $this->connection = Connection::getInstance();
 
             return $this->connection->ExecuteNonQuery($sql, $parameters);
 
-        } 
+        }
         catch(PDOException $e)
         {
             echo $e;
@@ -54,8 +54,8 @@ class PurchaseLineDao extends Singleton implements \interfaces\Crud
             $this->connection = Connection::getInstance();
             $resultSet = $this->connection->execute($sql);
 
-        } 
-        catch(PDOException $e) 
+        }
+        catch(PDOException $e)
         {
 
             echo $e;
@@ -64,7 +64,7 @@ class PurchaseLineDao extends Singleton implements \interfaces\Crud
         if(!empty($resultSet))
             return $this->mapear($resultSet);
         else
-            return false;       
+            return false;
 
     }
 
@@ -74,12 +74,12 @@ class PurchaseLineDao extends Singleton implements \interfaces\Crud
 
         $parameters['id_purchase_line'] = $id_purchase_line;
 
-        try 
+        try
         {
             $this->connection = Connection::getInstance();
             $resultSet = $this->connection->execute($sql, $parameters);
-        } 
-        catch(PDOException $e) 
+        }
+        catch(PDOException $e)
         {
             echo $e;
         }
@@ -90,9 +90,21 @@ class PurchaseLineDao extends Singleton implements \interfaces\Crud
             return false;
     }
 
-    public function update ($id)
+    public function update ($id,$price)
     {
+      $sql = "UPDATE purchase_lines SET price = :price  WHERE id_purchase_line = :id_purchase_line";
+      $parameters['id_purchase_line'] = $id;
+      $parameters['price'] = $price;
 
+      try
+      {
+          $this->connection = Connection::getInstance();
+          return $this->connection->ExecuteNonQuery($sql, $parameters);
+      }
+      catch(PDOException $e)
+      {
+          echo $e;
+      }
     }
 
     public function delete ($id_purchase_line)
@@ -101,18 +113,18 @@ class PurchaseLineDao extends Singleton implements \interfaces\Crud
 
         $parameters['id_purchase_line'] = $id_purchase_line;
 
-        try 
+        try
         {
             $this->connection = Connection::getInstance();
             return $this->connection->ExecuteNonQuery($sql, $parameters);
-        } 
-        catch(PDOException $e) 
+        }
+        catch(PDOException $e)
         {
             echo $e;
         }
    }
 
-    
+
 
     /**
     * Transforma el listado de lineas de compra en
@@ -123,7 +135,7 @@ class PurchaseLineDao extends Singleton implements \interfaces\Crud
 	protected function mapear($value) {
 
 		$value = is_array($value) ? $value : [];
-        
+
 		$resp = array_map(function($p){
 
             $daoEventSquare = D_Event_Square::getInstance();
@@ -135,9 +147,9 @@ class PurchaseLineDao extends Singleton implements \interfaces\Crud
 
 		    return new M_Purchase_line( $p['price'], $p['quantity'], $event_square , $ticket,
             $p['id_purchase_line'] );
-            
+
         }, $value);
-            
+
             /*  devuelve un arreglo si hay mas de 1 dato, sino un objeto*/
 
             return count($resp) > 1 ? $resp : $resp['0'];
