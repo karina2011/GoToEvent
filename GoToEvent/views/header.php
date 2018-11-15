@@ -19,11 +19,6 @@ $user = $userController->checkSession();
                 <span class="sr-only">(current)</span>
               </a>
             </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="<?php echo BASE; ?>views/viewusers">Nuevo Usuario
-                <span class="sr-only">(current)</span>
-              </a>
-            </li>
           <?php if($user) {
                   if ($user->getType() == "admin") { ?>
             <li class="nav-item">

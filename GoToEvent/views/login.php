@@ -16,6 +16,9 @@
   <link href="<?php echo BASE; ?>assets/css/styles.css" rel="stylesheet">
   <!--https://startbootstrap.com/snippets/login/-->
 
+    <!-- Styles.css-->
+    <link href="<?php echo BASE; ?>assets/css/modal.css" rel="stylesheet">
+
 </head>
 <body >
 
@@ -40,7 +43,41 @@
 
               <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Iniciar Sesion</button>
               <!--<button class="btn btn-lg btn-google btn-block text-uppercase" type="submit"><i class="fab fa-google mr-2"></i> Registrarse</button>-->
+              <a href="#openModal" class="btn btn-lg btn-google btn-block text-uppercase">Registrarse</a>
             </form>
+            <head></head>  
+
+                <div id="openModal" class="modalDialog">
+                  <div>
+                    <a href="#close" title="Close" class="close">X</a>
+                    <h3>Crear usuario</h3>
+
+                        <form action="<?php echo BASE; ?>user/create" method="post">
+                            <div class="form-group">
+                                <label for="name">Nombre</label>
+                                <input type="text" class="form-control" id="name" placeholder="Nombre" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastname">Apellido</label>
+                                <input type="text" class="form-control" id="lastname" placeholder="Apellido" name="lastname" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" class="form-control" id="email" placeholder="Email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="dni">DNI</label>
+                                <input type="number" class="form-control" id="dni" placeholder="DNI" name="dni" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="pass">Contraseña</label>
+                                <input type="password" class="form-control" id="pass" placeholder="Contraseña" name="pass" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Crear usuario</button>
+                        </form>
+                  </div>
+                </div>
           </div>
         </div>
       </div>

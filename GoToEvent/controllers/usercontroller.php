@@ -40,7 +40,7 @@ class UserController
 			$this->dao->create($user);
 
 			//luego de guardarlo en la base de datos se muetra el inicio de la pagina
-			require(ROOT . VIEWS . 'Home.php');
+			require(ROOT . VIEWS . 'login.php');
 		}
 	}
 
@@ -138,7 +138,7 @@ class UserController
 
 	}
 
-	public function signUp($email,$name,$pass){ // adaptar
+	public function signUp($name,$last_name,$email,$dni,$pass,$type=''){ // adaptar
 
 		$user = new User($email, $name, $pass);
 		//llama al metodo del dao para guardarlo en la base de datos
