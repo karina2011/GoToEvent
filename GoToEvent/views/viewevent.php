@@ -89,10 +89,13 @@ $event_squares = $eventSquareController->readAllByCalendarId($calendar->getId())
             <div class="card-body">
               <div class="col-lg-6">
                   <ul class="list-unstyled mb-0">
+                    <?php if(!empty($calendar->getArtists())) { ?>
                     <?php foreach ($calendar->getArtists() as $key => $artist) { ?>
                     <li>
                       <p><?php echo $artist['0']->getName() . ' ' . $artist['0']->getLastName(); ?></p>
                     </li>
+                    <?php } } else { ?>
+                      <p>Este evento no tiene artistas</p>
                     <?php } ?>
                   </ul>
               </div>

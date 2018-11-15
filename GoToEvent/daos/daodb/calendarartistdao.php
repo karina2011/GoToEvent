@@ -70,7 +70,7 @@ class CalendarArtistDao extends Singleton implements \interfaces\Crud
     }
 
 
-    public function update($id)
+    public function update($id, $parameter)
     {
 
     }

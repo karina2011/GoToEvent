@@ -266,7 +266,7 @@ class CalendarDao extends Singleton implements \interfaces\Crud
         }
         catch(PDOException $e)
         {
-            echo $e;
+            echo "<script>alert('No se pueden borrar calendarios por el momento. Estamos en construccion')</script>";
         }
    }
 

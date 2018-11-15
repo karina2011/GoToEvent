@@ -1,7 +1,14 @@
 <?php
 namespace controllers;
-class ViewsController
-{
+
+
+use controllers\UserController as C_User;
+use models\User as M_User;
+
+$userController = new C_User;
+$user = $userController->checkSession();
+
+class ViewsController {
 
     public function __construct()
     {
@@ -33,52 +40,124 @@ class ViewsController
     }
 
     public function viewAdmin(){
-        require(ROOT . VIEWS . 'admin.php');
-    }
-
-    public function viewUsers(){
-        require(ROOT . VIEWS . 'users.php');
+        $userController = new C_User;
+        $user = $userController->checkSession();
+        if ($user && $user->getType()== "admin"){
+            require(ROOT . VIEWS . 'admin.php');
+        } else {
+            require(ROOT . VIEWS . 'home.php');
+             echo '<script>alert("ALTO AHI VAQUERO");</script>';  
+           }
     }
 
     public function viewArtistsAdmin(){
-        require(ROOT . VIEWS . 'artistsadmin.php');
+        $userController = new C_User;
+        $user = $userController->checkSession();
+        if ($user && $user->getType()== "admin"){
+            require(ROOT . VIEWS . 'artistsadmin.php');
+        } else {
+            require(ROOT . VIEWS . 'home.php');
+             echo '<script>alert("ALTO AHI VAQUERO");</script>';  
+           }
     }
 
     public function viewEventsAdmin(){
-        require(ROOT . VIEWS . 'eventsadmin.php');
+        $userController = new C_User;
+        $user = $userController->checkSession();
+        if ($user && $user->getType()== "admin"){
+            require(ROOT . VIEWS . 'eventsadmin.php');
+        } else {
+            require(ROOT . VIEWS . 'home.php');
+             echo '<script>alert("ALTO AHI VAQUERO");</script>';  
+           }
     }
 
     public function viewCategoriesAdmin(){
-        require(ROOT . VIEWS . 'categoriesAdmin.php');
+        $userController = new C_User;
+        $user = $userController->checkSession();
+        if ($user && $user->getType()== "admin"){
+            require(ROOT . VIEWS . 'categoriesAdmin.php');
+        } else {
+            require(ROOT . VIEWS . 'home.php');
+             echo '<script>alert("ALTO AHI VAQUERO");</script>';  
+           }
     }
 
     public function viewUsersAdmin(){
-        require(ROOT . VIEWS . 'usersAdmin.php');
+        $userController = new C_User;
+        $user = $userController->checkSession();
+        if ($user && $user->getType()== "admin"){
+            require(ROOT . VIEWS . 'usersAdmin.php');
+        } else {
+            require(ROOT . VIEWS . 'home.php');
+             echo '<script>alert("ALTO AHI VAQUERO");</script>';  
+           }
     }
 
     public function viewTicketsAdmin(){
-        require(ROOT . VIEWS . 'ticketsAdmin.php');
+        $userController = new C_User;
+        $user = $userController->checkSession();
+        if ($user && $user->getType()== "admin"){
+            require(ROOT . VIEWS . 'ticketsAdmin.php');
+        } else {
+            require(ROOT . VIEWS . 'home.php');
+             echo '<script>alert("ALTO AHI VAQUERO");</script>';  
+           }
     }
 
     public function viewSquareTypesAdmin(){
-        require(ROOT . VIEWS . 'squaretypesadmin.php');
+        $userController = new C_User;
+        $user = $userController->checkSession();
+        if ($user && $user->getType()== "admin"){
+            require(ROOT . VIEWS . 'squaretypesadmin.php');
+        } else {
+            require(ROOT . VIEWS . 'home.php');
+             echo '<script>alert("ALTO AHI VAQUERO");</script>';  
+           }
     }
 
     public function viewEventPlacesAdmin(){
-        require(ROOT . VIEWS . 'eventplacesadmin.php');
+        $userController = new C_User;
+        $user = $userController->checkSession();
+        if ($user && $user->getType()== "admin"){
+            require(ROOT . VIEWS . 'eventplacesadmin.php');
+        } else {
+            require(ROOT . VIEWS . 'home.php');
+             echo '<script>alert("ALTO AHI VAQUERO");</script>';  
+           }
     }
 
     public function viewPurchasesAdmin(){
-        require(ROOT . VIEWS . 'purchasesadmin.php');
+        $userController = new C_User;
+        $user = $userController->checkSession();
+        if ($user && $user->getType()== "admin"){
+            require(ROOT . VIEWS . 'purchasesadmin.php');
+        } else {
+            require(ROOT . VIEWS . 'home.php');
+             echo '<script>alert("ALTO AHI VAQUERO");</script>';  
+           }
     }
 
     public function viewEventSquaresAdmin($id_calendar=''){
-        //echo "id de calendar: " . $id_calendar;
-        require(ROOT . VIEWS . 'eventsquaresadmin.php');
+        $userController = new C_User;
+        $user = $userController->checkSession();
+        if ($user && $user->getType()== "admin"){
+            require(ROOT . VIEWS . 'eventsquaresadmin.php');
+        } else {
+            require(ROOT . VIEWS . 'home.php');
+             echo '<script>alert("ALTO AHI VAQUERO");</script>';  
+           }
     }
 
     public function calendarsAdmin(){
-        require(ROOT . VIEWS . 'calendarsadmin.php');
+        $userController = new C_User;
+        $user = $userController->checkSession();
+        if ($user && $user->getType()== "admin"){
+            require(ROOT . VIEWS . 'calendarsadmin.php');
+        } else {
+            require(ROOT . VIEWS . 'home.php');
+             echo '<script>alert("ALTO AHI VAQUERO");</script>';  
+           }
     }
 
     public function viewEvent (){
