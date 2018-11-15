@@ -40,15 +40,15 @@ $listCategory = $categoryController->readAll();
                 </div>
                 <div class="form-group">
                     <label for="category">Categoria</label>
-                    <select name="id_category" required>
-					<?php foreach ($listCategory as $key => $category) { ?>
-							         <option value="<?php echo $category->getId();  ?>"><?php echo $category->getDescription(); ?></option>
-					<?php } ?>
+                    <select name="id_category" class="custom-select" required>
+                  <?php foreach ($listCategory as $key => $category) { ?>
+                      <option value="<?php echo $category->getId();  ?>"><?php echo $category->getDescription(); ?></option>
+                  <?php } ?>
 				            </select>
                 </div>
                 <div class="form-group">
                   <label>Cargar imagen (Max. 5MB): </label>
-                  <input type="file" name="eventimg" value="eventimg" required>
+                  <input type="file"  name="eventimg" value="eventimg" required>
                 </div>
                 <button type="submit" class="btn btn-primary">Crear evento</button>
             </form>

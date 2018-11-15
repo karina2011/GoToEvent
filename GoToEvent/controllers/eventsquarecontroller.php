@@ -26,8 +26,10 @@ class EventSquareController
     {
         $quantity = 0;
         $list = $this->readAllByCalendarId($id_calendar);
-        foreach ($list as $key => $event_square) {
-          $quantity = $quantity + $event_square->getAvailableQuantity();
+        if(is_array($list)){
+            foreach ($list as $key => $event_square) {
+            $quantity = $quantity + $event_square->getAvailableQuantity();
+            }   
         }
 
         $calendarController = new C_Calendar();

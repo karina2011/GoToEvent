@@ -122,4 +122,22 @@ class UserController
           require(ROOT . VIEWS . 'Home.php');
 
 	}
+
+	public function signUp($email,$name,$pass){ // adaptar
+
+		$user = new User($email, $name, $pass);
+		//llama al metodo del dao para guardarlo en la base de datos
+
+		$user = $this->create($user);
+
+		if($user){
+			require(ROOT . VIEWS . 'login.php');
+			echo "<script> alert('Usuario creado exitosamente');</script>";
+		}
+		else {
+			require(ROOT . VIEWS . 'signup.php');
+			echo "<script> alert('No se pudo crear usuario');</script>";
+		}
+
+	}
 }
