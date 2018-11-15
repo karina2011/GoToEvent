@@ -66,7 +66,7 @@ class EventSquareDao extends Singleton implements \interfaces\Crud
         else
             return false;
     }
-    
+
     public function readAllByCalendarId($id_calendar)
     {
         $sql = "SELECT * FROM event_squares WHERE id_calendar = :id_calendar";
@@ -113,9 +113,21 @@ class EventSquareDao extends Singleton implements \interfaces\Crud
             return false;
     }
 
-    public function update ($id)
+    public function update ($id,$price)
     {
+      $sql = "UPDATE event_squares SET price = :price  WHERE id_event_square = :id_event_square";
+      $parameters['id_event_square'] = $id;
+      $parameters['price'] = $price;
 
+      try
+      {
+          $this->connection = Connection::getInstance();
+          return $this->connection->ExecuteNonQuery($sql, $parameters);
+      }
+      catch(PDOException $e)
+      {
+          echo $e;
+      }
     }
 
     public function delete ($id_event_square)

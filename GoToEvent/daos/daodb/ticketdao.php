@@ -127,9 +127,21 @@ class TicketDao extends Singleton implements \interfaces\Crud
         else
             return false;
     }
-    public function update($object)
+    public function update($id,$number)
     {
+      $sql = "UPDATE tickets SET number = :number  WHERE id_ticket = :id_ticket";
+      $parameters['id_ticket'] = $id;
+      $parameters['number'] = $number;
 
+      try
+      {
+          $this->connection = Connection::getInstance();
+          return $this->connection->ExecuteNonQuery($sql, $parameters);
+      }
+      catch(PDOException $e)
+      {
+          echo $e;
+      }
     }
 
     public function delete ($number)

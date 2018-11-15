@@ -1,21 +1,21 @@
-<?php 
+<?php
 namespace daos\daodb;
 
 use models\Category as M_Category;
 use daos\daodb\connection as Connection;
 use PDOException;
 /**
- * 
+ *
  */
 class CategoryDao extends Singleton implements \interfaces\Crud
 {
 	private $connection;
-    
+
     public function __construct()
     {
         $this->connection = null;
     }
-	
+
 	public function create($category)
 	{
 		// Guardo como string la consulta sql utilizando como values, marcadores de parámetros con nombre (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada
@@ -24,19 +24,19 @@ class CategoryDao extends Singleton implements \interfaces\Crud
 
         $parameters['description'] = $category->getDescription();
 
-		try 
+		try
 		{
 
             $this->connection = Connection::getInstance();
 
             return $this->connection->ExecuteNonQuery($sql, $parameters);
 
-        } catch(PDOException $e) 
+        } catch(PDOException $e)
 		{
             echo "<script> alert('No se pudo crear: la categoria ya existe');</script>";
-            // https://sweetalert.js.org/ // for alerts with nice view 
-            
-            
+            // https://sweetalert.js.org/ // for alerts with nice view
+
+
 		}
 	}
 
@@ -50,8 +50,8 @@ class CategoryDao extends Singleton implements \interfaces\Crud
             $this->connection = Connection::getInstance();
             $resultSet = $this->connection->execute($sql);
 
-        } 
-        catch(PDOException $e) 
+        }
+        catch(PDOException $e)
         {
 
 			echo $e;
@@ -69,12 +69,12 @@ class CategoryDao extends Singleton implements \interfaces\Crud
 
         $parameters['description'] = $description;
 
-        try 
+        try
         {
             $this->connection = Connection::getInstance();
             $resultSet = $this->connection->execute($sql, $parameters);
-        } 
-        catch(PDOException $e) 
+        }
+        catch(PDOException $e)
         {
             echo $e;
         }
@@ -84,19 +84,19 @@ class CategoryDao extends Singleton implements \interfaces\Crud
         else
             return false;
     }
-    
+
     public function readById($id)
 	{
 		$sql = "SELECT * FROM categories where id_category = :id_category";
 
         $parameters['id_category'] = $id;
 
-        try 
+        try
         {
             $this->connection = Connection::getInstance();
             $resultSet = $this->connection->execute($sql, $parameters);
-        } 
-        catch(PDOException $e) 
+        }
+        catch(PDOException $e)
         {
             echo $e;
         }
@@ -112,30 +112,42 @@ class CategoryDao extends Singleton implements \interfaces\Crud
 		$sql = "DELETE FROM categories WHERE description = :description";
         $parameters['description'] = $description;
 
-        try 
+        try
         {
             $this->connection = Connection::getInstance();
             return $this->connection->ExecuteNonQuery($sql, $parameters);
-        } 
-        catch(PDOException $e) 
+        }
+        catch(PDOException $e)
         {
             echo $e;
         }
 	}
 
-	public function update($description)
+	public function update($description,$id)
 	{
-		
+		$sql = "UPDATE categories SET description = :description  WHERE id_category = :id_category";
+		$parameters['id_category'] = $id;
+		$parameters['description'] = $description;
+
+		try
+		{
+				$this->connection = Connection::getInstance();
+				return $this->connection->ExecuteNonQuery($sql, $parameters);
+		}
+		catch(PDOException $e)
+		{
+				echo $e;
+		}
 	}
 
 	protected function mapear($value) {
 
 		$value = is_array($value) ? $value : [];
-        
+
 		$resp = array_map(function($p){
 		    return new M_Category( $p['description'], $p['id_category']);
         }, $value);
-            
+
             /* devuelve un arreglo si tiene datos y sino devuelve nulo*/
 
             return count($resp) > 0 ? $resp : null;

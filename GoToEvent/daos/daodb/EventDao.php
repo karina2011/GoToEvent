@@ -152,9 +152,21 @@ class EventDao extends Singleton implements \interfaces\Crud
           return false;
     }
 
-    public function update ($id)
+    public function update ($id,$title)
     {
+      $sql = "UPDATE events SET title = :title  WHERE id_event = :id_event";
+      $parameters['id_event'] = $id;
+      $parameters['title'] = $title;
 
+      try
+      {
+          $this->connection = Connection::getInstance();
+          return $this->connection->ExecuteNonQuery($sql, $parameters);
+      }
+      catch(PDOException $e)
+      {
+          echo $e;
+      }
     }
 
     public function delete ($title)

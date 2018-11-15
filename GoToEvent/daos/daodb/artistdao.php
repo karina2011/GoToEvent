@@ -8,12 +8,12 @@ use PDOException;
 class ArtistDao extends Singleton implements \interfaces\Crud
 {
     private $connection;
-    
+
     public function __construct()
     {
         $this->connection = null;
     }
-    
+
     public function create($artist)
     {
         // Guardo como string la consulta sql utilizando como values, marcadores de parámetros con nombre (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada
@@ -25,13 +25,13 @@ class ArtistDao extends Singleton implements \interfaces\Crud
         $parameters['dni'] = $artist->getDni();
 
 		try {
-			
+
 
             $this->connection = Connection::getInstance();
 
             return $this->connection->ExecuteNonQuery($sql, $parameters);
 
-        } 
+        }
         catch(PDOException $e) {
 
 			echo $e;
@@ -48,8 +48,8 @@ class ArtistDao extends Singleton implements \interfaces\Crud
             $this->connection = Connection::getInstance();
             $resultSet = $this->connection->execute($sql);
 
-        } 
-        catch(PDOException $e) 
+        }
+        catch(PDOException $e)
         {
 
 			echo $e;
@@ -67,12 +67,12 @@ class ArtistDao extends Singleton implements \interfaces\Crud
 
         $parameters['dni'] = $dni;
 
-        try 
+        try
         {
             $this->connection = Connection::getInstance();
             $resultSet = $this->connection->execute($sql, $parameters);
-        } 
-        catch(PDOException $e) 
+        }
+        catch(PDOException $e)
         {
             echo $e;
         }
@@ -89,12 +89,12 @@ class ArtistDao extends Singleton implements \interfaces\Crud
 
         $parameters['id_artist'] = $id;
 
-        try 
+        try
         {
             $this->connection = Connection::getInstance();
             $resultSet = $this->connection->execute($sql, $parameters);
-        } 
-        catch(PDOException $e) 
+        }
+        catch(PDOException $e)
         {
             echo $e;
         }
@@ -105,9 +105,21 @@ class ArtistDao extends Singleton implements \interfaces\Crud
             return false;
     }
 
-    public function update ($id)
+    public function update ($id,$name)
     {
+      $sql = "UPDATE artists SET name = :name  WHERE id_artist = :id_artist";
+      $parameters['id_artist'] = $id;
+      $parameters['name'] = $name;
 
+      try
+      {
+          $this->connection = Connection::getInstance();
+          return $this->connection->ExecuteNonQuery($sql, $parameters);
+      }
+      catch(PDOException $e)
+      {
+          echo $e;
+      }
     }
 
     public function delete ($dni)
@@ -115,19 +127,19 @@ class ArtistDao extends Singleton implements \interfaces\Crud
         $sql = "DELETE FROM artists WHERE dni = :dni";
         $parameters['dni'] = $dni;
 
-        try 
+        try
         {
             $this->connection = Connection::getInstance();
             return $this->connection->ExecuteNonQuery($sql, $parameters);
-        } 
-        catch(PDOException $e) 
+        }
+        catch(PDOException $e)
         {
             echo $e;
         }
    }
 
     public function checkDni($dni){
-       
+
     }
 
     /**
@@ -139,11 +151,11 @@ class ArtistDao extends Singleton implements \interfaces\Crud
 	protected function mapear($value) {
 
 		$value = is_array($value) ? $value : [];
-        
+
 		$resp = array_map(function($p){
 		    return new M_Artist( $p['dni'], $p['name'], $p['last_name'], $p['id_artist']);
         }, $value);
-            
+
             /* devuelve un arreglo si tiene datos y sino devuelve nulo*/
 
             return count($resp) > 0 ? $resp : null;
