@@ -6,30 +6,45 @@ use models\User as User;
 use daos\daodb\UserDao as Dao;
 
 /**
- * 
+ *
  */
 class UserController
-{	
+{
 	protected $dao;
-	
+
 	function __construct()
 	{
 		$this->dao = Dao::getInstance();
 	}
 
-	public function create($name,$last_name,$email,$dni,$type,$pass)
+	public function create($name,$last_name,$email,$dni,$pass,$type='')
 	{
-		//crea el objeto user para luego agregarlo a la base de datos
+		if(!empty($type)){
+			//crea el objeto user para luego agregarlo a la base de datos
 
-		$user = new User($name,$last_name,$email,$dni,$type,$pass);
+			$user = new User($name,$last_name,$email,$dni,$type,$pass);
 
-		//llama al metodo del dao para guardarlo en la base de datos
+			//llama al metodo del dao para guardarlo en la base de datos
 
-		$this->dao->create($user);
+			$this->dao->create($user);
 
-		//luego de guardarlo en la base de datos se muetra el inicio de la pagina
-		require(ROOT . VIEWS . 'usersAdmin.php');
+			//luego de guardarlo en la base de datos se muetra el inicio de la pagina
+			require(ROOT . VIEWS . 'usersAdmin.php');}
+		else {
+			//crea el objeto user para luego agregarlo a la base de datos
+			$type='cliente';
+			$user = new User($name,$last_name,$email,$dni,$type,$pass);
+
+			//llama al metodo del dao para guardarlo en la base de datos
+
+			$this->dao->create($user);
+
+			//luego de guardarlo en la base de datos se muetra el inicio de la pagina
+			require(ROOT . VIEWS . 'Home.php');
+		}
 	}
+
+
 
 	public function readAll()
 	{
@@ -37,10 +52,10 @@ class UserController
 
 		$list = $this->dao->readAll();
 		if (!is_array($list) && $list != false){ // si no hay nada cargado, readall devuelve false
-			$array[] = $list; 
+			$array[] = $list;
 			$list = $array; // para que devuelva un arreglo en caso de haber solo 1 objeto // esto para cuando queremos hacer foreach al listar, ya que no se puede hacer foreach sobre un objeto ni sobre un false
 		}
-		
+
 		return $list;
 
 
@@ -54,18 +69,18 @@ class UserController
 
 		//INCLUYE LA VISTA DONDE SE MUESTRA EL user
 
-		//FALTA HACER LA VISTA 
+		//FALTA HACER LA VISTA
 
 	}
 
 	public function delete($email)
 	{
 		//BORRA EL user QUE COINCIDE CON EL EMAIL RECIBIDO POR PARAMETROS DE LA BASE DE DATOS
-		
+
 		$this->dao->delete($email);
 
 		//INCLUYE LA VISTA PRINCIPAL
-		
+
 		require(ROOT . VIEWS . 'usersAdmin.php');
 	}
 

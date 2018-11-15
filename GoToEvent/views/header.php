@@ -1,4 +1,4 @@
-<?php 
+<?php
 use controllers\UserController as C_User;
 use models\User as M_User;
 
@@ -19,7 +19,12 @@ $user = $userController->checkSession();
                 <span class="sr-only">(current)</span>
               </a>
             </li>
-          <?php if($user) { 
+            <li class="nav-item active">
+              <a class="nav-link" href="<?php echo BASE; ?>views/viewusers">Nuevo Usuario
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+          <?php if($user) {
                   if ($user->getType() == "admin") { ?>
             <li class="nav-item">
               <a class="nav-link" href="<?php echo BASE; ?>views/viewadmin">Administrar</a>

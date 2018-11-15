@@ -36,6 +36,10 @@ class ViewsController
         require(ROOT . VIEWS . 'admin.php');
     }
 
+    public function viewUsers(){
+        require(ROOT . VIEWS . 'users.php');
+    }
+
     public function viewArtistsAdmin(){
         require(ROOT . VIEWS . 'artistsadmin.php');
     }

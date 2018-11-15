@@ -7,20 +7,38 @@ use models\User as M_User;
 $userController = new C_User;
 $user = $userController->checkSession();
 
-$list = $userController->readAll();
 
 ?>
 <!DOCTYPE html>
 <html lang="en">
+<head>
 
-    <?php include_once (VIEWS."headAdmin.php");?>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>GoToEvent</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="<?php echo BASE; ?>assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="<?php echo BASE; ?>assets/css/shop-homepage.css" rel="stylesheet">
+
+  <!-- FontAwesome-->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
+
+</head>
+
+
+    <?php include_once (VIEWS."header.php");?>
 
   <body id="page-top">
 
-      <?php include_once (VIEWS."navAdmin.php");?>
+
 
     <div id="wrapper">
-      <?php include_once (VIEWS."sidebarAdmin.php");?>
 
       <div id="content-wrapper">
 
@@ -50,71 +68,14 @@ $list = $userController->readAll();
                     <label for="pass">Contraseña</label>
                     <input type="pass" class="form-control" id="pass" placeholder="Contraseña" name="pass" required>
                 </div>
-                <div class="form-group">
-                    <label for="type">Tipo</label>
-                    <select class="custom-select" id="inputGroupSelect01" name="type" required>
-                <option value="admin">Admin</option>
-                <option value="cliente">Cliente</option>
-                </select>
-                </div>
+
                 <button type="submit" class="btn btn-primary">Crear usuario</button>
             </form>
 
             <hr>
 
           <!-- DataTables Example -->
-          <div class="card mb-3">
-            <div class="card-header">
-              <i class="fas fa-table"></i> Usuarios
-            </div>
-            <div class="card-body">
-              <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                  <thead>
-                    <tr>
-                      <th>Nombre</th>
-                      <th>Apellido</th>
-                      <th>Email</th>
-                      <th>Dni</th>
-                      <th>Tipo</th>
-                      <th>Contraseña</th>
-                      <th>ID</th>
-                      <th></th><!-- para el boton de borrar-->
-                    </tr>
-                  </thead>
-                  <tfoot>
-                    <tr>
-                      <th>Nombre</th>
-                      <th>Apellido</th>
-                      <th>Email</th>
-                      <th>Dni</th>
-                      <th>Tipo</th>
-                      <th>Contraseña</th>
-                      <th>ID</th>
-                      <th></th>
-                    </tr>
-                  </tfoot>
-                  <tbody>
-                  <?php if($list != false) { ?>
-                  <?php foreach ($list as $key => $user){ ?>
-                    <tr>
-                      <td><?php echo $user->getName(); ?></td>
-                      <td><?php echo $user->getLastName(); ?></td>
-                      <td><?php echo $user->getEmail(); ?></td>
-                      <td><?php echo $user->getDni(); ?></td>
-                      <td><?php echo $user->getType(); ?></td>
-                      <td><?php echo $user->getPass(); ?></td>
-                      <td><?php echo $user->getId(); ?></td>
-                      <td> <form class="text-center" action="<?php echo BASE; ?>user/delete" method="post">
-          <button type="submit" class="btn btn-danger" name="dni" value="<?php echo $user->getEmail();?>"><i class="fas fa-trash"></i></button>
-          </form> </td>
-                    </tr>
-                    <?php } }?>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
+
 
         </div>
         <!-- /.container-fluid -->
