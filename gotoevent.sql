@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-11-2018 a las 16:33:57
--- Versión del servidor: 10.1.36-MariaDB
--- Versión de PHP: 7.2.10
+-- Tiempo de generación: 15-11-2018 a las 02:47:16
+-- Versión del servidor: 10.1.35-MariaDB
+-- Versión de PHP: 7.2.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -53,7 +53,7 @@ INSERT INTO `artists` (`id_artist`, `name`, `last_name`, `dni`) VALUES
 
 CREATE TABLE `calendars` (
   `id_calendar` int(11) NOT NULL,
-  `date` datetime DEFAULT NULL,
+  `date` date DEFAULT NULL,
   `id_event` int(11) DEFAULT NULL,
   `id_event_place` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -63,18 +63,24 @@ CREATE TABLE `calendars` (
 --
 
 INSERT INTO `calendars` (`id_calendar`, `date`, `id_event`, `id_event_place`) VALUES
-(1, '2018-11-30 00:00:00', 3, 4),
-(2, '2018-12-13 00:00:00', 2, 1),
-(3, '2018-11-28 00:00:00', 6, 2),
-(8, '2018-11-25 00:00:00', 3, 4),
-(9, '2019-02-09 00:00:00', 5, 3),
-(10, '2018-11-29 00:00:00', 3, 1),
-(11, '2019-01-12 00:00:00', 1, 1),
-(12, '2018-11-25 00:00:00', 4, 3),
-(13, '2019-01-18 00:00:00', 4, 4),
-(14, '2019-01-25 00:00:00', 2, 2),
-(15, '2019-03-20 00:00:00', 7, 2),
-(16, '2019-02-05 00:00:00', 8, 1);
+(1, '2018-11-30', 3, 4),
+(2, '2018-12-13', 2, 1),
+(3, '2018-11-28', 6, 2),
+(8, '2018-11-25', 3, 4),
+(10, '2018-11-29', 3, 1),
+(12, '2018-11-25', 4, 3),
+(13, '2019-01-18', 4, 4),
+(14, '2019-01-25', 2, 2),
+(15, '2019-03-20', 7, 2),
+(16, '2019-02-05', 8, 1),
+(17, '2019-01-18', 2, 1),
+(18, '2019-02-15', 1, 1),
+(19, '2019-01-11', 3, 1),
+(20, '2019-02-07', 8, 3),
+(21, '2019-02-14', 3, 1),
+(22, '2018-11-14', 3, 1),
+(23, '2019-05-10', 2, 1),
+(24, '2018-11-22', 10, 1);
 
 -- --------------------------------------------------------
 
@@ -98,7 +104,15 @@ INSERT INTO `calendars_x_artists` (`id_artist`, `id_calendar`) VALUES
 (2, 14),
 (4, 14),
 (2, 15),
-(4, 16);
+(4, 16),
+(4, 17),
+(2, 18),
+(1, 19),
+(1, 20),
+(1, 21),
+(4, 22),
+(2, 23),
+(1, 24);
 
 -- --------------------------------------------------------
 
@@ -144,10 +158,10 @@ INSERT INTO `events` (`id_event`, `title`, `id_category`, `img`) VALUES
 (2, 'Pelea por el titulo peso pesados', 2, '39938.png'),
 (3, 'Canta arjona', 1, '39938.png'),
 (4, 'Obra de teatro infantil', 3, '39938.png'),
-(5, 'A ver este', 2, '39938.png'),
 (6, 'nose que onda ', 2, '39938.png'),
 (7, 'boc', 5, '80378.png'),
-(8, 'Monumental', 5, '39938.png');
+(8, 'Monumental', 5, '39938.png'),
+(10, 'Eventazo', 2, '17475.jpg');
 
 -- --------------------------------------------------------
 
@@ -193,10 +207,10 @@ CREATE TABLE `event_squares` (
 INSERT INTO `event_squares` (`id_event_square`, `id_square_type`, `price`, `available_quantity`, `remainder`, `id_calendar`) VALUES
 (1, 1, 500, 1000, 1000, 1),
 (2, 2, 1000, 400, 400, 2),
-(3, 3, 330, 3000, 3000, 3),
 (4, 4, 4533, 43567, 43567, 2),
 (5, 3, 12, 12, 12, 15),
-(6, 3, 1, 1, 1, 16);
+(6, 3, 1, 1, 1, 16),
+(7, 4, 230, 3333, 3333, 23);
 
 -- --------------------------------------------------------
 
@@ -257,13 +271,6 @@ CREATE TABLE `tickets` (
   `number` int(11) DEFAULT NULL,
   `qr` varchar(15) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `tickets`
---
-
-INSERT INTO `tickets` (`id_ticket`, `number`, `qr`) VALUES
-(1, 78909, '78909');
 
 -- --------------------------------------------------------
 
@@ -394,13 +401,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `artists`
 --
 ALTER TABLE `artists`
-  MODIFY `id_artist` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_artist` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `calendars`
 --
 ALTER TABLE `calendars`
-  MODIFY `id_calendar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id_calendar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT de la tabla `categories`
@@ -412,7 +419,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT de la tabla `events`
 --
 ALTER TABLE `events`
-  MODIFY `id_event` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_event` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `event_places`
@@ -424,7 +431,7 @@ ALTER TABLE `event_places`
 -- AUTO_INCREMENT de la tabla `event_squares`
 --
 ALTER TABLE `event_squares`
-  MODIFY `id_event_square` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_event_square` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `purchases`
@@ -448,7 +455,7 @@ ALTER TABLE `square_types`
 -- AUTO_INCREMENT de la tabla `tickets`
 --
 ALTER TABLE `tickets`
-  MODIFY `id_ticket` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_ticket` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
