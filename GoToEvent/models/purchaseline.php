@@ -66,8 +66,15 @@ class PurchaseLine
 	}
 
 	public function getTotalPrice(){
-		return $price * $quantity;
+		$total = $this->price * $this->quantity;
+		return $total;
 	}
+
+	public function getEventTitle()
+	{
+			return $this->$event_square->getCalendarEvent();
+	}
+
 	public function setPrice($price)
 	{
 		$this->price = $price;

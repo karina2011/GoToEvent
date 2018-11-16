@@ -38,10 +38,10 @@ namespace views;
                 <img class="d-block w-100" src="https://bombanoise.com/wp-content/uploads/2017/08/concert.jpg" alt="First slide">
               </div>
               <div class="carousel-item">
-                <img class="d-block img-fluid w-100" src="http://xeneizesmillonarios.com.ar/wp-content/uploads/2017/09/MONU.jpg" alt="Second slide">
+                <img class="d-block img-fluid w-100" src="https://www.infoliga.com.ar/wp-content/gallery/lnb-13-14-penarol-quilmes-fecha-1-fase-1/001penarol.jpg" alt="Second slide">
               </div>
               <div class="carousel-item">
-                <img class="d-block img-fluid w-100" src="http://ilusound.wpengine.com/wp-content/uploads/2016/01/slide-ilusound-kalaidoscope.jpg" alt="Third slide">
+                <img class="d-block img-fluid w-100" src="https://k36.kn3.net/taringa/2/0/1/2/6/7/65/ricardoalvarez16/869.jpg?7288" alt="Third slide">
               </div>
             </div>
             <a class="carousel-control-prev" href="#slider" role="button" data-slide="prev">

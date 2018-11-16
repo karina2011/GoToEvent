@@ -78,14 +78,6 @@ class ViewsController {
         require(ROOT . VIEWS . 'login.php');
     }
 
-    public function viewShoppingCart()
-    {
-      $this->userController = new C_User;
-      $user = $this->userController->checkSession();
-
-      require(ROOT . VIEWS . 'viewsshoppingcart.php');
-    }
-
     public function viewAdmin(){
 
         $this->userController = new C_User;
@@ -328,10 +320,17 @@ class ViewsController {
         require(ROOT . VIEWS . 'viewevent.php');
     }
 
-    public function shoppingCart(){
-
+    public function shoppingCart()
+    {
         $this->userController = new C_User;
         $user = $this->userController->checkSession();
+
+        if(isset($_SESSION['carrito'])){
+            $purchasesLineList = $_SESSION['carrito'];
+        } else {
+          $purchasesLineList = array();
+        }
+
         require(ROOT . VIEWS . 'shoppingcart.php');
     }
 

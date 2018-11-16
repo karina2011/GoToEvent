@@ -113,6 +113,4 @@ class EventSquareController
       return $event_square;
     }
 
-
-
 } ?>

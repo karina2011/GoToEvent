@@ -45,7 +45,7 @@
           <h3>Cantidad:<?php echo $purchase_line->getQuantity(); ?></h3>
           <h3>Ticket: <?php echo $purchase_line->getTicketNumber(); ?></h3>
           <h3>Id Compra: <?php echo $purchase_line->getPurchaseId(); ?></h3>
-          
+
           <form action="<?php echo BASE; ?>PurchaseLine/delete" method="post">
           <a class="btn btn-primary" href="#">Ver Tipo de Plaza</a><!--cambiar esto a boton tambien-->
           <button name="description" type="submit" class="btn btn-danger" value="<?php echo $purchase_line->getId();?>"><i class="fas fa-trash"></i> </button>
