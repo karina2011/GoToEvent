@@ -33,7 +33,7 @@ class EventSquareController
         if(is_array($list)){
             foreach ($list as $key => $event_square) {
             $quantity = $quantity + $event_square->getAvailableQuantity();
-            }   
+            }
         }
 
         $calendarController = new C_Calendar();
@@ -104,6 +104,13 @@ class EventSquareController
         $this->dao->delete($dni);
 
         $this->viewController->viewEventSquaresAdmin();
+    }
+
+    public function readEventSquareById($id_event_square)
+    {
+      $event_square = $this->dao->read($id_event_square);
+
+      return $event_square;
     }
 
 

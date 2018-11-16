@@ -2,13 +2,14 @@
 namespace controllers;
 
 use models\Purchase;
-use models\PurchaseLine;
-use models\Ticket;
+use models\PurchaseLine as M_Purchase_line;
+use models\Ticket as M_Ticket;
 use daos\daodb\PurchaseLineDao as Dao;
 use daos\daodb\EventSquareDao as D_Event_Square;
 use daos\daodb\TicketDAo as D_Ticket;
 
 use controllers\ViewsController as C_View;
+use controllers\EventSquareController as C_Event_square;
 
 /**
  *
@@ -52,7 +53,7 @@ class PurchaseLineController
 		$list = $this->dao->readAll();
 
 		if (!is_array($list) && $list != false){ // si no hay nada cargado, readall devuelve false
-			$array[] = $list; 
+			$array[] = $list;
 			$list = $array; // para que devuelva un arreglo en caso de haber solo 1 objeto // esto para cuando queremos hacer foreach al listar, ya que no se puede hacer foreach sobre un objeto ni sobre un false
 		}
 
@@ -66,6 +67,30 @@ class PurchaseLineController
 		// despues de borrar una linea de compra, al ya haber recorrido todos las lineas de compra, la lista quedaba vacía, por eso hay q volver a leer
 
 		$this->viewController->viewPurchaseLinesAdmin();
+	}
+
+	public function createPurchaseLine($id_event_square='',$number='')
+	{
+			if(!isset($_SESSION['carrito']))
+			{
+				$_SESSION['carrito'] = array();
+			}
+
+			$eventSquareController = new C_Event_square;
+			$event_square = $eventSquareController->readEventSquareById($id_event_square);
+			if($event_square->getRemainder() >= $number)
+			{
+					/*$ticket = new M_Ticket();
+					$ticket = $ticket->generateRandomTicket();*/
+					$purchaseline = new M_Purchase_line($event_square->getPrice(),$number,$event_square);
+					$_SESSION['carrito'][] = $purchaseline;
+					$this->viewController->index();
+					echo "<script>alert('Su compra se agrego al carrito.')</script>";
+			} else {
+				$this->viewController->index();
+				echo "<script>alert('No quedan plazas disponibles')</script>";
+			}
+
 	}
 
 }
