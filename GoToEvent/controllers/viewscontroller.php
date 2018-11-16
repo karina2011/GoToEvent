@@ -44,6 +44,9 @@ class ViewsController {
 
     public function index()
     {
+        /*echo "<pre>";
+        var_dump($_SESSION['carrito']);
+        echo "</pre>";*/
         $this->userController = new C_User;
         $user = $this->userController->checkSession();
 
@@ -71,8 +74,16 @@ class ViewsController {
     {
         $this->userController = new C_User;
         $user = $this->userController->checkSession();
-        
+
         require(ROOT . VIEWS . 'login.php');
+    }
+
+    public function viewShoppingCart()
+    {
+      $this->userController = new C_User;
+      $user = $this->userController->checkSession();
+
+      require(ROOT . VIEWS . 'viewsshoppingcart.php');
     }
 
     public function viewAdmin(){
@@ -84,7 +95,7 @@ class ViewsController {
             require(ROOT . VIEWS . 'admin.php');
         } else {
             require(ROOT . VIEWS . 'home.php');
-             echo '<script>alert("ALTO AHI VAQUERO");</script>';  
+             echo '<script>alert("ALTO AHI VAQUERO");</script>';
            }
     }
 
@@ -102,7 +113,7 @@ class ViewsController {
             require(ROOT . VIEWS . 'artistsadmin.php');
         } else {
             require(ROOT . VIEWS . 'home.php');
-             echo '<script>alert("ALTO AHI VAQUERO");</script>';  
+             echo '<script>alert("ALTO AHI VAQUERO");</script>';
            }
     }
 
@@ -121,7 +132,7 @@ class ViewsController {
             require(ROOT . VIEWS . 'eventsadmin.php');
         } else {
             require(ROOT . VIEWS . 'home.php');
-             echo '<script>alert("ALTO AHI VAQUERO");</script>';  
+             echo '<script>alert("ALTO AHI VAQUERO");</script>';
            }
     }
 
@@ -136,7 +147,7 @@ class ViewsController {
             require(ROOT . VIEWS . 'categoriesAdmin.php');
         } else {
             require(ROOT . VIEWS . 'home.php');
-             echo '<script>alert("ALTO AHI VAQUERO");</script>';  
+             echo '<script>alert("ALTO AHI VAQUERO");</script>';
            }
     }
 
@@ -151,7 +162,7 @@ class ViewsController {
             require(ROOT . VIEWS . 'usersAdmin.php');
         } else {
             require(ROOT . VIEWS . 'home.php');
-             echo '<script>alert("ALTO AHI VAQUERO");</script>';  
+             echo '<script>alert("ALTO AHI VAQUERO");</script>';
            }
     }
 
@@ -167,7 +178,7 @@ class ViewsController {
             require(ROOT . VIEWS . 'ticketsAdmin.php');
         } else {
             require(ROOT . VIEWS . 'home.php');
-             echo '<script>alert("ALTO AHI VAQUERO");</script>';  
+             echo '<script>alert("ALTO AHI VAQUERO");</script>';
            }
     }
 
@@ -183,7 +194,7 @@ class ViewsController {
             require(ROOT . VIEWS . 'squaretypesadmin.php');
         } else {
             require(ROOT . VIEWS . 'home.php');
-             echo '<script>alert("ALTO AHI VAQUERO");</script>';  
+             echo '<script>alert("ALTO AHI VAQUERO");</script>';
            }
     }
 
@@ -199,7 +210,7 @@ class ViewsController {
             require(ROOT . VIEWS . 'eventplacesadmin.php');
         } else {
             require(ROOT . VIEWS . 'home.php');
-             echo '<script>alert("ALTO AHI VAQUERO");</script>';  
+             echo '<script>alert("ALTO AHI VAQUERO");</script>';
            }
     }
 
@@ -221,7 +232,7 @@ class ViewsController {
             require(ROOT . VIEWS . 'purchasesadmin.php');
         } else {
             require(ROOT . VIEWS . 'home.php');
-             echo '<script>alert("ALTO AHI VAQUERO");</script>';  
+             echo '<script>alert("ALTO AHI VAQUERO");</script>';
            }
     }
 
@@ -243,7 +254,7 @@ class ViewsController {
             require(ROOT . VIEWS . 'eventsquaresadmin.php');
         } else {
             require(ROOT . VIEWS . 'home.php');
-             echo '<script>alert("ALTO AHI VAQUERO");</script>';  
+             echo '<script>alert("ALTO AHI VAQUERO");</script>';
            }
     }
 
@@ -278,7 +289,7 @@ class ViewsController {
             require(ROOT . VIEWS . 'calendarsadmin.php');
         } else {
             require(ROOT . VIEWS . 'home.php');
-             echo '<script>alert("ALTO AHI VAQUERO");</script>';  
+             echo '<script>alert("ALTO AHI VAQUERO");</script>';
            }
     }
 

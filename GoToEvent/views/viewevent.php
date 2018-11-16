@@ -116,18 +116,23 @@ namespace views;
       <!-- /.row -->
       <h3>Plazas de evento</h3>
       <?php if($event_squares != null){ ?>
-      <form action="#" method="post">
         <?php foreach ($event_squares as $key => $event_square) { ?>
+      <form action="<?php echo BASE; ?>purchaseLine/createPurchaseLine" method="post">
+
+        <input type="hidden" name="id_event_square" value="<?php echo $event_square->getId(); ?>">
+
         <div class="form-group">
           <label for=""><?php echo $event_square->getSquareTypeDescription(); ?>-->Precio: $<?php echo $event_square->getPrice(); ?></label>
           <input type="number" name="event_square" value="" class="form-control" placeholder="Cantidad de entradas">
         </div>
-      <?php } ?>
+
         <div class="form-group">
-          <button type="button" name="button" class="btn btn-primary">Comprar</button>
+          <button type="submit" name="button" class="btn btn-primary">Comprar</button>
         </div>
+
       </form>
-    <?php } else { ?>
+      <?php } ?>
+  <?php } else { ?>
       <p>Este evento no tiene plazas disponibles</p>
     <?php } ?>
     </div>
