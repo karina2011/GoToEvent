@@ -317,5 +317,12 @@ class ViewsController {
         require(ROOT . VIEWS . 'viewevent.php');
     }
 
+    public function shoppingCart(){
+
+        $this->userController = new C_User;
+        $user = $this->userController->checkSession();
+        require(ROOT . VIEWS . 'shoppingcart.php');
+    }
+
 }
 ?>

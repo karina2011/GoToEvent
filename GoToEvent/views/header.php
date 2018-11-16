@@ -15,6 +15,9 @@ namespace views;
                 <span class="sr-only">(current)</span>
               </a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="<?php echo BASE; ?>">Artistas</a>
+            </li>
           <?php if($user) {
                   if ($user->getType() == "admin") { ?>
             <li class="nav-item">
@@ -22,11 +25,11 @@ namespace views;
             </li>
           <?php } }?>
             <li class="nav-item">
-              <a class="nav-link" href="#">Carrito <i class="fas fa-shopping-cart"></i></a>
+              <a class="nav-link" href="<?php echo BASE; ?>views/shoppingcart">Carrito <i class="fas fa-shopping-cart"></i></a>
             </li>
             <li class="nav-item">
               <?php  if(!$user){ ?>
-              <a class="nav-link" href="<?php echo BASE; ?>views/login">Iniciar Sesion</a>
+              <a class="nav-link" href="<?php echo BASE; ?>views/login">Iniciar sesion</a>
             <?php } else { ?>
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
@@ -37,6 +40,9 @@ namespace views;
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                          <a class="dropdown-item" href="#">
                               <i class="mr-2" data-feather="user" width="20" height="20"></i>Mi perfil
+                         </a>
+                         <a class="dropdown-item" href="#">
+                              <i class="mr-2" data-feather="user" width="20" height="20"></i>Mis compras
                          </a>
                          <a class="dropdown-item" href="<?php echo BASE; ?>user/logout">
                               <i class="mr-2" data-feather="log-out" width="20" height="20"></i> Cerrar Sesion

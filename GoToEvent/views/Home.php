@@ -81,7 +81,8 @@ namespace views;
         <!-- /.col-lg-3 -->
 
         <div class="col-lg-13">
-
+          <h2>Eventos</h2>
+          <hr>
           <div class="row">
             <?php if($calendarlist) { ?>
                     <?php foreach ($calendarlist as $key => $calendar) { ?>
