@@ -70,6 +70,19 @@ class ViewsController {
         require(ROOT . VIEWS . 'createcalendar.php');
     }
 
+    public function viewDateForEvent()
+    {
+        $this->artistController = new C_Artist;
+        $this->userController = new C_User;
+
+        $list = $this->artistController->readAll();
+        $user = $this->userController->checkSession();
+
+        $userController = new C_User;
+        $user = $userController->checkSession();
+        require(ROOT . VIEWS . 'dateForEvent.php');
+    }
+
     public function login()
     {
         $this->userController = new C_User;

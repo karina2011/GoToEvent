@@ -16,7 +16,26 @@ namespace views;
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="<?php echo BASE; ?>">Artistas</a>
+              <!--<div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">-->
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                         Consultas <i class="fas fa-user-circle fa-fw"></i>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                         <a class="dropdown-item" href="<?php echo BASE; ?>views/viewdateForEvent">
+                              <i class="mr-2" data-feather="user" width="20" height="20"></i>Evento por fecha
+                         </a>
+                         <a class="dropdown-item" href="#">
+                              <i class="mr-2" data-feather="user" width="20" height="20"></i>Evento por categoria
+                         </a>
+                         <a class="dropdown-item" href="#">
+                              <i class="mr-2" data-feather="log-out" width="20" height="20"></i> Evento por artista
+                         </a>
+                    </div>
+                  </li>
+               <!-- </ul>
+              </div>-->
             </li>
           <?php if($user) {
                   if ($user->getType() == "admin") { ?>
@@ -30,6 +49,7 @@ namespace views;
             <li class="nav-item">
               <?php  if(!$user){ ?>
               <a class="nav-link" href="<?php echo BASE; ?>views/login">Iniciar sesion</a>
+              
             <?php } else { ?>
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
