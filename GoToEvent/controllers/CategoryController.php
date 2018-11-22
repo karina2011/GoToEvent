@@ -44,8 +44,17 @@ class CategoryController
 	{
 		$category = $this->dao->read($description);
 
-		//flata mostrar la categoria que devuelve el dao
+		return $category;
+
 	}
+
+	public function readById($id)
+    {
+        $category = $this->dao->readById($id);
+
+        return $category[0];
+
+    }
 
 	public function delete($description)
 	{

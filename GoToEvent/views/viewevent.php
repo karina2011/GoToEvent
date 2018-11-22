@@ -81,7 +81,7 @@ namespace views;
                     <?php if(!empty($calendar->getArtists())) { ?>
                     <?php foreach ($calendar->getArtists() as $key => $artist) { ?>
                     <li>
-                      <p><?php echo $artist['0']->getName() . ' ' . $artist['0']->getLastName(); ?></p>
+                      <p>- <?php echo $artist['0']->getName() . ' ' . $artist['0']->getLastName(); ?></p>
                     </li>
                     <?php } } else { ?>
                       <p>Este evento no tiene artistas</p>

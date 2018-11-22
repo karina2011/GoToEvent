@@ -102,11 +102,68 @@ class CalendarController
 				}
 	}
 
+	public function readAll()
+	{
+		$list = $this->dao->readAll();
+
+		if (!is_array($list) && $list != false){ // si no hay nada cargado, readall devuelve false
+				$array[] = $list;
+				$list = $array; // para que devuelva un arreglo en caso de haber solo 1 objeto // esto para cuando queremos hacer foreach al listar, ya que no se puede hacer foreach sobre un objeto ni sobre un false
+		}
+
+		return $list;
+	}
+
 	public function readById($id)
 	{
 		$calendar = $this->dao->readById($id);
 
 		return $calendar;
+	}
+
+	// returns a list of calendars or a calendar that matches with de date 
+	public function readByDate($date)
+	{
+		
+		$list = $this->dao->readByDate($date);
+
+		if (!is_array($list) && $list != false){ // if theres nothing in $list, readall returns false
+			$array[] = $list;
+			$list = $array; //to return an array if theres only 1 object // this for when we want to do foreach when listing, since foreach can not be done on an object or on a false
+
+		}
+
+		return $list;
+	}
+
+	// returns a list of calendars or a calendar that matches with de category
+	public function readByCategory($categoryId)
+	{
+		
+		$list = $this->dao->readByCategory($categoryId);
+
+		if (!is_array($list) && $list != false){ // if theres nothing in $list, readall returns false
+			$array[] = $list;
+			$list = $array; //to return an array if theres only 1 object // this for when we want to do foreach when listing, since foreach can not be done on an object or on a false
+
+		}
+
+		return $list;
+	}
+
+	// returns a list of calendars or a calendar that matches with de category
+	public function readByArtist($artistId)
+	{
+		
+		$list = $this->dao->readByArtist($artistId);
+
+		if (!is_array($list) && $list != false){ // if theres nothing in $list, readall returns false
+			$array[] = $list;
+			$list = $array; //to return an array if theres only 1 object // this for when we want to do foreach when listing, since foreach can not be done on an object or on a false
+
+		}
+
+		return $list;
 	}
 
  	/* Funcion que valida que el evento no este ocupado
@@ -130,17 +187,6 @@ class CalendarController
 	{
 		$capacity = $this->dao->readEventPlaceByCalendarId($id_calendar);
 		return $capacity['0']['capacity'];
-	}
-	public function readAll()
-	{
-		$list = $this->dao->readAll();
-
-		if (!is_array($list) && $list != false){ // si no hay nada cargado, readall devuelve false
-				$array[] = $list;
-				$list = $array; // para que devuelva un arreglo en caso de haber solo 1 objeto // esto para cuando queremos hacer foreach al listar, ya que no se puede hacer foreach sobre un objeto ni sobre un false
-		}
-
-		return $list;
 	}
 
 	public function delete($id_calendar)
