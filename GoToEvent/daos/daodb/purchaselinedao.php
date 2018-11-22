@@ -145,8 +145,7 @@ class PurchaseLineDao extends Singleton implements \interfaces\Crud
             $ticket = $daoTicket->read($p['id_ticket']);
 
 
-		    return new M_Purchase_line( $p['price'], $p['quantity'], $event_square , $ticket,
-            $p['id_purchase_line'] );
+		    return new M_Purchase_line( $p['price'], $p['quantity'], $event_square , $ticket,  $p['id_purchase_line'] );
 
         }, $value);
 
