@@ -15,8 +15,8 @@ class PurchaseLine
 	function __construct($price='', $quantity='', $event_square='', $ticket='', $id_purchase_line='')
 	{
 		$this->price = $price;
-		$this->quantity = $quantity;
 		$this->event_square = $event_square;
+		$this->quantity = $quantity;
 		$this->ticket = $ticket;
 		$this->id_purchase_line = $id_purchase_line;
 	}
