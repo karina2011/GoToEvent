@@ -91,6 +91,28 @@ class PurchaseDao extends Singleton implements \interfaces\Crud
             return false;
     }
 
+    public function readLast ()
+    {
+        $sql = "SELECT * FROM purchases ORDER BY id_purchase DESC LIMIT 1";
+
+        $parameters['id_purchase'] = $id_purchase;
+
+        try
+        {
+            $this->connection = Connection::getInstance();
+            $resultSet = $this->connection->execute($sql, $parameters);
+        }
+        catch(PDOException $e)
+        {
+            echo $e;
+        }
+
+        if(!empty($resultSet))
+            return $this->mapear($resultSet);
+        else
+            return false;
+    }
+
     public function update ($id,$date)
     {
       $sql = "UPDATE purchases SET pdate = :pdate  WHERE id_purchase = :id_purchase";
@@ -145,15 +167,24 @@ class PurchaseDao extends Singleton implements \interfaces\Crud
 
             // buscar lineas de compras a la base de datos q coincidan con el id de compra
 
-            $daoPurchaseLine = DaoPurchaseLine::getInstance();
 
-            $purchaselines = $daoPurchaseLine->read($p['id_purchase']);
 
-		    return new M_Purchase( $p['date'], $customer, $purchaselines, $p['price'],$p['id_purchase']);
+            $purchaselines = $this->readPurchaseLines($p['id_purchase']);
+
+		    return new M_Purchase( $p['date'], $customer, $purchaselines, $p['id_purchase']);
         }, $value);
 
             /* devuelve un arreglo si tiene mas de un objeto, sino devuelve 1 solo objeto*/
 
             return count($resp) > 1 ? $resp : $resp['0'];
+     }
+
+     protected function readPurchaseLines($id_purchase)
+     {
+       $daoPurchaseLine = DaoPurchaseLine::getInstance();
+
+       $purchase_lines = $daoPurchaseLine->readByIdPurchase($id_purchase);
+
+       return $purchase_lines;
      }
 }

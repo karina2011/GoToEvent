@@ -1,22 +1,23 @@
-<?php 
+<?php
 namespace controllers;
 
-use models\Purchase;
+use models\Purchase as M_Purchase;
 use models\Purchase_line; // ver si es necesario
 use models\User; // cliente
+use models\Ticket as M_Ticket;
 use daos\daodb\PurchaseDao as Dao;
 use daos\daodb\UserDao as D_User;
 
 use controllers\ViewsController as C_View;
 
 /**
- * 
+ *
  */
 class PurchaseController
 {
 	protected $dao;
 	private $viewController;
-	
+
 	public function __construct()
     {
         $this->dao = Dao::getInstance(); // esto se instancia en el router
@@ -24,7 +25,7 @@ class PurchaseController
     }
 
 	public function create($userEmail='', $purchaselines='')
-	{	
+	{
 		var_dump($purchaselines);
 		//Pensar bien esto, primero fijarse si hay un usuario en session y extraer el usuario de ahi
 
@@ -55,7 +56,7 @@ class PurchaseController
 		$list = $this->dao->readAll();
 
 		if (!is_array($list) && $list != false){ // si no hay nada cargado, readall devuelve false
-			$array[] = $list; 
+			$array[] = $list;
 			$list = $array; // para que devuelva un arreglo en caso de haber solo 1 objeto // esto para cuando queremos hacer foreach al listar, ya que no se puede hacer foreach sobre un objeto ni sobre un false
 		}
 
@@ -69,7 +70,18 @@ class PurchaseController
 		// despues de borrar un evento, al ya haber recorrido todos los eventos, la lista quedaba vacía, por eso hay q volver a leer
 		$this->viewController->viewPurchasesAdmin();
 	}
-	
+
+	public function endPurhcase()
+	{
+		$purchase_lines = $_SESSION['carrito'];
+		$purchase = new M_Purchase(now(),$_SESSION['user']);
+		$purchase = $this->dao->readLast();
+		foreach ($purchase_lines as $key => $purchase_line) {
+				$ticket = new M_Ticket();
+				$ticket = $ticket->generateRandomTicket();
+		}
+	}
+
 }
 
 ?>
