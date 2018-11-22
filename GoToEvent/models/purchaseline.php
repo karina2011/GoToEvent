@@ -11,14 +11,16 @@ class PurchaseLine
 	private $event_square;
 	private $ticket;
 	private $id_purchase_line;
+	private $purchase;
 
-	function __construct($price='', $quantity='', $event_square='', $ticket='', $id_purchase_line='')
+	function __construct($price='', $quantity='', $event_square='', $ticket='', $purchase='', $id_purchase_line='')
 	{
 		$this->price = $price;
 		$this->event_square = $event_square;
 		$this->quantity = $quantity;
 		$this->ticket = $ticket;
 		$this->id_purchase_line = $id_purchase_line;
+		$this->purhcase = $purchase;
 	}
 
 	public function getPrice()

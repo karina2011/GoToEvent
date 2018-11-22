@@ -10,18 +10,17 @@ class Purchase
 	private $purchaselines = array();
 	private $price; // agregado por allan, ver si es necesario
 	private $id_purchase;
-	
 
-	function __construct($date='',$customer='',$purchaselines='', $price='', $id_purchase='')
+
+	function __construct($date='',$customer='',$purchaselines='', $id_purchase='')
 	{
 		$this->date = $date;
 		$this->customer = $customer;
 		$this->purchaselines = $purchaselines;
-		$this->price = $price;
 		$this->id_purchase = $id_purchase;
-		
+
 	}
-	
+
 	public function getDate()
 	{
 		return $this->date;
@@ -47,7 +46,8 @@ class Purchase
 		return $this->purchaselines;
 	}
 
-	public function getPrice (){
+	public function getTotal ()
+	{
 		$total = 0;
 		foreach ($purchaselines as $key => $purchaseline) {
 			$total = $total + $purchaseline->getTotalPrice();

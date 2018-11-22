@@ -90,6 +90,28 @@ class PurchaseLineDao extends Singleton implements \interfaces\Crud
             return false;
     }
 
+    public function readByIdPurchase ($id_purchase)
+    {
+        $sql = "SELECT * FROM purchase_lines where id_purchase = :id_purchase";
+
+        $parameters['id_purchase'] = $id_purchase;
+
+        try
+        {
+            $this->connection = Connection::getInstance();
+            $resultSet = $this->connection->execute($sql, $parameters);
+        }
+        catch(PDOException $e)
+        {
+            echo $e;
+        }
+
+        if(!empty($resultSet))
+            return $this->mapear($resultSet);
+        else
+            return false;
+    }
+
     public function update ($id,$price)
     {
       $sql = "UPDATE purchase_lines SET price = :price  WHERE id_purchase_line = :id_purchase_line";
