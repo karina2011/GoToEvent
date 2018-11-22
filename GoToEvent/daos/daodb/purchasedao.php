@@ -24,11 +24,10 @@ class PurchaseDao extends Singleton implements \interfaces\Crud
     {
         // Guardo como string la consulta sql utilizando como values, marcadores de parámetros con nombre (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada
 
-        $sql = "INSERT INTO purchases (date,customer_email,price) VALUES (:date,:customer_email,:price)"; // pdate = purchaste date
+        $sql = "INSERT INTO purchases (date,customer) VALUES (:date,:customer)"; // pdate = purchaste date
 
         $parameters['date'] = $purchase->getDate();
-        $parameters['customer_email'] = $purchase->getCustomerEmail();
-        $parameters['price'] = $purchase->getPrice();
+        $parameters['customer'] = $purchase->getCustomerEmail();
 
         try
         {

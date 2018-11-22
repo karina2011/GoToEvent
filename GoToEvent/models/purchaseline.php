@@ -97,5 +97,10 @@ class PurchaseLine
 		$this->id_line_purchase = $id;
 	}
 
+	public function setPurchase($purchase)
+	{
+		$this->purchase = $purchase;
+	}
+
 }
 ?>

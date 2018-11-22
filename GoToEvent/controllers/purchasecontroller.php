@@ -9,6 +9,7 @@ use daos\daodb\PurchaseDao as Dao;
 use daos\daodb\UserDao as D_User;
 
 use controllers\ViewsController as C_View;
+use controllers\PurchaseLineController as C_PurchaseLine;
 
 /**
  *
@@ -74,11 +75,15 @@ class PurchaseController
 	public function endPurhcase()
 	{
 		$purchase_lines = $_SESSION['carrito'];
-		$purchase = new M_Purchase(now(),$_SESSION['user']);
+		$purchase = new M_Purchase(now(),$_SESSION['user'],$purchase_lines);
+		$this->dao->create($purchase);
 		$purchase = $this->dao->readLast();
 		foreach ($purchase_lines as $key => $purchase_line) {
 				$ticket = new M_Ticket();
 				$ticket = $ticket->generateRandomTicket();
+				$purchase_line->setTicket($ticket);
+				$purchase_line->setPurchase($purchase);
+
 		}
 	}
 

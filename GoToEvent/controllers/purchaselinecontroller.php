@@ -47,6 +47,8 @@ class PurchaseLineController
 
 	}
 
+	
+
 	public function readAll()
 	{
 
