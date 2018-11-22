@@ -6,21 +6,21 @@
 
     require_once "config/constantes.php";
 	require_once "config/Autoload.php";
-	
+
 	require_once "config/Request.php";
 	require_once "config/Router.php";
     require_once "daos/daodb/Singleton.php";
     require_once "daos/daoList/Singleton.php";
-    
+
     use config\Autoload as Autoload;
 	use config\Router 	as Router;
 	use config\Request 	as Request;
 	use daos\daoList\Singleton as Singleton;
-	
+
 	Autoload::start();
 	session_start();
-    Router::direccionar(new Request());
+  Router::direccionar(new Request());
 
-    
+
 
 ?>
