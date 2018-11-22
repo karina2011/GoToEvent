@@ -70,19 +70,6 @@ class ViewsController {
         require(ROOT . VIEWS . 'createcalendar.php');
     }
 
-    public function viewDateForEvent()
-    {
-        $this->artistController = new C_Artist;
-        $this->userController = new C_User;
-
-        $list = $this->artistController->readAll();
-        $user = $this->userController->checkSession();
-
-        $userController = new C_User;
-        $user = $userController->checkSession();
-        require(ROOT . VIEWS . 'dateForEvent.php');
-    }
-
     public function login()
     {
         $this->userController = new C_User;
@@ -345,6 +332,69 @@ class ViewsController {
         }
 
         require(ROOT . VIEWS . 'shoppingcart.php');
+    }
+
+    public function eventsByDate(){
+
+        $this->userController = new C_User;
+        $user = $this->userController->checkSession();
+        $calendarlist = null;
+        if (isset($_GET["date"])){
+
+        $date = $_GET["date"];
+
+        $this->calendarController = new C_Calendar;
+        $calendarlist = $this->calendarController->readByDate($date);
+
+        }
+
+        require(ROOT . VIEWS . 'eventsbydate.php');
+    }
+
+    public function eventsByCategory(){
+
+        $this->userController = new C_User;
+        $user = $this->userController->checkSession();
+
+        $this->categoryController = new C_Category();
+        $listCategory = $this->categoryController->readAll();
+
+        $calendarlist = null;
+        if (isset($_GET["category"])){
+
+        $category = $_GET["category"];
+
+        $this->calendarController = new C_Calendar;
+        $calendarlist = $this->calendarController->readByCategory($category);
+
+        $selectedCategory = $this->categoryController->readById($category);
+
+        }
+
+        require(ROOT . VIEWS . 'eventsbycategory.php');
+    }
+
+    public function eventsByArtist(){
+
+        $this->userController = new C_User;
+        $user = $this->userController->checkSession();
+
+        $this->artistController = new C_Artist();
+        $listArtist = $this->artistController->readAll();
+        
+        $calendarlist = null;
+        if (isset($_GET["artist"])){
+
+        $artist = $_GET["artist"];
+
+        $this->calendarController = new C_Calendar;
+        $calendarlist = $this->calendarController->readByArtist($artist);
+
+        $selectedArtist = $this->artistController->readById($artist);
+
+        }
+
+        require(ROOT . VIEWS . 'eventsbyartist.php');
     }
 
 }

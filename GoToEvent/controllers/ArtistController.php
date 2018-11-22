@@ -44,6 +44,14 @@ class ArtistController
 
     }
 
+    public function readById($id)
+    {
+        $artist = $this->dao->readById($id);
+
+        return $artist[0];
+
+    }
+
     public function delete($dni)
     {
         $this->dao->delete($dni);

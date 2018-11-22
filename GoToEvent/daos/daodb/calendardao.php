@@ -146,6 +146,74 @@ class CalendarDao extends Singleton implements \interfaces\Crud
             return false;
     }
 
+    public function readByDate ($date)
+    {
+        $sql = "SELECT * FROM calendars where date = :date";
+
+        $parameters['date'] = $date;
+
+        try
+        {
+            $this->connection = Connection::getInstance();
+            $resultSet = $this->connection->execute($sql, $parameters);
+        }
+        catch(PDOException $e)
+        {
+            echo $e;
+        }
+
+        if(!empty($resultSet))
+            return $this->mapear($resultSet);
+        else
+            return false;
+    }
+
+    public function readByCategory ($categoryId)
+    {
+        $sql = "SELECT * FROM calendars c INNER JOIN events e on c.id_event = e.id_event INNER JOIN categories cat
+         on e.id_category = cat.id_category where cat.id_category = :category"; //:category = parameters[]..
+
+        $parameters['category'] = $categoryId;
+
+        try
+        {
+            $this->connection = Connection::getInstance();
+            $resultSet = $this->connection->execute($sql, $parameters);
+        }
+        catch(PDOException $e)
+        {
+            echo $e;
+        }
+
+        if(!empty($resultSet))
+            return $this->mapear($resultSet);
+        else
+            return false;
+    }
+
+    public function readByArtist ($artistId)
+    {
+        $sql = "SELECT * FROM calendars c INNER JOIN calendars_x_artists ca on c.id_calendar = ca.id_calendar
+         where ca.id_artist = :id_artist"; //:id_artist = parameters[]...
+
+        $parameters['id_artist'] = $artistId;
+
+        try
+        {
+            $this->connection = Connection::getInstance();
+            $resultSet = $this->connection->execute($sql, $parameters);
+        }
+        catch(PDOException $e)
+        {
+            echo $e;
+        }
+
+        if(!empty($resultSet))
+            return $this->mapear($resultSet);
+        else
+            return false;
+    }
+
     public function readEventPlaceByCalendarId ($id_calendar)
     {
         $sql = "SELECT ep.capacity FROM calendars c inner join event_places ep on c.id_event_place = ep.id_event_place where c.id_calendar = :id_calendar";
