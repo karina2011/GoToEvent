@@ -87,6 +87,28 @@ class TicketDao extends Singleton implements \interfaces\Crud
             return false;
     }
 
+    public function readLast()
+    {
+      $sql = "SELECT * FROM tickets ORDER BY id_ticket DESC LIMIT 1";
+
+      $parameters[] = '';
+
+      try
+      {
+          $this->connection = Connection::getInstance();
+          $resultSet = $this->connection->execute($sql, $parameters);
+      }
+      catch(PDOException $e)
+      {
+          echo $e;
+      }
+
+      if(!empty($resultSet))
+          return $this->mapear($resultSet);
+      else
+          return false;
+    }
+
     public function readByNumber ($number)
     {
         $sql = "SELECT * FROM tickets where number = :number";

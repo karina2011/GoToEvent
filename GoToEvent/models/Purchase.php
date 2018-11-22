@@ -54,6 +54,12 @@ class Purchase
 		}
 		return $total;
 	}
+
+	public function getCurstomerId()
+	{
+			return $this->customer->getId();
+	}
+
 	public function setDate($date)
 	{
 		$this->date = $date;

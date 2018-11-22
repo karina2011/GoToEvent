@@ -116,7 +116,7 @@
       </div>
       <!-- /.row -->
       <div class="">
-        <button type="button" class="btn btn-primary"> <a href="<?php echo BASE ?>views/index" style="text-decoration: none; color: white;">Finalizar compra</a> </button>
+        <button type="button" class="btn btn-primary"> <a href="<?php echo BASE ?>purchase/endPurhcase" style="text-decoration: none; color: white;">Finalizar compra</a> </button>
       </div>
       <br>
     </div>

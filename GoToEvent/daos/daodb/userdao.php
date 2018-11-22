@@ -93,6 +93,30 @@ class UserDao extends Singleton implements \interfaces\Crud
             return false;
     }
 
+    public function readById ($id)
+    {
+        $sql = "SELECT * FROM users where id_user = :id_user";
+
+        $parameters['id_user'] = $id;
+
+        try
+        {
+            $this->connection = Connection::getInstance();
+            $resultSet = $this->connection->execute($sql, $parameters);
+        }
+        catch(PDOException $e)
+        {
+            echo '<script>';
+            echo 'console.log("Error en base de datos. Archivo: userdao.php")';
+            echo '</script>';
+        }
+
+        if(!empty($resultSet))
+            return $this->mapear($resultSet);
+        else
+            return false;
+    }
+
 
     public function update ($id,$pass)
     {

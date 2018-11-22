@@ -10,6 +10,7 @@ use daos\daodb\UserDao as D_User;
 
 use controllers\ViewsController as C_View;
 use controllers\PurchaseLineController as C_PurchaseLine;
+use controllers\TicketController as C_Ticket;
 
 /**
  *
@@ -75,16 +76,23 @@ class PurchaseController
 	public function endPurhcase()
 	{
 		$purchase_lines = $_SESSION['carrito'];
-		$purchase = new M_Purchase(now(),$_SESSION['user'],$purchase_lines);
+		$fecha=strftime( "%Y-%m-%d-%H-%M-%S", time() );
+		$purchase = new M_Purchase($fecha,$_SESSION['user'],$purchase_lines);
 		$this->dao->create($purchase);
 		$purchase = $this->dao->readLast();
+		$purchaseLineController = new C_PurchaseLine;
+		$ticketController = new C_Ticket;
 		foreach ($purchase_lines as $key => $purchase_line) {
 				$ticket = new M_Ticket();
-				$ticket = $ticket->generateRandomTicket();
+				$ticketController->create($ticket);
+				$ticket = $ticketController->readLast();
 				$purchase_line->setTicket($ticket);
 				$purchase_line->setPurchase($purchase);
-
+				$purchaseLineController->createByObject($purchase_line);
 		}
+		$_SESSION['carrito'] = array();
+		$this->viewController->index();
+		echo "<script>alert('Su compra se realizo correctamente')</script>";
 	}
 
 }

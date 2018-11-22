@@ -77,6 +77,11 @@ class PurchaseLine
 			return $this->$event_square->getCalendarEvent();
 	}
 
+	public function getPurchaseId()
+	{
+		return $this->purchase->getId();
+	}
+
 	public function setPrice($price)
 	{
 		$this->price = $price;

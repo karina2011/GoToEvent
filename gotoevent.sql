@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
--- http://www.phpmyadmin.net
+-- version 4.8.3
+-- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-11-2018 a las 06:31:25
--- Versión del servidor: 10.1.9-MariaDB
--- Versión de PHP: 5.6.15
+-- Tiempo de generación: 22-11-2018 a las 23:10:55
+-- Versión del servidor: 10.1.36-MariaDB
+-- Versión de PHP: 7.2.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -218,9 +220,27 @@ INSERT INTO `event_squares` (`id_event_square`, `id_square_type`, `price`, `avai
 
 CREATE TABLE `purchases` (
   `id_purchase` int(11) NOT NULL,
-  `pdate` datetime DEFAULT NULL,
+  `date` datetime DEFAULT NULL,
   `customer` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `purchases`
+--
+
+INSERT INTO `purchases` (`id_purchase`, `date`, `customer`) VALUES
+(3, '2018-11-22 22:54:39', 2),
+(4, '2018-11-22 22:54:46', 2),
+(5, '2018-11-22 22:55:57', 2),
+(6, '2018-11-22 22:57:33', 2),
+(7, '2018-11-22 22:58:01', 2),
+(8, '2018-11-22 22:58:29', 2),
+(9, '2018-11-22 23:01:11', 2),
+(10, '2018-11-22 23:01:32', 2),
+(11, '2018-11-22 23:06:50', 2),
+(12, '2018-11-22 23:08:51', 2),
+(13, '2018-11-22 23:10:07', 2),
+(14, '2018-11-22 23:10:13', 2);
 
 -- --------------------------------------------------------
 
@@ -236,6 +256,15 @@ CREATE TABLE `purchase_lines` (
   `id_ticket` int(11) DEFAULT NULL,
   `id_purchase` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `purchase_lines`
+--
+
+INSERT INTO `purchase_lines` (`id_purchase_line`, `price`, `quantity`, `id_event_square`, `id_ticket`, `id_purchase`) VALUES
+(1, 230, 3, 7, 12, 11),
+(2, 230, 3, 7, 13, 12),
+(3, 230, 4, 7, 14, 13);
 
 -- --------------------------------------------------------
 
@@ -269,6 +298,26 @@ CREATE TABLE `tickets` (
   `number` int(11) DEFAULT NULL,
   `qr` varchar(15) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `tickets`
+--
+
+INSERT INTO `tickets` (`id_ticket`, `number`, `qr`) VALUES
+(1, 63479, '63479'),
+(2, 29973, '29973'),
+(3, 83889, '83889'),
+(4, 61038, '61038'),
+(5, 42689, '42689'),
+(6, 18860, '18860'),
+(7, 874, '874'),
+(8, 93621, '93621'),
+(9, 67847, '67847'),
+(10, 88802, '88802'),
+(11, 52565, '52565'),
+(12, 42097, '42097'),
+(13, 79891, '79891'),
+(14, 65121, '65121');
 
 -- --------------------------------------------------------
 
@@ -401,57 +450,68 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `artists`
 --
 ALTER TABLE `artists`
-  MODIFY `id_artist` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_artist` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
 --
 -- AUTO_INCREMENT de la tabla `calendars`
 --
 ALTER TABLE `calendars`
   MODIFY `id_calendar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
 --
 -- AUTO_INCREMENT de la tabla `categories`
 --
 ALTER TABLE `categories`
   MODIFY `id_category` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
 --
 -- AUTO_INCREMENT de la tabla `events`
 --
 ALTER TABLE `events`
   MODIFY `id_event` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
 --
 -- AUTO_INCREMENT de la tabla `event_places`
 --
 ALTER TABLE `event_places`
   MODIFY `id_event_place` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT de la tabla `event_squares`
 --
 ALTER TABLE `event_squares`
-  MODIFY `id_event_square` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_event_square` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
 --
 -- AUTO_INCREMENT de la tabla `purchases`
 --
 ALTER TABLE `purchases`
-  MODIFY `id_purchase` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_purchase` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
 --
 -- AUTO_INCREMENT de la tabla `purchase_lines`
 --
 ALTER TABLE `purchase_lines`
-  MODIFY `id_purchase_line` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_purchase_line` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- AUTO_INCREMENT de la tabla `square_types`
 --
 ALTER TABLE `square_types`
   MODIFY `id_square_type` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT de la tabla `tickets`
 --
 ALTER TABLE `tickets`
-  MODIFY `id_ticket` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_ticket` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
 --
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- Restricciones para tablas volcadas
 --
@@ -496,6 +556,7 @@ ALTER TABLE `purchase_lines`
   ADD CONSTRAINT `fk_event_square` FOREIGN KEY (`id_event_square`) REFERENCES `event_squares` (`id_event_square`),
   ADD CONSTRAINT `fk_purchase` FOREIGN KEY (`id_purchase`) REFERENCES `purchases` (`id_purchase`),
   ADD CONSTRAINT `fk_ticket` FOREIGN KEY (`id_ticket`) REFERENCES `tickets` (`id_ticket`);
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

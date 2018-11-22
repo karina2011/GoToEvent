@@ -47,7 +47,10 @@ class PurchaseLineController
 
 	}
 
-	
+	public function createByObject($purchase_line)
+	{
+			$this->dao->create($purchase_line,$purchase_line->getPurchaseId());
+	}
 
 	public function readAll()
 	{

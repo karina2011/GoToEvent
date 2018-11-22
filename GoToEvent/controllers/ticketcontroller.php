@@ -7,13 +7,13 @@ use daos\daodb\TicketDao as Dao;
 use controllers\ViewsController as C_View;
 
 /**
- * 
+ *
  */
 class TicketController // fijarse si esta controladora es necesaria - Allan
 {
 	protected $dao;
 	private $viewController;
-	
+
 	function __construct()
 	{
 		$this->dao = Dao::getInstance();
@@ -32,7 +32,7 @@ class TicketController // fijarse si esta controladora es necesaria - Allan
 		$this->dao->create($ticket);
 
 		// incluye la vista admin de ticket
-		$this->viewController->viewTicketsAdmin();
+		//$this->viewController->viewTicketsAdmin();
 	}
 
 	// devuelve un arreglo con los objetos dentro o un arreglo vacio en caso de no haber nada en la BD
@@ -42,10 +42,10 @@ class TicketController // fijarse si esta controladora es necesaria - Allan
 
 		$list = $this->dao->readAll();
 		if (!is_array($list) && $list != false){ // si no hay nada cargado, readall devuelve false
-			$array[] = $list; 
+			$array[] = $list;
 			$list = $array; // para que devuelva un arreglo en caso de haber solo 1 objeto // esto para cuando queremos hacer foreach al listar, ya que no se puede hacer foreach sobre un objeto ni sobre un false
 		}
-		
+
 		//SOLUCIONADO, HACER ESTO EN LAS DEMAS CONTROLADORAS
 		return $list;
 	}
@@ -57,6 +57,11 @@ class TicketController // fijarse si esta controladora es necesaria - Allan
 		$ticket = $this->dao->read($number);
 
 		//FALTA HACER LA VISTA QUE MUESTRE EL TICKET QUE SE BUSCO
+	}
+
+	public function readLast()
+	{
+		return $this->dao->readLast();
 	}
 
 	public function delete($number)

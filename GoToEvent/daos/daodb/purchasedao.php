@@ -27,7 +27,7 @@ class PurchaseDao extends Singleton implements \interfaces\Crud
         $sql = "INSERT INTO purchases (date,customer) VALUES (:date,:customer)"; // pdate = purchaste date
 
         $parameters['date'] = $purchase->getDate();
-        $parameters['customer'] = $purchase->getCustomerEmail();
+        $parameters['customer'] = $purchase->getCustomerId();
 
         try
         {
@@ -94,7 +94,7 @@ class PurchaseDao extends Singleton implements \interfaces\Crud
     {
         $sql = "SELECT * FROM purchases ORDER BY id_purchase DESC LIMIT 1";
 
-        $parameters['id_purchase'] = $id_purchase;
+        $parameters[] = '';
 
         try
         {
@@ -162,7 +162,7 @@ class PurchaseDao extends Singleton implements \interfaces\Crud
             // buscar el cliente(usuario) a la base de datos
             $daoUser = DaoUser::getInstance();
 
-            $customer = $daoUser->read($p['customer_email']);
+            $customer = $daoUser->readById($p['customer']);
 
             // buscar lineas de compras a la base de datos q coincidan con el id de compra
 
