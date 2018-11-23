@@ -303,15 +303,17 @@ class ViewsController {
 
     }
 
-    public function viewEvent (){
+    public function viewEvent ($calendarId=''){
 
         $this->userController = new C_User;
         $user = $this->userController->checkSession();
 
         $this->calendarController = new C_Calendar;
         $this->eventSquareController = new C_Event_square;
+        if(isset($_GET)){
+          $calendarId = $_GET["id_calendar"];
+        }
 
-        $calendarId = $_GET["id_calendar"];
 
         $calendar = $this->calendarController->readById($calendarId);
 
@@ -381,7 +383,7 @@ class ViewsController {
 
         $this->artistController = new C_Artist();
         $listArtist = $this->artistController->readAll();
-        
+
         $calendarlist = null;
         if (isset($_GET["artist"])){
 

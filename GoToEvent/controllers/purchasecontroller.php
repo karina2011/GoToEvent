@@ -75,42 +75,51 @@ class PurchaseController
 
 	public function endPurhcase()
 	{
-		if(isset($_SESSION['user'])){
-			$purchase_lines = $_SESSION['carrito'];
-			$fecha=strftime( "%Y-%m-%d-%H-%M-%S", time() );
-			$purchase = new M_Purchase($fecha,$_SESSION['user'],$purchase_lines);
-			$this->dao->create($purchase);
-			$purchase = $this->dao->readLast();
-			$purchaseLineController = new C_PurchaseLine;
-			$ticketController = new C_Ticket;
-			foreach ($purchase_lines as $key => $purchase_line) {
-					$ticket = new M_Ticket();
-					$ticketController->create($ticket);
-					$ticket = $ticketController->readLast();
-					$purchase_line->setTicket($ticket);
-					$purchase_line->setPurchase($purchase);
+		if(!empty($_SESSION['carrito'])){
+			/*echo "<pre>";
+			var_dump($_SESSION['carrito']);
+			echo "</pre>";*/
+				if(isset($_SESSION['user'])){
+					$purchase_lines = $_SESSION['carrito'];
+					$fecha=strftime( "%Y-%m-%d-%H-%M-%S", time() );
+					$purchase = new M_Purchase($fecha,$_SESSION['user'],$purchase_lines);
+					$this->dao->create($purchase);
+					$purchase = $this->dao->readLast();
+					$purchaseLineController = new C_PurchaseLine;
+					$ticketController = new C_Ticket;
+					foreach ($purchase_lines as $key => $purchase_line) {
+							$ticket = new M_Ticket();
+							$ticketController->create($ticket);
+							$ticket = $ticketController->readLast();
+							$purchase_line->setTicket($ticket);
+							$purchase_line->setPurchase($purchase);
 
-					/**
-					Esto lo que hace es restarle a la plaza de evento
-					las cantidad de entradas que compraron
-					**/
-					$available_quantity = $purchase_line->getAvailableQuantity();
-					$available_quantity = $available_quantity - $purchase_line->getQuantity();
-					$eventsquareController = new C_Event_square();
-					$eventsquareController->update($purchase_line->getEventSquare(),$available_quantity);
+							/*
+							Esto lo que hace es restarle a la plaza de evento
+							las cantidad de entradas que compraron
+							*/
+							$available_quantity = $purchase_line->getAvailableQuantity();
+							$available_quantity = $available_quantity - $purchase_line->getQuantity();
+							$eventsquareController = new C_Event_square();
+							$eventsquareController->update($purchase_line->getEventSquare(),$available_quantity);
 
 
 
 
-					$purchaseLineController->createByObject($purchase_line);
-			}
-			$_SESSION['carrito'] = array();
-			$this->viewController->index();
-			echo "<script>alert('Su compra se realizo correctamente')</script>";
+							$purchaseLineController->createByObject($purchase_line);
+					}
+					$_SESSION['carrito'] = array();
+					$this->viewController->index();
+					echo "<script>alert('Su compra se realizo correctamente')</script>";
+
+				} else {
+					$this->viewController->index();
+					echo "<script>alert('Por favor primero ingrese a su cuenta. Luego realice la compra')</script>";
+				}
 
 		} else {
 			$this->viewController->index();
-			echo "<script>alert('Por favor primero ingrese a su cuenta. Luego realice la compra')</script>";
+			echo "<script>alert('Antes de comprar debe de tener articulos en su carrito')</script>";
 		}
 
 	}

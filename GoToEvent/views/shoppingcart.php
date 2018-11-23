@@ -50,9 +50,6 @@
       <div class="row">
       <?php if(isset($purchasesLineList)){ ?>
               <?php foreach ($purchasesLineList as $key => $purchase_line) { ?>
-                      <?php echo "<pre>";
-                            //var_dump($purchase_line->getQuantity());
-                            echo "</pre>"; ?>
                       <div class="col-lg-4 mb-4">
                         <div class="card h-100">
                           <!-- hay que ver porque no me deja mostrar el titulo del evento, nose porque tira error REVISAR -->

@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace daos\daoList;
 
 class EventDao  extends Singleton implements \interfaces\Crud
@@ -51,7 +51,7 @@ class EventDao  extends Singleton implements \interfaces\Crud
 
     }
 
-    public function update ($id)
+    public function update ($objeto,$parameter)
     {
 
     }
