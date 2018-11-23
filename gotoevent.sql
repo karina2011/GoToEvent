@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-11-2018 a las 23:10:55
+-- Tiempo de generación: 23-11-2018 a las 14:28:39
 -- Versión del servidor: 10.1.36-MariaDB
 -- Versión de PHP: 7.2.11
 
@@ -80,7 +80,8 @@ INSERT INTO `calendars` (`id_calendar`, `date`, `id_event`, `id_event_place`) VA
 (21, '2019-02-14', 3, 1),
 (22, '2018-11-14', 3, 1),
 (23, '2019-05-10', 2, 1),
-(24, '2018-11-22', 10, 1);
+(24, '2018-11-22', 10, 1),
+(25, '2019-04-11', 10, 4);
 
 -- --------------------------------------------------------
 
@@ -112,7 +113,10 @@ INSERT INTO `calendars_x_artists` (`id_artist`, `id_calendar`) VALUES
 (1, 21),
 (4, 22),
 (2, 23),
-(1, 24);
+(1, 24),
+(1, 25),
+(2, 25),
+(5, 25);
 
 -- --------------------------------------------------------
 
@@ -205,12 +209,15 @@ CREATE TABLE `event_squares` (
 --
 
 INSERT INTO `event_squares` (`id_event_square`, `id_square_type`, `price`, `available_quantity`, `remainder`, `id_calendar`) VALUES
-(1, 1, 500, 1000, 1000, 1),
+(1, 1, 500, 997, 1000, 1),
 (2, 2, 1000, 400, 400, 2),
 (4, 4, 4533, 43567, 43567, 2),
 (5, 3, 12, 12, 12, 15),
-(6, 3, 1, 1, 1, 16),
-(7, 4, 230, 3333, 3333, 23);
+(6, 3, 1, 0, 1, 16),
+(7, 4, 230, 3333, 3333, 23),
+(8, 3, 236, 19998, 20000, 25),
+(9, 1, 375, 9998, 10000, 25),
+(10, 4, 210, 10000, 10000, 25);
 
 -- --------------------------------------------------------
 
@@ -220,7 +227,7 @@ INSERT INTO `event_squares` (`id_event_square`, `id_square_type`, `price`, `avai
 
 CREATE TABLE `purchases` (
   `id_purchase` int(11) NOT NULL,
-  `date` datetime DEFAULT NULL,
+  `date` date DEFAULT NULL,
   `customer` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -229,18 +236,15 @@ CREATE TABLE `purchases` (
 --
 
 INSERT INTO `purchases` (`id_purchase`, `date`, `customer`) VALUES
-(3, '2018-11-22 22:54:39', 2),
-(4, '2018-11-22 22:54:46', 2),
-(5, '2018-11-22 22:55:57', 2),
-(6, '2018-11-22 22:57:33', 2),
-(7, '2018-11-22 22:58:01', 2),
-(8, '2018-11-22 22:58:29', 2),
-(9, '2018-11-22 23:01:11', 2),
-(10, '2018-11-22 23:01:32', 2),
-(11, '2018-11-22 23:06:50', 2),
-(12, '2018-11-22 23:08:51', 2),
-(13, '2018-11-22 23:10:07', 2),
-(14, '2018-11-22 23:10:13', 2);
+(11, '2018-11-22', 2),
+(12, '2018-11-22', 2),
+(13, '2018-11-22', 2),
+(15, '2018-11-22', 2),
+(16, '2018-11-23', 2),
+(17, '2018-11-23', 2),
+(18, '2018-11-23', 2),
+(19, '2018-11-23', 2),
+(26, '2018-11-23', 2);
 
 -- --------------------------------------------------------
 
@@ -264,7 +268,16 @@ CREATE TABLE `purchase_lines` (
 INSERT INTO `purchase_lines` (`id_purchase_line`, `price`, `quantity`, `id_event_square`, `id_ticket`, `id_purchase`) VALUES
 (1, 230, 3, 7, 12, 11),
 (2, 230, 3, 7, 13, 12),
-(3, 230, 4, 7, 14, 13);
+(3, 230, 4, 7, 14, 13),
+(4, 230, 1, 7, 15, 15),
+(5, 230, 2, 7, 16, 16),
+(6, 1, 1, 6, 17, 16),
+(7, 1, 1, 6, 18, 17),
+(8, 500, 1, 1, 19, 18),
+(9, 500, 2, 1, 20, 19),
+(10, 236, 2, 8, 21, 26),
+(11, 375, 1, 9, 22, 26),
+(12, 375, 2, 9, 23, 26);
 
 -- --------------------------------------------------------
 
@@ -317,7 +330,16 @@ INSERT INTO `tickets` (`id_ticket`, `number`, `qr`) VALUES
 (11, 52565, '52565'),
 (12, 42097, '42097'),
 (13, 79891, '79891'),
-(14, 65121, '65121');
+(14, 65121, '65121'),
+(15, 13081, '13081'),
+(16, 71566, '71566'),
+(17, 45030, '45030'),
+(18, 49942, '49942'),
+(19, 76899, '76899'),
+(20, 79813, '79813'),
+(21, 55696, '55696'),
+(22, 40715, '40715'),
+(23, 24750, '24750');
 
 -- --------------------------------------------------------
 
@@ -456,7 +478,7 @@ ALTER TABLE `artists`
 -- AUTO_INCREMENT de la tabla `calendars`
 --
 ALTER TABLE `calendars`
-  MODIFY `id_calendar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id_calendar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT de la tabla `categories`
@@ -480,19 +502,19 @@ ALTER TABLE `event_places`
 -- AUTO_INCREMENT de la tabla `event_squares`
 --
 ALTER TABLE `event_squares`
-  MODIFY `id_event_square` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_event_square` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `purchases`
 --
 ALTER TABLE `purchases`
-  MODIFY `id_purchase` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_purchase` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT de la tabla `purchase_lines`
 --
 ALTER TABLE `purchase_lines`
-  MODIFY `id_purchase_line` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_purchase_line` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `square_types`
@@ -504,7 +526,7 @@ ALTER TABLE `square_types`
 -- AUTO_INCREMENT de la tabla `tickets`
 --
 ALTER TABLE `tickets`
-  MODIFY `id_ticket` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_ticket` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
