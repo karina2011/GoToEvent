@@ -79,7 +79,7 @@ class PurchaseLine
 
 	public function getEventTitle()
 	{
-			return $this->$event_square->getCalendarEvent();
+			return $this->event_square->getCalendarEvent();
 	}
 
 	public function getPurchaseId()

@@ -61,7 +61,7 @@ class EventController
 	{
 		$this->dao->delete($title);
 
-		require(ROOT . VIEWS . 'eventsAdmin.php');
+		$this->viewController->viewEventsAdmin();
 	}
 
 }

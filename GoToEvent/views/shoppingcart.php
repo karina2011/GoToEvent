@@ -53,7 +53,7 @@
                       <div class="col-lg-4 mb-4">
                         <div class="card h-100">
                           <!-- hay que ver porque no me deja mostrar el titulo del evento, nose porque tira error REVISAR -->
-                          <h3 class="card-header"><?php //echo $purchase_line->getEventTitle(); ?></h3>
+                          <h3 class="card-header"><?php echo $purchase_line->getEventTitle(); ?></h3>
                           <div class="card-body">
                             <div class="display-4">$<?php echo $purchase_line->getTotalPrice(); ?></div>
                             <div class="font-italic">total</div>

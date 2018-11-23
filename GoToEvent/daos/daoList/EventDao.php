@@ -68,7 +68,7 @@ class EventDao  extends Singleton implements \interfaces\Crud
         }
         if($flag){
             $this->setSessionEvent($this->list);
-            echo "Evento eliminado" . '<br><br>';
+            echo "<script>alert('Evento eliminado')</script>";
         } else {
             echo "El evento que deseas eliminar no exsiste" . '<br><br>';
         }
