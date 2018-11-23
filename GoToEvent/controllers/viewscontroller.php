@@ -399,5 +399,35 @@ class ViewsController {
         require(ROOT . VIEWS . 'eventsbyartist.php');
     }
 
+    public function eventByDateAdmin()
+    {
+      $this->userController = new C_User;
+      $user = $this->userController->checkSession();
+      $listUser = $this->userController->readAll();
+
+      $this->purchaseController = new C_Purchase;
+      $list = $this->purchaseController->readAll();
+
+      $this->purchaseLineController = new C_Purchase_line;
+      $listPurchaseLine = $this->purchaseLineController->readAll();
+
+      $totalevent = 0;
+
+      if($list && isset($_GET['date'])){
+        foreach ($list as $key => $onepurchase) {
+          if($onepurchase->getDate()==$_GET['date']){
+            $totalevent = $totalevent + $onepurchase->getTotal();
+          }
+
+        }
+      }
+
+      if ($user && $user->getType()== "admin"){
+          require(ROOT . VIEWS . 'eventbydateadmin.php');
+      } else {
+          require(ROOT . VIEWS . 'home.php');
+           echo '<script>alert("ALTO AHI VAQUERO");</script>';
+         }
+    }
 }
 ?>

@@ -6,7 +6,7 @@
             <span>Artistas</span>
           </a>
         </li>
-        
+
         <li class="nav-item ">
           <a class="nav-link" href="<?php echo BASE; ?>Views/viewEventsAdmin">
           <i class="fas fa-theater-masks"></i>
@@ -44,7 +44,7 @@
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" href="<?php echo BASE; ?>Views/viewPurchasesAdmin">
+          <a class="nav-link" href="<?php echo BASE; ?>Views/eventbydateadmin">
           <i class="fas fa-shopping-cart"></i>
             <span>Compras</span></a>
         </li>

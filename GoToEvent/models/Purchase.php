@@ -49,9 +49,17 @@ class Purchase
 	public function getTotal ()
 	{
 		$total = 0;
-		foreach ($purchaselines as $key => $purchaseline) {
-			$total = $total + $purchaseline->getTotalPrice();
+		  /*echo "<pre>";
+			var_dump($this->purchaselines);
+			echo "</pre>";*/
+		if(is_array($this->purchaselines)){
+			foreach ($this->purchaselines as $key => $purchaseline) {
+				$total = $total + $purchaseline->getTotalPrice();
+			}
+		} else {
+			$total = $total + $this->purchaselines->getTotalPrice();
 		}
+
 		return $total;
 	}
 
