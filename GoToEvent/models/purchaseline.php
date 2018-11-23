@@ -43,6 +43,11 @@ class PurchaseLine
 		return $this->ticket;
 	}
 
+	public function getAvailableQuantity()
+	{
+		return $this->event_square->getAvailableQuantity();
+	}
+
 	public function getEventSquareId()
 	{
 		return $this->event_square->getId();

@@ -113,4 +113,9 @@ class EventSquareController
       return $event_square;
     }
 
+    public function update($event_square,$availble_quantity)
+    {
+      $this->dao->update($event_square->getId(),$availble_quantity);
+    }
+
 } ?>

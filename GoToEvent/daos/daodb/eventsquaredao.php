@@ -113,11 +113,11 @@ class EventSquareDao extends Singleton implements \interfaces\Crud
             return false;
     }
 
-    public function update ($id,$price)
+    public function update ($id,$available_quantity)
     {
-      $sql = "UPDATE event_squares SET price = :price  WHERE id_event_square = :id_event_square";
+      $sql = "UPDATE event_squares SET available_quantity = :available_quantity  WHERE id_event_square = :id_event_square";
       $parameters['id_event_square'] = $id;
-      $parameters['price'] = $price;
+      $parameters['available_quantity'] = $available_quantity; 
 
       try
       {
