@@ -44,14 +44,18 @@ class ViewsController {
 
     public function index()
     {
-        /*echo "<pre>";
-        var_dump($_SESSION['carrito']);
-        echo "</pre>";*/
+
         $this->userController = new C_User;
         $user = $this->userController->checkSession();
 
         $this->calendarController = new C_Calendar;
-        $calendarlist = $this->calendarController->readAll();
+        $calendarlist = $this->calendarController->readCalendarsCurrent();
+
+        $this->categoryController = new C_Category();
+        $categoryList = $this->categoryController->readCategoriesSet();
+
+        $lastFiveCalendars = $this->calendarController->readLastFive();
+
         require(ROOT . VIEWS . 'Home.php');
     }
 

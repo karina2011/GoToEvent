@@ -85,7 +85,34 @@ class CategoryDao extends Singleton implements \interfaces\Crud
             return false;
     }
 
-    public function readById($id)
+		public function readCategoriesSet ()
+		{
+				$sql = "select
+				ca.id_category,
+				ca.description
+				from calendars c inner join events e on c.id_event = e.id_event
+				                  inner join categories ca on ca.id_category = e.id_category
+				group by ca.id_category, ca.description";
+
+				$parameters[] = array();
+
+				try
+				{
+						$this->connection = Connection::getInstance();
+						$resultSet = $this->connection->execute($sql);
+				}
+				catch(PDOException $e)
+				{
+						echo $e;
+				}
+
+				if(!empty($resultSet))
+						return $this->mapear($resultSet);
+				else
+						return false;
+		}
+
+  public function readById($id)
 	{
 		$sql = "SELECT * FROM categories where id_category = :id_category";
 

@@ -114,6 +114,22 @@ class CalendarController
 		return $list;
 	}
 
+	public function readCalendarsCurrent()
+	{
+		$list = $this->dao->readCalendarsCurrent();
+		if (!is_array($list) && $list != false){ // si no hay nada cargado, readall devuelve false
+				$array[] = $list;
+				$list = $array; // para que devuelva un arreglo en caso de haber solo 1 objeto // esto para cuando queremos hacer foreach al listar, ya que no se puede hacer foreach sobre un objeto ni sobre un false
+		}
+
+		return $list;
+	}
+
+	public function readLastFive()
+	{
+		return $this->dao->readLastFive();
+	}
+
 	public function readById($id)
 	{
 		$calendar = $this->dao->readById($id);
@@ -121,10 +137,10 @@ class CalendarController
 		return $calendar;
 	}
 
-	// returns a list of calendars or a calendar that matches with de date 
+	// returns a list of calendars or a calendar that matches with de date
 	public function readByDate($date)
 	{
-		
+
 		$list = $this->dao->readByDate($date);
 
 		if (!is_array($list) && $list != false){ // if theres nothing in $list, readall returns false
@@ -139,7 +155,7 @@ class CalendarController
 	// returns a list of calendars or a calendar that matches with de category
 	public function readByCategory($categoryId)
 	{
-		
+
 		$list = $this->dao->readByCategory($categoryId);
 
 		if (!is_array($list) && $list != false){ // if theres nothing in $list, readall returns false
@@ -154,7 +170,7 @@ class CalendarController
 	// returns a list of calendars or a calendar that matches with de category
 	public function readByArtist($artistId)
 	{
-		
+
 		$list = $this->dao->readByArtist($artistId);
 
 		if (!is_array($list) && $list != false){ // if theres nothing in $list, readall returns false

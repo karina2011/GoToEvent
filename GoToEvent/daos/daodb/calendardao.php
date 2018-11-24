@@ -124,6 +124,33 @@ class CalendarDao extends Singleton implements \interfaces\Crud
 
     }
 
+    public function readCalendarsCurrent()
+    {
+        $sql = "SELECT * FROM calendars WHERE date >= now() ORDER BY date ASC";
+
+        try
+        {
+
+            $this->connection = Connection::getInstance();
+            $resultSet = $this->connection->execute($sql);
+
+        }
+        catch(PDOException $e)
+        {
+
+            //echo $e;
+            echo '<script>';
+            echo 'console.log("Error en base de datos. Archivo: calendardao.php")';
+            echo '</script>';
+        }
+
+        if(!empty($resultSet))
+            return $this->mapear($resultSet);
+        else
+            return false;
+
+    }
+
     public function readById ($id)
     {
         $sql = "SELECT * FROM calendars where id_calendar = :id_calendar";
@@ -239,6 +266,28 @@ class CalendarDao extends Singleton implements \interfaces\Crud
     public function readLast ()
     {
         $sql = "SELECT * FROM calendars ORDER BY id_calendar DESC LIMIT 1";
+
+        $parameters[] = array();
+
+        try
+        {
+            $this->connection = Connection::getInstance();
+            $resultSet = $this->connection->execute($sql);
+        }
+        catch(PDOException $e)
+        {
+            echo $e;
+        }
+
+        if(!empty($resultSet))
+            return $this->mapear($resultSet);
+        else
+            return false;
+    }
+
+    public function readLastFive ()
+    {
+        $sql = "SELECT * FROM calendars WHERE date >= now() ORDER BY date asc LIMIT 5";
 
         $parameters[] = array();
 

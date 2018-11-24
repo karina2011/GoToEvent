@@ -59,33 +59,43 @@ namespace views;
 
       <div class="row">
 
-        <div class="col-lg-3">
-        <!-- comentado para que no ocupe espacio en inicio, lo dejo de referencia nada mas. (borrar mas adelante)
-          <h1 class="my-4">Shop Name</h1>
-          <div class="list-group">
-            <a href="#" class="list-group-item">Category 1</a>
-            <a href="#" class="list-group-item">Category 2</a>
-            <a href="#" class="list-group-item">Category 3</a>
-          </div>-->
-          <!-- Opciones artistas y eventos están aca de prueba, despues se debe pasar a su respectiva vista-->
-
-
-          <!--<h2 class="my-4"> Linea compra</h2>
-          <div class="list-group">
-            <a href="<?php echo BASE; ?>Views/viewCreatePurchaseLine" class="list-group-item">Crear linea Compra</a>
-            <a href="<?php echo BASE; ?>PurchaseLine/readAll" class="list-group-item">Ver linea Compras</a>
-          </div>-->
-
-
-        </div>
-        <!-- /.col-lg-3 -->
-
-        <div class="col-lg-13">
+        <!--<div class="col-lg-13">
           <h2>Eventos</h2>
           <hr>
           <div class="row">
-            <?php if($calendarlist) { ?>
-                    <?php foreach ($calendarlist as $key => $calendar) { ?>
+            <?php if($categoryList){ ?>
+              <?php if($calendarlist) { ?>
+                  <?php foreach ($categoryList as $key => $category) { ?>
+                          <?php foreach ($calendarlist as $key => $calendar) { ?>
+                                  <?php if($category->getDescription() == $calendar->getCategoryDescription()) { ?>
+                                    <div class="col-lg-4 col-md-6 mb-4">
+                                      <div class="card h-100">
+                                        <a href="<?php echo BASE; ?>views/viewEvent?id_calendar=<?php echo $calendar->getId(); ?>"><img src="<?php echo BASE.IMG_EVENT.$calendar->getEventImg(); ?>" class="card-img-top" alt=""></a>
+                                        <div class="card-body">
+                                          <h4 class="card-title">
+                                            <a href="<?php echo BASE; ?>views/viewEvent?id_calendar=<?php echo $calendar->getId(); ?>"><?php echo $calendar->getEventTitle(); ?></a>
+                                          </h4>
+                                          <p class="card-text"><?php echo $calendar->getCategoryDescription(); ?></p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <?php } ?>
+                                  <?php } ?>
+                          <?php } ?>
+                    <?php } ?>
+                  <?php } ?>
+
+          </div>
+        
+
+        </div>-->
+        <!-- /.col-lg-9 -->
+        <div class="col-lg-13">
+          <h2>Proximos Eventos </h2>
+          <hr>
+          <div class="row">
+            <?php if($lastFiveCalendars){ ?>
+                      <?php foreach ($lastFiveCalendars as $key => $calendar) { ?>
                               <div class="col-lg-4 col-md-6 mb-4">
                                 <div class="card h-100">
                                   <a href="<?php echo BASE; ?>views/viewEvent?id_calendar=<?php echo $calendar->getId(); ?>"><img src="<?php echo BASE.IMG_EVENT.$calendar->getEventImg(); ?>" class="card-img-top" alt=""></a>
@@ -97,27 +107,35 @@ namespace views;
                                   </div>
                                 </div>
                               </div>
-                <?php } ?>
-              <?php } ?>
-            <!--COMO EJEMPLO<div class="col-lg-4 col-md-6 mb-4">
-              <div class="card h-100">
-                <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                <div class="card-body">
-                  <h4 class="card-title">
-                    <a href="#">Item Two</a>
-                  </h4>
-                  <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur! Lorem ipsum dolor sit amet.</p>
-                </div>
-              </div>
-            </div>-->
-
-
-
+                      <?php } ?>
+            <?php } ?>
           </div>
-          <!-- /.row -->
-
         </div>
-        <!-- /.col-lg-9 -->
+        <?php if($categoryList){ ?>
+              <?php foreach ($categoryList as $key => $category) { ?>
+                <h2><?php echo $category->getDescription(); ?></h2>
+                <hr>
+                <div class="row">
+                    <?php if($calendarlist) { ?>
+                        <?php foreach ($calendarlist as $key => $calendar) { ?>
+                              <?php if($category->getDescription() == $calendar->getCategoryDescription()) { ?>
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                  <div class="card h-100">
+                                    <a href="<?php echo BASE; ?>views/viewEvent?id_calendar=<?php echo $calendar->getId(); ?>"><img src="<?php echo BASE.IMG_EVENT.$calendar->getEventImg(); ?>" class="card-img-top" alt=""></a>
+                                    <div class="card-body">
+                                      <h4 class="card-title">
+                                        <a href="<?php echo BASE; ?>views/viewEvent?id_calendar=<?php echo $calendar->getId(); ?>"><?php echo $calendar->getEventTitle(); ?></a>
+                                      </h4>
+                                      <p class="card-text"><?php echo $calendar->getCategoryDescription(); ?></p>
+                                    </div>
+                                  </div>
+                                </div>
+                              <?php } ?>
+                        <?php } ?>
+                    <?php } ?>
+                </div>
+              <?php } ?>
+        <?php } ?>
 
       </div>
       <!-- /.row -->
