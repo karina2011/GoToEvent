@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
--- https://www.phpmyadmin.net/
+-- version 4.5.1
+-- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-11-2018 a las 14:28:39
--- Versión del servidor: 10.1.36-MariaDB
--- Versión de PHP: 7.2.11
+-- Tiempo de generación: 25-11-2018 a las 11:54:16
+-- Versión del servidor: 10.1.9-MariaDB
+-- Versión de PHP: 5.6.15
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -40,10 +38,16 @@ CREATE TABLE `artists` (
 --
 
 INSERT INTO `artists` (`id_artist`, `name`, `last_name`, `dni`) VALUES
-(1, 'Federico', 'Elias', '23456789'),
-(2, 'Ricardo', 'Arjona', '56426894'),
-(4, 'Bad', 'Bunny', '87452148'),
-(5, 'Jose', 'Martinez', '2222222');
+(6, 'Polistas', 'Argentinos', '11111111'),
+(8, 'Pilotos', 'Multinacionales', '1111'),
+(9, 'Alex', 'Turner', '222222'),
+(10, 'Tyler', 'Joseph', '333333'),
+(11, 'Bailarines', 'Rusia', '4444444'),
+(12, 'Emiliano', 'Brancciari', '555555'),
+(13, 'Jugadores', 'Basquetbol', '66666'),
+(14, 'Cirque', 'Do Soleil', '7777'),
+(17, 'AndrÃ©s Ciro ', 'MartÃ­nez', '1212121'),
+(18, 'Diego', 'Topa', '232323');
 
 -- --------------------------------------------------------
 
@@ -63,25 +67,23 @@ CREATE TABLE `calendars` (
 --
 
 INSERT INTO `calendars` (`id_calendar`, `date`, `id_event`, `id_event_place`) VALUES
-(1, '2018-11-30', 3, 4),
-(2, '2018-12-13', 2, 1),
-(3, '2018-11-28', 6, 2),
-(8, '2018-11-25', 3, 4),
-(10, '2018-11-29', 3, 1),
-(12, '2018-11-25', 4, 3),
-(13, '2019-01-18', 4, 4),
-(14, '2019-01-25', 2, 2),
-(15, '2019-03-20', 7, 2),
-(16, '2019-02-05', 8, 1),
-(17, '2019-01-18', 2, 1),
-(18, '2019-02-15', 1, 1),
-(19, '2019-01-11', 3, 1),
-(20, '2019-02-07', 8, 3),
-(21, '2019-02-14', 3, 1),
-(22, '2018-11-14', 3, 1),
-(23, '2019-05-10', 2, 1),
-(24, '2018-11-22', 10, 1),
-(25, '2019-04-11', 10, 4);
+(26, '2018-11-27', 11, 5),
+(27, '2018-11-28', 12, 6),
+(29, '2018-11-29', 13, 8),
+(30, '2018-11-30', 13, 8),
+(31, '2018-12-01', 13, 8),
+(32, '2018-12-02', 14, 8),
+(33, '2018-12-03', 14, 8),
+(34, '2018-11-28', 16, 7),
+(35, '2018-12-09', 16, 7),
+(36, '2018-11-27', 18, 10),
+(38, '2018-12-08', 17, 9),
+(39, '2018-12-14', 19, 11),
+(40, '2019-03-29', 20, 12),
+(41, '2019-03-30', 20, 12),
+(42, '2019-03-31', 20, 12),
+(43, '2018-12-15', 21, 13),
+(44, '2019-01-03', 22, 14);
 
 -- --------------------------------------------------------
 
@@ -99,24 +101,23 @@ CREATE TABLE `calendars_x_artists` (
 --
 
 INSERT INTO `calendars_x_artists` (`id_artist`, `id_calendar`) VALUES
-(4, 12),
-(5, 12),
-(1, 13),
-(2, 14),
-(4, 14),
-(2, 15),
-(4, 16),
-(4, 17),
-(2, 18),
-(1, 19),
-(1, 20),
-(1, 21),
-(4, 22),
-(2, 23),
-(1, 24),
-(1, 25),
-(2, 25),
-(5, 25);
+(6, 26),
+(8, 27),
+(9, 29),
+(9, 30),
+(9, 31),
+(10, 32),
+(10, 33),
+(12, 34),
+(12, 35),
+(13, 36),
+(11, 38),
+(14, 39),
+(8, 40),
+(8, 41),
+(8, 42),
+(17, 43),
+(18, 44);
 
 -- --------------------------------------------------------
 
@@ -134,11 +135,15 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id_category`, `description`) VALUES
-(2, 'Boxeo'),
-(5, 'Futbol'),
-(4, 'Kickboxing'),
-(1, 'Musical'),
-(3, 'Teatro');
+(14, 'Carreras'),
+(10, 'Conciertos'),
+(13, 'Danza'),
+(6, 'Deporte'),
+(11, 'Festivales'),
+(9, 'Infantiles'),
+(7, 'Musical'),
+(8, 'Recreativos'),
+(12, 'Teatro');
 
 -- --------------------------------------------------------
 
@@ -158,14 +163,17 @@ CREATE TABLE `events` (
 --
 
 INSERT INTO `events` (`id_event`, `title`, `id_category`, `img`) VALUES
-(1, 'Gran evento musical', 1, '39938.png'),
-(2, 'Pelea por el titulo peso pesados', 2, '39938.png'),
-(3, 'Canta arjona', 1, '39938.png'),
-(4, 'Obra de teatro infantil', 3, '39938.png'),
-(6, 'nose que onda ', 2, '39938.png'),
-(7, 'boc', 5, '80378.png'),
-(8, 'Monumental', 5, '39938.png'),
-(10, 'Eventazo', 2, '17475.jpg');
+(11, 'Campeonato Argentino de Polo 125', 6, '39722.jpg'),
+(12, 'Monster Jam', 8, '3769.jpg'),
+(13, 'Arctic Monkeys', 10, '29838.jpg'),
+(14, 'Twenty one Pilots', 10, '6299.jpg'),
+(16, 'No Te Va a Gustar', 10, '94965.jpg'),
+(17, 'El Cascanueces- Ballet Nacional de Rusia', 13, '66413.jpg'),
+(18, 'PeÃ±arol - Quilmes', 6, '41941.jpg'),
+(19, 'Cirque Du Soleil: The Beatles LOVE', 8, '59116.jpg'),
+(20, 'Gran Premio MOTUL, Argentina 2019', 14, '92328.jpg'),
+(21, 'Ciro y Los Persas', 10, '61966.jpg'),
+(22, 'Junior Express en Concierto', 9, '3949.jpg');
 
 -- --------------------------------------------------------
 
@@ -184,10 +192,16 @@ CREATE TABLE `event_places` (
 --
 
 INSERT INTO `event_places` (`id_event_place`, `capacity`, `description`) VALUES
-(1, 55000, 'Monumental'),
-(2, 3000, 'Teatro comun'),
-(3, 38000, 'Gran Rex'),
-(4, 45000, 'Libertadores de America');
+(5, 30000, 'Campo Argentino de Polo'),
+(6, 53000, 'Estadio Ãšnico Ciudad de la Plata '),
+(7, 47000, 'Estadio Obras'),
+(8, 100000, 'HipÃ³dromo San Isidro  '),
+(9, 3262, 'Teatro Gran Rex'),
+(10, 8000, 'Polideportivo Panamericano â€œIslas Malvinasâ€'),
+(11, 2100, 'Love Theatre at The Mirage, Las Vegas, Nevada, EE.UU'),
+(12, 100000, 'Circuito Termas de Rio Hondo'),
+(13, 61688, 'River Plate'),
+(14, 2500, 'Teatro OperA');
 
 -- --------------------------------------------------------
 
@@ -209,15 +223,51 @@ CREATE TABLE `event_squares` (
 --
 
 INSERT INTO `event_squares` (`id_event_square`, `id_square_type`, `price`, `available_quantity`, `remainder`, `id_calendar`) VALUES
-(1, 1, 500, 997, 1000, 1),
-(2, 2, 1000, 400, 400, 2),
-(4, 4, 4533, 43567, 43567, 2),
-(5, 3, 12, 12, 12, 15),
-(6, 3, 1, 0, 1, 16),
-(7, 4, 230, 3333, 3333, 23),
-(8, 3, 236, 19998, 20000, 25),
-(9, 1, 375, 9998, 10000, 25),
-(10, 4, 210, 10000, 10000, 25);
+(11, 6, 1500, 4200, 4200, 26),
+(12, 11, 2000, 4200, 4200, 26),
+(13, 7, 1500, 4200, 4200, 26),
+(14, 12, 2000, 4200, 4200, 26),
+(15, 8, 2500, 4200, 4200, 26),
+(16, 9, 3000, 4000, 4000, 26),
+(17, 10, 2700, 4200, 4200, 26),
+(18, 25, 3500, 600, 600, 26),
+(19, 18, 2000, 7500, 7500, 27),
+(20, 20, 3000, 7500, 7500, 27),
+(21, 21, 2000, 7500, 7500, 27),
+(22, 22, 2000, 7500, 7500, 27),
+(23, 24, 3000, 7500, 7500, 27),
+(24, 23, 4000, 4000, 4000, 27),
+(25, 16, 7200, 80000, 80000, 29),
+(26, 17, 16000, 20000, 20000, 29),
+(27, 16, 7200, 80000, 80000, 30),
+(28, 17, 16000, 20000, 20000, 30),
+(29, 16, 7200, 80000, 80000, 31),
+(30, 17, 16000, 20000, 20000, 31),
+(31, 16, 7200, 80000, 80000, 32),
+(32, 17, 16000, 20000, 20000, 32),
+(33, 16, 7200, 80000, 80000, 33),
+(34, 17, 16000, 20000, 20000, 33),
+(35, 5, 2670, 27000, 27000, 34),
+(36, 13, 3350, 6000, 6000, 34),
+(37, 14, 5036, 5000, 5000, 34),
+(38, 15, 5036, 5000, 5000, 34),
+(39, 5, 2700, 27000, 27000, 35),
+(40, 13, 3400, 6000, 6000, 35),
+(41, 14, 5036, 5000, 5000, 35),
+(42, 15, 5036, 5000, 5000, 35),
+(43, 29, 310, 1000, 1000, 36),
+(44, 28, 230, 1000, 1000, 36),
+(45, 30, 190, 2000, 2000, 36),
+(46, 31, 150, 4000, 4000, 36),
+(50, 26, 1600, 2000, 2000, 38),
+(51, 32, 1800, 1200, 1200, 38),
+(52, 16, 8560, 2000, 2000, 39),
+(53, 16, 3400, 100000, 100000, 40),
+(54, 16, 3200, 100000, 100000, 41),
+(55, 16, 3500, 99998, 100000, 42),
+(56, 5, 1500, 4000, 4000, 43),
+(57, 27, 1900, 2000, 2000, 43),
+(58, 16, 1800, 2500, 2500, 44);
 
 -- --------------------------------------------------------
 
@@ -236,15 +286,8 @@ CREATE TABLE `purchases` (
 --
 
 INSERT INTO `purchases` (`id_purchase`, `date`, `customer`) VALUES
-(11, '2018-11-22', 2),
-(12, '2018-11-22', 2),
-(13, '2018-11-22', 2),
-(15, '2018-11-22', 2),
-(16, '2018-11-23', 2),
-(17, '2018-11-23', 2),
-(18, '2018-11-23', 2),
-(19, '2018-11-23', 2),
-(26, '2018-11-23', 2);
+(27, '2018-11-25', 3),
+(28, '2018-11-25', 3);
 
 -- --------------------------------------------------------
 
@@ -266,18 +309,8 @@ CREATE TABLE `purchase_lines` (
 --
 
 INSERT INTO `purchase_lines` (`id_purchase_line`, `price`, `quantity`, `id_event_square`, `id_ticket`, `id_purchase`) VALUES
-(1, 230, 3, 7, 12, 11),
-(2, 230, 3, 7, 13, 12),
-(3, 230, 4, 7, 14, 13),
-(4, 230, 1, 7, 15, 15),
-(5, 230, 2, 7, 16, 16),
-(6, 1, 1, 6, 17, 16),
-(7, 1, 1, 6, 18, 17),
-(8, 500, 1, 1, 19, 18),
-(9, 500, 2, 1, 20, 19),
-(10, 236, 2, 8, 21, 26),
-(11, 375, 1, 9, 22, 26),
-(12, 375, 2, 9, 23, 26);
+(13, 3500, 1, 55, 24, 27),
+(14, 3500, 1, 55, 25, 28);
 
 -- --------------------------------------------------------
 
@@ -295,10 +328,34 @@ CREATE TABLE `square_types` (
 --
 
 INSERT INTO `square_types` (`id_square_type`, `description`) VALUES
-(3, 'Campo'),
-(1, 'Platea'),
-(4, 'Popular'),
-(2, 'Vip');
+(16, 'AdmisiÃ³n General'),
+(31, 'Cabecera'),
+(5, 'Campo '),
+(28, 'Corralito'),
+(9, 'Dorrego Central'),
+(10, 'Dorrego Lateral'),
+(25, 'Grada Superior'),
+(30, 'Lateral'),
+(26, 'Pista'),
+(13, 'Platea Alta'),
+(14, 'Platea Este'),
+(27, 'Platea General'),
+(15, 'Platea Oeste'),
+(29, 'Rebatibles'),
+(18, 'SecciÃ³n 10'),
+(22, 'SecciÃ³n 29'),
+(20, 'SecciÃ³n 3'),
+(24, 'SecciÃ³n A 29'),
+(21, 'SecciÃ³n A28'),
+(23, 'SecciÃ³n Sentado'),
+(19, 'SecciÃ³n Sur'),
+(6, 'Tribuna A Lateral'),
+(11, 'Tribuna A Lateral Alta'),
+(7, 'Tribuna B Lateral'),
+(12, 'Tribuna B Lateral Alta'),
+(8, 'Tribuna C'),
+(32, 'Tribuna Superior'),
+(17, 'VIP');
 
 -- --------------------------------------------------------
 
@@ -317,29 +374,8 @@ CREATE TABLE `tickets` (
 --
 
 INSERT INTO `tickets` (`id_ticket`, `number`, `qr`) VALUES
-(1, 63479, '63479'),
-(2, 29973, '29973'),
-(3, 83889, '83889'),
-(4, 61038, '61038'),
-(5, 42689, '42689'),
-(6, 18860, '18860'),
-(7, 874, '874'),
-(8, 93621, '93621'),
-(9, 67847, '67847'),
-(10, 88802, '88802'),
-(11, 52565, '52565'),
-(12, 42097, '42097'),
-(13, 79891, '79891'),
-(14, 65121, '65121'),
-(15, 13081, '13081'),
-(16, 71566, '71566'),
-(17, 45030, '45030'),
-(18, 49942, '49942'),
-(19, 76899, '76899'),
-(20, 79813, '79813'),
-(21, 55696, '55696'),
-(22, 40715, '40715'),
-(23, 24750, '24750');
+(24, 93381, '93381'),
+(25, 42737, '42737');
 
 -- --------------------------------------------------------
 
@@ -364,8 +400,7 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id_user`, `name`, `last_name`, `dni`, `email`, `type`, `pass`) VALUES
 (1, 'Leonardo', 'Izurieta', '45187639', 'leo@leo', 'cliente', 'leo'),
 (2, 'Federico', 'Elias', '40794525', 'fede@fede', 'admin', 'admin'),
-(3, 'karina', 'felice', '29101068', 'kari@kari', 'admin', '1234'),
-(4, 'Santino', 'Barreiro', '51457524', 'santi@santi', 'cliente', 'santi');
+(3, 'karina', 'felice', '29101068', 'kari@kari', 'admin', '1234');
 
 --
 -- Índices para tablas volcadas
@@ -472,68 +507,57 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `artists`
 --
 ALTER TABLE `artists`
-  MODIFY `id_artist` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
+  MODIFY `id_artist` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 --
 -- AUTO_INCREMENT de la tabla `calendars`
 --
 ALTER TABLE `calendars`
-  MODIFY `id_calendar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
-
+  MODIFY `id_calendar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 --
 -- AUTO_INCREMENT de la tabla `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id_category` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
+  MODIFY `id_category` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT de la tabla `events`
 --
 ALTER TABLE `events`
-  MODIFY `id_event` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
+  MODIFY `id_event` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 --
 -- AUTO_INCREMENT de la tabla `event_places`
 --
 ALTER TABLE `event_places`
-  MODIFY `id_event_place` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
+  MODIFY `id_event_place` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT de la tabla `event_squares`
 --
 ALTER TABLE `event_squares`
-  MODIFY `id_event_square` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
+  MODIFY `id_event_square` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 --
 -- AUTO_INCREMENT de la tabla `purchases`
 --
 ALTER TABLE `purchases`
-  MODIFY `id_purchase` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
-
+  MODIFY `id_purchase` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 --
 -- AUTO_INCREMENT de la tabla `purchase_lines`
 --
 ALTER TABLE `purchase_lines`
-  MODIFY `id_purchase_line` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-
+  MODIFY `id_purchase_line` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT de la tabla `square_types`
 --
 ALTER TABLE `square_types`
-  MODIFY `id_square_type` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
+  MODIFY `id_square_type` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 --
 -- AUTO_INCREMENT de la tabla `tickets`
 --
 ALTER TABLE `tickets`
-  MODIFY `id_ticket` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
-
+  MODIFY `id_ticket` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 --
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
   MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
 --
 -- Restricciones para tablas volcadas
 --
@@ -578,7 +602,6 @@ ALTER TABLE `purchase_lines`
   ADD CONSTRAINT `fk_event_square` FOREIGN KEY (`id_event_square`) REFERENCES `event_squares` (`id_event_square`),
   ADD CONSTRAINT `fk_purchase` FOREIGN KEY (`id_purchase`) REFERENCES `purchases` (`id_purchase`),
   ADD CONSTRAINT `fk_ticket` FOREIGN KEY (`id_ticket`) REFERENCES `tickets` (`id_ticket`);
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
