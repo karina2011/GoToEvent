@@ -412,19 +412,39 @@ class ViewsController {
       $this->purchaseController = new C_Purchase;
       $list = $this->purchaseController->readAll();
 
+      $this->categoryController = new C_Category();
+      $listCategory = $this->categoryController->readAll();
+
+      $this->eventSquareController = new C_Event_square;
+
+      $this->calendarController = new C_Calendar;
+      
+
+      $this->eventController = new C_Event;
+      $listEvent = $this->eventController->readAll();
+
       $this->purchaseLineController = new C_Purchase_line;
       $listPurchaseLine = $this->purchaseLineController->readAll();
 
       $totalevent = 0;
-
+      $totaleventC= 0;
       if($list && isset($_GET['date'])){
         foreach ($list as $key => $onepurchase) {
           if($onepurchase->getDate()==$_GET['date']){
             $totalevent = $totalevent + $onepurchase->getTotal();
           }
-
         }
-      }
+       }
+       else if ($listCategory&& isset($_GET['category']))
+       {
+            $listCalendar=$this->calendarController->readByCategory($_GET['category']);
+            foreach ($listCalendar as $key => $oneCalendar) {
+                $listSquare=$this->eventSquareController->readAllByCalendarId($oneCalendar->getId());
+                foreach ($listSquare as $key => $oneSquare) {
+                    $totaleventC=$totaleventC+($oneSquare->getRemainder()-$oneSquare->getAvailableQuantity())*$oneSquare->getPrice();
+                }
+            }
+       }
 
       if ($user && $user->getType()== "admin"){
           require(ROOT . VIEWS . 'eventbydateadmin.php');

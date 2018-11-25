@@ -38,6 +38,44 @@ namespace views;
                       </div>
             </div>
           </div>
+          <div class="container">
+            <div class="row">
+                      <div class="col-lg-3">
+                        <h2 class="my-4">  Total de ventas por Categoria</h2>
+                        <hr>
+                          <form action="<?php echo BASE; ?>views/eventbydateadmin" method="GET">
+                            <div class="form-group">
+                              <label for="category">  Seleccione la categoria</label>
+                              
+                              <select name="category" class="custom-select" required>
+                                <?php foreach ($listCategory as $key => $category) { ?>
+                                <option value="<?php echo $category->getId();  ?>"><?php echo $category->getDescription(); ?></option>
+                              <?php } ?>
+				                      </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Buscar</button>
+                          </form>
+                      </div>
+                      <div class="col-lg-9">
+
+                          <?php if($list) {?>
+                                      <h4 class="my-4"> <?php if(isset($_GET['date'])){
+                                                           echo $_GET["date"];?>Dia:
+                                                           <?php }
+                                                      else if(isset($_GET['category'])){
+                                                    
+                                                        ?>Categoria: <?php $oneCategory=$this->categoryController->readById($_GET['category']);
+                                                                            echo $oneCategory->getDescription();
+                                                      } ?></h4>
+                          <?php } ?>
+                          <div class="row my-4">
+                                     <label for="date"><h4>Total vendido: $<?php echo $totaleventC; ?></h4></label>
+
+                          </div>
+                      </div>
+                      </div>
+            </div>
+          </div>
         </div>
       </div>
       <!-- /.container-fluid -->
