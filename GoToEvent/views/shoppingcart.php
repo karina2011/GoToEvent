@@ -42,15 +42,11 @@
       </h1>
       <hr>
 
-      <!--<ol class="breadcrumb">
-        <li class="breadcrumb-item">
-          <a href="index.html">Home</a>
-        </li>
-        <li class="breadcrumb-item active">Pricing</li>
-      </ol>-->
       <div class="row">
       <?php if(isset($purchasesLineList)){ ?>
+          <?php $contador = -1; ?>
               <?php foreach ($purchasesLineList as $key => $purchase_line) { ?>
+                      <?php $contador++; ?>
                       <div class="col-lg-4 mb-4">
                         <div class="card h-100">
                           <h3 class="card-header"><?php echo $purchase_line->getEventTitle(); ?></h3>
@@ -63,7 +59,7 @@
                               <div class="font-italic">total</div>
                             </div>
                             <li class="list-group-item">
-                              <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                              <a href="<?php echo BASE ?>purchaseline/deleteLine?posicion=<?php echo $contador; ?>" class="btn btn-danger"><i class="fas fa-trash"></i></a>
                             </li>
                           </ul>
                         </div>
@@ -73,42 +69,6 @@
               <h2>No hay compras en el carrito</h2>
       <?php } ?>
       <!-- Content Row -->
-
-
-        <!--<div class="col-lg-4 mb-4">
-          <div class="card card-outline-primary h-100">
-            <h3 class="card-header bg-primary text-white">Plus</h3>
-            <div class="card-body">
-              <div class="display-4">$39.99</div>
-              <div class="font-italic">per month</div>
-            </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">Cras justo odio</li>
-              <li class="list-group-item">Dapibus ac facilisis in</li>
-              <li class="list-group-item">Vestibulum at eros</li>
-              <li class="list-group-item">
-                <a href="#" class="btn btn-primary">Sign Up!</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="col-lg-4 mb-4">
-          <div class="card h-100">
-            <h3 class="card-header">Ultra</h3>
-            <div class="card-body">
-              <div class="display-4">$159.99</div>
-              <div class="font-italic">per month</div>
-            </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">Cras justo odio</li>
-              <li class="list-group-item">Dapibus ac facilisis in</li>
-              <li class="list-group-item">Vestibulum at eros</li>
-              <li class="list-group-item">
-                <a href="#" class="btn btn-primary">Sign Up!</a>
-              </li>
-            </ul>
-          </div>
-        </div> -->
 
       </div>
       <!-- /.row -->

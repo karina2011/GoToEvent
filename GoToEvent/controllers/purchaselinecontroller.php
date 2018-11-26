@@ -98,6 +98,19 @@ class PurchaseLineController
 
 	}
 
+	public function deleteLine()
+	{
+		if($_GET)
+		{
+			/*echo "<pre>";
+			var_dump($_SESSION);
+			echo "</pre>";*/
+			$posicion = $_GET['posicion'];
+			unset($_SESSION['carrito'][$posicion]);
+		}
+		$this->viewController->shoppingCart();
+	}
+
 }
 
 ?>
