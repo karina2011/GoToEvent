@@ -372,6 +372,8 @@ class CalendarDao extends Singleton implements \interfaces\Crud
 
     public function delete ($id)
     {
+        $sql2 = "DELETE FROM calendars_x_artists WHERE id_calendar = :id_calendar";
+        $sql1 = "DELETE FROM event_squares WHERE id_calendar = :id_calendar";
         $sql = "DELETE FROM calendars WHERE id_calendar = :id_calendar";
 
         $parameters['id_calendar'] = $id;
@@ -379,11 +381,20 @@ class CalendarDao extends Singleton implements \interfaces\Crud
         try
         {
             $this->connection = Connection::getInstance();
-            return $this->connection->ExecuteNonQuery($sql, $parameters);
+            $eventSquare=$this->connection->ExecuteNonQuery($sql1, $parameters);
+            if ($eventSquare>0)
+            {
+                $calendarArtist=$this->connection->ExecuteNonQuery($sql2, $parameters);
+                if ($calendarArtist>0)
+                {
+                    return $this->connection->ExecuteNonQuery($sql, $parameters);
+                }
+            }
+            
         }
         catch(PDOException $e)
         {
-            echo "<script>alert('No se pueden borrar calendarios por el momento. Estamos en construccion')</script>";
+            echo "<script>alert('No se pueden borrar el calendario ya que tiene entradas vendidas')</script>";
         }
    }
 
