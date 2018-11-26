@@ -438,10 +438,12 @@ class ViewsController {
        else if ($listCategory&& isset($_GET['category']))
        {
             $listCalendar=$this->calendarController->readByCategory($_GET['category']);
+            if($listCalendar){
             foreach ($listCalendar as $key => $oneCalendar) {
                 $listSquare=$this->eventSquareController->readAllByCalendarId($oneCalendar->getId());
                 foreach ($listSquare as $key => $oneSquare) {
                     $totaleventC=$totaleventC+($oneSquare->getRemainder()-$oneSquare->getAvailableQuantity())*$oneSquare->getPrice();
+                }
                 }
             }
        }

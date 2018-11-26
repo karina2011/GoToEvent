@@ -46,7 +46,7 @@
         <li class="nav-item">
           <a class="nav-link" href="<?php echo BASE; ?>Views/eventbydateadmin">
           <i class="fas fa-shopping-cart"></i>
-            <span>Compras</span></a>
+            <span>Ventas</span></a>
         </li>
 
         <li class="nav-item">

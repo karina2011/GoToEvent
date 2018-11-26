@@ -86,6 +86,7 @@ class PurchaseLineController
 			if($event_square->getRemainder() >= $number)
 			{
 					/*$ticket = new M_Ticket();
+				
 					$ticket = $ticket->generateRandomTicket();*/
 					$purchaseline = new M_Purchase_line($event_square->getPrice(),$number,$event_square);
 					$_SESSION['carrito'][] = $purchaseline;
@@ -103,10 +104,11 @@ class PurchaseLineController
 		if($_GET)
 		{
 			/*echo "<pre>";
-			var_dump($_SESSION);
+			print_r($_SESSION);
 			echo "</pre>";*/
 			$posicion = $_GET['posicion'];
 			unset($_SESSION['carrito'][$posicion]);
+			$_SESSION['carrito']=array_values($_SESSION['carrito']);
 		}
 		$this->viewController->shoppingCart();
 	}

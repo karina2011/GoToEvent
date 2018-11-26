@@ -46,8 +46,8 @@ namespace views;
                           <form action="<?php echo BASE; ?>views/eventbydateadmin" method="GET">
                             <div class="form-group">
                               <label for="category">  Seleccione la categoria</label>
-                              
                               <select name="category" class="custom-select" required>
+                              <option>Seleccione una categoria</option>
                                 <?php foreach ($listCategory as $key => $category) { ?>
                                 <option value="<?php echo $category->getId();  ?>"><?php echo $category->getDescription(); ?></option>
                               <?php } ?>
