@@ -32,16 +32,23 @@ namespace views;
                         <?php } }?>
 
                         <br>
-                        
-            <a href="#openModal" class="btn btn-success">Agregar plaza de evento</a> <!-- para ventana emergente/modal/flotante/comosellame-->
 
-                <div id="openModal" class="modalDialog">
-                  <div>
-                    <a href="#close" title="Close" class="close">X</a>
-                    <h3>Crear Plazas de evento</h3>
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#openModal">
+                Agregar plaza de evento
+              </button> <!-- para ventana emergente/modal/flotante/comosellame-->
 
-                        <form action="<?php echo BASE; ?>eventsquare/create" method="post">
-                            <div class="form-group">
+              <div class="modal fade" id="openModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Crear plazas de evento</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                          <form action="<?php echo BASE; ?>eventsquare/create" method="post">
+                          <div class="form-group">
                                 <label for="squaretype">Tipo de plaza:</label>
                                 <select class="custom-select"  name="squaretype">
                                   <?php  foreach ($listSquareType as $key => $squaretype) { ?>
@@ -62,7 +69,9 @@ namespace views;
 
                             <input type="hidden" name="id_calendar" value="<?php echo $calendar->getId(); ?>">
                             <button type="submit" class="btn btn-primary">Crear plaza de evento</button>
-                        </form>
+                          </form>
+                      </div>
+                    </div>
                   </div>
                 </div>
 

@@ -453,5 +453,24 @@ class ViewsController {
            echo '<script>alert("ALTO AHI VAQUERO");</script>';
          }
     }
+
+    public function myPurchases(){
+
+        $this->userController = new C_User;
+        $user = $this->userController->checkSession();
+
+        if($user){
+
+            $this->purchaseController = new C_Purchase;
+            $list = $this->purchaseController->getPurchasesByUser($user);
+
+            require(ROOT . VIEWS . 'mypurchases.php');
+
+        } else {
+            require(ROOT . VIEWS . 'Home.php');
+            echo '<script>alert("ALTO AHI VAQUERO");</script>';
+        }
+
+    }
 }
 ?>

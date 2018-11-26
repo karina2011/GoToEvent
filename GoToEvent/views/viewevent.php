@@ -122,7 +122,7 @@ namespace views;
         <input type="hidden" name="id_event_square" value="<?php echo $event_square->getId(); ?>">
 
         <div class="form-group">
-          <label for=""><?php echo $event_square->getSquareTypeDescription(); ?>-->Precio: $<?php echo $event_square->getPrice(); ?></label>
+          <label for=""><strong><?php echo $event_square->getSquareTypeDescription(); ?></strong>-->Precio: $<?php echo $event_square->getPrice(); ?></label>
           <input type="number" name="event_square" value="" class="form-control" placeholder="Cantidad de entradas">
         </div>
 

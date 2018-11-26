@@ -37,15 +37,16 @@ namespace views;
                <!-- </ul>
               </div>-->
             </li>
-          <?php if($user) {
+         
+            <li class="nav-item">
+              <a class="nav-link" href="<?php echo BASE; ?>views/shoppingcart">Carrito <i class="fas fa-shopping-cart"></i></a>
+            </li>
+            <?php if($user) {
                   if ($user->getType() == "admin") { ?>
             <li class="nav-item">
               <a class="nav-link" href="<?php echo BASE; ?>views/viewadmin">Administrar</a>
             </li>
           <?php } }?>
-            <li class="nav-item">
-              <a class="nav-link" href="<?php echo BASE; ?>views/shoppingcart">Carrito <i class="fas fa-shopping-cart"></i></a>
-            </li>
             <li class="nav-item">
               <?php  if(!$user){ ?>
               <a class="nav-link" href="<?php echo BASE; ?>views/login">Iniciar sesion</a>
@@ -61,7 +62,7 @@ namespace views;
                          <a class="dropdown-item" href="#">
                               <i class="mr-2" data-feather="user" width="20" height="20"></i>Mi perfil
                          </a>
-                         <a class="dropdown-item" href="#">
+                         <a class="dropdown-item" href="<?php echo BASE; ?>views/myPurchases">
                               <i class="mr-2" data-feather="user" width="20" height="20"></i>Mis compras
                          </a>
                          <a class="dropdown-item" href="<?php echo BASE; ?>user/logout">

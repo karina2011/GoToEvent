@@ -184,6 +184,34 @@ class PurchaseDao extends Singleton implements \interfaces\Crud
 
        $purchase_lines = $daoPurchaseLine->readByIdPurchase($id_purchase);
 
+       if (!is_array($purchase_lines) && $purchase_lines != false){ // si no hay nada cargado, read devuelve false
+        $array[] = $purchase_lines;
+        $purchase_lines = $array; // para que devuelva un arreglo en caso de haber solo 1 objeto // esto para cuando queremos hacer foreach al listar, ya que no se puede hacer foreach sobre un objeto ni sobre un false
+        }
+
        return $purchase_lines;
      }
+
+     public function readAllByUser($userId)
+    {
+        $sql = "SELECT * FROM purchases where customer = :userId";
+
+        $parameters['userId'] = $userId;
+
+        try
+        {
+            $this->connection = Connection::getInstance();
+            $resultSet = $this->connection->execute($sql, $parameters);
+        }
+        catch(PDOException $e)
+        {
+            echo $e;
+        }
+
+        if(!empty($resultSet))
+            return $this->mapear($resultSet);
+        else
+            return false;
+
+    }
 }

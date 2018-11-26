@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-  <title> LOGIN </title>
+  <title> Login </title>
 
     <!-- Bootstrap core CSS -->
     <link href="<?php echo BASE; ?>assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -16,8 +16,6 @@
   <link href="<?php echo BASE; ?>assets/css/styles.css" rel="stylesheet">
   <!--https://startbootstrap.com/snippets/login/-->
 
-    <!-- Styles.css-->
-    <link href="<?php echo BASE; ?>assets/css/modal.css" rel="stylesheet">
 
 </head>
 <body >
@@ -43,46 +41,59 @@
 
               <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Iniciar Sesion</button>
               <!--<button class="btn btn-lg btn-google btn-block text-uppercase" type="submit"><i class="fab fa-google mr-2"></i> Registrarse</button>-->
-              <a href="#openModal" class="btn btn-lg btn-google btn-block text-uppercase">Registrarse</a>
+              <!-- Button trigger modal -->
+              <button type="button" class="btn btn-lg btn-outline-info btn-block text-uppercase" data-toggle="modal" data-target="#openModal">
+                Registrarse
+              </button>
             </form>
             <head></head>  
 
-                <div id="openModal" class="modalDialog">
-                  <div>
-                    <a href="#close" title="Close" class="close">X</a>
-                    <h3>Crear usuario</h3>
+            <!-- Modal -->
+                <div class="modal fade" id="openModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Crear usuario</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                          <form action="<?php echo BASE; ?>user/create" method="post">
+                            <div class="form-group">
+                                  <label for="name">Nombre</label>
+                                  <input type="text" class="form-control" id="name" placeholder="Nombre" name="name" required>
+                              </div>
+                              <div class="form-group">
+                                  <label for="lastname">Apellido</label>
+                                  <input type="text" class="form-control" id="lastname" placeholder="Apellido" name="lastname" required>
+                              </div>
+                              <div class="form-group">
+                                  <label for="email">Email</label>
+                                  <input type="email" class="form-control" id="email" placeholder="Email" name="email" required>
+                              </div>
+                              <div class="form-group">
+                                  <label for="dni">DNI</label>
+                                  <input type="number" class="form-control" id="dni" placeholder="DNI" name="dni" required>
+                              </div>
 
-                        <form action="<?php echo BASE; ?>user/create" method="post">
-                            <div class="form-group">
-                                <label for="name">Nombre</label>
-                                <input type="text" class="form-control" id="name" placeholder="Nombre" name="name" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="lastname">Apellido</label>
-                                <input type="text" class="form-control" id="lastname" placeholder="Apellido" name="lastname" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Email</label>
-                                <input type="email" class="form-control" id="email" placeholder="Email" name="email" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="dni">DNI</label>
-                                <input type="number" class="form-control" id="dni" placeholder="DNI" name="dni" required>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="pass">Contraseña</label>
-                                <input type="password" class="form-control" id="pass" placeholder="Contraseña" name="pass" required>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Crear usuario</button>
-                        </form>
+                              <div class="form-group">
+                                  <label for="pass">Contraseña</label>
+                                  <input type="password" class="form-control" id="pass" placeholder="Contraseña" name="pass" required>
+                              </div>
+                              <button type="submit" class="btn btn-primary">Crear usuario</button>
+                          </form>
+                      </div>
+                    </div>
                   </div>
                 </div>
+                
           </div>
         </div>
       </div>
     </div>
   </div>
+
 
   <?php include_once (VIEWS."footer.php");?>
   
