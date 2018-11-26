@@ -68,4 +68,17 @@ class SquareTypeController
 
         $this->viewController->viewSquareTypesAdmin();
     }
+
+    public function newSquareType($description){
+        //SE CREA EL OBJETO PARA LUEGO AGREGARLO A LA BASE DE DATOS
+
+    	$square_type = new Square_type($description);
+
+    	//SE GUARDA EL OBJETO CREADO ANTERIORMENTE EN LA BASE DE DATOS
+
+    	$this->dao->create($square_type);
+
+    	//SE INCLUYE LA VISTA PRINCIPAL PARA PODER SEGUIR NAVEGANDO POR LA WEB
+        $this->viewController->addEventSquareToCalendar();
+    }
 }

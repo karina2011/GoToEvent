@@ -33,9 +33,12 @@ namespace views;
 
                         <br>
 
+                  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#openModal2">
+                    Crear tipo de plaza
+                  </button> <!-- para ventana emergente/modal/flotante/comosellame-->
                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#openModal">
                 Agregar plaza de evento
-              </button> <!-- para ventana emergente/modal/flotante/comosellame-->
+                </button> <!-- para ventana emergente/modal/flotante/comosellame-->
 
               <div class="modal fade" id="openModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                   <div class="modal-dialog modal-dialog-centered" role="document">
@@ -69,6 +72,29 @@ namespace views;
 
                             <input type="hidden" name="id_calendar" value="<?php echo $calendar->getId(); ?>">
                             <button type="submit" class="btn btn-primary">Crear plaza de evento</button>
+                          </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="modal fade" id="openModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Crear tipo de plaza</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                          <form action="<?php echo BASE; ?>squaretype/newSquareType" method="post">
+                            <div class="form-group">
+                                <label for="descrption">Descripcion de tipo de plaza:</label>
+                                <input type="text" class="form-control" id="description" placeholder="Descripcion" name="description" required>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Crear tipo de plaza</button>
                           </form>
                       </div>
                     </div>
