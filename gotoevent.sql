@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-11-2018 a las 06:52:27
+-- Tiempo de generación: 27-11-2018 a las 07:39:33
 -- Versión del servidor: 10.1.9-MariaDB
 -- Versión de PHP: 5.6.15
 
@@ -236,7 +236,7 @@ INSERT INTO `event_squares` (`id_event_square`, `id_square_type`, `price`, `avai
 (32, 17, 16000, 20000, 20000, 32),
 (33, 16, 7200, 79998, 80000, 33),
 (34, 17, 16000, 20000, 20000, 33),
-(35, 5, 2670, 27000, 27000, 34),
+(35, 5, 2670, 26999, 27000, 34),
 (36, 13, 3350, 6000, 6000, 34),
 (37, 14, 5036, 5000, 5000, 34),
 (38, 15, 5036, 5000, 5000, 34),
@@ -244,14 +244,14 @@ INSERT INTO `event_squares` (`id_event_square`, `id_square_type`, `price`, `avai
 (40, 13, 3400, 6000, 6000, 35),
 (41, 14, 5036, 5000, 5000, 35),
 (42, 15, 5036, 5000, 5000, 35),
-(43, 29, 310, 999, 1000, 36),
+(43, 29, 310, 998, 1000, 36),
 (44, 28, 230, 1000, 1000, 36),
 (45, 30, 190, 2000, 2000, 36),
 (46, 31, 150, 4000, 4000, 36),
 (50, 26, 1600, 2000, 2000, 38),
 (51, 32, 1800, 1200, 1200, 38),
 (52, 16, 8560, 2000, 2000, 39),
-(53, 16, 3400, 100000, 100000, 40),
+(53, 16, 3400, 99999, 100000, 40),
 (54, 16, 3200, 100000, 100000, 41),
 (55, 16, 3500, 99998, 100000, 42),
 (56, 5, 1500, 4000, 4000, 43),
@@ -326,7 +326,10 @@ INSERT INTO `purchases` (`id_purchase`, `date`, `customer`) VALUES
 (76, '2018-11-27', 3),
 (77, '2018-11-27', 3),
 (78, '2018-11-27', 3),
-(79, '2018-11-27', 3);
+(79, '2018-11-27', 3),
+(80, '2018-11-27', 3),
+(81, '2018-11-27', 3),
+(82, '2018-11-27', 3);
 
 -- --------------------------------------------------------
 
@@ -348,7 +351,9 @@ CREATE TABLE `purchase_lines` (
 --
 
 INSERT INTO `purchase_lines` (`id_purchase_line`, `price`, `quantity`, `id_event_square`, `id_ticket`, `id_purchase`) VALUES
-(21, 7200, 1, 33, 32, 79);
+(21, 7200, 1, 33, 32, 79),
+(23, 3400, 1, 53, 34, 81),
+(24, 310, 1, 43, 35, 82);
 
 -- --------------------------------------------------------
 
@@ -412,7 +417,9 @@ CREATE TABLE `tickets` (
 --
 
 INSERT INTO `tickets` (`id_ticket`, `number`, `qr`) VALUES
-(32, 24634, 'temp/test.png');
+(32, 24634, 'temp/test.png'),
+(34, 54755, 'temp/54755.png'),
+(35, 58100, 'temp/58100.png');
 
 -- --------------------------------------------------------
 
@@ -574,12 +581,12 @@ ALTER TABLE `event_squares`
 -- AUTO_INCREMENT de la tabla `purchases`
 --
 ALTER TABLE `purchases`
-  MODIFY `id_purchase` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
+  MODIFY `id_purchase` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
 --
 -- AUTO_INCREMENT de la tabla `purchase_lines`
 --
 ALTER TABLE `purchase_lines`
-  MODIFY `id_purchase_line` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id_purchase_line` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 --
 -- AUTO_INCREMENT de la tabla `square_types`
 --
@@ -589,7 +596,7 @@ ALTER TABLE `square_types`
 -- AUTO_INCREMENT de la tabla `tickets`
 --
 ALTER TABLE `tickets`
-  MODIFY `id_ticket` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id_ticket` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 --
 -- AUTO_INCREMENT de la tabla `users`
 --
