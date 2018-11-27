@@ -68,6 +68,12 @@ class PurchaseLine
 		return $this->event_square->getSquareTypeDescription();
 	}
 
+	public function getQR()
+	{
+		return $this->ticket->getQr();
+	}
+
+
 	public function getTicketNumber(){
 		return $this->ticket->getNumber();
 	}

@@ -51,7 +51,8 @@
       <div class="row">
       <?php if(!empty($list)){ ?>
               <?php foreach ($list as $key => $purchase) { ?>
-                <?php foreach ($purchase->getPurchaseLines() as $key => $purchase_line) { ?>
+                <?php if(!empty($purchase->getPurchaseLines())){ ?>
+                  <?php foreach ($purchase->getPurchaseLines() as $key => $purchase_line) { ?>
                       <div class="col-lg-4 mb-4">
                         <div class="card h-100">
                           <!-- hay que ver porque no me deja mostrar el titulo del evento, nose porque tira error REVISAR -->
@@ -61,17 +62,19 @@
                             <li class="list-group-item">Fecha: <?php echo $purchase->getDate(); ?></li>
                             <li class="list-group-item">Cantidad: <?php echo $purchase_line->getQuantity(); ?></li>
                             <li class="list-group-item">$<?php echo $purchase_line->getPrice(); ?> x entrada</li>
-                            <li class="list-group-item">Total: $<?php echo $purchase_line->getTotalPrice(); ?></li>
+                            <li class="list-group-item">Total: $<?php echo $purchase_line->getTotalPrice(); ?></li>                  
                             <div class="card-body">
                                 <div class="font-italic">Ticket:</div>
                                 <div class="display-4">#<?php echo $purchase_line->getTicketNumber(); ?></div>
                             </div>
+                            <?php echo BASE . $purchase_line->getQR(); ?>
+                            <td class="text-center"><img src="<?php echo BASE . $purchase_line->getQR(); ?>" width='65' height='46'></td><!-- modificar models y agregar img-->
                           </ul>
                         </div>
                       </div>
                 <?php } ?>
               <?php } ?>
-      <?php } else { ?>
+      <?php }} else { ?>
               <h2>Aun no hiciste ninguna compra</h2>
       <?php } ?>
 

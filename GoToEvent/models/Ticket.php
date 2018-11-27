@@ -1,8 +1,11 @@
 <?php
 namespace models;
 
+//use assets\phpqrcode\phpqrcode as QRcode;
+require_once (ROOT . 'phpqrcode/qrlib.php');  
 use daos\daodb\TicketDao as D_Ticket;
-// https://evilnapsis.com/2018/02/26/crear-codigo-qr-con-php/ // para crear codigo qrs
+use phpqrcode\QRcode as QRcode;
+/*https:evilnapsis.com/2018/02/26/crear-codigo-qr-con-php  para crear codigo qrs*/
 
 class Ticket
 {
@@ -58,15 +61,40 @@ class Ticket
 		}
 
 		$this->number = $number;
-		$this->qr = $number;
+		//$this->qr = $number;
 		$this->id_ticket = $daoTicket->getMaxId() + 1; // asignamos el id q le corresponde segun la BD
 	}
 
+	public function generateRandomQr(){
+		//Agregamos la libreria para genera códigos QR
+		 
+
+	
+		//Si no existe la carpeta la creamos
+		if (!file_exists(DIR_QR))
+		mkdir(DIR_QR);
+
+	//Declaramos la ruta y nombre del archivo a generar
+		
+		$filename = DIR_QR.$this->number.'.png';
+		$tamaño = 10; //Tamaño de Pixel
+		$level = 'L'; //Precisión Baja
+		$framSize = 3; //Tamaño en blanco
+		$contenido = "http://codigosdeprogramacion.com"; //Texto
+		
+			//Enviamos los parametros a la Función para generar código QR 
+		QRcode::png($contenido, $filename, $level, $tamaño, $framSize); 
+		
+			//Mostramos la imagen generada
+		echo '<img src="'.DIR_QR.basename($filename).'" /><hr/>';  
+		$this->qr = $filename;
+	}
 	public function createNewTicket($ticket)
 	{
 		$ticket = $this->generateRandomTicket();
 		$this->dao->create($ticket);
 		$ticket = $this->dao->readLastTicket();
+		
 
 		return $ticket;
 	}

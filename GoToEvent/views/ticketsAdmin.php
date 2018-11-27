@@ -52,10 +52,11 @@ namespace views;
                     </tr>
                   </tfoot>
                   <tbody>
+                  
                   <?php if($list != false){ foreach ($list as $key => $ticket){ ?>
                     <tr>
                       <td><?php echo $ticket->getNumber(); ?></td>
-                      <td><?php echo $ticket->getQr(); ?></td>
+                      <td class="text-center"><img src="<?php echo BASE . $ticket->getQr(); ?>" width='65' height='46'></td><!-- modificar models y agregar img-->
                       <td><?php echo $ticket->getId(); ?></td>
                       <td> <form class="text-center" action="<?php echo BASE; ?>ticket/delete" method="post">
                       <button type="submit" class="btn btn-danger" name="number" value="<?php echo $ticket->getNumber();?>"><i class="fas fa-trash"></i></button>

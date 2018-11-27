@@ -4,6 +4,7 @@ namespace controllers;
 use models\Ticket as Ticket;
 use daos\daodb\TicketDao as Dao;
 
+
 use controllers\ViewsController as C_View;
 
 /**
@@ -26,6 +27,7 @@ class TicketController // fijarse si esta controladora es necesaria - Allan
 
 		$ticket = new Ticket(); // crea un ticket vacio
 		$ticket->generateRandomTicket(); // creamos un ticket aleatorio
+		$ticket->generateRandomQr();
 
 		//GUARDA EL OBJETO EN LA BASE DE DATOS
 

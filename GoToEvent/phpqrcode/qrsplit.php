@@ -1,4 +1,5 @@
 <?php
+namespace phpqrcode;
 /*
  * PHP QR Code encoder
  *

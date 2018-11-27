@@ -15,5 +15,11 @@ define('DB_NAME',"GoToEvent");
 define('IMG_UPLOADS',ROOT.'assets/img');
 define('IMG_EVENT','assets/img/eventimg/');
 
+//Declaramos una carpeta temporal para guardar la imagenes generadas
+define('DIR_QR', 'temp/');
+
+
+
+
 
 ?>
