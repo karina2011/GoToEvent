@@ -67,7 +67,6 @@
                                 <div class="font-italic">Ticket:</div>
                                 <div class="display-4">#<?php echo $purchase_line->getTicketNumber(); ?></div>
                             </div>
-                            <?php echo BASE . $purchase_line->getQR(); ?>
                             <td class="text-center"><img src="<?php echo BASE . $purchase_line->getQR(); ?>" width='65' height='46'></td><!-- modificar models y agregar img-->
                           </ul>
                         </div>
