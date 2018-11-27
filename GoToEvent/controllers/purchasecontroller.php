@@ -76,9 +76,7 @@ class PurchaseController
 	public function endPurhcase()
 	{
 		if(!empty($_SESSION['carrito'])){
-			/*echo "<pre>";
-			var_dump($_SESSION['carrito']);
-			echo "</pre>";*/
+
 				if(isset($_SESSION['user'])){
 					$purchase_lines = $_SESSION['carrito'];
 					$fecha=strftime( "%Y-%m-%d-%H-%M-%S", time() );

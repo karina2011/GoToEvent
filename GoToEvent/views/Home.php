@@ -38,10 +38,10 @@ namespace views;
                 <img class="d-block w-100" src="https://bombanoise.com/wp-content/uploads/2017/08/concert.jpg" alt="First slide">
               </div>
               <div class="carousel-item">
-                <img class="d-block img-fluid w-100" src="https://www.infoliga.com.ar/wp-content/gallery/lnb-13-14-penarol-quilmes-fecha-1-fase-1/001penarol.jpg" alt="Second slide">
+                <img class="d-block img-fluid w-100" src="https://cdn.tn.com.ar/sites/default/files/styles/1366x765/public/2017/11/17/1117_recital_felicidad_1280.jpg" alt="Second slide">
               </div>
               <div class="carousel-item">
-                <img class="d-block img-fluid w-100" src="https://k36.kn3.net/taringa/2/0/1/2/6/7/65/ricardoalvarez16/869.jpg?7288" alt="Third slide">
+                <img class="d-block img-fluid w-100" src="http://chicasennewyork.com/wp-content/uploads/2016/01/2.jpg" alt="Third slide">
               </div>
             </div>
             <a class="carousel-control-prev" href="#slider" role="button" data-slide="prev">
@@ -86,7 +86,7 @@ namespace views;
                   <?php } ?>
 
           </div>
-        
+
 
         </div>-->
         <!-- /.col-lg-9 -->

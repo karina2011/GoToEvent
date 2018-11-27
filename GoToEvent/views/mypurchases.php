@@ -62,12 +62,13 @@
                             <li class="list-group-item">Fecha: <?php echo $purchase->getDate(); ?></li>
                             <li class="list-group-item">Cantidad: <?php echo $purchase_line->getQuantity(); ?></li>
                             <li class="list-group-item">$<?php echo $purchase_line->getPrice(); ?> x entrada</li>
-                            <li class="list-group-item">Total: $<?php echo $purchase_line->getTotalPrice(); ?></li>                  
+                            <li class="list-group-item">Total: $<?php echo $purchase_line->getTotalPrice(); ?></li>
                             <div class="card-body">
                                 <div class="font-italic">Ticket:</div>
                                 <div class="display-4">#<?php echo $purchase_line->getTicketNumber(); ?></div>
+                                <td class="text-center"><img src="<?php echo BASE . $purchase_line->getQR(); ?>" width='200' height='150'></td><!-- modificar models y agregar img-->
                             </div>
-                            <td class="text-center"><img src="<?php echo BASE . $purchase_line->getQR(); ?>" width='65' height='46'></td><!-- modificar models y agregar img-->
+
                           </ul>
                         </div>
                       </div>
@@ -84,7 +85,7 @@
     <!-- /.container -->
 
     <!-- Footer -->
-    <?php include(VIEWS. "footer.php");?>
+    <?php //include(VIEWS. "footer.php"); comentado porq aparece arriba si esta vacio?>
 
     <!-- Bootstrap core JavaScript -->
     <script src="<?php echo BASE; ?>assets/vendor/jquery/jquery.min.js"></script>

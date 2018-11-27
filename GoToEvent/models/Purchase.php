@@ -57,6 +57,7 @@ class Purchase
 				$total = $total + $purchaseline->getTotalPrice();
 			}
 		} else {
+			var_dump($this->purchaselines);
 			$total = $total + $this->purchaselines->getTotalPrice();
 		}
 

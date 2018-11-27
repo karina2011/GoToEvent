@@ -50,7 +50,7 @@
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" href="">
+          <a class="nav-link" href="<?php echo BASE; ?>Views/eventbydateadmin">
           <i class="fas fa-list-ul"></i>
             <span>Lineas de compra</span></a>
         </li>

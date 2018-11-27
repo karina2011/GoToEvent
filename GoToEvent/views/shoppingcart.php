@@ -43,7 +43,7 @@
       <hr>
 
       <div class="row">
-      <?php if(isset($purchasesLineList)){ ?>
+      <?php if(!empty($purchasesLineList)){ ?>
           <?php $contador = -1; ?>
               <?php foreach ($purchasesLineList as $key => $purchase_line) { ?>
                       <?php $contador++; ?>
@@ -63,24 +63,30 @@
                             </li>
                           </ul>
                         </div>
+                        <div class="">
+                          <br>
+                          <button type="button" class="btn btn-primary"> <a href="<?php echo BASE ?>purchase/endPurhcase" style="text-decoration: none; color: white;">Finalizar compra</a> </button>
+                        </div>
                       </div>
+
               <?php } ?>
       <?php } else { ?>
-              <h2>No hay compras en el carrito</h2>
+              <div class="col-lg-4">
+                <h2>No hay compras en el carrito</h2>
+              </div>
       <?php } ?>
       <!-- Content Row -->
 
       </div>
       <!-- /.row -->
-      <div class="">
-        <button type="button" class="btn btn-primary"> <a href="<?php echo BASE ?>purchase/endPurhcase" style="text-decoration: none; color: white;">Finalizar compra</a> </button>
-      </div>
+
       <br>
     </div>
+
     <!-- /.container -->
 
     <!-- Footer -->
-    <?php include(VIEWS. "footer.php");?>
+    <?php // include(VIEWS. "footer.php");?>
 
     <!-- Bootstrap core JavaScript -->
     <script src="<?php echo BASE; ?>assets/vendor/jquery/jquery.min.js"></script>
