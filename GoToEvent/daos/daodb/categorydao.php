@@ -146,7 +146,8 @@ class CategoryDao extends Singleton implements \interfaces\Crud
         }
         catch(PDOException $e)
         {
-            echo $e;
+			echo "<script> alert('No se puede borrar. Hay eventos con esa categoria');</script>";
+            //echo $e;
         }
 	}
 

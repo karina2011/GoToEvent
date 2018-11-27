@@ -22,7 +22,7 @@ namespace views;
             <form action="<?php echo BASE; ?>calendar/create" method="post">
                 <div class="form-group">
                     <label for="date">Fecha:</label>
-                    <input type="date" class="form-control" id="date" placeholder="Fecha" name="date" required>
+                    <input type="date" class="form-control" id="date" placeholder="Fecha" min="<?php echo date("Y-m-d");?>" name="date" required>
                 </div>
 
 

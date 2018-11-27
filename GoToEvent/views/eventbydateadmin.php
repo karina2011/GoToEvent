@@ -26,18 +26,17 @@ namespace views;
                             <button type="submit" class="btn btn-primary">Buscar</button>
                           </form>
                       </div>
-                      <div class="col-lg-9">
-
-                          <?php if($list) {?>
-                          <h4 class="my-4">Dia: <?php if(isset($_GET['date'])){ echo $_GET["date"]; } ?></h4>
-                          <?php } ?>
-                          <div class="row my-4">
-                                     <label for="date"><h4>Total vendido: $<?php echo $totalevent; ?></h4></label>
-
-                          </div>
-                      </div>
+                      
             </div>
-          </div>
+            <div class="col-lg-9">
+
+                          <?php if($list && isset($_GET['date'])) {?>
+                          <h4 class="my-4">Dia: <?php if(isset($_GET['date'])){ echo $_GET["date"]; } ?></h4>
+                          
+                              <label for="date"><h4 class="my-4">Total vendido: $<?php echo $totalevent; ?></h4></label>
+                          <?php } ?>
+            </div>
+          <hr>
           <div class="container">
             <div class="row">
                       <div class="col-lg-3">
@@ -56,24 +55,17 @@ namespace views;
                             <button type="submit" class="btn btn-primary">Buscar</button>
                           </form>
                       </div>
+                     
+                      </div>
+                      </div>
                       <div class="col-lg-9">
 
-                          <?php if($list) {?>
-                                      <h4 class="my-4"> <?php if(isset($_GET['date'])){
-                                                           echo $_GET["date"];?>Dia:
-                                                           <?php }
-                                                      else if(isset($_GET['category'])){
-                                                    
-                                                        ?>Categoria: <?php $oneCategory=$this->categoryController->readById($_GET['category']);
-                                                                            echo $oneCategory->getDescription();
-                                                      } ?></h4>
-                          <?php } ?>
-                          <div class="row my-4">
-                                     <label for="date"><h4>Total vendido: $<?php echo $totaleventC; ?></h4></label>
-
-                          </div>
-                      </div>
-                      </div>
+                      <?php if($list && isset($_GET['category'])) {?>
+                            <h4 class="my-4">Categoria: <?php $oneCategory=$this->categoryController->readById($_GET['category']);
+                            echo $oneCategory->getDescription(); ?></h4>
+                      
+                                <label for="date"><h4>Total vendido: $<?php echo $totaleventC; ?></h4></label>
+                      <?php } ?>
             </div>
           </div>
         </div>

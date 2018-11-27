@@ -134,7 +134,8 @@ class ArtistDao extends Singleton implements \interfaces\Crud
         }
         catch(PDOException $e)
         {
-            echo $e;
+            echo "<script> alert('No se puede borrar. El artista va a participar de un evento');</script>";
+            //echo $e;
         }
    }
 
