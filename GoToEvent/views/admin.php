@@ -18,6 +18,7 @@ namespace views;
         <div class="container-fluid">
 
             <h2>Bienvenid@ <?php echo $user->getName() . ' ' . $user->getLastName();?></h2>
+            <td class="text-center"><img src="<?php echo BASE.IMG_EVENT.'admi.jpg'; ?>" width='885' height='446'></td><!-- modificar models y agregar img-->
 
         </div>
         <!-- /.container-fluid -->
