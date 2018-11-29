@@ -44,12 +44,12 @@
 
         <div class="col-lg-9">
 
-            <?php if($calendarlist) {?>
+            <?php if(is_array($calendarlist) && !empty($calendarlist)) {?>
             <h4 class="my-4">Eventos para: <?php echo $_GET["date"]; ?></h4>
             <?php } ?> 
            <!-- row. -->         
           <div class="row my-4">
-              <?php if($calendarlist) {?>
+              <?php if(is_array($calendarlist) && !empty($calendarlist)) {?>
                     <?php foreach ($calendarlist as $key => $calendar) { ?>
 
                         <div class="col-lg-4 col-md-6 mb-4">
@@ -60,12 +60,13 @@
                                 <a href="<?php echo BASE; ?>views/viewEvent?id_calendar=<?php echo $calendar->getId(); ?>"><?php echo $calendar->getEventTitle(); ?></a>
                               </h4>
                                <p class="card-text"><?php echo $calendar->getCategoryDescription(); ?></p>
+                               <p class="card-text">Fecha: <?php echo $calendar->getDate(); ?></p>
                             </div>
                           </div>
                         </div>
 
                     <?php } ?>
-              <?php } else { echo '<h4> NO HAY EVENTOS PARA ESA FECHA</h4>'; }?>
+              <?php } else if ($calendarlist == false) { echo '<h4> NO HAY EVENTOS PARA LA FECHA: '. $_GET['date'] .'</h4>'; }?>
 
           </div>
           <!-- /.row -->

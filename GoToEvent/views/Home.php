@@ -104,6 +104,7 @@ namespace views;
                                       <a href="<?php echo BASE; ?>views/viewEvent?id_calendar=<?php echo $calendar->getId(); ?>"><?php echo $calendar->getEventTitle(); ?></a>
                                     </h4>
                                     <p class="card-text"><?php echo $calendar->getCategoryDescription(); ?></p>
+                                    <p class="card-text">Fecha: <?php echo $calendar->getDate(); ?></p>
                                   </div>
                                 </div>
                               </div>
@@ -127,6 +128,7 @@ namespace views;
                                         <a href="<?php echo BASE; ?>views/viewEvent?id_calendar=<?php echo $calendar->getId(); ?>"><?php echo $calendar->getEventTitle(); ?></a>
                                       </h4>
                                       <p class="card-text"><?php echo $calendar->getCategoryDescription(); ?></p>
+                                      <p class="card-text">Fecha: <?php echo $calendar->getDate(); ?></p>
                                     </div>
                                   </div>
                                 </div>

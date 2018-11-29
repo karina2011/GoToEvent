@@ -344,7 +344,7 @@ class ViewsController {
 
         $this->userController = new C_User;
         $user = $this->userController->checkSession();
-        $calendarlist = null;
+        $calendarlist = true; // para las comprobaciones en la vista para que no aparezca " no hay eventos para esa fecha" de entrada
         if (isset($_GET["date"])){
 
         $date = $_GET["date"];
@@ -365,7 +365,7 @@ class ViewsController {
         $this->categoryController = new C_Category();
         $listCategory = $this->categoryController->readAll();
 
-        $calendarlist = null;
+        $calendarlist = true; // para las comprobaciones en vista
         if (isset($_GET["category"])){
 
         $category = $_GET["category"];
@@ -388,7 +388,7 @@ class ViewsController {
         $this->artistController = new C_Artist();
         $listArtist = $this->artistController->readAll();
 
-        $calendarlist = null;
+        $calendarlist = true; // para las comprobaciones en vista
         if (isset($_GET["artist"])){
 
         $artist = $_GET["artist"];
